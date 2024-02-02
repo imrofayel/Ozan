@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_gemini/google_gemini.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:ozan/components/components2.0.dart';
 import 'package:ozan/components/file_service.dart';
 import 'package:ozan/components/snackbar.dart';
 import 'package:ozan/components/components.dart';
@@ -49,87 +50,17 @@ class _MarkdownState extends State<Markdown>{
       super.dispose();
   }
 
-  void templates(context){
+  IconButton date(context, TextEditingController controller){
+    
+    return IconButton(onPressed: () async{
 
-    showDialog(
+      var date = await showDatePickerDialog(context);
 
-      context: context,
+      setState(() {
+        pageTitle.text = DateFormat('EE, d MMMM y').format(date);
+      });   
 
-      builder: (context) {
-
-        return AlertDialog(
-
-          shadowColor: Colors.transparent,
-
-          backgroundColor: Themes.accent,
-
-          contentPadding: const EdgeInsets.all(20),
-
-          insetPadding: EdgeInsets.zero,
-          
-          content: SizedBox(
-
-            height: 120,
-
-            child: Column(
-
-              children: [
-
-                Row(
-                
-                  children: [
-                    
-                    FilledButton.tonal(onPressed: (){
-                      setState(() {
-                        page.text += DateFormat('EEEE, d MMMM y').format(DateTime.now());
-                      });
-                    }, style: const ButtonStyle(fixedSize: MaterialStatePropertyAll(Size(80, 50)), padding: MaterialStatePropertyAll(EdgeInsets.zero), shadowColor: MaterialStatePropertyAll(Colors.transparent)), child: const Text("Date", style: TextStyle(fontSize: 16))),
-                
-                    const Gap(8),
-                
-                    FilledButton.tonal(onPressed: (){
-
-                    }, style: const ButtonStyle(fixedSize: MaterialStatePropertyAll(Size(50, 50)), padding: MaterialStatePropertyAll(EdgeInsets.zero), shadowColor: MaterialStatePropertyAll(Colors.transparent)), child: const Text("H1", style: TextStyle(fontSize: 16))),
-                
-                    const Gap(8),
-                
-                    FilledButton.tonal(onPressed: (){}, style: const ButtonStyle(fixedSize: MaterialStatePropertyAll(Size(50, 50)), padding: MaterialStatePropertyAll(EdgeInsets.zero), shadowColor: MaterialStatePropertyAll(Colors.transparent)), child: const Text("H2", style: TextStyle(fontSize: 16))),
-                
-                    const Gap(8),
-                
-                    FilledButton.tonal(onPressed: (){}, style: const ButtonStyle(fixedSize: MaterialStatePropertyAll(Size(50, 50)), padding: MaterialStatePropertyAll(EdgeInsets.zero), shadowColor: MaterialStatePropertyAll(Colors.transparent)), child: const Text("H3", style: TextStyle(fontSize: 16))),
-                
-                    const Gap(8),
-                
-                    FilledButton.tonal(onPressed: (){}, style: const ButtonStyle(fixedSize: MaterialStatePropertyAll(Size(50, 50)), padding: MaterialStatePropertyAll(EdgeInsets.zero), shadowColor: MaterialStatePropertyAll(Colors.transparent)), child: const Text("H4", style: TextStyle(fontSize: 16))),
-                  ],
-                ),
-
-                const Gap(10),
-
-                Row(
-                
-                  children: [
-                    
-                    FilledButton.tonal(onPressed: (){
-                      
-                    }, style: const ButtonStyle(fixedSize: MaterialStatePropertyAll(Size(120, 50)), padding: MaterialStatePropertyAll(EdgeInsets.zero), shadowColor: MaterialStatePropertyAll(Colors.transparent)), child: const Text("Code Block", style: TextStyle(fontSize: 16))),
-                
-                    const Gap(8),
-                
-                    FilledButton.tonal(onPressed: (){}, style: const ButtonStyle(fixedSize: MaterialStatePropertyAll(Size(70, 50)), padding: MaterialStatePropertyAll(EdgeInsets.zero), shadowColor: MaterialStatePropertyAll(Colors.transparent)), child: const Text("Table", style: TextStyle(fontSize: 16))),
-                
-                    const Gap(8),
-                
-                    FilledButton.tonal(onPressed: (){}, style: const ButtonStyle(fixedSize: MaterialStatePropertyAll(Size(130, 50)), padding: MaterialStatePropertyAll(EdgeInsets.zero), shadowColor: MaterialStatePropertyAll(Colors.transparent)), child: const Text("Blockquote", style: TextStyle(fontSize: 16))),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        );
-      }
-    );
+    }, icon: const Icon(Iconsax.add));
   }
 
   @override
@@ -166,6 +97,7 @@ class _MarkdownState extends State<Markdown>{
                       const Gap(10),
                   
                       // Date picker
+                      date(context, pageTitle),
                     ],
                   ),
             
@@ -357,8 +289,6 @@ class _MarkdownState extends State<Markdown>{
 
                                           Text("  Writer", style: TextStyle(fontSize: 22, color: Themes.text)),
                                         ]),
-
-                                        FilledButton.tonal(onPressed: ()=> templates(context), style: const ButtonStyle(fixedSize: MaterialStatePropertyAll(Size(120, 45)), padding: MaterialStatePropertyAll(EdgeInsets.zero), shadowColor: MaterialStatePropertyAll(Colors.transparent)), child: const Text("Templates", style: TextStyle(fontSize: 16)))
                                       ],
                                     ),
                                   ),
