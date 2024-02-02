@@ -29,31 +29,31 @@ Widget toolbar(TextEditingController controller, context){
       
           children: [
             
-            IconButton(onPressed: () => applyFormatting(controller, '**'), icon: const Icon(Iconsax.text_bold, size: 22)),
+            IconButton(onPressed: () => applyFormatting(controller, '**'), icon: const Icon(Iconsax.text_bold, size: 22), tooltip: "Bold"),
       
             const Gap(2),
       
-            IconButton(onPressed: () => applyFormatting(controller, '*'), icon: const Icon(Iconsax.text_underline, size: 22)),
+            IconButton(onPressed: () => applyFormatting(controller, '*'), icon: const Icon(Iconsax.text_underline, size: 22), tooltip: "Underline"),
       
             const Gap(6),
 
-            IconButton(onPressed: () => applyCodeFormatting(controller, context), icon: const Icon(Iconsax.code, size: 22)),
+            IconButton(onPressed: () => applyCodeFormatting(controller, context), icon: const Icon(Iconsax.code, size: 22), tooltip: "Code Block"),
       
             const Gap(6),
 
-            IconButton(onPressed: () => applyQuoteFormatting(controller), icon: const Icon(Iconsax.quote_down, size: 22)),
+            IconButton(onPressed: () => applyQuoteFormatting(controller), icon: const Icon(Iconsax.quote_down, size: 22), tooltip: "Quote"),
       
             const Gap(6),
 
-            IconButton(onPressed: ()=> tableDialog(context, controller), icon: const Icon(Iconsax.grid_edit, size: 24)),
+            IconButton(onPressed: ()=> tableDialog(context, controller), icon: const Icon(Iconsax.grid_edit, size: 24), tooltip: "Table"),
       
             const Gap(6),
 
-            IconButton(onPressed: () => applyListFormatting(controller), icon: const Icon(Iconsax.task_square, size: 24)),
+            IconButton(onPressed: () => applyListFormatting(controller), icon: const Icon(Iconsax.task_square, size: 24), tooltip: "Bullet List"),
       
             const Gap(6),
 
-            IconButton(onPressed: () => linkDialog(context, controller), icon: const Icon(Iconsax.link, size: 22)),
+            IconButton(onPressed: () => linkDialog(context, controller), icon: const Icon(Iconsax.link, size: 22), tooltip: "Link"),
 
             const Gap(6),
           

@@ -208,7 +208,7 @@ class _MarkdownState extends State<Markdown>{
                         
                           children: [
                         
-                            button(() => searchView(context, search, page), Iconsax.search_normal_1, context, textColor: const Color.fromARGB(255, 4, 2, 16)),
+                            button(() => searchView(context, search, page), Iconsax.search_normal_1, context, textColor: const Color.fromARGB(255, 4, 2, 16), tooltip: "Search"),
                         
                             const Gap(10),
                         
@@ -276,7 +276,7 @@ class _MarkdownState extends State<Markdown>{
 
                                 Text(" Ozan Copilot", style: TextStyle(fontSize: 22, color: Themes.text)),
 
-                                button(() => copyToClipboard(context, data), Iconsax.copy, context),   
+                                button(() => copyToClipboard(context, data), Iconsax.copy, context, tooltip: "Copy"),   
                               ],
                             ),
                           ),

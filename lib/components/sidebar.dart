@@ -39,7 +39,7 @@ class _SidebarState extends State<Sidebar> {
                 borderRadius: BorderRadius.circular(30),
               ),
 
-              child: button(() {}, Iconsax.home, context),
+              child: button(() {}, Iconsax.home, context, tooltip: "Home"),
 
             ),
             
@@ -60,11 +60,11 @@ class _SidebarState extends State<Sidebar> {
 
                 children: [
 
-                button(() => Markdown.files.newFile(context), Iconsax.add_circle, context),
+                button(() => Markdown.files.newFile(context), Iconsax.add_circle, context, tooltip: "New File"),
 
-                button(() => Markdown.files.loadFile(context), Iconsax.arrow_circle_up, context),
+                button(() => Markdown.files.loadFile(context), Iconsax.arrow_circle_up, context, tooltip: "Import"),
 
-                button(null, Iconsax.info_circle, context),
+                button(null, Iconsax.info_circle, context, tooltip: "About"),
 
                 ],
               )
@@ -80,7 +80,7 @@ class _SidebarState extends State<Sidebar> {
                 borderRadius: BorderRadius.circular(30),
               ),
 
-              child: button(() => Markdown.files.saveContent(context), Iconsax.import_1, context),
+              child: button(() => Markdown.files.saveContent(context), Iconsax.import_1, context, tooltip: "Export"),
             ),
           ],
         )

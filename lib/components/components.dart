@@ -8,9 +8,11 @@ import 'package:ozan/components/snackbar.dart';
 import 'package:ozan/components/syntax.dart';
 import 'package:ozan/theme/theme.dart';
 
-IconButton button(void Function()? function, IconData icon, context, {Color? color, Color? textColor, Color? overlayColor}){
+IconButton button(void Function()? function, IconData icon, context, {Color? color, Color? textColor, Color? overlayColor, required String tooltip}){
 
   return IconButton(
+
+      tooltip: tooltip,
 
       onPressed: function, 
 
