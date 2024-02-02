@@ -1,4 +1,4 @@
-# Ozan - A bard; a story teller and a composer 📖
+# Ozan - A bard; a story teller and a composer
 
 This is a simple Markdown-based text editor and note maker. The app is built with Flutter, ensuring a smooth and user-friendly experience.
 
