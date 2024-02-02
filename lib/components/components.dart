@@ -331,66 +331,6 @@ IconButton suffix(context){
       }, icon: const Icon(Iconsax.microphone), padding: const EdgeInsets.all(1));
 }
 
-TextEditingController menu = TextEditingController();
-
-DropdownMenu categories(){
-
-  List<DropdownMenuEntry> categories = [
-
-    const DropdownMenuEntry(value: 0, label: "  Other"),
-
-    const DropdownMenuEntry(value: 1, label: "  Dairy"),
-
-    const DropdownMenuEntry(value: 2, label: "  Studies"),
-
-    const DropdownMenuEntry(value: 3, label: "  Office"),
-  ];
-
-  return DropdownMenu(
-
-    textStyle: const TextStyle(fontSize: 17),
-
-    controller: menu,
-
-    initialSelection: categories[0],
-
-    menuStyle: MenuStyle(
-
-      backgroundColor: MaterialStatePropertyAll(Themes.accent),
-
-      shadowColor: const MaterialStatePropertyAll(Colors.transparent),
-
-      elevation: const MaterialStatePropertyAll(0),
-    ),
-
-    inputDecorationTheme: InputDecorationTheme(
-
-      fillColor: Themes.accent,
-
-      filled: true,
-
-      border: InputBorder.none,
-
-      enabledBorder: OutlineInputBorder(
-
-        borderRadius: BorderRadius.circular(20),
-
-        borderSide: BorderSide.none
-      ),
-
-      focusedBorder: OutlineInputBorder(
-
-        borderRadius: BorderRadius.circular(30),
-
-        borderSide: BorderSide.none
-      )
-
-    ),
-
-    dropdownMenuEntries: categories
-  );
-}
-
 TextField titleBox({required TextEditingController controller}){
 
   return TextField(

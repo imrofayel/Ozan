@@ -165,7 +165,7 @@ class _MarkdownState extends State<Markdown>{
                   
                       const Gap(10),
                   
-                      categories(),
+                      // Date picker
                     ],
                   ),
             
