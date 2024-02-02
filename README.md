@@ -6,7 +6,7 @@ This is a simple Markdown-based text editor and note maker. The app is built wit
 
 - **Markdown Editing:** Create and edit your notes using simple Markdown syntax.
 - **AI Copilot:** Use friendly AI assistance when taking notes.
-- **Import & Export:** Save your notes as [.md](https://www.markdownguide.org/) and import them whenever you need.
+- **Import & Export:** Save your notes, and import them whenever you need.
 - **Material Design:** Google Material Design for a visually appealing interface, intuitive navigation, and an enhanced user experience.
 
 
