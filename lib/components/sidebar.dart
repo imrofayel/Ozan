@@ -3,7 +3,6 @@ import 'package:gap/gap.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:ozan/components/markdown.dart';
 import 'package:ozan/components/components.dart';
-import 'package:ozan/components/tooltip.dart';
 import 'package:ozan/theme/theme.dart';
 
 class Sidebar extends StatefulWidget {
@@ -12,7 +11,7 @@ class Sidebar extends StatefulWidget {
   @override
   State<Sidebar> createState() => _SidebarState();
 }
-
+// wow
 class _SidebarState extends State<Sidebar> {
 
   @override
@@ -65,7 +64,7 @@ class _SidebarState extends State<Sidebar> {
 
                 button(() => Markdown.files.loadFile(context), Iconsax.arrow_circle_up, context),
 
-                button(() => format(), Iconsax.info_circle, context),
+                button(null, Iconsax.info_circle, context),
 
                 ],
               )
