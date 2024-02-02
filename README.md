@@ -1,16 +1,12 @@
-# ozan
+# Ozan - A bard; a story teller and a composer
 
-A new Flutter project.
+This is a simple Markdown-based text editor and note maker. The app is built with Flutter, ensuring a smooth and user-friendly experience.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- **Markdown Editing:** Create and edit your notes using simple Markdown syntax.
+- **AI Copilot:** Use friendly AI assistance when taking notes.
+- **Import & Export:** Save your notes, and import them whenever you need.
+- **Material Design:** Google Material Design for a visually appealing interface, intuitive navigation, and an enhanced user experience.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
