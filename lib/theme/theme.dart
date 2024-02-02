@@ -15,6 +15,16 @@ class Themes{
     
     useMaterial3: true,
 
+    tooltipTheme: TooltipThemeData(
+      height: 13,
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.grey.shade100,
+        borderRadius: BorderRadius.circular(20)
+      ),
+
+      textStyle: TextStyle(fontSize: 16, color: const Color.fromARGB(255, 3, 7, 3).withOpacity(0.8)),
+    )
   );
 
   /* LIGHT */
