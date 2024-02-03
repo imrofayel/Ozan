@@ -56,7 +56,7 @@ Widget toolbar(TextEditingController controller, context){
             const Gap(6),
           
             DropdownMenu(
-
+            
               onSelected: (value){
                 
                 String temp = '';
@@ -69,34 +69,34 @@ Widget toolbar(TextEditingController controller, context){
                   case 1:
                     temp = '##';
                     break;
-
+            
                   case 2:
                     temp = '###';
                     break;
-
+            
                   case 3:
                     temp = '####';
                     break;
-
+            
                   case 4:
                     temp = '#####';
                     break;
-
+            
                   case 5:
                     temp = '######';
                     break;
-
+            
                   default: temp = '#';
                 }
-
+            
                   TextSelection selection = controller.selection;
-
+            
                   String text = controller.text;
-
+            
                   try {
                     String newText =
                         '${text.substring(0, selection.start)}\n$temp ${text.substring(selection.start, selection.end)}\n${text.substring(selection.end)}';
-
+            
                     controller.value = TextEditingValue(
                       text: newText,
                       selection: TextSelection.collapsed(offset: selection.end + 4),
@@ -105,13 +105,13 @@ Widget toolbar(TextEditingController controller, context){
                     // Text field not selected
                   }
               },
-
-              initialSelection: 0,
-
+            
+              initialSelection: 2,
+            
               width: 95,
-
+            
               textStyle: TextStyle(fontSize: 18, color: Themes.text.withOpacity(0.8)),
-
+            
               dropdownMenuEntries: heading,
             )
           ],
@@ -377,11 +377,11 @@ void tableDialog(context, TextEditingController controller){
                   Navigator.pop(context);
                 }
                 else{
-                  SnackBarUtils.showSnackbar(context, Iconsax.warning_2, "Please enter values for both row and col");
+                  SnackBarUtils.showSnackbar(context, Iconsax.warning_2, "Please enter valid integer values for both row and col");
                 }
               },
 
-              icon: const Icon(Iconsax.add))
+              icon: const Icon(Iconsax.add),  tooltip: "Create")
             ],
           ),
         ),
@@ -423,7 +423,7 @@ void linkDialog(context, TextEditingController controller){
         
         content: SizedBox(
 
-          height: 300, width: 300,
+          height: 260, width: 300,
 
           child: Column(
             
@@ -503,19 +503,19 @@ void linkDialog(context, TextEditingController controller){
               const Gap(20),
           
               IconButton.filled(onPressed: (){
-
+              
                 if(title.text.isNotEmpty && link.text.isNotEmpty){
-
+              
                       TextSelection selection = controller.selection;
-
+              
                       // Get the current text in the TextField
                       String text = controller.text;
-
+              
                       try {
-
+              
                         String newText =
                             '${text.substring(0, selection.start)}[${title.text}](${link.text})${text.substring(selection.end)}';
-
+              
                         // Update the text in the TextField
                         controller.value = TextEditingValue(
                           text: newText,
@@ -526,10 +526,10 @@ void linkDialog(context, TextEditingController controller){
                       }  
                 }
               },
-
-              style: const ButtonStyle(fixedSize: MaterialStatePropertyAll(Size(250, 60)), shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20))))),
-
-              icon: const Icon(Iconsax.add))
+              
+              style: const ButtonStyle(fixedSize: MaterialStatePropertyAll(Size(50, 50)), shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30))))),
+              
+              icon: const Icon(Iconsax.add), tooltip: "Create")
             ],
           ),
         ),

@@ -6,7 +6,7 @@ class Themes{
 
     colorScheme: ColorScheme.fromSeed(
 
-      seedColor: const Color.fromARGB(255, 0, 35, 189),
+      seedColor: Colors.deepPurple,
 
       brightness: Brightness.light,
     ),
@@ -42,7 +42,7 @@ class Themes{
 
     inputDecorationTheme: InputDecorationTheme(
 
-      fillColor: Themes.accent,
+      fillColor: Themes.background.withOpacity(0.77),
 
       filled: true,
 
@@ -80,7 +80,7 @@ class Themes{
 
         surfaceTintColor: MaterialStatePropertyAll(Themes.accent),
 
-        visualDensity: VisualDensity.comfortable
+        visualDensity: VisualDensity.comfortable,
 
       )
     )
