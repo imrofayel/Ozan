@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:ozan/database/shared_preferences_util.dart';
 import 'package:ozan/views/home.dart';
 import 'package:ozan/theme/theme.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
@@ -25,6 +26,17 @@ class Ozan extends StatefulWidget {
 }
 
 class _OzanState extends State<Ozan> {
+
+    @override
+  void initState() {
+    super.initState();
+    _loadData();
+  }
+
+  Future<void> _loadData() async {
+    await SharedPreferencesUtil.loadState('key');
+  }
+  
   @override
   Widget build(BuildContext context) {
 
@@ -71,7 +83,6 @@ class _OzanState extends State<Ozan> {
       );
   }
 }
-
 
 class MinimizeButton extends StatelessWidget {
   const MinimizeButton({super.key});
