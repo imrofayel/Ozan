@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:ozan/activities/home.dart';
+import 'package:ozan/views/home.dart';
 import 'package:ozan/theme/theme.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 

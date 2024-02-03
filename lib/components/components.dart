@@ -1,11 +1,9 @@
 import 'package:dictionaryx/dictionary_msa.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:gap/gap.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:ozan/components/snackbar.dart';
-import 'package:ozan/components/syntax.dart';
 import 'package:ozan/theme/theme.dart';
 
 IconButton button(void Function()? function, IconData icon, context, {Color? color, Color? textColor, Color? overlayColor, required String tooltip}){
@@ -33,7 +31,7 @@ IconButton button(void Function()? function, IconData icon, context, {Color? col
   );
 }
 
-TextField textField(context, {int? lines = 1, required void Function(String)? onSubmitted, required void Function(String)? onChanged, required TextEditingController controller, FocusNode? focusNode, required Color color, Color? textColor, Widget? suffix}){
+TextField textField(context, {int? lines = 1, required void Function(String)? onSubmitted, required void Function(String)? onChanged, required TextEditingController controller, FocusNode? focusNode, required Color color, Color? textColor}){
 
   return TextField(
     
@@ -47,11 +45,9 @@ TextField textField(context, {int? lines = 1, required void Function(String)? on
 
     focusNode: focusNode,
 
-    style: TextStyle(color: textColor ?? Themes.text, fontSize: 18),
+    style: TextStyle(color: textColor ?? Themes.text, fontSize: 18, height: 2),
 
     decoration: InputDecoration(
-
-      suffix: suffix,
 
       filled: true,
 
@@ -74,59 +70,6 @@ TextField textField(context, {int? lines = 1, required void Function(String)? on
       ),
     ),
   );
-}
-
-Markdown markdown(String data, double scale, context){
-
-  return Markdown(
-      
-      selectable: true,
-    
-      data: data,
-      
-      softLineBreak: true,
-
-      builders: {
-        'code': CodeElementBuilder(context: context)
-      },
-    
-      styleSheet: MarkdownStyleSheet(
-
-          p: TextStyle(color: Themes.text.withOpacity(0.9), height: 1.8),
-
-          textScaleFactor: scale,
-
-          codeblockPadding: const EdgeInsets.all(12),
-
-          codeblockDecoration: const BoxDecoration(
-
-            color:  Color.fromRGBO(248, 249, 251, 1),
-
-            borderRadius: BorderRadius.all(Radius.circular(16)),
-          ),
-
-          tableBorder: TableBorder.all(borderRadius: BorderRadius.circular(20), color: const Color.fromARGB(255, 244, 245, 247), width: 1.5),
-
-          tableHead: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-
-          blockquoteDecoration: const BoxDecoration(
-            
-            color:  Color.fromRGBO(248, 249, 251, 1),
-
-            borderRadius: BorderRadius.all(Radius.circular(16)),
-          ),
-
-          blockquotePadding: const EdgeInsets.all(20),
-
-          blockquote: const TextStyle(fontFamily: "Playfair Display", fontSize: 16),
-
-          horizontalRuleDecoration: BoxDecoration(borderRadius: BorderRadius.circular(30), border: Border.all(width: 1, color: Themes.text.withOpacity(0.8))),
-
-          strong: const TextStyle(fontWeight: FontWeight.w500), 
-
-          em: const TextStyle(decoration: TextDecoration.underline, fontStyle: FontStyle.normal),
-      )
-    );
 }
 
 FilledButton tonalButton({required void Function()? fn, required String text, required IconData icon}){
@@ -339,22 +282,22 @@ TextField titleBox({required TextEditingController controller}){
 
     decoration: InputDecoration(
 
-      hintText: "enter title",
+      hintText: "Untitled",
 
-      hintStyle: TextStyle(fontWeight: FontWeight.w400, color: Themes.text.withOpacity(0.3)),
+      hintStyle: TextStyle(fontWeight: FontWeight.w400, color: Themes.text.withOpacity(0.8)),
 
       constraints: const BoxConstraints(maxHeight: 70, maxWidth: 520),
 
       enabledBorder: OutlineInputBorder(
 
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(50),
 
         borderSide: const BorderSide(color: Colors.transparent),
       ),
 
       focusedBorder: OutlineInputBorder(
 
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(50),
         
         borderSide: const BorderSide(color: Colors.transparent),
       ),
@@ -368,6 +311,8 @@ TextField titleBox({required TextEditingController controller}){
       fillColor: Themes.accent,
 
       focusColor: Themes.accent,
+
+      hoverColor: Themes.accent
     ),
 
     style: const TextStyle(fontSize: 20),

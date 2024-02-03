@@ -6,7 +6,7 @@ class Themes{
 
     colorScheme: ColorScheme.fromSeed(
 
-      seedColor: Colors.red,
+      seedColor: const Color.fromARGB(255, 0, 35, 189),
 
       brightness: Brightness.light,
     ),
@@ -24,6 +24,65 @@ class Themes{
       ),
 
       textStyle: TextStyle(fontSize: 16, color: const Color.fromARGB(255, 3, 7, 3).withOpacity(0.8)),
+    ),
+
+    datePickerTheme: DatePickerThemeData(
+
+      elevation: 0,
+
+      todayBorder: BorderSide.none,
+
+      backgroundColor: Colors.white.withOpacity(0.9),
+
+      shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(30)),
+
+    ), 
+
+    dropdownMenuTheme: DropdownMenuThemeData(
+
+    inputDecorationTheme: InputDecorationTheme(
+
+      fillColor: Themes.accent,
+
+      filled: true,
+
+      border: InputBorder.none,
+
+      enabledBorder: OutlineInputBorder(
+
+      borderRadius: BorderRadius.circular(30),
+
+      borderSide: BorderSide.none
+                
+      ),
+
+      activeIndicatorBorder: BorderSide(color: Themes.accent),
+
+      focusedBorder: OutlineInputBorder(
+
+          borderRadius: BorderRadius.circular(30),
+
+            borderSide: BorderSide.none
+                
+          )
+
+      ),
+
+      menuStyle: MenuStyle(
+        
+        elevation: const MaterialStatePropertyAll(0),
+
+        backgroundColor: MaterialStatePropertyAll(Colors.white.withOpacity(0.6)),
+
+        shadowColor: const MaterialStatePropertyAll(Colors.transparent),   
+
+        shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(18))),
+
+        surfaceTintColor: MaterialStatePropertyAll(Themes.accent),
+
+        visualDensity: VisualDensity.comfortable
+
+      )
     )
   );
 

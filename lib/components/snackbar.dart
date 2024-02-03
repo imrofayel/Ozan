@@ -49,7 +49,7 @@ class SnackBarUtils{
           
           closeIconColor: Colors.red,
 
-          duration: const Duration(seconds: 5),
+          duration: const Duration(minutes: 2),
 
           backgroundColor: Themes.text,
 

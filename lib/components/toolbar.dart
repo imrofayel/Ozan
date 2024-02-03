@@ -16,8 +16,6 @@ Widget toolbar(TextEditingController controller, context){
     ),
 
     height: 70,
-
-    width: 500,
                     
     child: Padding(
 
@@ -113,39 +111,6 @@ Widget toolbar(TextEditingController controller, context){
               width: 95,
 
               textStyle: TextStyle(fontSize: 18, color: Themes.text.withOpacity(0.8)),
-
-              menuStyle: MenuStyle(
-
-                backgroundColor: MaterialStatePropertyAll(Themes.background),
-
-                shadowColor: const MaterialStatePropertyAll(Colors.transparent),
-
-                elevation: const MaterialStatePropertyAll(0),
-              ),
-
-              inputDecorationTheme: InputDecorationTheme(
-
-                fillColor: Themes.background,
-
-                filled: true,
-
-                border: InputBorder.none,
-
-                enabledBorder: OutlineInputBorder(
-
-                  borderRadius: BorderRadius.circular(30),
-
-                  borderSide: BorderSide.none
-                ),
-
-                focusedBorder: OutlineInputBorder(
-
-                  borderRadius: BorderRadius.circular(30),
-
-                  borderSide: BorderSide.none
-                )
-
-              ),
 
               dropdownMenuEntries: heading,
             )
