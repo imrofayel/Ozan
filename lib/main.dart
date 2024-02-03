@@ -27,49 +27,51 @@ class Ozan extends StatefulWidget {
 class _OzanState extends State<Ozan> {
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: Themes.light,
-      home: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(44),
-          child: AppBar(
-
-            title: SizedBox(
-              
-              child: Row(
+        debugShowCheckedModeBanner: false,
+        theme: Themes.light,
+        home: Scaffold(
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(44),
+            child: AppBar(
+      
+              title: SizedBox(
                 
-                children: [
+                child: Row(
+                  
+                  children: [
+                
+                    const Icon(Iconsax.unlimited, size: 26),
               
-                  const Icon(Iconsax.unlimited, size: 26),
-            
-                  const Gap(6),
-            
-                  const Text("Ozan", style: TextStyle(fontSize: 20)),
-
-                  const Gap(6),
-
-                  FilledButton.tonal(onPressed: (){}, style: const ButtonStyle(fixedSize: MaterialStatePropertyAll(Size(60, 30)), padding: MaterialStatePropertyAll(EdgeInsets.zero)), child: const Text("Beta"))
-                ],
-              ),
-            ),
-
-
-            backgroundColor: Themes.background,
-            elevation: 0,
-
-            actions: const[
-                    MinimizeButton(),
-                    MaximizeButton(),
-                    CloseButton(),
+                    const Gap(6),
+              
+                    const Text("Ozan", style: TextStyle(fontSize: 20)),
+      
+                    const Gap(6),
+      
+                    FilledButton.tonal(onPressed: (){}, style: const ButtonStyle(fixedSize: MaterialStatePropertyAll(Size(60, 30)), padding: MaterialStatePropertyAll(EdgeInsets.zero)), child: const Text("Beta"))
                   ],
-            )
-          ),
-        body: const Home(),
-      ),
-    );
+                ),
+              ),
+      
+      
+              backgroundColor: Themes.background,
+              elevation: 0,
+      
+              actions: const[
+                      MinimizeButton(),
+                      MaximizeButton(),
+                      CloseButton(),
+                    ],
+              )
+            ),
+          body: const Home(),
+        ),
+      );
   }
 }
+
 
 class MinimizeButton extends StatelessWidget {
   const MinimizeButton({super.key});

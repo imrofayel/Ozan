@@ -237,7 +237,9 @@ class _MarkdownState extends State<Markdown>{
 
                               const Gap(10),
 
-                              IconButton(onPressed: (){}, icon: const Icon(Iconsax.voice_cricle))
+                              IconButton(onPressed: (){
+                                SnackBarUtils.showSnackbar(context, Icons.window_sharp, "Press Windows + H");
+                              }, icon: const Icon(Iconsax.microphone))
                             ],
                           )
                         ],
