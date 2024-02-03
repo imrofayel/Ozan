@@ -4,6 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:ozan/components/markdown.dart';
 import 'package:ozan/components/components.dart';
 import 'package:ozan/theme/theme.dart';
+import 'package:ozan/views/configure.dart';
 
 class Sidebar extends StatefulWidget {
   const Sidebar({super.key});
@@ -65,7 +66,11 @@ class _SidebarState extends State<Sidebar> {
 
                 button(() => Markdown.files.loadFile(context), Iconsax.arrow_circle_up, context, tooltip: "Import"),
 
-                button(null, Iconsax.info_circle, context, tooltip: "About"),
+                button((){
+                  showDialog(context: context, builder: (context){
+                    return const Configuration();
+                  });
+                }, Iconsax.setting, context, tooltip: "Settings"),
 
                 ],
               )

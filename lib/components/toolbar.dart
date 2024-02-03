@@ -314,7 +314,7 @@ void tableDialog(context, TextEditingController controller){
                       
                       prefixIcon: Padding(
                         padding: const EdgeInsets.fromLTRB(12.0, 0, 0, 0),
-                        child: Icon(Iconsax.sidebar_top, color: Themes.text.withOpacity(0.9), size: 24),
+                        child: IconButton(onPressed: (){}, icon: Icon(Iconsax.sidebar_top, color: Themes.text.withOpacity(0.9), size: 24), tooltip: "Rows"),
                       ),
                          
                       border: InputBorder.none,
@@ -347,7 +347,7 @@ void tableDialog(context, TextEditingController controller){
                       
                       prefixIcon: Padding(
                         padding: const EdgeInsets.fromLTRB(12.0, 0, 0, 0),
-                        child: Icon(Iconsax.sidebar_left, color: Themes.text.withOpacity(0.9), size: 24),
+                        child: IconButton(onPressed: (){}, icon: Icon(Iconsax.sidebar_left, color: Themes.text.withOpacity(0.9), size: 24), tooltip: "Columns"),
                       ),
                                    
                       filled: true,
@@ -479,7 +479,7 @@ void linkDialog(context, TextEditingController controller){
                       
                       prefixIcon: Padding(
                         padding: const EdgeInsets.fromLTRB(12.0, 0, 10, 0),
-                        child: Icon(Iconsax.link, color: Themes.text.withOpacity(0.9), size: 24),
+                        child: IconButton(onPressed: (){}, icon: Icon(Iconsax.link, color: Themes.text.withOpacity(0.9), size: 24), tooltip: "Link"),
                       ),
                                    
                       filled: true,

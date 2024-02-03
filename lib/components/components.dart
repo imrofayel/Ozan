@@ -72,13 +72,13 @@ TextField textField(context, {int? lines = 1, required void Function(String)? on
   );
 }
 
-FilledButton tonalButton({required void Function()? fn, required String text, required IconData icon}){
+FilledButton tonalButton({required void Function()? fn, required String text, required IconData icon, Size? size, double? textSize, double? iconSize}){
 
   return FilledButton.tonal(onPressed: fn,
 
     style: ButtonStyle(
 
-      fixedSize: const MaterialStatePropertyAll(Size(175, 50)),
+      fixedSize: MaterialStatePropertyAll(size ?? const Size(175, 50)),
 
       backgroundColor: MaterialStatePropertyAll(Themes.accent),
 
@@ -92,11 +92,11 @@ FilledButton tonalButton({required void Function()? fn, required String text, re
 
       children: [
         
-        Icon(icon, size: 25, color: Themes.text),
+        Icon(icon, size: iconSize?? 25, color: Themes.text),
     
         const Gap(8),
         
-        Text(text, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Themes.text)),
+        Text(text, style: TextStyle(fontSize: textSize ?? 18, fontWeight: FontWeight.w400, color: Themes.text)),
       ],
     ),
   );

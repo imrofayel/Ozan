@@ -86,6 +86,7 @@ class MinimizeButton extends StatelessWidget {
         onPressed: () {
           appWindow.minimize();
         },
+        tooltip: "Minimize",
       ),
     );
   }
@@ -108,6 +109,7 @@ class MaximizeButton extends StatelessWidget {
             appWindow.maximize();
           }
         },
+        tooltip: "Maximize",
       ),
     );
   }
@@ -126,6 +128,7 @@ class CloseButton extends StatelessWidget {
         onPressed: () {
           appWindow.close();
         },
+        tooltip: "Close",
       ),
     );
   }
