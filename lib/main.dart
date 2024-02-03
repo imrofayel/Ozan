@@ -67,7 +67,6 @@ class _OzanState extends State<Ozan> {
                 ),
               ),
       
-      
               backgroundColor: Themes.background,
               elevation: 0,
       
