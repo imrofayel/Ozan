@@ -16,7 +16,7 @@ class SnackBarUtils{
           
           closeIconColor: Colors.red,
 
-          duration: const Duration(seconds: 5),
+          duration: const Duration(seconds: 3),
 
           backgroundColor: Themes.text,
 
@@ -49,7 +49,7 @@ class SnackBarUtils{
           
           closeIconColor: Colors.red,
 
-          duration: const Duration(minutes: 2),
+          duration: const Duration(minutes: 1),
 
           backgroundColor: Themes.text,
 
@@ -67,7 +67,7 @@ class SnackBarUtils{
 
               const Gap(12),
 
-              IconButton(onPressed: ()=> copyToClipboard, icon: Icon(Iconsax.copy, color: Themes.background.withOpacity(0.9))),
+              IconButton(onPressed: ()=> copyToClipboard(context, msg), icon: Icon(Iconsax.copy, color: Themes.background.withOpacity(0.9))),
               
             ],
           )
