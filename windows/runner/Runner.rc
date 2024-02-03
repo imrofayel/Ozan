@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "ozan" "\0"
+            VALUE "CompanyName", "Adam Rofayel" "\0"
+            VALUE "FileDescription", "A markdown based text editor" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "ozan" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2024 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "ozan.exe" "\0"
-            VALUE "ProductName", "ozan" "\0"
+            VALUE "InternalName", "Ozan" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2024 Adam Rofayel. All rights reserved." "\0"
+            VALUE "OriginalFilename", "Ozan.exe" "\0"
+            VALUE "ProductName", "Ozan" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

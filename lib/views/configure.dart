@@ -222,7 +222,14 @@ class Settings extends StatefulWidget {
   State<Settings> createState() => _SettingsState();
 }
 
+Color getTheme(){
+  return _SettingsState.seed;
+}
+
 class _SettingsState extends State<Settings> {
+
+  static Color seed = Colors.deepPurpleAccent;
+
   @override
   Widget build(BuildContext context) {
 
@@ -257,8 +264,9 @@ class _SettingsState extends State<Settings> {
         
               children: [
                 
+
                 const Icon(Iconsax.setting, size: 26),
-                
+                                
                 const Gap(6),
                 
                 Text("Settings", style: TextStyle(fontSize: 22, color: Themes.text.withOpacity(0.9))),
@@ -357,15 +365,27 @@ class _SettingsState extends State<Settings> {
 
                     children: [
 
-                      accentButton(color: const Color.fromRGBO(233, 222, 248, 1), fn: (){}),
+                      accentButton(color: const Color.fromRGBO(233, 222, 248, 1), fn: (){
+                        setState(() {
+                          seed = Colors.purple;
+                        });
+                      }),
 
                       const Gap(12),
 
-                      accentButton(color: const Color.fromARGB(255, 208, 249, 230), fn: (){}),
+                      accentButton(color: const Color.fromARGB(255, 208, 249, 230), fn: (){
+                        setState(() {
+                          seed = Colors.greenAccent;
+                        });
+                      }),
 
                       const Gap(12),
 
-                      accentButton(color: const Color.fromARGB(255, 202, 208, 245), fn: (){})
+                      accentButton(color: const Color.fromARGB(255, 202, 208, 245), fn: (){
+                        setState(() {
+                          seed = Colors.blue;
+                        });
+                      })
                     ],
                   ),
                 ],
@@ -411,3 +431,4 @@ FilledButton accentButton({required Color color, required void Function()? fn}){
     )
   );
 }
+

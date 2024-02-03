@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ozan/views/configure.dart';
 
 class Themes{
 
@@ -6,7 +7,7 @@ class Themes{
 
     colorScheme: ColorScheme.fromSeed(
 
-      seedColor: Colors.deepPurple,
+      seedColor: getTheme(),
 
       brightness: Brightness.light,
     ),
@@ -72,7 +73,7 @@ class Themes{
         
         elevation: const MaterialStatePropertyAll(0),
 
-        backgroundColor: MaterialStatePropertyAll(Colors.white.withOpacity(0.6)),
+        backgroundColor: MaterialStatePropertyAll(Colors.white.withOpacity(0.8)),
 
         shadowColor: const MaterialStatePropertyAll(Colors.transparent),   
 
