@@ -145,7 +145,7 @@ class _MarkdownState extends State<Markdown>{
                         
                             const Gap(10),
                         
-                            tonalButton(fn: () => dictionaryView(context), text: "Dictionary", icon: Iconsax.shield_search),
+                            // tonalButton(fn: () => dictionaryView(context), text: "Dictionary", icon: Iconsax.shield_search),
                           ],
                         ),
                       ],

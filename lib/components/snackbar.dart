@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:iconsax/iconsax.dart';
-import 'package:ozan/components/components.dart';
+// import 'package:iconsax/iconsax.dart';
+// import 'package:ozan/components/components.dart';
 import 'package:ozan/theme/theme.dart';
 
 class SnackBarUtils{
@@ -39,39 +39,39 @@ class SnackBarUtils{
 
 
   // Dictionary SnackBar
-  static void showDictionarySnackbar(BuildContext context, IconData icon, String msg){
+  // static void showDictionarySnackbar(BuildContext context, IconData icon, String msg){
 
-    ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
+  //   ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
 
-    ScaffoldMessenger.of(context).showSnackBar(
+  //   ScaffoldMessenger.of(context).showSnackBar(
 
-        SnackBar(
+  //       SnackBar(
           
-          closeIconColor: Colors.red,
+  //         closeIconColor: Colors.red,
 
-          duration: const Duration(minutes: 1),
+  //         duration: const Duration(minutes: 1),
 
-          backgroundColor: Themes.text,
+  //         backgroundColor: Themes.text,
 
-          showCloseIcon: true,
+  //         showCloseIcon: true,
 
-          content: Row(
+  //         content: Row(
           
-            children: [
+  //           children: [
           
-              Icon(icon, color: Themes.background.withOpacity(0.9)),
+  //             Icon(icon, color: Themes.background.withOpacity(0.9)),
               
-              const Gap(12),
+  //             const Gap(12),
           
-              Text(msg, style: TextStyle(color:Themes.background, height: 2)),
+  //             Text(msg, style: TextStyle(color:Themes.background, height: 2)),
 
-              const Gap(12),
+  //             const Gap(12),
 
-              IconButton(onPressed: ()=> copyToClipboard(context, msg), icon: Icon(Iconsax.copy, color: Themes.background.withOpacity(0.9))),
+  //             IconButton(onPressed: ()=> copyToClipboard(context, msg), icon: Icon(Iconsax.copy, color: Themes.background.withOpacity(0.9))),
               
-            ],
-          )
-        )
-    );
-  }
+  //           ],
+  //         )
+  //       )
+  //   );
+  // }
 }

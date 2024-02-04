@@ -339,58 +339,58 @@ class _SettingsState extends State<Settings> {
             
             const Gap(15),
             
-            // Accent Color
-            Container(
+            // // Accent Color
+            // Container(
               
-              height: 80, width: 500,
+            //   height: 80, width: 500,
             
-              padding: const EdgeInsets.fromLTRB(16, 10, 10, 10),
+            //   padding: const EdgeInsets.fromLTRB(16, 10, 10, 10),
             
-              decoration: BoxDecoration(
-                color: Themes.accent.withOpacity(0.4),
-                borderRadius: BorderRadius.circular(12),
-              ),
+            //   decoration: BoxDecoration(
+            //     color: Themes.accent.withOpacity(0.4),
+            //     borderRadius: BorderRadius.circular(12),
+            //   ),
             
-              child: Row(
+            //   child: Row(
             
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
             
-                children: [
+            //     children: [
               
-                  Text("Accent Color", style: TextStyle(fontSize: 17, color: Themes.text.withOpacity(0.9))),
+            //       Text("Accent Color", style: TextStyle(fontSize: 17, color: Themes.text.withOpacity(0.9))),
               
-                  Row(
+            //       Row(
 
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
-                    children: [
+            //         children: [
 
-                      accentButton(color: const Color.fromRGBO(233, 222, 248, 1), fn: (){
-                        setState(() {
-                          seed = Colors.purple;
-                        });
-                      }),
+            //           accentButton(color: const Color.fromRGBO(233, 222, 248, 1), fn: (){
+            //             setState(() {
+            //               seed = Colors.purple;
+            //             });
+            //           }),
 
-                      const Gap(12),
+            //           const Gap(12),
 
-                      accentButton(color: const Color.fromARGB(255, 208, 249, 230), fn: (){
-                        setState(() {
-                          seed = Colors.greenAccent;
-                        });
-                      }),
+            //           accentButton(color: const Color.fromARGB(255, 208, 249, 230), fn: (){
+            //             setState(() {
+            //               seed = Colors.greenAccent;
+            //             });
+            //           }),
 
-                      const Gap(12),
+            //           const Gap(12),
 
-                      accentButton(color: const Color.fromARGB(255, 202, 208, 245), fn: (){
-                        setState(() {
-                          seed = Colors.blue;
-                        });
-                      })
-                    ],
-                  ),
-                ],
-              ),
-            ),
+            //           accentButton(color: const Color.fromARGB(255, 202, 208, 245), fn: (){
+            //             setState(() {
+            //               seed = Colors.blue;
+            //             });
+            //           })
+            //         ],
+            //       ),
+            //     ],
+            //   ),
+            // ),
           ]
         ),
       )
@@ -418,17 +418,17 @@ List<DropdownMenuEntry> languages = [
 
   ];
 
-FilledButton accentButton({required Color color, required void Function()? fn}){
+// FilledButton accentButton({required Color color, required void Function()? fn}){
 
-  return FilledButton(
-    onPressed: fn, 
-    child: null, 
-    style: ButtonStyle(
-      backgroundColor: MaterialStatePropertyAll(color), 
-      shadowColor: const MaterialStatePropertyAll(Colors.transparent), 
-      fixedSize: const MaterialStatePropertyAll(Size(40, 40)),
-      shape: const MaterialStatePropertyAll(CircleBorder())
-    )
-  );
-}
+//   return FilledButton(
+//     onPressed: fn, 
+//     child: null, 
+//     style: ButtonStyle(
+//       backgroundColor: MaterialStatePropertyAll(color), 
+//       shadowColor: const MaterialStatePropertyAll(Colors.transparent), 
+//       fixedSize: const MaterialStatePropertyAll(Size(40, 40)),
+//       shape: const MaterialStatePropertyAll(CircleBorder())
+//     )
+//   );
+// }
 

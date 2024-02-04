@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:ozan/database/shared_preferences_util.dart';
 import 'package:ozan/views/home.dart';
 import 'package:ozan/theme/theme.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
@@ -30,11 +29,6 @@ class _OzanState extends State<Ozan> {
     @override
   void initState() {
     super.initState();
-    _loadData();
-  }
-
-  Future<void> _loadData() async {
-    await SharedPreferencesUtil.loadState('key');
   }
   
   @override
@@ -62,7 +56,7 @@ class _OzanState extends State<Ozan> {
       
                     const Gap(6),
       
-                    FilledButton.tonal(onPressed: (){}, style: const ButtonStyle(fixedSize: MaterialStatePropertyAll(Size(60, 30)), padding: MaterialStatePropertyAll(EdgeInsets.zero)), child: const Text("Beta"))
+                    FilledButton(onPressed: (){}, style: const ButtonStyle(fixedSize: MaterialStatePropertyAll(Size(60, 30)), padding: MaterialStatePropertyAll(EdgeInsets.zero)), child: const Text("Beta"))
                   ],
                 ),
               ),

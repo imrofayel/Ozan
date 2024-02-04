@@ -1,4 +1,4 @@
-import 'package:dictionaryx/dictionary_msa.dart';
+// import 'package:dictionaryx/dictionary_msa.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
@@ -103,64 +103,64 @@ FilledButton tonalButton({required void Function()? fn, required String text, re
 }
 
 
-void dictionaryView(context){
+// void dictionaryView(context){
 
-  showDialog(
+//   showDialog(
 
-    context: context,
+//     context: context,
 
-    builder: (context) {
+//     builder: (context) {
 
-      return AlertDialog(
+//       return AlertDialog(
 
-        shadowColor: Colors.transparent,
+//         shadowColor: Colors.transparent,
 
-        backgroundColor: Themes.accent,
+//         backgroundColor: Themes.accent,
 
-        contentPadding: const EdgeInsets.all(8),
+//         contentPadding: const EdgeInsets.all(8),
 
-        insetPadding: EdgeInsets.zero,
+//         insetPadding: EdgeInsets.zero,
         
-        content: SizedBox(
+//         content: SizedBox(
 
-          height: 120,
+//           height: 120,
 
-          child: Column(
+//           child: Column(
           
-            children: [
+//             children: [
           
-              TextField(
+//               TextField(
               
-                onSubmitted: (value){
-                  dictionary(context, value);
-                },     
+//                 onSubmitted: (value){
+//                   dictionary(context, value);
+//                 },     
                 
-                decoration: InputDecoration(
+//                 decoration: InputDecoration(
                   
-                  prefixIcon: Icon(Iconsax.search_normal_1, color: Themes.text, size: 26),
+//                   prefixIcon: Icon(Iconsax.search_normal_1, color: Themes.text, size: 26),
                      
-                  border: InputBorder.none,
+//                   border: InputBorder.none,
               
-                  fillColor: Themes.accent,
+//                   fillColor: Themes.accent,
               
-                  focusColor: Themes.accent,
+//                   focusColor: Themes.accent,
               
-                  hoverColor: Themes.accent,
-                ),
+//                   hoverColor: Themes.accent,
+//                 ),
               
-                style: const TextStyle(fontSize: 19),
-              ),
+//                 style: const TextStyle(fontSize: 19),
+//               ),
 
-              const Gap(10),
+//               const Gap(10),
 
-              FilledButton.tonal(onPressed: (){}, style: const ButtonStyle(fixedSize: MaterialStatePropertyAll(Size(340, 50)), padding: MaterialStatePropertyAll(EdgeInsets.zero), shadowColor: MaterialStatePropertyAll(Colors.transparent)), child: const Text("Dictionary may take some time to load once!"))
-            ],
-          ),
-        ),
-      );
-    }
-  );
-}
+//               FilledButton.tonal(onPressed: (){}, style: const ButtonStyle(fixedSize: MaterialStatePropertyAll(Size(340, 50)), padding: MaterialStatePropertyAll(EdgeInsets.zero), shadowColor: MaterialStatePropertyAll(Colors.transparent)), child: const Text("Dictionary may take some time to load once!"))
+//             ],
+//           ),
+//         ),
+//       );
+//     }
+//   );
+// }
 
 void searchView(context, TextEditingController search, TextEditingController text){
 
@@ -220,26 +220,26 @@ void copyToClipboard(context, String text){
       SnackBarUtils.showSnackbar(context, Iconsax.copy_success, "Copied to clipboard");
   }
 
-void dictionary(BuildContext context, String word) {
+// void dictionary(BuildContext context, String word) {
 
-  String get;
+//   String get;
 
-  try {
+//   try {
 
-    var dMSA = DictionaryMSA();
+//     var dMSA = DictionaryMSA();
 
-    var entry = dMSA.getEntry(word);
+//     var entry = dMSA.getEntry(word);
 
-    get = "(${entry.meanings.first.pos.toString().split('.')[1].toLowerCase()}) ${entry.meanings.first.description}.\nSynonyms: ${entry.synonyms.toSet()}\ne.g., ${entry.meanings.first.examples.first}";
+//     get = "(${entry.meanings.first.pos.toString().split('.')[1].toLowerCase()}) ${entry.meanings.first.description}.\nSynonyms: ${entry.synonyms.toSet()}\ne.g., ${entry.meanings.first.examples.first}";
 
-    SnackBarUtils.showDictionarySnackbar(context, Iconsax.eye, get);
+//     SnackBarUtils.showDictionarySnackbar(context, Iconsax.eye, get);
 
-  } catch (e) {
+//   } catch (e) {
 
-    get = "Check your spelling or try another word";
-    SnackBarUtils.showDictionarySnackbar(context, Iconsax.eye_slash, get);
-  }
-}
+//     get = "Check your spelling or try another word";
+//     SnackBarUtils.showDictionarySnackbar(context, Iconsax.eye_slash, get);
+//   }
+// }
 
 
 SingleChildScrollView textEncode({required int words, required int char, required int lines}){
