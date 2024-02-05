@@ -10,7 +10,7 @@ Widget toolbar(TextEditingController controller, context){
                     
     decoration: BoxDecoration(
       
-      color: Themes.accent,
+      color: Themes.accent.withOpacity(0.5),
 
       borderRadius: BorderRadius.circular(20),
     ),
@@ -19,7 +19,7 @@ Widget toolbar(TextEditingController controller, context){
                     
     child: Padding(
 
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(0.0),
 
       child: Row(
 
@@ -27,19 +27,19 @@ Widget toolbar(TextEditingController controller, context){
       
           children: [
             
-            IconButton(onPressed: () => applyFormatting(controller, '**'), icon: const Icon(Iconsax.text_bold, size: 22), tooltip: "Bold"),
+            IconButton(onPressed: () => applyFormatting(controller, '**'), icon: const Icon(Iconsax.text_bold, size: 24), tooltip: "Bold"),
       
             const Gap(2),
       
-            IconButton(onPressed: () => applyFormatting(controller, '*'), icon: const Icon(Iconsax.text_underline, size: 22), tooltip: "Underline"),
+            IconButton(onPressed: () => applyFormatting(controller, '*'), icon: const Icon(Iconsax.text_underline, size: 24), tooltip: "Underline"),
       
             const Gap(6),
 
-            IconButton(onPressed: () => applyCodeFormatting(controller, context), icon: const Icon(Iconsax.code, size: 22), tooltip: "Code Block"),
+            IconButton(onPressed: () => applyCodeFormatting(controller, context), icon: const Icon(Iconsax.code, size: 24), tooltip: "Code Block"),
       
             const Gap(6),
 
-            IconButton(onPressed: () => applyQuoteFormatting(controller), icon: const Icon(Iconsax.quote_down, size: 22), tooltip: "Quote"),
+            IconButton(onPressed: () => applyQuoteFormatting(controller), icon: const Icon(Iconsax.quote_down, size: 24), tooltip: "Quote"),
       
             const Gap(6),
 
@@ -51,7 +51,15 @@ Widget toolbar(TextEditingController controller, context){
       
             const Gap(6),
 
-            IconButton(onPressed: () => linkDialog(context, controller), icon: const Icon(Iconsax.link, size: 22), tooltip: "Link"),
+            IconButton(onPressed: (){}, icon: const Icon(Iconsax.hashtag_up, size: 24), tooltip: "Numbered List"),
+
+            const Gap(6),
+
+            IconButton(onPressed: (){}, icon: const Icon(Iconsax.calendar, size: 24), tooltip: "Date"),
+
+            const Gap(6),
+
+            IconButton(onPressed: () => linkDialog(context, controller), icon: const Icon(Iconsax.link, size: 24), tooltip: "Link"),
 
             const Gap(6),
           

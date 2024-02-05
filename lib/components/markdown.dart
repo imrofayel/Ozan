@@ -97,7 +97,19 @@ class _MarkdownState extends State<Markdown>{
                       const Gap(10),
                   
                       // Date picker
+
                       date(context, pageTitle),
+
+                      FilledButton.tonal(onPressed: (){
+
+                        showDialog(
+                          context: context, 
+
+                          builder: (context){
+                            return const Editor();
+                          }
+                        );
+                      }, style: ButtonStyle(fixedSize: const MaterialStatePropertyAll(Size(60, 60)), padding: const MaterialStatePropertyAll(EdgeInsets.zero), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Themes.accent), overlayColor: MaterialStatePropertyAll(Colors.grey.shade100)), child: const Icon(Iconsax.edit_2, size: 26)),
                     ],
                   ),
             
@@ -141,10 +153,6 @@ class _MarkdownState extends State<Markdown>{
                           children: [
                         
                             button(() => searchView(context, search, page), Iconsax.search_normal_1, context, textColor: const Color.fromARGB(255, 4, 2, 16), tooltip: "Search"),
-                        
-                            const Gap(10),
-                        
-                            // tonalButton(fn: () => dictionaryView(context), text: "Dictionary", icon: Iconsax.shield_search),
                           ],
                         ),
                       ],
@@ -183,6 +191,7 @@ class _MarkdownState extends State<Markdown>{
                       borderRadius: const BorderRadius.all(Radius.circular(20)),
 
                       // AI BOX
+
                       color: Themes.accent,
                       ),
           
@@ -195,7 +204,9 @@ class _MarkdownState extends State<Markdown>{
                         mainAxisAlignment: MainAxisAlignment.start,
                       
                         children: [
+
                           // AI Box Top Icons
+
                           SingleChildScrollView(
           
                             scrollDirection: Axis.vertical,
@@ -245,14 +256,6 @@ class _MarkdownState extends State<Markdown>{
                       ),
                     ),
                   ),
-
-                  IconButton.filled(onPressed: (){
-                    showDialog(context: context, 
-                    builder: (context) {
-                      return const Editor();
-                    }
-                  );
-                  }, icon: const Icon(Iconsax.edit))
                 ],
               ),
             )
@@ -300,7 +303,7 @@ String title(){
 }
 
 
-/// EDITOR DIALOGUE
+// Editor Dialogue
 class Editor extends StatefulWidget {
   const Editor({super.key});
 
@@ -320,28 +323,52 @@ class _EditorState extends State<Editor> {
 
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
 
-      title: const Text("Writer"),
+      title: Row(
+
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+        children: [
+          
+          const Row(
+
+            children: [
+
+              Icon(Iconsax.edit_2),
+          
+              Gap(10),
+
+              Text("Writer"),
+            ],
+          ),
+
+          IconButton(onPressed: (){
+            Navigator.of(context).pop();
+          }, icon: const Icon(Iconsax.close_circle, size: 26))
+        ],
+      ),
+
+      titlePadding: const EdgeInsets.fromLTRB(30, 30, 20, 10),
 
       children: [
 
         SizedBox(
 
-          height: 400,
+          height: 480,
 
-          width: 600,
+          width: 550,
 
           child: Column(
 
             children: [
 
-                SingleChildScrollView(
+                Padding(
 
-                    scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.fromLTRB(22, 0, 22, 0),
 
-                    child: toolbar(_MarkdownState.page, context)
-                  ),
+                  child: toolbar(_MarkdownState.page, context),
+                ),
 
-                  const Gap(15),
+                  const Gap(14),
           
                   Column(
           
@@ -353,11 +380,11 @@ class _EditorState extends State<Editor> {
           
                       Padding(
 
-                        padding: const EdgeInsets.all(8.0),
-                        
+                        padding: const EdgeInsets.fromLTRB(18, 0, 18, 0),
+
                         child: Container(
                         
-                          height: 310,
+                          height: 390,
                         
                           decoration: BoxDecoration(
                             
@@ -369,7 +396,7 @@ class _EditorState extends State<Editor> {
                         
                           child: Padding(
                           
-                            padding: const EdgeInsets.all(6.0),
+                            padding: const EdgeInsets.all(6),
                             // SCSV
                             child: Column(
                               
@@ -385,7 +412,7 @@ class _EditorState extends State<Editor> {
                         
                                     child: textField(context,
                                             
-                                    lines: 7, 
+                                    lines: 9, 
                                             
                                     onSubmitted: (text) {
                                       _MarkdownState.page.text += '\n';
