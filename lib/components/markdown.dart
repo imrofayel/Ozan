@@ -100,6 +100,8 @@ class _MarkdownState extends State<Markdown>{
 
                       date(context, pageTitle),
 
+                      const Gap(15),
+
                       FilledButton.tonal(onPressed: (){
 
                         showDialog(
@@ -184,7 +186,7 @@ class _MarkdownState extends State<Markdown>{
               
                   Container(
           
-                    height: 360,
+                    height: 590,
           
                     decoration: BoxDecoration(
                       
