@@ -365,7 +365,7 @@ void tableDialog(context, TextEditingController controller){
                 }
               },
 
-              icon: const Icon(FluentIcons.add_24_regular),  tooltip: "Create")
+              icon: Icon(FluentIcons.add_24_regular, color: Theme.of(context).colorScheme.tertiary),  tooltip: "Create")
             ],
           ),
         ),
@@ -513,7 +513,7 @@ void linkDialog(context, TextEditingController controller){
               
               style: const ButtonStyle(fixedSize: MaterialStatePropertyAll(Size(50, 50)), shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30))))),
               
-              icon: const Icon(FluentIcons.add_24_regular), tooltip: "Create")
+              icon: Icon(FluentIcons.add_24_regular, color: Theme.of(context).colorScheme.tertiary,), tooltip: "Create")
             ],
           ),
         ),

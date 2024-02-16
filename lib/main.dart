@@ -34,9 +34,7 @@ class _OzanState extends State<Ozan> {
         home: Scaffold(
 
           appBar: AppBar(
-
-            backgroundColor: Theme.of(context).colorScheme.background,
-               
+             
             title: const SizedBox(
               
               child: Row(

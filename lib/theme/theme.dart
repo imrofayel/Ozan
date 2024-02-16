@@ -40,6 +40,8 @@ class Themes {
 
     ),
 
+    appBarTheme:  const AppBarTheme(backgroundColor: Color.fromARGB(255, 255, 255, 255)),
+
     tooltipTheme: TooltipThemeData(
 
       height: 13,
@@ -62,17 +64,17 @@ class Themes {
 
       todayBorder: BorderSide.none,
 
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromARGB(255, 250, 250, 250),
 
       shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(30)),
+
+      todayForegroundColor: const MaterialStatePropertyAll(Colors.black)
 
     ), 
 
     dropdownMenuTheme: DropdownMenuThemeData(
 
     inputDecorationTheme: InputDecorationTheme(
-
-      filled: true,
 
       border: InputBorder.none,
 
@@ -98,7 +100,7 @@ class Themes {
         
         elevation: const MaterialStatePropertyAll(0),
 
-        backgroundColor: const MaterialStatePropertyAll(Colors.white),
+        backgroundColor: const MaterialStatePropertyAll(Color.fromARGB(255, 250, 250, 250)),
 
         shadowColor: const MaterialStatePropertyAll(Colors.transparent),   
 
@@ -148,6 +150,8 @@ class Themes {
 
     ),
 
+    appBarTheme:  const AppBarTheme(backgroundColor: Color.fromRGBO(40, 47, 40, 1)),
+
     tooltipTheme: TooltipThemeData(
 
       height: 13,
@@ -161,7 +165,7 @@ class Themes {
         borderRadius: BorderRadius.circular(20)
       ),
 
-      textStyle: TextStyle(fontSize: 16, color: const Color.fromARGB(255, 3, 7, 3).withOpacity(0.8)),
+      textStyle: TextStyle(fontSize: 16, color: const Color.fromARGB(255, 255, 255, 255).withOpacity(0.8)),
     ),
 
     datePickerTheme: DatePickerThemeData(
@@ -170,17 +174,17 @@ class Themes {
 
       todayBorder: BorderSide.none,
 
-      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      backgroundColor: const Color.fromRGBO(40, 47, 40, 1),
 
       shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(30)),
+
+      todayForegroundColor: const MaterialStatePropertyAll(Colors.white)
 
     ), 
 
     dropdownMenuTheme: DropdownMenuThemeData(
 
     inputDecorationTheme: InputDecorationTheme(
-
-      filled: true,
 
       border: InputBorder.none,
 
@@ -206,7 +210,7 @@ class Themes {
         
         elevation: const MaterialStatePropertyAll(0),
 
-        backgroundColor: const MaterialStatePropertyAll(Color.fromARGB(255, 0, 0, 0)),
+        backgroundColor: const MaterialStatePropertyAll(Color.fromRGBO(45, 63, 50, 1)),
 
         shadowColor: const MaterialStatePropertyAll(Colors.transparent),   
 
