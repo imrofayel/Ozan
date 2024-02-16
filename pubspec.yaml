@@ -43,6 +43,7 @@ dependencies:
   flutter_highlight: ^0.7.0
   simple_icons: ^10.1.3
   iconsax: ^0.0.8
+  fluentui_system_icons: ^1.1.226
     
 dev_dependencies:
   flutter_test:
