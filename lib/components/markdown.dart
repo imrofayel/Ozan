@@ -9,7 +9,6 @@ import 'package:ozan/components/components.dart';
 import 'package:ozan/components/toolbar.dart';
 import 'package:ozan/theme/theme.dart';
 import 'package:intl/intl.dart';
-
 import '../markdown/markdown_style.dart';
 
 class Markdown extends StatefulWidget {
@@ -32,7 +31,7 @@ class _MarkdownState extends State<Markdown>{
 
   static TextEditingController pageTitle = TextEditingController();
 
-  FocusNode _focusNode = FocusNode();// Declare the FocusNode
+  static FocusNode _focusNode = FocusNode();// Declare the FocusNode
 
   String data = ''; // AI Generated response
 
@@ -98,7 +97,21 @@ class _MarkdownState extends State<Markdown>{
                       const Gap(10),
                   
                       // Date picker
+
                       date(context, pageTitle),
+
+                      const Gap(15),
+
+                      FilledButton.tonal(onPressed: (){
+
+                        showDialog(
+                          context: context, 
+
+                          builder: (context){
+                            return const Editor();
+                          }
+                        );
+                      }, style: ButtonStyle(fixedSize: const MaterialStatePropertyAll(Size(60, 60)), padding: const MaterialStatePropertyAll(EdgeInsets.zero), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Themes.accent), overlayColor: MaterialStatePropertyAll(Colors.grey.shade100)), child: const Icon(Iconsax.edit_2, size: 26)),
                     ],
                   ),
             
@@ -142,10 +155,6 @@ class _MarkdownState extends State<Markdown>{
                           children: [
                         
                             button(() => searchView(context, search, page), Iconsax.search_normal_1, context, textColor: const Color.fromARGB(255, 4, 2, 16), tooltip: "Search"),
-                        
-                            const Gap(10),
-                        
-                            // tonalButton(fn: () => dictionaryView(context), text: "Dictionary", icon: Iconsax.shield_search),
                           ],
                         ),
                       ],
@@ -177,13 +186,14 @@ class _MarkdownState extends State<Markdown>{
               
                   Container(
           
-                    height: 360,
+                    height: 590,
           
                     decoration: BoxDecoration(
                       
                       borderRadius: const BorderRadius.all(Radius.circular(20)),
 
                       // AI BOX
+
                       color: Themes.accent,
                       ),
           
@@ -196,7 +206,9 @@ class _MarkdownState extends State<Markdown>{
                         mainAxisAlignment: MainAxisAlignment.start,
                       
                         children: [
+
                           // AI Box Top Icons
+
                           SingleChildScrollView(
           
                             scrollDirection: Axis.vertical,
@@ -246,104 +258,6 @@ class _MarkdownState extends State<Markdown>{
                       ),
                     ),
                   ),
-          
-                  const Gap(15),
-
-                  SingleChildScrollView(
-
-                    scrollDirection: Axis.horizontal,
-
-                    child: toolbar(page, context)
-                  ),
-
-                  const Gap(15),
-          
-                  Column(
-          
-                    mainAxisAlignment: MainAxisAlignment.center,
-
-                    crossAxisAlignment: CrossAxisAlignment.center,
-          
-                    children: [
-          
-                      Container(
-                      
-                        height: 380,
-                      
-                        decoration: BoxDecoration(
-                          
-                          borderRadius: const BorderRadius.all(Radius.circular(20)),
-                          
-                          // TextBox
-                          color: Themes.accent,
-                        ),
-                      
-                        child: Padding(
-                        
-                          padding: const EdgeInsets.all(6.0),
-                          // SCSV
-                          child: Column(
-                            
-                            mainAxisAlignment: MainAxisAlignment.start,
-                          
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                          
-                            children: [ 
-                              
-                                Padding(
-                          
-                                  padding: const EdgeInsets.all(14.0),
-                          
-                                  child: Row(
-                                  
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  
-                                    children: [
-                                      
-                                      Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        const Icon(Iconsax.edit_2, size: 23),
-                          
-                                        const Gap(10),
-                          
-                                        Text("  Writer", style: TextStyle(fontSize: 22, color: Themes.text)),
-                                      ]),
-                                    ],
-                                  ),
-                                ),
-                          
-                                SingleChildScrollView(
-
-                                  scrollDirection: Axis.vertical,
-
-                                  child: textField(context,
-                                          
-                                  lines: 7, 
-                                          
-                                  onSubmitted: (text) {
-                                    page.text += '\n';
-                                  },
-                                  
-                                  onChanged: (text) {
-                                    setState(() {
-                                      md = text;
-                                    });
-                                  }, 
-                                  
-                                  controller: page, 
-                                  
-                                  focusNode: _focusNode,
-                                                                
-                                  color: Themes.accent,
-                                  ),
-                                ),
-                            ]
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                 ],
               ),
             )
@@ -388,4 +302,148 @@ String title(){
   }
 
   return getTitle;
+}
+
+
+// Editor Dialogue
+class Editor extends StatefulWidget {
+  const Editor({super.key});
+
+  @override
+  State<Editor> createState() => _EditorState();
+}
+
+class _EditorState extends State<Editor> {
+  int selectedIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+
+    return SimpleDialog(
+
+      shadowColor: Colors.transparent,
+
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+
+      title: Row(
+
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+        children: [
+          
+          const Row(
+
+            children: [
+
+              Icon(Iconsax.edit_2),
+          
+              Gap(10),
+
+              Text("Writer"),
+            ],
+          ),
+
+          IconButton(onPressed: (){
+            Navigator.of(context).pop();
+          }, icon: const Icon(Iconsax.close_circle, size: 26))
+        ],
+      ),
+
+      titlePadding: const EdgeInsets.fromLTRB(30, 30, 20, 10),
+
+      children: [
+
+        SizedBox(
+
+          height: 480,
+
+          width: 550,
+
+          child: Column(
+
+            children: [
+
+                Padding(
+
+                  padding: const EdgeInsets.fromLTRB(22, 0, 22, 0),
+
+                  child: toolbar(_MarkdownState.page, context),
+                ),
+
+                  const Gap(14),
+          
+                  Column(
+          
+                    mainAxisAlignment: MainAxisAlignment.center,
+
+                    crossAxisAlignment: CrossAxisAlignment.center,
+          
+                    children: [
+          
+                      Padding(
+
+                        padding: const EdgeInsets.fromLTRB(18, 0, 18, 0),
+
+                        child: Container(
+                        
+                          height: 390,
+                        
+                          decoration: BoxDecoration(
+                            
+                            borderRadius: const BorderRadius.all(Radius.circular(20)),
+                            
+                            // TextBox
+                            color: Colors.white.withOpacity(0.3),
+                          ),
+                        
+                          child: Padding(
+                          
+                            padding: const EdgeInsets.all(6),
+                            // SCSV
+                            child: Column(
+                              
+                              mainAxisAlignment: MainAxisAlignment.start,
+                            
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                            
+                              children: [ 
+                            
+                                  SingleChildScrollView(
+                        
+                                    scrollDirection: Axis.vertical,
+                        
+                                    child: textField(context,
+                                            
+                                    lines: 9, 
+                                            
+                                    onSubmitted: (text) {
+                                      _MarkdownState.page.text += '\n';
+                                    },
+                                    
+                                    onChanged: (text) {
+                                      setState(() {
+                                        _MarkdownState.md = text;
+                                      });
+                                    }, 
+                                    
+                                    controller: _MarkdownState.page, 
+                                    
+                                    focusNode: _MarkdownState._focusNode,
+                                                                  
+                                    color: Colors.transparent,
+                                    ),
+                                  ),
+                              ]
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+            ],
+          ),
+        )
+      ],
+    );
+  }
 }

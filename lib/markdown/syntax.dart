@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_highlight/themes/atom-one-light.dart';
 import 'package:flutter_highlighter/flutter_highlighter.dart';
-import 'package:flutter_highlighter/themes/atom-one-dark.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:gap/gap.dart';
 import 'package:iconsax/iconsax.dart';
@@ -70,7 +69,7 @@ class CodeElementBuilder extends MarkdownElementBuilder {
                     .platformBrightness ==
                 Brightness.light
             ? atomOneLightTheme
-            : atomOneDarkTheme,
+            : atomOneLightTheme,
         
         padding: const EdgeInsets.only(left: 10, top: 8, bottom: 8),
     
