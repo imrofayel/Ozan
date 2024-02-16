@@ -2,7 +2,6 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:ozan/components/snackbar.dart';
-import 'package:ozan/theme/theme.dart';
 
 Widget toolbar(TextEditingController controller, context){
 
@@ -10,7 +9,7 @@ Widget toolbar(TextEditingController controller, context){
                     
     decoration: BoxDecoration(
       
-      color: Themes.accent.withOpacity(0.5),
+      color: Theme.of(context).colorScheme.primary,
 
       borderRadius: BorderRadius.circular(16),
     ),
@@ -100,7 +99,7 @@ Widget toolbar(TextEditingController controller, context){
             
               width: 90,
             
-              textStyle: TextStyle(fontSize: 20, color: Themes.text.withOpacity(0.8)),
+              textStyle: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.tertiary),
             
               dropdownMenuEntries: heading,
             )
@@ -299,18 +298,18 @@ void tableDialog(context, TextEditingController controller){
                       
                       prefixIcon: Padding(
                         padding: const EdgeInsets.fromLTRB(12.0, 0, 0, 0),
-                        child: IconButton(onPressed: (){}, icon: Icon(FluentIcons.align_left_24_regular, color: Themes.text.withOpacity(0.9), size: 24), tooltip: "Rows"),
+                        child: IconButton(onPressed: (){}, icon: Icon(FluentIcons.align_left_24_regular, color: Theme.of(context).colorScheme.tertiary, size: 24), tooltip: "Rows"),
                       ),
                          
                       border: InputBorder.none,
           
                       filled: true,
                   
-                      fillColor: Themes.accent.withOpacity(0.4),
+                      fillColor: Theme.of(context).colorScheme.primary,
                   
-                      focusColor: Themes.accent.withOpacity(0.4),
+                      focusColor: Theme.of(context).colorScheme.primary,
                   
-                      hoverColor: Themes.accent.withOpacity(0.4),
+                      hoverColor: Theme.of(context).colorScheme.primary,
 
                       enabledBorder: OutlineInputBorder(borderSide:BorderSide.none, borderRadius: BorderRadius.circular(20)),
 
@@ -332,16 +331,16 @@ void tableDialog(context, TextEditingController controller){
                       
                       prefixIcon: Padding(
                         padding: const EdgeInsets.fromLTRB(12.0, 0, 0, 0),
-                        child: IconButton(onPressed: (){}, icon: Icon(FluentIcons.align_top_24_regular, color: Themes.text.withOpacity(0.9), size: 24), tooltip: "Columns"),
+                        child: IconButton(onPressed: (){}, icon: Icon(FluentIcons.align_top_24_regular, color: Theme.of(context).colorScheme.tertiary, size: 24), tooltip: "Columns"),
                       ),
                                    
                       filled: true,
                   
-                      fillColor: Themes.accent.withOpacity(0.5),
+                      fillColor: Theme.of(context).colorScheme.primary,
                   
-                      focusColor: Themes.accent.withOpacity(0.4),
+                      focusColor: Theme.of(context).colorScheme.primary,
                   
-                      hoverColor: Themes.accent.withOpacity(0.4),
+                      hoverColor: Theme.of(context).colorScheme.primary,
 
                       enabledBorder: OutlineInputBorder(borderSide:BorderSide.none, borderRadius: BorderRadius.circular(20)),
 
@@ -430,7 +429,7 @@ void linkDialog(context, TextEditingController controller){
 
                       hintText: " Title",
 
-                      hintStyle: TextStyle(fontWeight: FontWeight.w500, color: Themes.text.withOpacity(0.1)),
+                      hintStyle: TextStyle(fontWeight: FontWeight.w500, color: Theme.of(context).colorScheme.tertiary),
           
                       constraints: const BoxConstraints(maxHeight: 80, maxWidth: 250),
                          
@@ -438,11 +437,11 @@ void linkDialog(context, TextEditingController controller){
           
                       filled: true,
                   
-                      fillColor: Themes.accent.withOpacity(0.4),
+                      fillColor: Theme.of(context).colorScheme.primary,
                   
-                      focusColor: Themes.accent.withOpacity(0.4),
+                      focusColor: Theme.of(context).colorScheme.primary,
                   
-                      hoverColor: Themes.accent.withOpacity(0.4),
+                      hoverColor: Theme.of(context).colorScheme.primary,
 
                       enabledBorder: OutlineInputBorder(borderSide:BorderSide.none, borderRadius: BorderRadius.circular(20)),
 
@@ -464,16 +463,16 @@ void linkDialog(context, TextEditingController controller){
                       
                       prefixIcon: Padding(
                         padding: const EdgeInsets.fromLTRB(12.0, 0, 10, 0),
-                        child: IconButton(onPressed: (){}, icon: Icon(FluentIcons.link_24_regular, color: Themes.text.withOpacity(0.9), size: 24), tooltip: "Link"),
+                        child: IconButton(onPressed: (){}, icon: Icon(FluentIcons.link_24_regular, color: Theme.of(context).colorScheme.tertiary, size: 24), tooltip: "Link"),
                       ),
                                    
                       filled: true,
                   
-                      fillColor: Themes.accent.withOpacity(0.5),
+                      fillColor: Theme.of(context).colorScheme.primary,
                   
-                      focusColor: Themes.accent.withOpacity(0.4),
+                      focusColor: Theme.of(context).colorScheme.primary,
                   
-                      hoverColor: Themes.accent.withOpacity(0.4),
+                      hoverColor: Theme.of(context).colorScheme.primary,
 
                       enabledBorder: OutlineInputBorder(borderSide:BorderSide.none, borderRadius: BorderRadius.circular(20)),
 

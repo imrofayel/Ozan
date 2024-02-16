@@ -2,7 +2,6 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:gap/gap.dart';
-import 'package:ozan/theme/theme.dart';
 
 class Configuration extends StatefulWidget {
   const Configuration({super.key});
@@ -81,7 +80,7 @@ class _InfoState extends State<Info> {
 
           const Gap(10),
          
-          Text("Adam Rofayel. All rights reserved.", style: TextStyle(fontSize: 18, color: Themes.text.withOpacity(0.9)))
+          Text("Adam Rofayel. All rights reserved.", style: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.tertiary))
         ],
       ),
     );

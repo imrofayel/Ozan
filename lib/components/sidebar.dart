@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:ozan/components/markdown.dart';
 import 'package:ozan/components/components.dart';
-import 'package:ozan/theme/theme.dart';
 import 'package:ozan/views/configure.dart';
 
 class Sidebar extends StatefulWidget {
@@ -36,7 +35,7 @@ class _SidebarState extends State<Sidebar> {
             
               decoration: BoxDecoration(
 
-                color: Themes.accent,
+                color: Theme.of(context).colorScheme.primary,
 
                 borderRadius: BorderRadius.circular(20),
               ),

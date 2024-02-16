@@ -7,7 +7,6 @@ import 'package:ozan/database/file_service.dart';
 import 'package:ozan/components/snackbar.dart';
 import 'package:ozan/components/components.dart';
 import 'package:ozan/components/toolbar.dart';
-import 'package:ozan/theme/theme.dart';
 import 'package:intl/intl.dart';
 import '../markdown/markdown_style.dart';
 
@@ -89,7 +88,7 @@ class _MarkdownState extends State<Markdown>{
                   
                   children: [
                 
-                    Expanded(child: titleBox(controller: pageTitle)),
+                    Expanded(child: titleBox(context, controller: pageTitle)),
                 
                     const Gap(10),
                 
@@ -131,7 +130,7 @@ class _MarkdownState extends State<Markdown>{
                     
                     children: [
                                       
-                      textEncode(words: page.text.split(' ').length-1, char: page.text.length, lines: page.text.split('\n').length-1),
+                      textEncode(context, words: page.text.split(' ').length-1, char: page.text.length, lines: page.text.split('\n').length-1),
                     
                     ],
                   ),
@@ -169,7 +168,7 @@ class _MarkdownState extends State<Markdown>{
 
                       // AI BOX
 
-                      color: Themes.accent,
+                      color: Theme.of(context).colorScheme.primary,
                       ),
           
                     child: Padding(
@@ -194,7 +193,7 @@ class _MarkdownState extends State<Markdown>{
                                             
                               children: [
 
-                                Text(" Raya Copilot", style: TextStyle(fontSize: 22, color: Themes.text)),
+                                Text(" Raya Copilot", style: TextStyle(fontSize: 22, color: Theme.of(context).colorScheme.tertiary)),
 
                                 button(() => copyToClipboard(context, data), FluentIcons.copy_24_regular, context, tooltip: "Copy"),   
                               ],
@@ -219,14 +218,14 @@ class _MarkdownState extends State<Markdown>{
                                 child: textField(context, onSubmitted: (str){
                                   generate(prompt.text);
                                   SnackBarUtils.showSnackbar(context, FluentIcons.brain_circuit_24_regular, "Ozan is generating. . .");
-                                }, onChanged: null, controller: prompt, color: Themes.background, textColor: Themes.text.withOpacity(0.8)),
+                                }, onChanged: null, controller: prompt, color: Theme.of(context).colorScheme.background, textColor: Theme.of(context).colorScheme.tertiary),
                               ),
 
                               const Gap(10),
 
                               IconButton(onPressed: (){
                                 SnackBarUtils.showSnackbar(context, Icons.window_sharp, "Press Windows + H");
-                              }, icon: Icon(FluentIcons.mic_24_regular, size: 26, color: Themes.text))
+                              }, icon: Icon(FluentIcons.mic_24_regular, size: 26, color: Theme.of(context).colorScheme.tertiary))
                             ],
                           )
                         ],

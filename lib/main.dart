@@ -29,12 +29,14 @@ class _OzanState extends State<Ozan> {
 
         debugShowCheckedModeBanner: false,
 
-        theme: Themes.light,
+        theme: Themes.darkTheme,
         
         home: Scaffold(
 
           appBar: AppBar(
-                
+
+            backgroundColor: Theme.of(context).colorScheme.background,
+               
             title: const SizedBox(
               
               child: Row(

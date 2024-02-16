@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:ozan/components/snackbar.dart';
-import 'package:ozan/theme/theme.dart';
 
 IconButton button(void Function()? function, IconData icon, context, {Color? textColor, Color? overlayColor, required String tooltip}){
 
@@ -20,7 +19,7 @@ IconButton button(void Function()? function, IconData icon, context, {Color? tex
 
         iconSize: const MaterialStatePropertyAll(26),
 
-        iconColor: MaterialStatePropertyAll(textColor ?? Themes.text),
+        iconColor: MaterialStatePropertyAll(textColor ?? Theme.of(context).colorScheme.tertiary),
 
         overlayColor: MaterialStatePropertyAll(overlayColor ?? Colors.transparent),
       )
@@ -41,7 +40,7 @@ TextField textField(context, {int? lines = 1, required void Function(String)? on
 
     focusNode: focusNode,
 
-    style: TextStyle(color: textColor ?? Themes.text, fontSize: 18, height: 2),
+    style: TextStyle(color: textColor ?? Theme.of(context).colorScheme.tertiary, fontSize: 18, height: 2),
 
     decoration: InputDecoration(
 
@@ -68,7 +67,7 @@ TextField textField(context, {int? lines = 1, required void Function(String)? on
   );
 }
 
-FilledButton tonalButton({required void Function()? fn, required String text, required IconData icon, Size? size, double? textSize, double? iconSize}){
+FilledButton tonalButton(context, {required void Function()? fn, required String text, required IconData icon, Size? size, double? textSize, double? iconSize}){
 
   return FilledButton.tonal(onPressed: fn,
 
@@ -76,7 +75,7 @@ FilledButton tonalButton({required void Function()? fn, required String text, re
 
       fixedSize: MaterialStatePropertyAll(size ?? const Size(175, 50)),
 
-      backgroundColor: MaterialStatePropertyAll(Themes.accent),
+      backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary),
 
       shadowColor: const MaterialStatePropertyAll(Colors.transparent),
 
@@ -88,11 +87,11 @@ FilledButton tonalButton({required void Function()? fn, required String text, re
 
       children: [
         
-        Icon(icon, size: iconSize?? 25, color: Themes.text),
+        Icon(icon, size: iconSize?? 25, color: Theme.of(context).colorScheme.tertiary),
     
         const Gap(8),
         
-        Text(text, style: TextStyle(fontSize: textSize ?? 18, fontWeight: FontWeight.w400, color: Themes.text)),
+        Text(text, style: TextStyle(fontSize: textSize ?? 18, fontWeight: FontWeight.w400, color: Theme.of(context).colorScheme.tertiary)),
       ],
     ),
   );
@@ -106,7 +105,7 @@ void copyToClipboard(context, String text){
   }
 
 
-SingleChildScrollView textEncode({required int words, required int char, required int lines}){
+SingleChildScrollView textEncode(context, {required int words, required int char, required int lines}){
 
   return SingleChildScrollView(
 
@@ -118,15 +117,15 @@ SingleChildScrollView textEncode({required int words, required int char, require
     
       children: [
     
-        FilledButton(onPressed: (){}, style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: MaterialStatePropertyAll(Themes.accent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Themes.background)), child: Text("$words words", style: TextStyle(fontSize: 15, color: Themes.text))),
+        FilledButton(onPressed: (){}, style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("$words words", style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary))),
     
         const Gap(7),
     
-        FilledButton(onPressed: (){}, style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: MaterialStatePropertyAll(Themes.accent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Themes.background)), child: Text("$char characters", style: TextStyle(fontSize: 15, color: Themes.text))),
+        FilledButton(onPressed: (){}, style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("$char characters", style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary))),
     
         const Gap(7),
     
-        FilledButton(onPressed: (){}, style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: MaterialStatePropertyAll(Themes.accent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Themes.background)), child: Text("$lines lines", style: TextStyle(fontSize: 15, color: Themes.text))),
+        FilledButton(onPressed: (){}, style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("$lines lines", style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary))),
       ],
     ),
   );
@@ -138,7 +137,7 @@ IconButton suffix(context){
       }, icon: const Icon(FluentIcons.mic_24_regular), padding: const EdgeInsets.all(1));
 }
 
-TextField titleBox({required TextEditingController controller}){
+TextField titleBox(context, {required TextEditingController controller}){
 
   return TextField(
 
@@ -148,7 +147,7 @@ TextField titleBox({required TextEditingController controller}){
 
       hintText: "Subject",
 
-      hintStyle: TextStyle(fontWeight: FontWeight.w400, color: Themes.text),
+      hintStyle: TextStyle(fontWeight: FontWeight.w400, color: Theme.of(context).colorScheme.tertiary),
 
       constraints: const BoxConstraints(maxWidth: 520),
 
