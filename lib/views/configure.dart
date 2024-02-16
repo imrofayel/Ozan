@@ -24,7 +24,7 @@ class _ConfigurationState extends State<Configuration> {
 
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
 
-      title: const Text("Settings"),
+      title: const Text("About"),
 
       children: [
 
@@ -69,9 +69,6 @@ class _ConfigurationState extends State<Configuration> {
     switch (index) {
 
       case 0:
-        return const Settings();
-
-      case 1:
         return const Info();
 
       default:
@@ -96,12 +93,6 @@ class NavigationMenu extends StatelessWidget {
         IconButton(onPressed: (){
           onItemSelected(0);
         }, icon: const Icon(Iconsax.setting)),
-
-        const Gap(8),
-        
-        IconButton(onPressed: (){
-          onItemSelected(1);
-        }, icon: const Icon(Iconsax.info_circle)),
       ],
     );
   }
@@ -212,217 +203,3 @@ class _InfoState extends State<Info> {
     );
   }
 }
-
-
-// Settings
-class Settings extends StatefulWidget {
-  const Settings({super.key});
-
-  @override
-  State<Settings> createState() => _SettingsState();
-}
-
-class _SettingsState extends State<Settings> {
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Container(
-      
-      padding: const EdgeInsets.all(24),
-    
-      margin: const EdgeInsets.fromLTRB(0, 0, 12, 0),
-    
-      decoration: BoxDecoration(
-        color: Themes.accent.withOpacity(0.4),
-        borderRadius: BorderRadius.circular(12),
-      ),
-    
-      child: SingleChildScrollView(
-
-        scrollDirection: Axis.vertical,
-
-        child: Column(
-            
-          mainAxisAlignment: MainAxisAlignment.start,
-            
-          crossAxisAlignment: CrossAxisAlignment.start,
-        
-          children: [
-            
-            const Gap(12),
-            // Settings
-            Row(
-        
-              mainAxisAlignment: MainAxisAlignment.start,
-        
-              children: [
-                
-
-                const Icon(Iconsax.setting, size: 26),
-                                
-                const Gap(6),
-                
-                Text("Settings", style: TextStyle(fontSize: 22, color: Themes.text.withOpacity(0.9))),
-              ],
-            ), 
-            
-            const Gap(25),
-            
-            // Theme
-            Container(
-              
-              height: 80, width: 500,
-            
-              padding: const EdgeInsets.fromLTRB(16, 10, 10, 10),
-            
-              decoration: BoxDecoration(
-                color: Themes.accent.withOpacity(0.4),
-                borderRadius: BorderRadius.circular(12),
-              ),
-            
-              child: Row(
-            
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            
-                children: [
-              
-                  Text("Theme", style: TextStyle(fontSize: 17, color: Themes.text.withOpacity(0.9))),
-              
-                  DropdownMenu(
-              
-                    dropdownMenuEntries: theme,
-              
-                    initialSelection: 0,
-                  )
-                ],
-              ),
-            ),
-            
-            const Gap(15),
-            
-            // Language
-            Container(
-              
-              height: 80, width: 500,
-            
-              padding: const EdgeInsets.fromLTRB(16, 10, 10, 10),
-            
-              decoration: BoxDecoration(
-                color: Themes.accent.withOpacity(0.4),
-                borderRadius: BorderRadius.circular(12),
-              ),
-            
-              child: Row(
-            
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            
-                children: [
-              
-                  Text("Language", style: TextStyle(fontSize: 17, color: Themes.text.withOpacity(0.9))),
-
-                  DropdownMenu(
-              
-                    dropdownMenuEntries: languages,
-              
-                    initialSelection: 0,
-                  ),
-                ],
-              ),
-            ),
-            
-            const Gap(15),
-            
-            // // Accent Color
-            // Container(
-              
-            //   height: 80, width: 500,
-            
-            //   padding: const EdgeInsets.fromLTRB(16, 10, 10, 10),
-            
-            //   decoration: BoxDecoration(
-            //     color: Themes.accent.withOpacity(0.4),
-            //     borderRadius: BorderRadius.circular(12),
-            //   ),
-            
-            //   child: Row(
-            
-            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            
-            //     children: [
-              
-            //       Text("Accent Color", style: TextStyle(fontSize: 17, color: Themes.text.withOpacity(0.9))),
-              
-            //       Row(
-
-            //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
-            //         children: [
-
-            //           accentButton(color: const Color.fromRGBO(233, 222, 248, 1), fn: (){
-            //             setState(() {
-            //               seed = Colors.purple;
-            //             });
-            //           }),
-
-            //           const Gap(12),
-
-            //           accentButton(color: const Color.fromARGB(255, 208, 249, 230), fn: (){
-            //             setState(() {
-            //               seed = Colors.greenAccent;
-            //             });
-            //           }),
-
-            //           const Gap(12),
-
-            //           accentButton(color: const Color.fromARGB(255, 202, 208, 245), fn: (){
-            //             setState(() {
-            //               seed = Colors.blue;
-            //             });
-            //           })
-            //         ],
-            //       ),
-            //     ],
-            //   ),
-            // ),
-          ]
-        ),
-      )
-    );
-  }
-}
-
-List<DropdownMenuEntry> theme = [
-
-    const DropdownMenuEntry(value: 0, label: " Light"),
-
-    const DropdownMenuEntry(value: 1, label: " Dark"),
-
-    const DropdownMenuEntry(value: 1, label: " Grey"),
-
-  ];
-
-List<DropdownMenuEntry> languages = [
-
-    const DropdownMenuEntry(value: 0, label: " English"),
-
-    const DropdownMenuEntry(value: 1, label: " اردو"),
-
-    const DropdownMenuEntry(value: 1, label: " Turkish"),
-
-  ];
-
-// FilledButton accentButton({required Color color, required void Function()? fn}){
-
-//   return FilledButton(
-//     onPressed: fn, 
-//     child: null, 
-//     style: ButtonStyle(
-//       backgroundColor: MaterialStatePropertyAll(color), 
-//       shadowColor: const MaterialStatePropertyAll(Colors.transparent), 
-//       fixedSize: const MaterialStatePropertyAll(Size(40, 40)),
-//       shape: const MaterialStatePropertyAll(CircleBorder())
-//     )
-//   );
-// }
-
