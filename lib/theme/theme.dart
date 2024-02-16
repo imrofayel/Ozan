@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ozan/views/configure.dart';
 
 class Themes{
 
@@ -7,7 +6,7 @@ class Themes{
 
     colorScheme: ColorScheme.fromSeed(
 
-      seedColor: getTheme(),
+      seedColor: Colors.deepPurple,
 
       brightness: Brightness.light,
     ),

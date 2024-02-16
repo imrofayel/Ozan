@@ -222,13 +222,7 @@ class Settings extends StatefulWidget {
   State<Settings> createState() => _SettingsState();
 }
 
-Color getTheme(){
-  return _SettingsState.seed;
-}
-
 class _SettingsState extends State<Settings> {
-
-  static Color seed = Colors.deepPurpleAccent;
 
   @override
   Widget build(BuildContext context) {

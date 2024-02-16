@@ -102,66 +102,6 @@ FilledButton tonalButton({required void Function()? fn, required String text, re
   );
 }
 
-
-// void dictionaryView(context){
-
-//   showDialog(
-
-//     context: context,
-
-//     builder: (context) {
-
-//       return AlertDialog(
-
-//         shadowColor: Colors.transparent,
-
-//         backgroundColor: Themes.accent,
-
-//         contentPadding: const EdgeInsets.all(8),
-
-//         insetPadding: EdgeInsets.zero,
-        
-//         content: SizedBox(
-
-//           height: 120,
-
-//           child: Column(
-          
-//             children: [
-          
-//               TextField(
-              
-//                 onSubmitted: (value){
-//                   dictionary(context, value);
-//                 },     
-                
-//                 decoration: InputDecoration(
-                  
-//                   prefixIcon: Icon(Iconsax.search_normal_1, color: Themes.text, size: 26),
-                     
-//                   border: InputBorder.none,
-              
-//                   fillColor: Themes.accent,
-              
-//                   focusColor: Themes.accent,
-              
-//                   hoverColor: Themes.accent,
-//                 ),
-              
-//                 style: const TextStyle(fontSize: 19),
-//               ),
-
-//               const Gap(10),
-
-//               FilledButton.tonal(onPressed: (){}, style: const ButtonStyle(fixedSize: MaterialStatePropertyAll(Size(340, 50)), padding: MaterialStatePropertyAll(EdgeInsets.zero), shadowColor: MaterialStatePropertyAll(Colors.transparent)), child: const Text("Dictionary may take some time to load once!"))
-//             ],
-//           ),
-//         ),
-//       );
-//     }
-//   );
-// }
-
 void searchView(context, TextEditingController search, TextEditingController text){
 
   showDialog(
@@ -219,27 +159,6 @@ void copyToClipboard(context, String text){
 
       SnackBarUtils.showSnackbar(context, Iconsax.copy_success, "Copied to clipboard");
   }
-
-// void dictionary(BuildContext context, String word) {
-
-//   String get;
-
-//   try {
-
-//     var dMSA = DictionaryMSA();
-
-//     var entry = dMSA.getEntry(word);
-
-//     get = "(${entry.meanings.first.pos.toString().split('.')[1].toLowerCase()}) ${entry.meanings.first.description}.\nSynonyms: ${entry.synonyms.toSet()}\ne.g., ${entry.meanings.first.examples.first}";
-
-//     SnackBarUtils.showDictionarySnackbar(context, Iconsax.eye, get);
-
-//   } catch (e) {
-
-//     get = "Check your spelling or try another word";
-//     SnackBarUtils.showDictionarySnackbar(context, Iconsax.eye_slash, get);
-//   }
-// }
 
 
 SingleChildScrollView textEncode({required int words, required int char, required int lines}){

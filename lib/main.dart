@@ -56,7 +56,7 @@ class _OzanState extends State<Ozan> {
       
                     const Gap(6),
       
-                    FilledButton(onPressed: (){}, style: const ButtonStyle(fixedSize: MaterialStatePropertyAll(Size(60, 30)), padding: MaterialStatePropertyAll(EdgeInsets.zero)), child: const Text("Beta"))
+                    FilledButton(onPressed: (){}, style: const ButtonStyle(fixedSize: MaterialStatePropertyAll(Size(60, 30)), padding: MaterialStatePropertyAll(EdgeInsets.zero), shadowColor: MaterialStatePropertyAll(Colors.transparent)), child: const Text("Beta"))
                   ],
                 ),
               ),
