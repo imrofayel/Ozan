@@ -41,6 +41,7 @@ dependencies:
   flutter_highlighter: ^0.1.1
   flutter_highlight: ^0.7.0
   fluentui_system_icons: ^1.1.226
+  provider: ^6.1.1
     
 dev_dependencies:
   flutter_test:

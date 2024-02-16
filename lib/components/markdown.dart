@@ -296,6 +296,8 @@ class _EditorState extends State<Editor> {
 
     return SimpleDialog(
 
+      elevation: 0,
+
       shadowColor: Colors.transparent,
 
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),

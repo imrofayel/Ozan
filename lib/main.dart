@@ -1,11 +1,13 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:ozan/theme/theme_provider.dart';
 import 'package:ozan/views/home.dart';
-import 'package:ozan/theme/theme.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
-  runApp(const Ozan());
+  
+  runApp(ChangeNotifierProvider(create: (context) => ThemeSwitcher(), child: const Ozan()));
 }
 
 class Ozan extends StatefulWidget {
@@ -29,7 +31,7 @@ class _OzanState extends State<Ozan> {
 
         debugShowCheckedModeBanner: false,
 
-        theme: Themes.darkTheme,
+        theme: Provider.of<ThemeSwitcher>(context).themeData,
         
         home: Scaffold(
 
@@ -56,7 +58,11 @@ class _OzanState extends State<Ozan> {
               
               [
 
-                IconButton(onPressed: (){}, icon: const Icon(FluentIcons.weather_sunny_24_regular, size: 26)),
+                IconButton(onPressed: (){
+
+                  Provider.of<ThemeSwitcher>(context, listen: false).toggleTheme();
+
+                }, icon: const Icon(FluentIcons.weather_sunny_24_regular, size: 26)),
                                 
                 IconButton(onPressed: (){}, icon: const Icon(FluentIcons.cloud_24_regular, size: 26)),
 
