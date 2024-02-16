@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ozan/components/markdown.dart';
 import 'package:ozan/components/sidebar.dart';
-import 'package:ozan/theme/theme.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -14,15 +13,16 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
+    return const Scaffold(
 
-      backgroundColor: Themes.background,
-
-      body: const Row(
+      body: Row(
+      
+        crossAxisAlignment: CrossAxisAlignment.start,
+        
         children: [
           
           Expanded(flex: 1, child: Sidebar()),
-
+      
           Expanded(flex: 11, child: Markdown()),
         ],
       ),

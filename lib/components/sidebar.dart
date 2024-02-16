@@ -1,6 +1,6 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:ozan/components/markdown.dart';
 import 'package:ozan/components/components.dart';
 import 'package:ozan/theme/theme.dart';
@@ -22,38 +22,23 @@ class _SidebarState extends State<Sidebar> {
 
       scrollDirection: Axis.vertical,
       
-      child: Container(
-      
-        alignment: Alignment.center,
-      
+      child: SizedBox(
+        
         child: Column(
-      
-          mainAxisAlignment: MainAxisAlignment.center,
-      
+            
           children: [
             
-            Container(
-              
-              width: 60, height: 60, 
-            
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-              ),
-
-              child: button(() {
-              }, Iconsax.home, context, tooltip: "Home"),
-
-            ),
-            
-            const Gap(25),
+            const Gap(10),
       
             Container(
       
-              width: 60, height: 200, 
+              width: 55, height: 210, 
             
               decoration: BoxDecoration(
+
                 color: Themes.accent,
-                borderRadius: BorderRadius.circular(30),
+
+                borderRadius: BorderRadius.circular(20),
               ),
 
               child: Column(
@@ -62,31 +47,26 @@ class _SidebarState extends State<Sidebar> {
 
                 children: [
 
-                button(() => Markdown.files.newFile(context), Iconsax.add_circle, context, tooltip: "New File"),
+                button(() => Markdown.files.newFile(context), FluentIcons.add_24_regular, context, tooltip: "New File"),
 
-                button(() => Markdown.files.loadFile(context), Iconsax.arrow_circle_up, context, tooltip: "Import"),
+                const Gap(6),
+
+                button(() => Markdown.files.loadFile(context), FluentIcons.attach_24_regular, context, tooltip: "Import"),
+
+                const Gap(6),
 
                 button((){
                   showDialog(context: context, builder: (context){
                     return const Configuration();
                   });
-                }, Iconsax.setting, context, tooltip: "Settings"),
+                }, FluentIcons.person_24_regular, context, tooltip: "About"),
+
+                const Gap(6),
+
+                button(() => Markdown.files.saveContent(context), FluentIcons.arrow_download_24_regular, context, tooltip: "Export"),
 
                 ],
               )
-            ),
-      
-            const Gap(25),
-      
-            Container(
-              
-              width: 60, height: 60, 
-            
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-              ),
-
-              child: button(() => Markdown.files.saveContent(context), Iconsax.import_1, context, tooltip: "Export"),
             ),
           ],
         )

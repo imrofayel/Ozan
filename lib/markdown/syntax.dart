@@ -1,10 +1,10 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_highlight/themes/atom-one-light.dart';
 import 'package:flutter_highlighter/flutter_highlighter.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:gap/gap.dart';
-import 'package:iconsax/iconsax.dart';
-// ignore:, depend_on_referenced_packages 
+// ignore: depend_on_referenced_packages
 import 'package:markdown/markdown.dart' as md;
 import 'package:ozan/components/components.dart';
 import 'package:ozan/components/snackbar.dart';
@@ -50,8 +50,8 @@ class CodeElementBuilder extends MarkdownElementBuilder {
     
           IconButton(onPressed: (){
             copyToClipboard(context, element.textContent);
-            SnackBarUtils.showSnackbar(context, Iconsax.copy_success, "Code copied");
-          }, icon: const Icon(Iconsax.copy), padding: EdgeInsets.zero),
+            SnackBarUtils.showSnackbar(context, FluentIcons.copy_24_regular, "Code copied");
+          }, icon: const Icon(FluentIcons.copy_24_regular), padding: EdgeInsets.zero),
           ],
         ),
     

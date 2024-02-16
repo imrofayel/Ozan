@@ -6,7 +6,7 @@ class Themes{
 
     colorScheme: ColorScheme.fromSeed(
 
-      seedColor: Colors.deepPurple,
+      seedColor: Colors.greenAccent,
 
       brightness: Brightness.light,
     ),

@@ -19,7 +19,7 @@ Markdown markdown(String data, double scale, context){
     
       styleSheet: MarkdownStyleSheet(
 
-          p: TextStyle(color: Themes.text.withOpacity(0.9), height: 1.8),
+          p: TextStyle(color: Themes.text, height: 1.6),
 
           textScaleFactor: scale,
 

@@ -1,6 +1,6 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:ozan/components/snackbar.dart';
 import 'package:ozan/theme/theme.dart';
 
@@ -12,7 +12,7 @@ Widget toolbar(TextEditingController controller, context){
       
       color: Themes.accent.withOpacity(0.5),
 
-      borderRadius: BorderRadius.circular(20),
+      borderRadius: BorderRadius.circular(16),
     ),
 
     height: 70,
@@ -27,39 +27,33 @@ Widget toolbar(TextEditingController controller, context){
       
           children: [
             
-            IconButton(onPressed: () => applyFormatting(controller, '**'), icon: const Icon(Iconsax.text_bold, size: 24), tooltip: "Bold"),
-      
-            const Gap(2),
-      
-            IconButton(onPressed: () => applyFormatting(controller, '*'), icon: const Icon(Iconsax.text_underline, size: 24), tooltip: "Underline"),
+            IconButton(onPressed: () => applyFormatting(controller, '**'), icon: const Icon(FluentIcons.text_bold_24_regular, size: 26), tooltip: "Bold"),
+            
+            IconButton(onPressed: () => applyFormatting(controller, '*'), icon: const Icon(FluentIcons.text_underline_24_regular, size: 26), tooltip: "Underline"),
       
             const Gap(6),
 
-            IconButton(onPressed: () => applyCodeFormatting(controller, context), icon: const Icon(Iconsax.code, size: 24), tooltip: "Code Block"),
+            IconButton(onPressed: () => applyCodeFormatting(controller, context), icon: const Icon(FluentIcons.code_24_regular, size: 26), tooltip: "Code Block"),
       
             const Gap(6),
 
-            IconButton(onPressed: () => applyQuoteFormatting(controller), icon: const Icon(Iconsax.quote_down, size: 24), tooltip: "Quote"),
+            IconButton(onPressed: () => applyQuoteFormatting(controller), icon: const Icon(FluentIcons.text_quote_24_regular, size: 28), tooltip: "Quote"),
       
             const Gap(6),
 
-            IconButton(onPressed: ()=> tableDialog(context, controller), icon: const Icon(Iconsax.grid_edit, size: 24), tooltip: "Table"),
+            IconButton(onPressed: ()=> tableDialog(context, controller), icon: const Icon(FluentIcons.table_edit_24_regular, size: 26), tooltip: "Table"),
       
             const Gap(6),
 
-            IconButton(onPressed: () => applyListFormatting(controller), icon: const Icon(Iconsax.task_square, size: 24), tooltip: "Bullet List"),
+            IconButton(onPressed: () => applyListFormatting(controller, '-'), icon: const Icon(FluentIcons.text_bullet_list_24_regular, size: 26), tooltip: "Bullet List"),
       
             const Gap(6),
 
-            IconButton(onPressed: (){}, icon: const Icon(Iconsax.hashtag_up, size: 24), tooltip: "Numbered List"),
+            IconButton(onPressed: () => applyListFormatting(controller, '1. '), icon: const Icon(FluentIcons.text_number_list_ltr_24_regular, size: 24), tooltip: "Numbered List"),
 
             const Gap(6),
 
-            IconButton(onPressed: (){}, icon: const Icon(Iconsax.calendar, size: 24), tooltip: "Date"),
-
-            const Gap(6),
-
-            IconButton(onPressed: () => linkDialog(context, controller), icon: const Icon(Iconsax.link, size: 24), tooltip: "Link"),
+            IconButton(onPressed: () => linkDialog(context, controller), icon: const Icon(FluentIcons.link_24_regular, size: 26), tooltip: "Link"),
 
             const Gap(6),
           
@@ -80,18 +74,6 @@ Widget toolbar(TextEditingController controller, context){
             
                   case 2:
                     temp = '###';
-                    break;
-            
-                  case 3:
-                    temp = '####';
-                    break;
-            
-                  case 4:
-                    temp = '#####';
-                    break;
-            
-                  case 5:
-                    temp = '######';
                     break;
             
                   default: temp = '#';
@@ -116,9 +98,9 @@ Widget toolbar(TextEditingController controller, context){
             
               initialSelection: 2,
             
-              width: 95,
+              width: 90,
             
-              textStyle: TextStyle(fontSize: 18, color: Themes.text.withOpacity(0.8)),
+              textStyle: TextStyle(fontSize: 20, color: Themes.text.withOpacity(0.8)),
             
               dropdownMenuEntries: heading,
             )
@@ -131,17 +113,12 @@ Widget toolbar(TextEditingController controller, context){
 
 List<DropdownMenuEntry> heading = [
 
-    const DropdownMenuEntry(value: 0, label: " H1"),
+    const DropdownMenuEntry(value: 0, label: "H1", labelWidget: Icon(FluentIcons.text_header_1_24_regular, size: 28)),
 
-    const DropdownMenuEntry(value: 1, label: " H2"),
+    const DropdownMenuEntry(value: 1, label: "H2", labelWidget: Icon(FluentIcons.text_header_2_24_regular, size: 26)),
 
-    const DropdownMenuEntry(value: 2, label: " H3"),
+    const DropdownMenuEntry(value: 2, label: "H3", labelWidget: Icon(FluentIcons.text_header_3_24_regular, size: 24)),
 
-    const DropdownMenuEntry(value: 3, label: " H4"),
-
-    const DropdownMenuEntry(value: 3, label: " H5"),
-
-    const DropdownMenuEntry(value: 3, label: " H6"),
   ];
 
 void applyCodeFormatting(TextEditingController controller, context) {
@@ -165,7 +142,7 @@ void applyCodeFormatting(TextEditingController controller, context) {
     }
 }
 
-void applyListFormatting(TextEditingController controller) {
+void applyListFormatting(TextEditingController controller, String format) {
 
     TextSelection selection = controller.selection;
 
@@ -173,7 +150,7 @@ void applyListFormatting(TextEditingController controller) {
 
     try {
       String newText =
-          '${text.substring(0, selection.start)}\n- ${text.substring(selection.start, selection.end)}\n${text.substring(selection.end)}';
+          '${text.substring(0, selection.start)}\n$format ${text.substring(selection.start, selection.end)}\n${text.substring(selection.end)}';
 
       controller.value = TextEditingValue(
         text: newText,
@@ -322,7 +299,7 @@ void tableDialog(context, TextEditingController controller){
                       
                       prefixIcon: Padding(
                         padding: const EdgeInsets.fromLTRB(12.0, 0, 0, 0),
-                        child: IconButton(onPressed: (){}, icon: Icon(Iconsax.sidebar_top, color: Themes.text.withOpacity(0.9), size: 24), tooltip: "Rows"),
+                        child: IconButton(onPressed: (){}, icon: Icon(FluentIcons.align_left_24_regular, color: Themes.text.withOpacity(0.9), size: 24), tooltip: "Rows"),
                       ),
                          
                       border: InputBorder.none,
@@ -355,7 +332,7 @@ void tableDialog(context, TextEditingController controller){
                       
                       prefixIcon: Padding(
                         padding: const EdgeInsets.fromLTRB(12.0, 0, 0, 0),
-                        child: IconButton(onPressed: (){}, icon: Icon(Iconsax.sidebar_left, color: Themes.text.withOpacity(0.9), size: 24), tooltip: "Columns"),
+                        child: IconButton(onPressed: (){}, icon: Icon(FluentIcons.align_top_24_regular, color: Themes.text.withOpacity(0.9), size: 24), tooltip: "Columns"),
                       ),
                                    
                       filled: true,
@@ -385,11 +362,11 @@ void tableDialog(context, TextEditingController controller){
                   Navigator.pop(context);
                 }
                 else{
-                  SnackBarUtils.showSnackbar(context, Iconsax.warning_2, "Please enter valid integer values for both row and col");
+                  SnackBarUtils.showSnackbar(context, FluentIcons.warning_24_regular, "Please enter valid integer values for both row and col");
                 }
               },
 
-              icon: const Icon(Iconsax.add),  tooltip: "Create")
+              icon: const Icon(FluentIcons.add_24_regular),  tooltip: "Create")
             ],
           ),
         ),
@@ -487,7 +464,7 @@ void linkDialog(context, TextEditingController controller){
                       
                       prefixIcon: Padding(
                         padding: const EdgeInsets.fromLTRB(12.0, 0, 10, 0),
-                        child: IconButton(onPressed: (){}, icon: Icon(Iconsax.link, color: Themes.text.withOpacity(0.9), size: 24), tooltip: "Link"),
+                        child: IconButton(onPressed: (){}, icon: Icon(FluentIcons.link_24_regular, color: Themes.text.withOpacity(0.9), size: 24), tooltip: "Link"),
                       ),
                                    
                       filled: true,
@@ -537,7 +514,7 @@ void linkDialog(context, TextEditingController controller){
               
               style: const ButtonStyle(fixedSize: MaterialStatePropertyAll(Size(50, 50)), shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30))))),
               
-              icon: const Icon(Iconsax.add), tooltip: "Create")
+              icon: const Icon(FluentIcons.add_24_regular), tooltip: "Create")
             ],
           ),
         ),
