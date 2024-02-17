@@ -195,7 +195,13 @@ class _MarkdownState extends State<Markdown>{
 
                                 Text(" Raya Copilot", style: TextStyle(fontSize: 22, color: Theme.of(context).colorScheme.tertiary)),
 
-                                button(() => copyToClipboard(context, data), FluentIcons.copy_24_regular, context, tooltip: "Copy"),   
+                                Row(
+
+                                  children: [
+
+                                    button(() => copyToClipboard(context, data), FluentIcons.copy_24_regular, context, tooltip: "Copy"),
+                                  ],
+                                )   
                               ],
                             ),
                           ),
@@ -217,7 +223,7 @@ class _MarkdownState extends State<Markdown>{
 
                                 child: textField(context, onSubmitted: (str){
                                   generate(prompt.text);
-                                  SnackBarUtils.showSnackbar(context, FluentIcons.brain_circuit_24_regular, "Ozan is generating. . .");
+                                  SnackBarUtils.showSnackbar(context, FluentIcons.brain_circuit_24_regular, "Raya is generating. . .");
                                 }, onChanged: null, controller: prompt, color: Theme.of(context).colorScheme.background, textColor: Theme.of(context).colorScheme.tertiary),
                               ),
 

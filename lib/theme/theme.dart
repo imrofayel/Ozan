@@ -4,6 +4,8 @@ class Themes {
 
   static ThemeData lightTheme = ThemeData(
 
+    brightness: Brightness.light,
+
     useMaterial3: true,
 
     fontFamily: "Inter",
@@ -25,8 +27,6 @@ class Themes {
       seedColor: Colors.green,
 
       background: const Color.fromARGB(255, 255, 255, 255),
-
-      secondary: const Color.fromRGBO(197, 197, 197, 1),
 
       primary: const Color.fromARGB(255, 250, 250, 250),
 
@@ -68,7 +68,13 @@ class Themes {
 
       shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(30)),
 
-      todayForegroundColor: const MaterialStatePropertyAll(Colors.black)
+      todayForegroundColor: const MaterialStatePropertyAll(Colors.white),
+
+      todayBackgroundColor: const MaterialStatePropertyAll(Colors.black),
+
+      cancelButtonStyle: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.black), foregroundColor: MaterialStatePropertyAll(Colors.white)),
+
+      confirmButtonStyle: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.black), foregroundColor: MaterialStatePropertyAll(Colors.white)),
 
     ), 
 
@@ -114,6 +120,8 @@ class Themes {
 
   static ThemeData darkTheme = ThemeData(
 
+    brightness: Brightness.dark,
+
     useMaterial3: true,
 
     fontFamily: "Inter",
@@ -134,11 +142,9 @@ class Themes {
 
       seedColor: Colors.green,
 
-      background: const Color.fromRGBO(40, 47, 40, 1),
+      background: const Color.fromRGBO(9, 11, 16, 1),
 
-      secondary: const Color.fromRGBO(46, 66, 52, 1),
-
-      primary: const Color.fromRGBO(45, 63, 50, 1),
+      primary: const Color.fromRGBO(15, 17, 26, 1),
 
       primaryContainer: const Color.fromARGB(255, 212, 106, 85),
 
@@ -150,7 +156,7 @@ class Themes {
 
     ),
 
-    appBarTheme:  const AppBarTheme(backgroundColor: Color.fromRGBO(40, 47, 40, 1)),
+    appBarTheme:  const AppBarTheme(backgroundColor: Color.fromRGBO(9, 11, 16, 1)),
 
     tooltipTheme: TooltipThemeData(
 
@@ -178,7 +184,13 @@ class Themes {
 
       shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(30)),
 
-      todayForegroundColor: const MaterialStatePropertyAll(Colors.white)
+      todayForegroundColor: const MaterialStatePropertyAll(Colors.black),
+
+      todayBackgroundColor: const MaterialStatePropertyAll(Colors.white),
+
+      cancelButtonStyle: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.white), foregroundColor: MaterialStatePropertyAll(Colors.black)),
+
+      confirmButtonStyle: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.white), foregroundColor: MaterialStatePropertyAll(Colors.black)),
 
     ), 
 
@@ -192,7 +204,7 @@ class Themes {
 
       borderRadius: BorderRadius.circular(30),
 
-      borderSide: BorderSide.none
+      borderSide: BorderSide.none,
                 
       ),
 
@@ -203,7 +215,7 @@ class Themes {
             borderSide: BorderSide.none
                 
           )
-
+      
       ),
 
       menuStyle: MenuStyle(

@@ -13,10 +13,12 @@ Markdown markdown(String data, double scale, context){
       softLineBreak: true,
 
       builders: {
-        'code': CodeElementBuilder(context: context)
+        'code': CodeElementBuilder(context: context),
       },
     
       styleSheet: MarkdownStyleSheet(
+
+          codeblockDecoration: BoxDecoration(color: Theme.of(context).colorScheme.primary, borderRadius: BorderRadius.circular(12)),
 
           p: TextStyle(color: Theme.of(context).colorScheme.tertiary, height: 1.6),
 

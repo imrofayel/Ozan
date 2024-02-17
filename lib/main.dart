@@ -29,6 +29,8 @@ class _OzanState extends State<Ozan> {
 
     return MaterialApp(
 
+        title: "Rofayel Notebook",
+
         debugShowCheckedModeBanner: false,
 
         theme: Provider.of<ThemeSwitcher>(context).themeData,
