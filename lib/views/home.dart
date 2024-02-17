@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ozan/components/markdown.dart';
+import 'package:ozan/views/markdown.dart';
 import 'package:ozan/components/sidebar.dart';
 
 class Home extends StatefulWidget {

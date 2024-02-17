@@ -1,7 +1,7 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:ozan/components/markdown.dart';
+import 'package:ozan/views/markdown.dart';
 import 'package:ozan/components/components.dart';
 import 'package:ozan/views/configure.dart';
 
