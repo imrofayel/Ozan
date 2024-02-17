@@ -29,6 +29,8 @@ IconButton button(void Function()? function, IconData icon, context, {Color? tex
 TextField textField(context, {int? lines = 1, required void Function(String)? onSubmitted, required void Function(String)? onChanged, required TextEditingController controller, FocusNode? focusNode, required Color color, Color? textColor}){
 
   return TextField(
+
+    cursorColor: Theme.of(context).colorScheme.tertiary,
     
     controller: controller,
 
