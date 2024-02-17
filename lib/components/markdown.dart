@@ -60,7 +60,7 @@ class _MarkdownState extends State<Markdown>{
           pageTitle.text = DateFormat('EE, d MMMM y').format(date);
         });
 
-    }, style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.zero), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), icon: const Icon(FluentIcons.calendar_week_start_24_regular, size: 28));
+    }, tooltip: "Date", style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.zero), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), icon: const Icon(FluentIcons.calendar_week_start_24_regular, size: 28));
   }
 
   @override
@@ -107,7 +107,7 @@ class _MarkdownState extends State<Markdown>{
                           return const Editor();
                         }
                       );
-                    }, style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.zero), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), icon: const Icon(FluentIcons.text_edit_style_24_regular, size: 28)),
+                    }, tooltip: "Editor", style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.zero), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), icon: const Icon(FluentIcons.text_edit_style_24_regular, size: 28)),
                   ],
                 ),
                       
