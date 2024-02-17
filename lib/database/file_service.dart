@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:ozan/components/markdown.dart';
 import 'package:ozan/components/snackbar.dart';
 
@@ -44,7 +44,7 @@ class FileService {
       SnackBarUtils.showSnackbar(
           context, Icons.check, "File Saved at ${filePath ?? _selectedDirectory}");
     } catch (e) {
-      SnackBarUtils.showSnackbar(context, Iconsax.warning_2, "Unexpected error occurred");
+      SnackBarUtils.showSnackbar(context, FluentIcons.warning_24_regular, "Unexpected error occurred");
     }
   }
 
@@ -53,7 +53,7 @@ class FileService {
     _selectedDirectory = '';
     markdown.clear();
     SnackBarUtils.showSnackbar(
-        context, Iconsax.book_1, "New File Loaded, Please write something in editor to see changes!");
+        context, FluentIcons.document_page_bottom_right_24_regular, "New File Loaded, Please write something in editor to see changes!");
   }
 
   Future<void> loadFile(context) async {
@@ -67,12 +67,12 @@ class FileService {
         markdown.text = await file.readAsString();
 
         SnackBarUtils.showSnackbar(
-            context, Iconsax.tick_circle, "File Uploaded, edit a single letter in editor to see changes!");
+            context, FluentIcons.checkmark_circle_24_regular, "File Uploaded, edit a single letter in editor to see changes!");
       } else {
-        SnackBarUtils.showSnackbar(context, Iconsax.close_circle, "File not selected");
+        SnackBarUtils.showSnackbar(context, FluentIcons.warning_24_regular, "File not selected");
       }
     } catch (e) {
-      SnackBarUtils.showSnackbar(context, Iconsax.warning_2, "Unexpected error occurred");
+      SnackBarUtils.showSnackbar(context, FluentIcons.warning_24_regular, "Unexpected error occurred");
     }
   }
 }

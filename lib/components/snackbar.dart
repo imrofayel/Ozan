@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-// import 'package:iconsax/iconsax.dart';
-// import 'package:ozan/components/components.dart';
-import 'package:ozan/theme/theme.dart';
 
 class SnackBarUtils{
 
@@ -18,7 +15,7 @@ class SnackBarUtils{
 
           duration: const Duration(seconds: 3),
 
-          backgroundColor: Themes.text,
+          backgroundColor: Theme.of(context).colorScheme.primary,
 
           showCloseIcon: true,
 
@@ -26,11 +23,11 @@ class SnackBarUtils{
           
             children: [
           
-              Icon(icon, color: Themes.background.withOpacity(0.9)),
+              Icon(icon, color: Theme.of(context).colorScheme.tertiary),
               
               const Gap(12),
           
-              Text(msg, style: TextStyle(color:Themes.background, height: 2)),
+              Text(msg, style: TextStyle(color:Theme.of(context).colorScheme.tertiary, height: 2)),
             ],
           )
         )

@@ -1,20 +1,13 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:iconsax/iconsax.dart';
+import 'package:ozan/theme/theme_provider.dart';
 import 'package:ozan/views/home.dart';
-import 'package:ozan/theme/theme.dart';
-import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
-  runApp(const Ozan());
-  doWhenWindowReady(() {
-    final win = appWindow;
-    win.alignment = Alignment.center;
-    win.minSize = const Size(1050, 600);
-    win.maximize();
-    win.title = "Ozan";
-    win.show();
-  });
+  
+  runApp(ChangeNotifierProvider(create: (context) => ThemeSwitcher(), child: const Ozan()));
 }
 
 class Ozan extends StatefulWidget {
@@ -35,105 +28,52 @@ class _OzanState extends State<Ozan> {
   Widget build(BuildContext context) {
 
     return MaterialApp(
+
+        title: "Rofayel Notebook",
+
         debugShowCheckedModeBanner: false,
-        theme: Themes.light,
+
+        theme: Provider.of<ThemeSwitcher>(context).themeData,
+        
         home: Scaffold(
-          appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(44),
-            child: AppBar(
-      
-              title: SizedBox(
-                
-                child: Row(
-                  
-                  children: [
-                
-                    const Icon(Iconsax.unlimited, size: 26),
+
+          appBar: AppBar(
+             
+            title: const SizedBox(
               
-                    const Gap(6),
+              child: Row(
+                
+                children: [
               
-                    const Text("Ozan", style: TextStyle(fontSize: 20)),
-      
-                    const Gap(6),
-      
-                    FilledButton(onPressed: (){}, style: const ButtonStyle(fixedSize: MaterialStatePropertyAll(Size(60, 30)), padding: MaterialStatePropertyAll(EdgeInsets.zero), shadowColor: MaterialStatePropertyAll(Colors.transparent)), child: const Text("Beta"))
-                  ],
-                ),
+                  Icon(FluentIcons.calendar_week_numbers_24_regular, size: 26),
+            
+                  Gap(6),
+            
+                  Text("Notebook", style: TextStyle(fontSize: 20)),
+                ],
               ),
-      
-              backgroundColor: Themes.background,
-              elevation: 0,
-      
-              actions: const[
-                      MinimizeButton(),
-                      MaximizeButton(),
-                      CloseButton(),
-                    ],
-              )
+            ),
+                
+            elevation: 0,
+                
+            actions:
+              
+              [
+
+                IconButton(onPressed: (){
+
+                  Provider.of<ThemeSwitcher>(context, listen: false).toggleTheme();
+
+                }, icon: const Icon(FluentIcons.weather_sunny_24_regular, size: 26)),
+                                
+                IconButton(onPressed: (){}, icon: const Icon(FluentIcons.cloud_24_regular, size: 26)),
+
+                const Gap(10),
+              
+              ],
             ),
           body: const Home(),
         ),
       );
-  }
-}
-
-class MinimizeButton extends StatelessWidget {
-  const MinimizeButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Padding(
-      padding: const EdgeInsets.all(3.0),
-      child: IconButton(
-        icon: const Icon(Iconsax.minus, size: 22),
-        onPressed: () {
-          appWindow.minimize();
-        },
-        tooltip: "Minimize",
-      ),
-    );
-  }
-}
-
-class MaximizeButton extends StatelessWidget {
-  const MaximizeButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Padding(
-      padding: const EdgeInsets.all(3.0),
-      child: IconButton(
-        icon: const Icon(Iconsax.copy, size: 22),
-        onPressed: () {
-          if (appWindow.isMaximized) {
-            appWindow.restore();
-          } else {
-            appWindow.maximize();
-          }
-        },
-        tooltip: "Maximize",
-      ),
-    );
-  }
-}
-
-class CloseButton extends StatelessWidget {
-  const CloseButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Padding(
-      padding: const EdgeInsets.all(3.0),
-      child: IconButton(
-        icon: const Icon(Iconsax.close_circle, size: 22),
-        onPressed: () {
-          appWindow.close();
-        },
-        tooltip: "Close",
-      ),
-    );
   }
 }

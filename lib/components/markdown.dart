@@ -1,13 +1,12 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_gemini/google_gemini.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:ozan/components/widgets.dart';
 import 'package:ozan/database/file_service.dart';
 import 'package:ozan/components/snackbar.dart';
 import 'package:ozan/components/components.dart';
 import 'package:ozan/components/toolbar.dart';
-import 'package:ozan/theme/theme.dart';
 import 'package:intl/intl.dart';
 import '../markdown/markdown_style.dart';
 
@@ -35,7 +34,7 @@ class _MarkdownState extends State<Markdown>{
 
   String data = ''; // AI Generated response
 
-  static String md = ''; // Markdown Box data
+  static String md = 'Open Editor & Capture your thoughts!'; // Markdown Box data
   
   @override
   void initState() {
@@ -53,14 +52,15 @@ class _MarkdownState extends State<Markdown>{
 
   Widget date(context, TextEditingController controller){
     
-    return  FilledButton.tonal(onPressed: () async{
+    return  IconButton(onPressed: () async{
 
       var date = await showDatePickerDialog(context);
 
         setState(() {
           pageTitle.text = DateFormat('EE, d MMMM y').format(date);
         });
-    }, style: ButtonStyle(fixedSize: const MaterialStatePropertyAll(Size(60, 60)), padding: const MaterialStatePropertyAll(EdgeInsets.zero), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Themes.accent), overlayColor: MaterialStatePropertyAll(Colors.grey.shade100)), child: const Icon(Iconsax.calendar_2, size: 26));
+
+    }, tooltip: "Date", style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.zero), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), icon: const Icon(FluentIcons.calendar_week_start_24_regular, size: 28));
   }
 
   @override
@@ -78,90 +78,64 @@ class _MarkdownState extends State<Markdown>{
            
             scrollDirection: Axis.vertical,
 
-            child: Padding(
-                      
-              padding: const EdgeInsets.fromLTRB(8, 10, 10, 0),
+            child: Column(
             
-              child: Column(
-              
-                mainAxisAlignment: MainAxisAlignment.center,
-              
-                children: [
+              mainAxisAlignment: MainAxisAlignment.center,
+            
+              children: [
+                
+                Row(
                   
-                  Row(
+                  children: [
+                
+                    Expanded(child: titleBox(context, controller: pageTitle)),
+                
+                    const Gap(10),
+                
+                    // Date picker
+            
+                    date(context, pageTitle),
+            
+                    const Gap(15),
+            
+                    IconButton(onPressed: (){
+            
+                      showDialog(
+                        context: context, 
+            
+                        builder: (context){
+                          return const Editor();
+                        }
+                      );
+                    }, tooltip: "Editor", style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.zero), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), icon: const Icon(FluentIcons.text_edit_style_24_regular, size: 28)),
+                  ],
+                ),
+                      
+                SizedBox(
+                          
+                  height: 450,
+                          
+                  child: markdown(md, 1.36, context)
+                ),
+                        
+                  const Gap(10),
+                        
+                  Padding(
+                        
+                    padding: const EdgeInsets.fromLTRB(0,0,0,10),
+                    
+                    child: Row(
+                                      
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     
                     children: [
-                  
-                      Expanded(child: titleBox(controller: pageTitle)),
-                  
-                      const Gap(10),
-                  
-                      // Date picker
-
-                      date(context, pageTitle),
-
-                      const Gap(15),
-
-                      FilledButton.tonal(onPressed: (){
-
-                        showDialog(
-                          context: context, 
-
-                          builder: (context){
-                            return const Editor();
-                          }
-                        );
-                      }, style: ButtonStyle(fixedSize: const MaterialStatePropertyAll(Size(60, 60)), padding: const MaterialStatePropertyAll(EdgeInsets.zero), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Themes.accent), overlayColor: MaterialStatePropertyAll(Colors.grey.shade100)), child: const Icon(Iconsax.edit_2, size: 26)),
+                                      
+                      textEncode(context, words: page.text.split(' ').length-1, char: page.text.length, lines: page.text.split('\n').length-1),
+                    
                     ],
                   ),
-            
-                  const Gap(15),
-            
-                  Container(
-                            
-                    height: 450,
-                            
-                    decoration: BoxDecoration(
-                      
-                      borderRadius: const BorderRadius.all(Radius.circular(20)),
-                            
-                      // Markdown BOX
-                      color: Themes.accent,
-                  
-                      ),
-                            
-                    child: Padding(padding: const EdgeInsets.all(12),
-                            
-                      child: markdown(md, 1.30, context)
-                    )
-                  ),
-            
-                    const Gap(20),
-            
-                    Padding(
-            
-                      padding: const EdgeInsets.fromLTRB(0,0,0,15),
-                      
-                      child: Row(
-                                        
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      
-                      children: [
-                                        
-                        textEncode(words: page.text.split(' ').length-1, char: page.text.length, lines: page.text.split('\n').length-1),
-                      
-                        Row(
-                        
-                          children: [
-                        
-                            button(() => searchView(context, search, page), Iconsax.search_normal_1, context, textColor: const Color.fromARGB(255, 4, 2, 16), tooltip: "Search"),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
@@ -186,7 +160,7 @@ class _MarkdownState extends State<Markdown>{
               
                   Container(
           
-                    height: 590,
+                    height: 540,
           
                     decoration: BoxDecoration(
                       
@@ -194,7 +168,7 @@ class _MarkdownState extends State<Markdown>{
 
                       // AI BOX
 
-                      color: Themes.accent,
+                      color: Theme.of(context).colorScheme.primary,
                       ),
           
                     child: Padding(
@@ -219,16 +193,22 @@ class _MarkdownState extends State<Markdown>{
                                             
                               children: [
 
-                                Text(" Ozan Copilot", style: TextStyle(fontSize: 22, color: Themes.text)),
+                                Text(" Raya Copilot", style: TextStyle(fontSize: 22, color: Theme.of(context).colorScheme.tertiary)),
 
-                                button(() => copyToClipboard(context, data), Iconsax.copy, context, tooltip: "Copy"),   
+                                Row(
+
+                                  children: [
+
+                                    button(() => copyToClipboard(context, data), FluentIcons.copy_24_regular, context, tooltip: "Copy"),
+                                  ],
+                                )   
                               ],
                             ),
                           ),
           
                           Expanded(
           
-                            child: markdown(data, 1.2, context),
+                            child: markdown(data, 1.3, context),
           
                           ),
           
@@ -243,15 +223,15 @@ class _MarkdownState extends State<Markdown>{
 
                                 child: textField(context, onSubmitted: (str){
                                   generate(prompt.text);
-                                  SnackBarUtils.showSnackbar(context, Iconsax.magic_star, "Ozan is generating. . .");
-                                }, onChanged: null, controller: prompt, color: Themes.background, textColor: Themes.text.withOpacity(0.8)),
+                                  SnackBarUtils.showSnackbar(context, FluentIcons.brain_circuit_24_regular, "Raya is generating. . .");
+                                }, onChanged: null, controller: prompt, color: Theme.of(context).colorScheme.background, textColor: Theme.of(context).colorScheme.tertiary),
                               ),
 
                               const Gap(10),
 
                               IconButton(onPressed: (){
                                 SnackBarUtils.showSnackbar(context, Icons.window_sharp, "Press Windows + H");
-                              }, icon: const Icon(Iconsax.microphone))
+                              }, icon: Icon(FluentIcons.mic_24_regular, size: 26, color: Theme.of(context).colorScheme.tertiary))
                             ],
                           )
                         ],
@@ -287,7 +267,7 @@ generate(String prompt){
 
 - Try again later!''';
 
-          SnackBarUtils.showSnackbar(context, Iconsax.emoji_sad, "Something went wrong!");
+          SnackBarUtils.showSnackbar(context, FluentIcons.warning_24_regular, "Something went wrong!");
         });
       });
   }
@@ -314,12 +294,15 @@ class Editor extends StatefulWidget {
 }
 
 class _EditorState extends State<Editor> {
+  
   int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
 
     return SimpleDialog(
+
+      elevation: 0,
 
       shadowColor: Colors.transparent,
 
@@ -335,7 +318,7 @@ class _EditorState extends State<Editor> {
 
             children: [
 
-              Icon(Iconsax.edit_2),
+              Icon(FluentIcons.text_edit_style_24_regular, size: 26),
           
               Gap(10),
 
@@ -345,7 +328,7 @@ class _EditorState extends State<Editor> {
 
           IconButton(onPressed: (){
             Navigator.of(context).pop();
-          }, icon: const Icon(Iconsax.close_circle, size: 26))
+          }, icon: const Icon(FluentIcons.full_screen_minimize_24_regular, size: 26))
         ],
       ),
 
@@ -390,10 +373,10 @@ class _EditorState extends State<Editor> {
                         
                           decoration: BoxDecoration(
                             
-                            borderRadius: const BorderRadius.all(Radius.circular(20)),
+                            borderRadius: const BorderRadius.all(Radius.circular(16)),
                             
                             // TextBox
-                            color: Colors.white.withOpacity(0.3),
+                            color: Theme.of(context).colorScheme.primary,
                           ),
                         
                           child: Padding(
@@ -414,7 +397,7 @@ class _EditorState extends State<Editor> {
                         
                                     child: textField(context,
                                             
-                                    lines: 9, 
+                                    lines: 9,
                                             
                                     onSubmitted: (text) {
                                       _MarkdownState.page.text += '\n';

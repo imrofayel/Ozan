@@ -1,12 +1,11 @@
 // import 'package:dictionaryx/dictionary_msa.dart';
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:ozan/components/snackbar.dart';
-import 'package:ozan/theme/theme.dart';
 
-IconButton button(void Function()? function, IconData icon, context, {Color? color, Color? textColor, Color? overlayColor, required String tooltip}){
+IconButton button(void Function()? function, IconData icon, context, {Color? textColor, Color? overlayColor, required String tooltip}){
 
   return IconButton(
 
@@ -18,15 +17,11 @@ IconButton button(void Function()? function, IconData icon, context, {Color? col
     
       style: ButtonStyle(
 
-        backgroundColor: MaterialStatePropertyAll(color ?? Themes.accent),
+        iconSize: const MaterialStatePropertyAll(26),
 
-        fixedSize: const MaterialStatePropertyAll(Size(50, 50)),
+        iconColor: MaterialStatePropertyAll(textColor ?? Theme.of(context).colorScheme.tertiary),
 
-        iconSize: const MaterialStatePropertyAll(25),
-
-        iconColor: MaterialStatePropertyAll(textColor ?? Themes.text),
-
-        overlayColor: MaterialStatePropertyAll(overlayColor ?? Colors.white),
+        overlayColor: MaterialStatePropertyAll(overlayColor ?? Colors.transparent),
       )
   );
 }
@@ -45,7 +40,7 @@ TextField textField(context, {int? lines = 1, required void Function(String)? on
 
     focusNode: focusNode,
 
-    style: TextStyle(color: textColor ?? Themes.text, fontSize: 18, height: 2),
+    style: TextStyle(color: textColor ?? Theme.of(context).colorScheme.tertiary, fontSize: 18, height: 2),
 
     decoration: InputDecoration(
 
@@ -72,7 +67,7 @@ TextField textField(context, {int? lines = 1, required void Function(String)? on
   );
 }
 
-FilledButton tonalButton({required void Function()? fn, required String text, required IconData icon, Size? size, double? textSize, double? iconSize}){
+FilledButton tonalButton(context, {required void Function()? fn, required String text, required IconData icon, Size? size, double? textSize, double? iconSize}){
 
   return FilledButton.tonal(onPressed: fn,
 
@@ -80,7 +75,7 @@ FilledButton tonalButton({required void Function()? fn, required String text, re
 
       fixedSize: MaterialStatePropertyAll(size ?? const Size(175, 50)),
 
-      backgroundColor: MaterialStatePropertyAll(Themes.accent),
+      backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary),
 
       shadowColor: const MaterialStatePropertyAll(Colors.transparent),
 
@@ -92,64 +87,13 @@ FilledButton tonalButton({required void Function()? fn, required String text, re
 
       children: [
         
-        Icon(icon, size: iconSize?? 25, color: Themes.text),
+        Icon(icon, size: iconSize?? 25, color: Theme.of(context).colorScheme.tertiary),
     
         const Gap(8),
         
-        Text(text, style: TextStyle(fontSize: textSize ?? 18, fontWeight: FontWeight.w400, color: Themes.text)),
+        Text(text, style: TextStyle(fontSize: textSize ?? 18, fontWeight: FontWeight.w400, color: Theme.of(context).colorScheme.tertiary)),
       ],
     ),
-  );
-}
-
-void searchView(context, TextEditingController search, TextEditingController text){
-
-  showDialog(
-
-    context: context,
-
-    builder: (context) {
-
-      return AlertDialog(
-
-        shadowColor: Colors.transparent,
-
-        backgroundColor: Themes.accent,
-
-        contentPadding: const EdgeInsets.all(8),
-
-        insetPadding: EdgeInsets.zero,
-        
-        content: TextField(
-        
-          onSubmitted: (value){
-            
-            if(text.text.toLowerCase().contains(value.toLowerCase())){
-          
-                SnackBarUtils.showSnackbar(context, Iconsax.tick_circle, "Found");
-            }
-            else{
-                SnackBarUtils.showSnackbar(context, Iconsax.warning_2, "Not Found");
-            }
-          },     
-          
-          decoration: InputDecoration(
-            
-            prefixIcon: Icon(Iconsax.search_normal_1, color: Themes.text, size: 26),
-       
-            border: InputBorder.none,
-        
-            fillColor: Themes.accent,
-        
-            focusColor: Themes.accent,
-        
-            hoverColor: Themes.accent,
-          ),
-
-          style: const TextStyle(fontSize: 19),
-        ),
-      );
-    }
   );
 }
 
@@ -157,11 +101,11 @@ void copyToClipboard(context, String text){
 
       Clipboard.setData(ClipboardData(text: text));
 
-      SnackBarUtils.showSnackbar(context, Iconsax.copy_success, "Copied to clipboard");
+      SnackBarUtils.showSnackbar(context, FluentIcons.copy_24_regular, "Copied to clipboard");
   }
 
 
-SingleChildScrollView textEncode({required int words, required int char, required int lines}){
+SingleChildScrollView textEncode(context, {required int words, required int char, required int lines}){
 
   return SingleChildScrollView(
 
@@ -173,15 +117,15 @@ SingleChildScrollView textEncode({required int words, required int char, require
     
       children: [
     
-        FilledButton.tonal(onPressed: (){}, style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: MaterialStatePropertyAll(Themes.accent), shadowColor: const MaterialStatePropertyAll(Colors.transparent)), child: Text("$words words", style: const TextStyle(fontSize: 15))),
+        FilledButton(onPressed: (){}, style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("$words words", style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary))),
     
         const Gap(7),
     
-        FilledButton.tonal(onPressed: (){}, style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: MaterialStatePropertyAll(Themes.accent), shadowColor: const MaterialStatePropertyAll(Colors.transparent)), child: Text("$char characters", style: const TextStyle(fontSize: 15))),
+        FilledButton(onPressed: (){}, style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("$char characters", style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary))),
     
         const Gap(7),
     
-        FilledButton.tonal(onPressed: (){}, style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: MaterialStatePropertyAll(Themes.accent), shadowColor: const MaterialStatePropertyAll(Colors.transparent)), child: Text("$lines lines", style: const TextStyle(fontSize: 15))),
+        FilledButton(onPressed: (){}, style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("$lines lines", style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary))),
       ],
     ),
   );
@@ -190,10 +134,10 @@ SingleChildScrollView textEncode({required int words, required int char, require
 IconButton suffix(context){
   return IconButton(onPressed: (){
         SnackBarUtils.showSnackbar(context, Icons.window_sharp, "Press Windows + H");
-      }, icon: const Icon(Iconsax.microphone), padding: const EdgeInsets.all(1));
+      }, icon: const Icon(FluentIcons.mic_24_regular), padding: const EdgeInsets.all(1));
 }
 
-TextField titleBox({required TextEditingController controller}){
+TextField titleBox(context, {required TextEditingController controller}){
 
   return TextField(
 
@@ -201,39 +145,21 @@ TextField titleBox({required TextEditingController controller}){
 
     decoration: InputDecoration(
 
-      hintText: "Untitled",
+      hintText: "Subject",
 
-      hintStyle: TextStyle(fontWeight: FontWeight.w400, color: Themes.text.withOpacity(0.8)),
+      hintStyle: TextStyle(fontWeight: FontWeight.w400, color: Theme.of(context).colorScheme.tertiary),
 
-      constraints: const BoxConstraints(maxHeight: 70, maxWidth: 520),
-
-      enabledBorder: OutlineInputBorder(
-
-        borderRadius: BorderRadius.circular(50),
-
-        borderSide: const BorderSide(color: Colors.transparent),
-      ),
-
-      focusedBorder: OutlineInputBorder(
-
-        borderRadius: BorderRadius.circular(50),
-        
-        borderSide: const BorderSide(color: Colors.transparent),
-      ),
+      constraints: const BoxConstraints(maxWidth: 520),
 
       contentPadding: const EdgeInsets.all(20),
 
       border: InputBorder.none,
 
-      filled: true,
+      focusColor: Colors.transparent,
 
-      fillColor: Themes.accent,
-
-      focusColor: Themes.accent,
-
-      hoverColor: Themes.accent
+      hoverColor: Colors.transparent
     ),
 
-    style: const TextStyle(fontSize: 20),
+    style: const TextStyle(fontSize: 26),
   );
 }
