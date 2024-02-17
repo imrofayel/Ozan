@@ -24,17 +24,11 @@ class Themes {
 
       brightness: Brightness.light,
 
-      seedColor: Colors.green,
+      seedColor: Colors.black,
 
       background: const Color.fromARGB(255, 255, 255, 255),
 
       primary: const Color.fromARGB(255, 250, 250, 250),
-
-      primaryContainer: const Color.fromRGBO(240, 127, 104, 1),
-
-      secondaryContainer: const Color.fromRGBO(69, 185, 146, 1),
-
-      tertiaryContainer: const Color.fromARGB(255, 215, 239, 95),
 
       tertiary: const Color.fromRGBO(43, 43, 43, 1),
 
@@ -140,17 +134,11 @@ class Themes {
 
       brightness: Brightness.dark,
 
-      seedColor: Colors.green,
+      seedColor: Colors.white,
 
       background: const Color.fromRGBO(9, 11, 16, 1),
 
       primary: const Color.fromRGBO(15, 17, 26, 1),
-
-      primaryContainer: const Color.fromARGB(255, 212, 106, 85),
-
-      secondaryContainer: const Color.fromRGBO(33, 150, 115, 1),
-
-      tertiaryContainer: const Color.fromARGB(255, 215, 239, 95),
 
       tertiary: const Color.fromRGBO(192, 212, 190, 1),
 
