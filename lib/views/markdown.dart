@@ -9,7 +9,6 @@ import 'package:ozan/components/components.dart';
 import 'package:ozan/components/toolbar.dart';
 import 'package:intl/intl.dart';
 import '../markdown/markdown_style.dart';
-
 class Markdown extends StatefulWidget {
 
   const Markdown({super.key});
