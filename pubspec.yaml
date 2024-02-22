@@ -41,6 +41,10 @@ dependencies:
   flutter_highlight: ^0.7.0
   fluentui_system_icons: ^1.1.226
   provider: ^6.1.1
+  sqflite_common_ffi: any
+  path_provider: ^2.1.2
+  sqflite: ^2.3.2
+  
     
 dev_dependencies:
   flutter_test:
