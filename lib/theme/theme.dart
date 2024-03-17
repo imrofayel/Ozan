@@ -26,15 +26,15 @@ class Themes {
 
       seedColor: Colors.black,
 
-      background: const Color.fromARGB(255, 255, 255, 255),
+      background: const Color.fromRGBO(243, 242, 236, 1),
 
-      primary: const Color.fromARGB(255, 250, 250, 250),
+      primary: const Color.fromRGBO(241, 239, 235, 1),
 
       tertiary: const Color.fromRGBO(43, 43, 43, 1),
 
     ),
 
-    appBarTheme:  const AppBarTheme(backgroundColor: Color.fromARGB(255, 255, 255, 255)),
+    appBarTheme:  const AppBarTheme(backgroundColor: Color.fromRGBO(243, 242, 236, 1)),
 
     tooltipTheme: TooltipThemeData(
 
