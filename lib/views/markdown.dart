@@ -91,7 +91,7 @@ class _MarkdownState extends State<Markdown>{
                   
                       Expanded(child: titleBox(context, controller: pageTitle)),
                   
-                      const Gap(10),
+                      const Gap(100),
                   
                       // Date picker
                               

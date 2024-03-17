@@ -17,7 +17,7 @@ IconButton button(void Function()? function, IconData icon, context, {Color? tex
     
       style: ButtonStyle(
 
-        iconSize: const MaterialStatePropertyAll(26),
+        iconSize: const MaterialStatePropertyAll(24),
 
         iconColor: MaterialStatePropertyAll(textColor ?? Theme.of(context).colorScheme.tertiary),
 
@@ -121,25 +121,25 @@ SingleChildScrollView textEncode(context, {required int words, required int char
     
         FilledButton(onPressed: (){}, style: ButtonStyle(
           
-          side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8))),
+          side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.4))),
 
-          padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: const MaterialStatePropertyAll(Colors.transparent)), child: Text("$words words", style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary))),
+          padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("$words words", style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary))),
     
         const Gap(7),
     
         FilledButton(onPressed: (){}, style: ButtonStyle(
           
-          side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8))),
+          side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.4))),
 
-          padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: const MaterialStatePropertyAll(Colors.transparent)), child: Text("$char characters", style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary))),
+          padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("$char characters", style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary))),
     
         const Gap(7),
     
         FilledButton(onPressed: (){}, style: ButtonStyle(
 
-          side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8))),
+          side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.4))),
 
-          padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: const MaterialStatePropertyAll(Colors.transparent)), child: Text("$lines lines", style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary))),
+          padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("$lines lines", style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary))),
       ],
     ),
   );
@@ -159,7 +159,7 @@ TextField titleBox(context, {required TextEditingController controller}){
 
     decoration: InputDecoration(
 
-      hintText: "Subject",
+      hintText: "Creation",
 
       hintStyle: TextStyle(fontWeight: FontWeight.w400, color: Theme.of(context).colorScheme.tertiary),
 
@@ -167,13 +167,19 @@ TextField titleBox(context, {required TextEditingController controller}){
 
       contentPadding: const EdgeInsets.all(20),
 
-      border: InputBorder.none,
+      enabledBorder: OutlineInputBorder(borderSide: BorderSide(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.4)), borderRadius: BorderRadius.circular(23)),
+
+      focusedBorder: OutlineInputBorder(borderSide: BorderSide(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.4)), borderRadius: BorderRadius.circular(23)),
 
       focusColor: Colors.transparent,
 
-      hoverColor: Colors.transparent
+      hoverColor: Colors.transparent,
+
+      fillColor: Theme.of(context).colorScheme.primary.withOpacity(0.8),
+
+      filled: true
     ),
 
-    style: const TextStyle(fontSize: 26),
+    style: const TextStyle(fontSize: 24),
   );
 }
