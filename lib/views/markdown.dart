@@ -1,4 +1,3 @@
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -199,7 +198,7 @@ class _EditorState extends State<Editor> {
 
             children: [
 
-              Icon(FluentIcons.text_edit_style_24_regular, size: 26),
+              Icon(CupertinoIcons.pencil_outline, size: 28),
           
               Gap(10),
 
@@ -209,11 +208,11 @@ class _EditorState extends State<Editor> {
 
           IconButton(onPressed: (){
             Navigator.of(context).pop();
-          }, icon: const Icon(FluentIcons.full_screen_minimize_24_regular, size: 26))
+          }, icon: const Icon(CupertinoIcons.xmark, size: 20))
         ],
       ),
 
-      titlePadding: const EdgeInsets.fromLTRB(30, 30, 20, 10),
+      titlePadding: const EdgeInsets.fromLTRB(30, 30, 20, 0),
 
       children: [
 
@@ -227,14 +226,9 @@ class _EditorState extends State<Editor> {
 
             children: [
 
-                Padding(
+                toolbar(_MarkdownState.page, context),
 
-                  padding: const EdgeInsets.fromLTRB(22, 0, 22, 0),
-
-                  child: toolbar(_MarkdownState.page, context),
-                ),
-
-                  const Gap(14),
+                  const Gap(8),
           
                   Column(
           
@@ -257,7 +251,7 @@ class _EditorState extends State<Editor> {
                             borderRadius: const BorderRadius.all(Radius.circular(16)),
                             
                             // TextBox
-                            color: Theme.of(context).colorScheme.primary,
+                            color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
                           ),
                         
                           child: Padding(

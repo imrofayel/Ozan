@@ -1,4 +1,5 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:ozan/components/snackbar.dart';
@@ -9,8 +10,6 @@ Widget toolbar(TextEditingController controller, context){
                     
     decoration: BoxDecoration(
       
-      color: Theme.of(context).colorScheme.primary,
-
       borderRadius: BorderRadius.circular(16),
     ),
 
@@ -26,33 +25,33 @@ Widget toolbar(TextEditingController controller, context){
       
           children: [
             
-            IconButton(onPressed: () => applyFormatting(controller, '**'), icon: const Icon(FluentIcons.text_bold_24_regular, size: 26), tooltip: "Bold"),
+            IconButton(onPressed: () => applyFormatting(controller, '**'), icon: Icon(CupertinoIcons.bold, size: 26, color: Theme.of(context).colorScheme.tertiary), tooltip: "Bold"),
             
-            IconButton(onPressed: () => applyFormatting(controller, '*'), icon: const Icon(FluentIcons.text_underline_24_regular, size: 26), tooltip: "Underline"),
+            IconButton(onPressed: () => applyFormatting(controller, '*'), icon: Icon(CupertinoIcons.italic, size: 26, color: Theme.of(context).colorScheme.tertiary,), tooltip: "Italic"),
       
             const Gap(6),
 
-            IconButton(onPressed: () => applyCodeFormatting(controller, context), icon: const Icon(FluentIcons.code_24_regular, size: 26), tooltip: "Code Block"),
+            IconButton(onPressed: () => applyCodeFormatting(controller, context), icon: Icon(CupertinoIcons.chevron_left_slash_chevron_right, size: 26, color: Theme.of(context).colorScheme.tertiary), tooltip: "Code Block"),
       
             const Gap(6),
 
-            IconButton(onPressed: () => applyQuoteFormatting(controller), icon: const Icon(FluentIcons.text_quote_24_regular, size: 28), tooltip: "Quote"),
+            IconButton(onPressed: () => applyQuoteFormatting(controller), icon: Icon(FluentIcons.text_quote_24_regular, size: 28, color: Theme.of(context).colorScheme.tertiary), tooltip: "Quote"),
       
             const Gap(6),
 
-            IconButton(onPressed: ()=> tableDialog(context, controller), icon: const Icon(FluentIcons.table_edit_24_regular, size: 26), tooltip: "Table"),
+            IconButton(onPressed: ()=> tableDialog(context, controller), icon: Icon(FluentIcons.table_edit_24_regular, size: 26, color: Theme.of(context).colorScheme.tertiary), tooltip: "Table"),
       
             const Gap(6),
 
-            IconButton(onPressed: () => applyListFormatting(controller, '-'), icon: const Icon(FluentIcons.text_bullet_list_24_regular, size: 26), tooltip: "Bullet List"),
+            IconButton(onPressed: () => applyListFormatting(controller, '-'), icon: Icon(FluentIcons.text_bullet_list_24_regular, size: 26, color: Theme.of(context).colorScheme.tertiary), tooltip: "Bullet List"),
       
             const Gap(6),
 
-            IconButton(onPressed: () => applyListFormatting(controller, '1. '), icon: const Icon(FluentIcons.text_number_list_ltr_24_regular, size: 24), tooltip: "Numbered List"),
+            IconButton(onPressed: () => applyListFormatting(controller, '1. '), icon: Icon(FluentIcons.text_number_list_ltr_24_regular, size: 24, color: Theme.of(context).colorScheme.tertiary), tooltip: "Numbered List"),
 
             const Gap(6),
 
-            IconButton(onPressed: () => linkDialog(context, controller), icon: const Icon(FluentIcons.link_24_regular, size: 26), tooltip: "Link"),
+            IconButton(onPressed: () => linkDialog(context, controller), icon: Icon(FluentIcons.link_24_regular, size: 26, color: Theme.of(context).colorScheme.tertiary), tooltip: "Link"),
 
             const Gap(6),
           
@@ -99,7 +98,7 @@ Widget toolbar(TextEditingController controller, context){
             
               width: 90,
             
-              textStyle: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.tertiary),
+              textStyle: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'),
             
               dropdownMenuEntries: heading,
             )
