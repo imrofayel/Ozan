@@ -72,9 +72,9 @@ class _HomeState extends State<Home> {
 
           Expanded(flex: 2, child: SizedBox()),
       
-          Expanded(flex: 15, child: Markdown()),
+          Expanded(flex: 10, child: Markdown()),
 
-          Expanded(flex: 2, child: SizedBox()),
+          Expanded(flex: 3, child: SizedBox()),
         ],
       ),
     );

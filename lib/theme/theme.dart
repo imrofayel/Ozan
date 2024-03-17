@@ -8,7 +8,7 @@ class Themes {
 
     useMaterial3: true,
 
-    fontFamily: "Inter",
+    fontFamily: "EB Garamond",
 
     textTheme: const TextTheme(
 
@@ -30,9 +30,9 @@ class Themes {
 
       primary: const Color.fromRGBO(248, 248, 247, 1),
 
-      tertiary: const Color.fromRGBO(80, 78, 67, 1),
+      tertiary: const Color.fromRGBO(61, 57, 41, 1),
 
-      secondary: const Color.fromRGBO(186, 91, 56, 1)
+      secondary: const Color.fromRGBO(61, 57, 41, 1)
 
     ),
 
@@ -51,7 +51,7 @@ class Themes {
         borderRadius: BorderRadius.circular(20)
       ),
 
-      textStyle: TextStyle(fontSize: 16, color: const Color.fromARGB(255, 3, 7, 3).withOpacity(0.8)),
+      textStyle: TextStyle(fontSize: 18, color: const Color.fromARGB(255, 3, 7, 3).withOpacity(0.8), fontFamily: 'Inter'),
     ),
 
     datePickerTheme: DatePickerThemeData(

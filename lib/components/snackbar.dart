@@ -27,7 +27,7 @@ class SnackBarUtils{
               
               const Gap(12),
           
-              Text(msg, style: TextStyle(color:Theme.of(context).colorScheme.tertiary, height: 2)),
+              Text(msg, style: TextStyle(color:Theme.of(context).colorScheme.tertiary, height: 2, fontFamily: 'Inter', fontSize: 18)),
             ],
           )
         )

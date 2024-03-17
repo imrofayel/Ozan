@@ -1,11 +1,10 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:ozan/components/widgets.dart';
 import 'package:ozan/database/file_service.dart';
 import 'package:ozan/components/components.dart';
 import 'package:ozan/components/toolbar.dart';
-import 'package:intl/intl.dart';
 import '../markdown/markdown_style.dart';
 class Markdown extends StatefulWidget {
 
@@ -47,19 +46,6 @@ class _MarkdownState extends State<Markdown>{
       super.dispose();
   }
 
-  Widget date(context, TextEditingController controller){
-    
-    return  IconButton(onPressed: () async{
-
-      var date = await showDatePickerDialog(context);
-
-        setState(() {
-          pageTitle.text = DateFormat('EE, d MMMM y').format(date);
-        });
-
-    }, tooltip: "Date", style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.zero), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), icon: const Icon(FluentIcons.calendar_week_start_24_regular, size: 28));
-  }
-
   @override
   Widget build(BuildContext context) {
 
@@ -81,9 +67,17 @@ class _MarkdownState extends State<Markdown>{
             
               children: [
                 
-                Padding(
+                Container(
 
-                  padding: const EdgeInsets.only(right: 25.0),
+                  decoration: BoxDecoration(
+
+                    color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
+
+                    borderRadius: const BorderRadius.all(Radius.circular(23)),
+
+                    border: Border.all(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.4))
+
+                  ),
 
                   child: Row(
                     
@@ -91,15 +85,11 @@ class _MarkdownState extends State<Markdown>{
                   
                       Expanded(child: titleBox(context, controller: pageTitle)),
                   
-                      const Gap(100),
-                  
-                      // Date picker
-                              
-                      date(context, pageTitle),
-                              
+                      const Gap(20),
+                                                
                       const Gap(15),
                               
-                      IconButton(onPressed: (){
+                      FilledButton(onPressed: (){
                               
                         showDialog(
                           context: context, 
@@ -108,7 +98,25 @@ class _MarkdownState extends State<Markdown>{
                             return const Editor();
                           }
                         );
-                      }, tooltip: "Editor", style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.zero), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), icon: const Icon(FluentIcons.text_edit_style_24_regular, size: 28)),
+                      }, style: ButtonStyle(
+                        
+                        shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
+                        
+                        backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.secondary), padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: const MaterialStatePropertyAll(Colors.transparent)), 
+                        
+                        child: Row(
+
+                          children: [
+
+                            Icon(CupertinoIcons.pencil_outline, size: 26, color: Theme.of(context).colorScheme.primary),
+
+                            const Gap(10),
+
+                            Text('Writer', style: TextStyle(color: Theme.of(context).colorScheme.primary, fontSize: 20, fontFamily: 'Inter'),)
+                          ],
+                        )),
+
+                      const Gap(15)
                     ],
                   ),
                 ),
@@ -117,7 +125,7 @@ class _MarkdownState extends State<Markdown>{
                           
                   height: 450,
                           
-                  child: markdown(md, 1.36, context)
+                  child: markdown(md, 1.62, context)
                 ),
                         
                   const Gap(10),
@@ -195,7 +203,7 @@ class _EditorState extends State<Editor> {
           
               Gap(10),
 
-              Text("Writer"),
+              Text("Writer", style: TextStyle(fontSize: 24, fontFamily: 'Inter'),),
             ],
           ),
 

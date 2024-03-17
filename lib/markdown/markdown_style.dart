@@ -24,9 +24,9 @@ Markdown markdown(String data, double scale, context){
 
           textScaleFactor: scale,
 
-          tableBorder: TableBorder.all(borderRadius: BorderRadius.circular(20), color: const Color.fromARGB(255, 244, 245, 247), width: 1.5),
+          tableBorder: TableBorder.all(borderRadius: BorderRadius.circular(14), color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6), width: 1),
 
-          tableHead: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+          tableHead: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
 
           blockquoteDecoration: BoxDecoration(
             
@@ -37,13 +37,13 @@ Markdown markdown(String data, double scale, context){
 
           blockquotePadding: const EdgeInsets.all(20),
 
-          blockquote: const TextStyle(fontFamily: "Times New Roman", fontSize: 16),
+          blockquote: const TextStyle(fontSize: 16),
 
-          horizontalRuleDecoration: BoxDecoration(borderRadius: BorderRadius.circular(30), border: Border.all(width: 1, color: Theme.of(context).colorScheme.tertiary)),
+          horizontalRuleDecoration: BoxDecoration(borderRadius: BorderRadius.circular(30), border: Border.all(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8))),
 
           strong: const TextStyle(fontWeight: FontWeight.w500), 
 
-          em: const TextStyle(decoration: TextDecoration.underline, fontStyle: FontStyle.normal),
+          em: const TextStyle(fontStyle: FontStyle.italic),
       )
     );
 }
