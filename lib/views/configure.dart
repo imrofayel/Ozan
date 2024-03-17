@@ -1,4 +1,4 @@
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:gap/gap.dart';
@@ -56,11 +56,11 @@ class _InfoState extends State<Info> {
             
             children: [
           
-              Icon(FluentIcons.calendar_week_numbers_24_regular, size: 30),
+              Icon(CupertinoIcons.pencil_outline, size: 30),
                       
               Gap(6),
                       
-              Text("Notebook v1.3", style: TextStyle(fontSize: 24)),
+              Text("Rofayel Notebook v4.0 (Grok)", style: TextStyle(fontSize: 20, fontFamily: 'Inter')),
             ],
           ),
 
@@ -74,13 +74,9 @@ class _InfoState extends State<Info> {
               scrollDirection: Axis.vertical,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: MarkdownBody(data: "Rofayel Notebook is a companion that makes your writing enjoyable. It is designed with simplicity in mind. The brain behind; a junior dev with a passion for creating tools that make a difference. Ozan is a newbie project, and we'd love your response! join us on our journey.", styleSheet: MarkdownStyleSheet(p: const TextStyle(fontSize: 16, height: 2))),
+                child: MarkdownBody(data: "simple, elegant, enjoyable", styleSheet: MarkdownStyleSheet(p: const TextStyle(fontSize: 33, height: 2, fontStyle: FontStyle.italic))),
               )),
           ),
-
-          const Gap(10),
-         
-          Text("Adam Rofayel. All rights reserved.", style: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.tertiary))
         ],
       ),
     );

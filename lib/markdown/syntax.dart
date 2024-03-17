@@ -20,7 +20,7 @@ class CodeElementBuilder extends MarkdownElementBuilder {
     var language = '';
 
     if(element.attributes['class'] == null){
-      return Text(element.textContent, textScaler: const TextScaler.linear(1.3), style: TextStyle(backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.8), color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Roboto Mono'));
+      return Text(element.textContent.toString(), textScaler: const TextScaler.linear(1.3), style: TextStyle(backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.8), color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Roboto Mono'));
     }
 
     else{

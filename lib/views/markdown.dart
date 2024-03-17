@@ -29,7 +29,7 @@ class _MarkdownState extends State<Markdown>{
 
   String data = ''; // AI Generated response
 
-  static String md = 'Open Editor & Capture your thoughts!'; // Markdown Box data
+  static String md = '#### Start writing!!'; // Markdown Box data
   
   @override
   void initState() {
