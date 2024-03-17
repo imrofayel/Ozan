@@ -18,7 +18,7 @@ Markdown markdown(String data, double scale, context){
     
       styleSheet: MarkdownStyleSheet(
 
-          codeblockDecoration: BoxDecoration(color: Theme.of(context).colorScheme.primary, borderRadius: BorderRadius.circular(12)),
+          codeblockDecoration: BoxDecoration(color: Theme.of(context).colorScheme.primary.withOpacity(0.8), borderRadius: BorderRadius.circular(20)),
 
           p: TextStyle(color: Theme.of(context).colorScheme.tertiary, height: 1.6),
 
