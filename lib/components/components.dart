@@ -119,15 +119,27 @@ SingleChildScrollView textEncode(context, {required int words, required int char
     
       children: [
     
-        FilledButton(onPressed: (){}, style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("$words words", style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary))),
+        FilledButton(onPressed: (){}, style: ButtonStyle(
+          
+          side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8))),
+
+          padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: const MaterialStatePropertyAll(Colors.transparent)), child: Text("$words words", style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary))),
     
         const Gap(7),
     
-        FilledButton(onPressed: (){}, style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("$char characters", style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary))),
+        FilledButton(onPressed: (){}, style: ButtonStyle(
+          
+          side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8))),
+
+          padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: const MaterialStatePropertyAll(Colors.transparent)), child: Text("$char characters", style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary))),
     
         const Gap(7),
     
-        FilledButton(onPressed: (){}, style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("$lines lines", style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary))),
+        FilledButton(onPressed: (){}, style: ButtonStyle(
+
+          side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8))),
+
+          padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: const MaterialStatePropertyAll(Colors.transparent)), child: Text("$lines lines", style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary))),
       ],
     ),
   );

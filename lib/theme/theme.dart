@@ -30,7 +30,9 @@ class Themes {
 
       primary: const Color.fromRGBO(241, 239, 235, 1),
 
-      tertiary: const Color.fromRGBO(43, 43, 43, 1),
+      tertiary: const Color.fromRGBO(80, 78, 67, 1),
+
+      secondary: const Color.fromRGBO(186, 91, 56, 1)
 
     ),
 

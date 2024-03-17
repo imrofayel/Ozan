@@ -1,10 +1,8 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:google_gemini/google_gemini.dart';
 import 'package:ozan/components/widgets.dart';
 import 'package:ozan/database/file_service.dart';
-import 'package:ozan/components/snackbar.dart';
 import 'package:ozan/components/components.dart';
 import 'package:ozan/components/toolbar.dart';
 import 'package:intl/intl.dart';
@@ -83,31 +81,36 @@ class _MarkdownState extends State<Markdown>{
             
               children: [
                 
-                Row(
+                Padding(
+
+                  padding: const EdgeInsets.only(right: 25.0),
+
+                  child: Row(
+                    
+                    children: [
                   
-                  children: [
-                
-                    Expanded(child: titleBox(context, controller: pageTitle)),
-                
-                    const Gap(10),
-                
-                    // Date picker
-            
-                    date(context, pageTitle),
-            
-                    const Gap(15),
-            
-                    IconButton(onPressed: (){
-            
-                      showDialog(
-                        context: context, 
-            
-                        builder: (context){
-                          return const Editor();
-                        }
-                      );
-                    }, tooltip: "Editor", style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.zero), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), icon: const Icon(FluentIcons.text_edit_style_24_regular, size: 28)),
-                  ],
+                      Expanded(child: titleBox(context, controller: pageTitle)),
+                  
+                      const Gap(10),
+                  
+                      // Date picker
+                              
+                      date(context, pageTitle),
+                              
+                      const Gap(15),
+                              
+                      IconButton(onPressed: (){
+                              
+                        showDialog(
+                          context: context, 
+                              
+                          builder: (context){
+                            return const Editor();
+                          }
+                        );
+                      }, tooltip: "Editor", style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.zero), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), icon: const Icon(FluentIcons.text_edit_style_24_regular, size: 28)),
+                    ],
+                  ),
                 ),
                       
                 SizedBox(
@@ -141,31 +144,6 @@ class _MarkdownState extends State<Markdown>{
       ],
     );
 }
-
-generate(String prompt){
-      
-      final gemini = GoogleGemini(
-        apiKey: "AIzaSyDS08hZlaB5hJfRUi8SyyX9iOZ9Z69uadY",
-      );
-        
-      gemini.generateFromText(prompt).then((value) {
-
-        setState(() {
-          data = value.text;
-        });
-
-      }).catchError((e){  
-        setState(() {
-          data = '''## You're not connected!
-
-- Check your network and try to reconnect.
-
-- Try again later!''';
-
-          SnackBarUtils.showSnackbar(context, FluentIcons.warning_24_regular, "Something went wrong!");
-        });
-      });
-  }
 }
 
 String title(){
