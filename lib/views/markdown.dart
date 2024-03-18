@@ -66,8 +66,8 @@ class _MarkdownState extends State<Markdown>{
 
   @override
   void dispose() {
-     page.dispose(); // Dispose the TextEditingController
-     _focusNode.dispose(); // Dispose the FocusNode
+    //  page.dispose(); // Dispose the TextEditingController
+    //  _focusNode.dispose(); // Dispose the FocusNode
       super.dispose();
   }
 

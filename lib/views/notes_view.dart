@@ -5,7 +5,6 @@ import 'package:gap/gap.dart';
 import 'package:ozan/db/db_provider.dart';
 import 'package:ozan/db/notes.dart';
 import 'package:ozan/views/markdown.dart';
-import 'package:ozan/views/update.dart';
 import 'package:provider/provider.dart';
 import 'package:popover/popover.dart';
 
@@ -99,7 +98,48 @@ class _NotesViewState extends State<NotesView> {
                                                                   
                                           onTap: (){
                                   
-                                            Navigator.push(context, MaterialPageRoute(builder:(context) => Markdown(note: snapshot.data![index])));
+                                            Navigator.push(context, MaterialPageRoute(builder:(context){
+                                              
+                                              return Scaffold(
+
+                                                    body: Row(
+
+                                                      children: [
+
+                                                        Expanded(flex: 3, child: SizedBox(
+
+                                                          child: Padding(
+
+                                                            padding: const EdgeInsets.all(20.0),
+
+                                                            child: Column(
+                                                            
+                                                              mainAxisAlignment: MainAxisAlignment.start,
+                                                            
+                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                            
+                                                              children: [
+                                                                IconButton(onPressed: (){
+                                                                  Navigator.pop(context);
+                                                                }, icon: const Icon(CupertinoIcons.arrow_left)),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        )),
+
+                                                        Expanded(flex: 8, child: Padding(
+
+                                                          padding: const EdgeInsets.all(26),
+
+                                                          child: Markdown(note: snapshot.data![index]),
+                                                        )),
+
+                                                        const Expanded(flex: 3, child: SizedBox()),
+
+                                                      ],
+                                                    ),
+                                                  );
+                                            }));
                                           },
                                   
                                           child: Container(

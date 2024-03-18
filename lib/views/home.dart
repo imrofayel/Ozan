@@ -6,7 +6,6 @@ import 'package:ozan/views/configure.dart';
 import 'package:ozan/views/markdown.dart';
 import 'package:ozan/components/sidebar.dart';
 import 'package:ozan/views/notes_view.dart';
-import 'package:ozan/views/update.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
