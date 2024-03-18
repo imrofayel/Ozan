@@ -247,7 +247,8 @@ class _EditorState extends State<Editor> {
                 Text("Writer", style: TextStyle(fontSize: 24, fontFamily: 'Inter'),),
               ],
             ),
-            IconButton(
+
+            FilledButton.tonal(
               
                 onPressed: (){
             
@@ -264,7 +265,7 @@ class _EditorState extends State<Editor> {
             
                 else{
             
-                  value.dbHelper.insert(NotesModel(title: _UpdateState.pageTitle.text, description: _UpdateState.page.text, date: date));
+                  value.dbHelper.insert(NotesModel(title: _UpdateState.pageTitle.text.isNotEmpty ? _UpdateState.pageTitle.text : 'Untitled', description: _UpdateState.page.text, date: date));
               
                   value.initDatabase();
               
@@ -273,24 +274,12 @@ class _EditorState extends State<Editor> {
             
                 Navigator.of(context).pop();
             
-                } else{
-            
-                  showDialog(context: context, builder:(context) {
-                    
-                    return CupertinoAlertDialog(content: Padding(
-                      
-                      padding: const EdgeInsets.all(5.0),
-                      
-                      child: Text("Please enter title and description", style: TextStyle(fontSize: 24, color: Theme.of(context).colorScheme.tertiary, fontStyle: FontStyle.italic, height: 1.4, fontFamily: 'EB Garamond'), textAlign: TextAlign.left),
-                      ));
-                    });
-            
-                  }
+                }
             
                 }, 
               
               
-                icon: const Icon(CupertinoIcons.check_mark)
+                child: const Text('Save', style: TextStyle(fontFamily: 'Inter', fontSize: 18))
 
                 )
           ],

@@ -30,7 +30,6 @@ class _HomeState extends State<Home> {
                 children: [
 
                 IconButton(onPressed: (){
-                     Navigator.push(context, MaterialPageRoute(builder:(context) => const NotesView()));
                   }, icon: Icon(CupertinoIcons.scribble, size: 36, color: Theme.of(context).colorScheme.tertiary)),
             
                   const Gap(10),
@@ -69,19 +68,52 @@ class _HomeState extends State<Home> {
               ],
             ),
 
-      body: const Row(
+      body: Row(
       
         crossAxisAlignment: CrossAxisAlignment.start,
         
         children: [
           
-          Expanded(flex: 1, child: Sidebar()),
+          const Expanded(flex: 1, child: Sidebar()),
 
-          Expanded(flex: 2, child: SizedBox()),
+          const Expanded(flex: 2, child: SizedBox()),
       
-          Expanded(flex: 10, child: Markdown()),
+          const Expanded(flex: 10, child: Markdown()),
 
-          Expanded(flex: 3, child: SizedBox()),
+          Expanded(flex: 3, child: SizedBox(
+
+            child: Column(
+
+              crossAxisAlignment: CrossAxisAlignment.center,
+
+              mainAxisAlignment: MainAxisAlignment.end,
+
+              children: [
+                
+                Padding(
+                
+                  padding: const EdgeInsets.only(left: 60, right: 60, bottom: 30),
+                
+                  child: FilledButton(onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder:(context) => const NotesView()));
+                  }, 
+                  
+                  style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary.withOpacity(0.8)), padding: const MaterialStatePropertyAll(EdgeInsets.all(20)),
+                  
+                  side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6))),
+
+                  overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+
+                  shadowColor: const MaterialStatePropertyAll(Colors.transparent)
+                  
+                  ),
+                  
+                  
+                  child: Text('Saved', style: TextStyle(fontSize: 20, fontFamily: 'Inter', color: Theme.of(context).colorScheme.tertiary, fontWeight: FontWeight.w400))),
+                ),
+              ],
+            ),
+          )),
         ],
       ),
     );

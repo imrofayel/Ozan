@@ -225,13 +225,21 @@ class _EditorState extends State<Editor> {
 
               children: [
 
-                IconButton(
+                FilledButton.tonal(
+
+                    style: const ButtonStyle(
+                      padding: MaterialStatePropertyAll(EdgeInsets.all(15)),
+
+                      overlayColor: MaterialStatePropertyAll(Colors.transparent),
+
+                      shadowColor: MaterialStatePropertyAll(Colors.transparent)
+                    ),
                   
                     onPressed: (){
                 
-                    if(_MarkdownState.pageTitle.text.isNotEmpty && _MarkdownState.page.text.isNotEmpty){
+                    if(_MarkdownState.page.text.isNotEmpty){
                 
-                      value.dbHelper.insert(NotesModel(title: _MarkdownState.pageTitle.text, description: _MarkdownState.page.text, date: date));
+                      value.dbHelper.insert(NotesModel(title: _MarkdownState.pageTitle.text.isNotEmpty ? _MarkdownState.pageTitle.text : 'Untitled', description: _MarkdownState.page.text, date: date));
                   
                       value.initDatabase();
                   
@@ -239,25 +247,9 @@ class _EditorState extends State<Editor> {
                       
                       Navigator.of(context).pop();
                     }
-                            
-                    else{
-                
-                      showDialog(context: context, builder:(context) {
-                        
-                        return CupertinoAlertDialog(content: Padding(
-                          
-                          padding: const EdgeInsets.all(5.0),
-                          
-                          child: Text("Please enter title and description", style: TextStyle(fontSize: 24, color: Theme.of(context).colorScheme.tertiary, fontFamily: "Inter", height: 1.4), textAlign: TextAlign.left),
-                          ));
-                        });
-                
-                      }
-                
                     }, 
                   
-                  
-                    icon: const Icon(CupertinoIcons.checkmark)
+                    child: const Text('Save', style: TextStyle(fontFamily: 'Inter', fontSize: 18))
                 
                     ),
 
