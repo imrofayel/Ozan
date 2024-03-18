@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 import 'package:ozan/database/file_service.dart';
 import 'package:ozan/components/components.dart';
 import 'package:ozan/components/toolbar.dart';
@@ -14,7 +15,7 @@ class Markdown extends StatefulWidget {
 
   const Markdown({super.key});
 
-  static FileService files = FileService(_MarkdownState.page);
+  static FileService files = FileService(_MarkdownState.page, _MarkdownState.pageTitle);
 
   @override
   State<Markdown> createState() => _MarkdownState();
@@ -100,7 +101,7 @@ class _MarkdownState extends State<Markdown>{
                               context: context, 
                                   
                               builder: (context){
-                                return Editor();
+                                return const Editor();
                               }
                             );
                           }, style: ButtonStyle(
@@ -130,7 +131,7 @@ class _MarkdownState extends State<Markdown>{
                               
                       height: 450,
                               // change md to page.text
-                      child: markdown(md, 1.62, context)
+                      child: markdown(page.text, 1.62, context)
                     ),
                             
                       const Gap(10),
@@ -186,9 +187,7 @@ class Editor extends StatefulWidget {
 
 class _EditorState extends State<Editor> {
   
-  // int selectedIndex = 0;
-
-  String date = DateTime.now().toString(); 
+  String date = DateFormat('d MMM, yy').format(DateTime.now()); 
 
 
   @override

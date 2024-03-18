@@ -178,3 +178,22 @@ Widget titleBox(context, {required TextEditingController controller}){
     style: const TextStyle(fontSize: 30),
   );
 }
+
+String greet(){
+  
+  String text;
+
+  if(DateTime.now().hour > 0 && DateTime.now().hour <= 11){
+    text = 'Good Morning!';
+  }
+
+  if(DateTime.now().hour > 11 && DateTime.now().hour <= 16){
+    text = 'Good Afternoon!';
+  }
+
+  else{
+    text = 'Good Evening!';
+  }
+
+  return text;
+}

@@ -1,7 +1,7 @@
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:ozan/components/components.dart';
 import 'package:ozan/db/db_provider.dart';
 import 'package:ozan/db/notes.dart';
 import 'package:ozan/views/update_view.dart';
@@ -47,6 +47,8 @@ class _NotesViewState extends State<NotesView> {
         body: Column(
           
           children: [
+
+              Text(greet(), textScaler: const TextScaler.linear(2.7),),
             
               FutureBuilder(
         
@@ -77,7 +79,7 @@ class _NotesViewState extends State<NotesView> {
                                   child: ListView.builder(
                                   
                                     scrollDirection: Axis.vertical,
-                                                                                          
+
                                     itemCount: snapshot.data!.length,
                                     
                                     itemBuilder:(context, index) {
@@ -121,6 +123,7 @@ class _NotesViewState extends State<NotesView> {
                                                               children: [
                                                                 IconButton(onPressed: (){
                                                                   Navigator.pop(context);
+                                                                  
                                                                 }, icon: const Icon(CupertinoIcons.arrow_left)),
                                                               ],
                                                             ),
@@ -197,7 +200,7 @@ class _NotesViewState extends State<NotesView> {
                                                           
                                                                 child: IconButton(onPressed: (){
                                                                                               
-                                                                                                                                                                        value.dbHelper.delete(snapshot.data![index].id);
+                                                                value.dbHelper.delete(snapshot.data![index].id);
                                                                 
                                                                 value.initDatabase();
                                                                 
@@ -249,15 +252,7 @@ class _NotesViewState extends State<NotesView> {
         
                           children: [
         
-                            Center(
-                            
-                              child: Icon(FluentIcons.add_48_regular, size: 100, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.3))
-
-                            ),
-        
-                            const Gap(25),
-        
-                            Text("Your canvas is blank.", textScaler: const TextScaler.linear(2.2), style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.3))),
+                            Center(child: Text("Your canvas is blank.", textScaler: const TextScaler.linear(2.8), style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(1), fontStyle: FontStyle.italic))),
 
                             const Gap(100),
                           ],
@@ -273,15 +268,4 @@ class _NotesViewState extends State<NotesView> {
       }
     );
   }
-}
-
-Color categoryColor(String category, context){
-
-    if(category == 'Personal'){
-      return Theme.of(context).colorScheme.tertiaryContainer;
-    }
-    else if(category == 'Office'){
-      return Theme.of(context).colorScheme.primaryContainer;
-    }
-    return Theme.of(context).colorScheme.secondaryContainer;
 }

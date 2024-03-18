@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 import 'package:ozan/database/file_service.dart';
 import 'package:ozan/components/components.dart';
 import 'package:ozan/components/toolbar.dart';
@@ -16,7 +17,7 @@ class Update extends StatefulWidget {
 
   NotesModel? note;
 
-  static FileService files = FileService(_UpdateState.page);
+  static FileService files = FileService(_UpdateState.page, _UpdateState.pageTitle);
 
   @override
   State<Update> createState() => _UpdateState();
@@ -45,6 +46,8 @@ class _UpdateState extends State<Update>{
           pageTitle = TextEditingController(text: widget.note!.title);
 
           page = TextEditingController(text: widget.note!.description);
+
+          md = (widget.note!.description).toString();
 
         });        
       }
@@ -153,7 +156,7 @@ class _UpdateState extends State<Update>{
                               
                       height: 450,
                               // change md to page.text
-                      child: markdown(md, 1.62, context)
+                      child: markdown(page.text, 1.62, context)
                     ),
                             
                       const Gap(10),
@@ -211,9 +214,7 @@ class Editor extends StatefulWidget {
 
 class _EditorState extends State<Editor> {
   
-  // int selectedIndex = 0;
-
-  String date = DateTime.now().toString(); 
+  String date = DateFormat('d MMM, yy').format(DateTime.now()); 
 
 
   @override
@@ -280,7 +281,7 @@ class _EditorState extends State<Editor> {
                       
                       padding: const EdgeInsets.all(5.0),
                       
-                      child: Text("Please enter title and description", style: TextStyle(fontSize: 24, color: Theme.of(context).colorScheme.tertiary, fontFamily: "Inter", height: 1.4), textAlign: TextAlign.left),
+                      child: Text("Please enter title and description", style: TextStyle(fontSize: 24, color: Theme.of(context).colorScheme.tertiary, fontStyle: FontStyle.italic, height: 1.4, fontFamily: 'EB Garamond'), textAlign: TextAlign.left),
                       ));
                     });
             

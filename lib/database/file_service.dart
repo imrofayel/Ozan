@@ -2,14 +2,16 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:ozan/views/markdown.dart';
 import 'package:ozan/components/snackbar.dart';
+import '../views/markdown.dart';
 
 class FileService {
   
-  FileService(this.markdown);
+  FileService(this.markdown, this.$title);
 
   TextEditingController markdown;
+
+  TextEditingController $title;
   
   File? _selectedFile;
   String? _selectedDirectory = '';
