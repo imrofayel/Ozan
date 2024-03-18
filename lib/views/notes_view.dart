@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:ozan/db/db_provider.dart';
 import 'package:ozan/db/notes.dart';
-import 'package:ozan/views/markdown.dart';
+import 'package:ozan/views/update_view.dart';
 import 'package:provider/provider.dart';
 import 'package:popover/popover.dart';
 
@@ -131,7 +131,7 @@ class _NotesViewState extends State<NotesView> {
 
                                                           padding: const EdgeInsets.all(26),
 
-                                                          child: Markdown(note: snapshot.data![index]),
+                                                          child: Update(note: snapshot.data![index]),
                                                         )),
 
                                                         const Expanded(flex: 3, child: SizedBox()),

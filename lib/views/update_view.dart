@@ -10,18 +10,19 @@ import 'package:provider/provider.dart';
 import '../markdown/markdown_style.dart';
 
 // ignore: must_be_immutable
-class Markdown extends StatefulWidget {
+class Update extends StatefulWidget {
 
-  const Markdown({super.key});
+  Update({super.key, this.note});
 
-  static FileService files = FileService(_MarkdownState.page);
+  NotesModel? note;
+
+  static FileService files = FileService(_UpdateState.page);
 
   @override
-  State<Markdown> createState() => _MarkdownState();
+  State<Update> createState() => _UpdateState();
 
 }
-
-class _MarkdownState extends State<Markdown>{
+class _UpdateState extends State<Update>{
 
   static TextEditingController page = TextEditingController();
 
@@ -36,6 +37,28 @@ class _MarkdownState extends State<Markdown>{
   void initState() {
       page.addListener(() => setState(() {})); 
       _focusNode = FocusNode(); // Assign a FocusNode
+
+      if(widget.note != null){
+
+        setState(() {
+          
+          pageTitle = TextEditingController(text: widget.note!.title);
+
+          page = TextEditingController(text: widget.note!.description);
+
+        });        
+      }
+
+      // else{
+
+      //   setState(() {
+          
+      //     page = TextEditingController(text: page.text);
+
+      //     pageTitle = TextEditingController(text: 'Creation');
+          
+      //   });
+      // }
 
       super.initState();
 }
@@ -100,7 +123,7 @@ class _MarkdownState extends State<Markdown>{
                               context: context, 
                                   
                               builder: (context){
-                                return Editor();
+                                return Editor(note: widget.note);
                               }
                             );
                           }, style: ButtonStyle(
@@ -166,8 +189,8 @@ String title(){
   
   String getTitle = 'Untitled';
 
-  if(_MarkdownState.pageTitle.text.isNotEmpty){
-    getTitle = _MarkdownState.pageTitle.text;
+  if(_UpdateState.pageTitle.text.isNotEmpty){
+    getTitle = _UpdateState.pageTitle.text;
   }
 
   return getTitle;
@@ -178,7 +201,9 @@ String title(){
 // ignore: must_be_immutable
 class Editor extends StatefulWidget {
 
-  const Editor({super.key});
+  NotesModel? note;
+
+  Editor({super.key, this.note});
 
   @override
   State<Editor> createState() => _EditorState();
@@ -225,18 +250,29 @@ class _EditorState extends State<Editor> {
               
                 onPressed: (){
             
-                if(_MarkdownState.pageTitle.text.isNotEmpty && _MarkdownState.page.text.isNotEmpty){
+                if(_UpdateState.pageTitle.text.isNotEmpty && _UpdateState.page.text.isNotEmpty){
             
-                  value.dbHelper.insert(NotesModel(title: _MarkdownState.pageTitle.text, description: _MarkdownState.page.text, date: date));
+                if(widget.note != null){
+            
+                value.dbHelper.update(NotesModel(title: _UpdateState.pageTitle.text, description: _UpdateState.page.text, date: date, id: widget.note!.id));
+              
+                value.initDatabase();
+              
+                  value.setLength();
+                } 
+            
+                else{
+            
+                  value.dbHelper.insert(NotesModel(title: _UpdateState.pageTitle.text, description: _UpdateState.page.text, date: date));
               
                   value.initDatabase();
               
                   value.setLength();
-                  
-                  Navigator.of(context).pop();
                 }
-                        
-                else{
+            
+                Navigator.of(context).pop();
+            
+                } else{
             
                   showDialog(context: context, builder:(context) {
                     
@@ -273,7 +309,7 @@ class _EditorState extends State<Editor> {
       
               children: [
       
-                  toolbar(_MarkdownState.page, context),
+                  toolbar(_UpdateState.page, context),
       
                     const Gap(8),
             
@@ -323,19 +359,19 @@ class _EditorState extends State<Editor> {
                                               
                                       onSubmitted: (text) {
                                         setState(() {
-                                          _MarkdownState.page.text += '\n';
+                                          _UpdateState.page.text += '\n';
                                         });
                                       },
                                       
                                       onChanged: (text) {
                                         setState(() {
-                                          _MarkdownState.md = text;
+                                          _UpdateState.md = text;
                                         });
                                       },
                                       
-                                      controller: _MarkdownState.page, 
+                                      controller: _UpdateState.page, 
                                       
-                                      focusNode: _MarkdownState._focusNode,
+                                      focusNode: _UpdateState._focusNode,
                                                                     
                                       color: Colors.transparent,
                                       ),
