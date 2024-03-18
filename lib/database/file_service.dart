@@ -2,14 +2,16 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:ozan/views/markdown.dart';
 import 'package:ozan/components/snackbar.dart';
+import '../views/markdown.dart';
 
 class FileService {
   
-  FileService(this.markdown);
+  FileService(this.markdown, this.$title);
 
   TextEditingController markdown;
+
+  TextEditingController $title;
   
   File? _selectedFile;
   String? _selectedDirectory = '';
@@ -35,7 +37,7 @@ class FileService {
           _selectedDirectory = metadataDirPath = directory!;
         }
 
-        filePath = '$metadataDirPath\\${title()}.md';
+        filePath = '$metadataDirPath\\${$title.text.isNotEmpty ? $title.text : title()}.md';
 
         final newFile = File(filePath);
         await newFile.writeAsString(content);
@@ -52,6 +54,7 @@ class FileService {
     _selectedFile = null;
     _selectedDirectory = '';
     markdown.clear();
+    $title.clear();
     SnackBarUtils.showSnackbar(
         context, FluentIcons.document_page_bottom_right_24_regular, "New File Loaded, Please write something in editor to see changes!");
   }
@@ -67,7 +70,7 @@ class FileService {
         markdown.text = await file.readAsString();
 
         SnackBarUtils.showSnackbar(
-            context, FluentIcons.checkmark_circle_24_regular, "File Uploaded, edit a single letter in editor to see changes!");
+            context, FluentIcons.checkmark_circle_24_regular, "File Uploaded!");
       } else {
         SnackBarUtils.showSnackbar(context, FluentIcons.warning_24_regular, "File not selected");
       }

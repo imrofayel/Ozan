@@ -19,6 +19,12 @@ class CodeElementBuilder extends MarkdownElementBuilder {
 
     var language = '';
 
+    if(element.attributes['class'] == null){
+      return Text(element.textContent.toString(), textScaler: const TextScaler.linear(1.3), style: TextStyle(backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.8), color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Roboto Mono'));
+    }
+
+    else{
+
     if (element.attributes['class'] != null) {
       String lg = element.attributes['class'] as String;
       language = lg.substring(9);
@@ -50,7 +56,7 @@ class CodeElementBuilder extends MarkdownElementBuilder {
               
             children: [
               
-            FilledButton(onPressed: (){}, style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.all(15)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background), foregroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.tertiary)), child: Text(lang,)),
+            FilledButton(onPressed: (){}, style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.all(15)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background), foregroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.tertiary)), child: Text(lang, textScaler: const TextScaler.linear(1.3), style: const TextStyle(fontFamily: 'Inter'))),
               
             IconButton(onPressed: (){
               copyToClipboard(context, element.textContent);
@@ -78,21 +84,22 @@ class CodeElementBuilder extends MarkdownElementBuilder {
         
         padding: const EdgeInsets.fromLTRB(24, 10, 24, 10),
     
-        textStyle: const TextStyle(fontSize: 16, fontFamily: "Roboto Mono", height: 2),
+        textStyle: const TextStyle(fontSize: 17, fontFamily: "Roboto Mono", height: 2),
         ),
       ]
     );
+    }
   }
 }
 
 
 const nordTheme = {
   'root':
-      TextStyle(backgroundColor: Color.fromRGBO(15, 17, 26, 1), color: Color(0xffD8DEE9)),
+      TextStyle(backgroundColor: Colors.transparent, color: Color(0xffD8DEE9)),
   'subst': TextStyle(color: Color(0xffD8DEE9)),
   'selector-tag': TextStyle(color: Color(0xff81A1C1)),
   'selector-id':
-      TextStyle(color: Color(0xff8FBCBB), fontWeight: FontWeight.bold),
+      TextStyle(color: Color(0xff8FBCBB)),
   'selector-class': TextStyle(color: Color(0xff8FBCBB)),
   'selector-attr': TextStyle(color: Color(0xff8FBCBB)),
   'selector-pseudo': TextStyle(color: Color(0xff88C0D0)),
@@ -114,7 +121,7 @@ const nordTheme = {
   'code': TextStyle(color: Color(0xff8FBCBB)),
   'emphasis': TextStyle(fontStyle: FontStyle.italic),
   'formula': TextStyle(color: Color(0xff8FBCBB)),
-  'strong': TextStyle(fontWeight: FontWeight.bold),
+  'strong': TextStyle(fontWeight: FontWeight.w500),
   'quote': TextStyle(color: Color(0xff4C566A)),
   'comment': TextStyle(color: Color(0xff4C566A)),
   'doctag': TextStyle(color: Color(0xff8FBCBB)),
@@ -134,7 +141,7 @@ const nordTheme = {
 
 const arduinoLightTheme = {
   'root':
-      TextStyle(backgroundColor: Color.fromARGB(255, 250, 250, 250), color: Color(0xff434f54)),
+      TextStyle(backgroundColor: Colors.transparent, color: Color(0xff434f54)),
   'subst': TextStyle(color: Color(0xff434f54)),
   'keyword': TextStyle(color: Color(0xff00979D)),
   'attribute': TextStyle(color: Color(0xff00979D)),
@@ -160,13 +167,13 @@ const arduinoLightTheme = {
   'quote': TextStyle(color: Color(0xff005C5F)),
   'template-tag': TextStyle(color: Color(0xff005C5F)),
   'deletion': TextStyle(color: Color(0xff005C5F)),
-  'title': TextStyle(color: Color(0xff880000), fontWeight: FontWeight.bold),
-  'section': TextStyle(color: Color(0xff880000), fontWeight: FontWeight.bold),
+  'title': TextStyle(color: Color(0xff880000)),
+  'section': TextStyle(color: Color(0xff880000)),
   'comment': TextStyle(color: Color.fromRGBO(149, 165, 166, .8)),
   'meta-keyword': TextStyle(color: Color(0xff728E00)),
   'meta': TextStyle(color: Color(0xff434f54)),
   'emphasis': TextStyle(fontStyle: FontStyle.italic),
-  'strong': TextStyle(fontWeight: FontWeight.bold),
+  'strong': TextStyle(fontWeight: FontWeight.w500),
   'function': TextStyle(color: Color(0xff728E00)),
   'number': TextStyle(color: Color(0xff8A7B52)),
 };

@@ -8,7 +8,7 @@ class Themes {
 
     useMaterial3: true,
 
-    fontFamily: "Inter",
+    fontFamily: "EB Garamond",
 
     textTheme: const TextTheme(
 
@@ -24,17 +24,19 @@ class Themes {
 
       brightness: Brightness.light,
 
-      seedColor: Colors.black,
+      seedColor: Colors.brown,
 
-      background: const Color.fromARGB(255, 255, 255, 255),
+      background: const Color.fromRGBO(243, 242, 236, 1),
 
-      primary: const Color.fromARGB(255, 250, 250, 250),
+      primary: const Color.fromRGBO(248, 248, 247, 1),
 
-      tertiary: const Color.fromRGBO(43, 43, 43, 1),
+      tertiary: const Color.fromRGBO(61, 57, 41, 1),
+
+      secondary: const Color.fromRGBO(61, 57, 41, 1)
 
     ),
 
-    appBarTheme:  const AppBarTheme(backgroundColor: Color.fromARGB(255, 255, 255, 255)),
+    appBarTheme:  const AppBarTheme(backgroundColor: Color.fromRGBO(243, 242, 236, 1)),
 
     tooltipTheme: TooltipThemeData(
 
@@ -49,28 +51,8 @@ class Themes {
         borderRadius: BorderRadius.circular(20)
       ),
 
-      textStyle: TextStyle(fontSize: 16, color: const Color.fromARGB(255, 3, 7, 3).withOpacity(0.8)),
+      textStyle: TextStyle(fontSize: 18, color: const Color.fromARGB(255, 3, 7, 3).withOpacity(0.8), fontFamily: 'Inter'),
     ),
-
-    datePickerTheme: DatePickerThemeData(
-
-      elevation: 0,
-
-      todayBorder: BorderSide.none,
-
-      backgroundColor: const Color.fromARGB(255, 250, 250, 250),
-
-      shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(30)),
-
-      todayForegroundColor: const MaterialStatePropertyAll(Colors.white),
-
-      todayBackgroundColor: const MaterialStatePropertyAll(Colors.black),
-
-      cancelButtonStyle: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.black), foregroundColor: MaterialStatePropertyAll(Colors.white)),
-
-      confirmButtonStyle: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.black), foregroundColor: MaterialStatePropertyAll(Colors.white)),
-
-    ), 
 
     dropdownMenuTheme: DropdownMenuThemeData(
 
@@ -118,7 +100,7 @@ class Themes {
 
     useMaterial3: true,
 
-    fontFamily: "Inter",
+    fontFamily: "EB Garamond",
 
     textTheme: const TextTheme(
 
@@ -134,17 +116,17 @@ class Themes {
 
       brightness: Brightness.dark,
 
-      seedColor: Colors.white,
+      seedColor: Colors.brown,
 
-      background: const Color.fromRGBO(9, 11, 16, 1),
+      background: const Color.fromRGBO(44, 44, 41, 1),
 
-      primary: const Color.fromRGBO(15, 17, 26, 1),
+      primary: const Color.fromRGBO(51, 51, 48, 1),
 
       tertiary: const Color.fromRGBO(192, 212, 190, 1),
 
     ),
 
-    appBarTheme:  const AppBarTheme(backgroundColor: Color.fromRGBO(9, 11, 16, 1)),
+    appBarTheme:  const AppBarTheme(backgroundColor: Color.fromRGBO(44, 44, 41, 1)),
 
     tooltipTheme: TooltipThemeData(
 
@@ -159,28 +141,8 @@ class Themes {
         borderRadius: BorderRadius.circular(20)
       ),
 
-      textStyle: TextStyle(fontSize: 16, color: const Color.fromARGB(255, 255, 255, 255).withOpacity(0.8)),
+      textStyle: TextStyle(fontSize: 18, color: const Color.fromARGB(255, 255, 255, 255).withOpacity(0.8), fontFamily: 'Inter'),
     ),
-
-    datePickerTheme: DatePickerThemeData(
-
-      elevation: 0,
-
-      todayBorder: BorderSide.none,
-
-      backgroundColor: const Color.fromRGBO(40, 47, 40, 1),
-
-      shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(30)),
-
-      todayForegroundColor: const MaterialStatePropertyAll(Colors.black),
-
-      todayBackgroundColor: const MaterialStatePropertyAll(Colors.white),
-
-      cancelButtonStyle: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.white), foregroundColor: MaterialStatePropertyAll(Colors.black)),
-
-      confirmButtonStyle: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.white), foregroundColor: MaterialStatePropertyAll(Colors.black)),
-
-    ), 
 
     dropdownMenuTheme: DropdownMenuThemeData(
 

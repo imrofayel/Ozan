@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ozan/theme/theme.dart';
 class ThemeSwitcher with ChangeNotifier{
 
-  ThemeData _themeData = Themes.darkTheme;
+  ThemeData _themeData = Themes.lightTheme;
 
   ThemeData get themeData => _themeData;
 

@@ -17,7 +17,7 @@ IconButton button(void Function()? function, IconData icon, context, {Color? tex
     
       style: ButtonStyle(
 
-        iconSize: const MaterialStatePropertyAll(26),
+        iconSize: const MaterialStatePropertyAll(24),
 
         iconColor: MaterialStatePropertyAll(textColor ?? Theme.of(context).colorScheme.tertiary),
 
@@ -42,7 +42,7 @@ TextField textField(context, {int? lines = 1, required void Function(String)? on
 
     focusNode: focusNode,
 
-    style: TextStyle(color: textColor ?? Theme.of(context).colorScheme.tertiary, fontSize: 18, height: 2),
+    style: TextStyle(color: textColor ?? Theme.of(context).colorScheme.tertiary, fontSize: 18, height: 2, fontFamily: 'Inter'),
 
     decoration: InputDecoration(
 
@@ -119,15 +119,27 @@ SingleChildScrollView textEncode(context, {required int words, required int char
     
       children: [
     
-        FilledButton(onPressed: (){}, style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("$words words", style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary))),
+        FilledButton(onPressed: (){}, style: ButtonStyle(
+          
+          side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6))),
+
+          padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary.withOpacity(0.8))), child: Text("$words words", style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
     
         const Gap(7),
     
-        FilledButton(onPressed: (){}, style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("$char characters", style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary))),
+        FilledButton(onPressed: (){}, style: ButtonStyle(
+          
+          side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6))),
+
+          padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary.withOpacity(0.8))), child: Text("$char characters", style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
     
         const Gap(7),
     
-        FilledButton(onPressed: (){}, style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("$lines lines", style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary))),
+        FilledButton(onPressed: (){}, style: ButtonStyle(
+
+          side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6))),
+
+          padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary.withOpacity(0.8))), child: Text("$lines lines", style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
       ],
     ),
   );
@@ -139,7 +151,7 @@ IconButton suffix(context){
       }, icon: const Icon(FluentIcons.mic_24_regular), padding: const EdgeInsets.all(1));
 }
 
-TextField titleBox(context, {required TextEditingController controller}){
+Widget titleBox(context, {required TextEditingController controller}){
 
   return TextField(
 
@@ -147,7 +159,7 @@ TextField titleBox(context, {required TextEditingController controller}){
 
     decoration: InputDecoration(
 
-      hintText: "Subject",
+      hintText: "Creation",
 
       hintStyle: TextStyle(fontWeight: FontWeight.w400, color: Theme.of(context).colorScheme.tertiary),
 
@@ -155,13 +167,33 @@ TextField titleBox(context, {required TextEditingController controller}){
 
       contentPadding: const EdgeInsets.all(20),
 
-      border: InputBorder.none,
-
       focusColor: Colors.transparent,
 
-      hoverColor: Colors.transparent
+      hoverColor: Colors.transparent,
+
+      border: InputBorder.none
+
     ),
 
-    style: const TextStyle(fontSize: 26),
+    style: const TextStyle(fontSize: 30),
   );
+}
+
+String greet(){
+  
+  String text;
+
+  if(DateTime.now().hour > 0 && DateTime.now().hour <= 11){
+    text = 'Good Morning!';
+  }
+
+  if(DateTime.now().hour > 11 && DateTime.now().hour <= 16){
+    text = 'Good Afternoon!';
+  }
+
+  else{
+    text = 'Good Evening!';
+  }
+
+  return text;
 }

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:ozan/views/markdown.dart';
 import 'package:ozan/components/components.dart';
-import 'package:ozan/views/configure.dart';
 
 class Sidebar extends StatefulWidget {
   const Sidebar({super.key});
@@ -22,47 +21,34 @@ class _SidebarState extends State<Sidebar> {
       scrollDirection: Axis.vertical,
       
       child: SizedBox(
+
+        height: MediaQuery.of(context).size.height - 80,
         
         child: Column(
+
+          crossAxisAlignment: CrossAxisAlignment.center,
+
+          mainAxisAlignment: MainAxisAlignment.end,
             
           children: [
-            
-            const Gap(10),
-      
+                  
             Container(
-      
-              width: 55, height: 210, 
-            
-              decoration: BoxDecoration(
+                  
+              decoration: const BoxDecoration(
 
-                color: Theme.of(context).colorScheme.primary,
+                color: Colors.transparent,
 
-                borderRadius: BorderRadius.circular(20),
               ),
 
               child: Column(
-                
-                mainAxisAlignment: MainAxisAlignment.center,
 
                 children: [
 
-                button(() => Markdown.files.newFile(context), FluentIcons.add_24_regular, context, tooltip: "New File"),
+                button(() => Markdown.files.loadFile(context), FluentIcons.attach_32_filled, context, tooltip: "Open"),
 
-                const Gap(6),
+                const Gap(14),
 
-                button(() => Markdown.files.loadFile(context), FluentIcons.attach_24_regular, context, tooltip: "Import"),
-
-                const Gap(6),
-
-                button((){
-                  showDialog(context: context, builder: (context){
-                    return const Configuration();
-                  });
-                }, FluentIcons.person_24_regular, context, tooltip: "About"),
-
-                const Gap(6),
-
-                button(() => Markdown.files.saveContent(context), FluentIcons.arrow_download_24_regular, context, tooltip: "Export"),
+                button(() => Markdown.files.saveContent(context), FluentIcons.arrow_down_32_filled, context, tooltip: "Save"),
 
                 ],
               )
