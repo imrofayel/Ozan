@@ -59,7 +59,7 @@ initDatabase() async {
 
   _onCreate(Database db, int version) async {
     await db.execute(
-        'CREATE TABLE notes (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, description TEXT NOT NULL, category TEXT NOT NULL, date TEXT NOT NULL)');
+        'CREATE TABLE notes (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, description TEXT NOT NULL, date TEXT NOT NULL)');
   }
 
   Future<NotesModel> insert(NotesModel notesModel) async {
@@ -90,4 +90,16 @@ initDatabase() async {
       whereArgs: [notesModel.id],
     );
   }
+
+
+  // Future<void> resetDatabase() async {
+  //   final dbClient = await db;
+  //   await dbClient!.close();
+
+  //   final databasesPath = await getDatabasesPath();
+  //   final path = join(databasesPath, 'your_database.db');
+
+  //   await deleteDatabase(path);
+  //   _db = null;
+  // }
 }

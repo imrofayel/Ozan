@@ -7,11 +7,9 @@ class NotesModel{
 
   final String description;
 
-  final String category;
-
   final String date;
 
-  NotesModel({required this.title, this.id, required this.description, required this.category, required this.date});
+  NotesModel({required this.title, this.id, required this.description, required this.date});
 
   NotesModel.fromMap(Map<String, dynamic> res):
 
@@ -20,8 +18,6 @@ class NotesModel{
   title = res['title'],
 
   description = res['description'],
-
-  category = res['category'],
 
   date = res['date'];
 
@@ -34,8 +30,6 @@ class NotesModel{
       'title' : title,
 
       'description' : description,
-
-      'category' : category,
 
       'date' : date,
     };

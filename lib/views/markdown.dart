@@ -180,20 +180,9 @@ class _EditorState extends State<Editor> {
   
   // int selectedIndex = 0;
 
-  String category = 'Personal';
+  String date = DateTime.now().toString(); 
 
-  String date = "Date"; 
-
-  Color categoryColor(){
-
-    if(category == 'Personal'){
-      return Theme.of(context).colorScheme.tertiaryContainer;
-    }
-    else if(category == 'Office'){
-      return Theme.of(context).colorScheme.primaryContainer;
-    }
-    return Theme.of(context).colorScheme.secondaryContainer;
-  }
+  String? data, title;
 
     @override
   void initState() {
@@ -202,15 +191,19 @@ class _EditorState extends State<Editor> {
 
     if(widget.note != null){
 
-      _MarkdownState.pageTitle.text = widget.note!.title;
+      setState(() {
+        
+        _MarkdownState.pageTitle = TextEditingController(text: widget.note?.title ?? '');
 
-      _MarkdownState.page.text = widget.note!.description;
+        _MarkdownState.page = TextEditingController(text: widget.note?.description ?? '');
 
-      category = widget.note!.category;
+        date = widget.note!.date;
+      });
 
-      date = widget.note!.date;
 
     }
+
+
   }
 
   @override
@@ -243,10 +236,6 @@ class _EditorState extends State<Editor> {
                 Text("Writer", style: TextStyle(fontSize: 24, fontFamily: 'Inter'),),
               ],
             ),
-      
-            // IconButton(onPressed: (){
-            //   Navigator.of(context).pop();
-            // }, icon: const Icon(CupertinoIcons.xmark, size: 20))
             IconButton(
               
                 onPressed: (){
@@ -255,7 +244,7 @@ class _EditorState extends State<Editor> {
             
                 if(widget.note != null){
             
-                value.dbHelper.update(NotesModel(title: _MarkdownState.pageTitle.text, description: _MarkdownState.page.text, category: category, date: date, id: widget.note!.id));
+                value.dbHelper.update(NotesModel(title: _MarkdownState.pageTitle.text, description: _MarkdownState.page.text, date: date, id: widget.note!.id));
               
                 value.initDatabase();
               
@@ -264,7 +253,7 @@ class _EditorState extends State<Editor> {
             
                 else{
             
-                  value.dbHelper.insert(NotesModel(title: _MarkdownState.pageTitle.text, description: _MarkdownState.page.text, category: category, date: date));
+                  value.dbHelper.insert(NotesModel(title: _MarkdownState.pageTitle.text, description: _MarkdownState.page.text, date: date));
               
                   value.initDatabase();
               
