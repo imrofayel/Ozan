@@ -52,9 +52,10 @@ class _MarkdownState extends State<Markdown>{
       else{
         setState(() {
           
-          page = TextEditingController(text: '');
+          page = TextEditingController(text: page.text);
 
           pageTitle = TextEditingController(text: 'Creation');
+          
         });
       }
 

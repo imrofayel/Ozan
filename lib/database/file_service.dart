@@ -67,7 +67,7 @@ class FileService {
         markdown.text = await file.readAsString();
 
         SnackBarUtils.showSnackbar(
-            context, FluentIcons.checkmark_circle_24_regular, "File Uploaded, edit a single letter in editor to see changes!");
+            context, FluentIcons.checkmark_circle_24_regular, "File Uploaded!");
       } else {
         SnackBarUtils.showSnackbar(context, FluentIcons.warning_24_regular, "File not selected");
       }
