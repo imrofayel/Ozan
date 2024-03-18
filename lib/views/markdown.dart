@@ -152,7 +152,7 @@ class _MarkdownState extends State<Markdown>{
                               
                       height: 450,
                               // change md to page.text
-                      child: markdown(page.text, 1.62, context)
+                      child: markdown(md, 1.62, context)
                     ),
                             
                       const Gap(10),
