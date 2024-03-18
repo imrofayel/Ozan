@@ -4,6 +4,9 @@ import 'package:gap/gap.dart';
 import 'package:ozan/database/file_service.dart';
 import 'package:ozan/components/components.dart';
 import 'package:ozan/components/toolbar.dart';
+import 'package:ozan/db/db_provider.dart';
+import 'package:ozan/db/notes.dart';
+import 'package:provider/provider.dart';
 import '../markdown/markdown_style.dart';
 class Markdown extends StatefulWidget {
 
@@ -16,10 +19,6 @@ class Markdown extends StatefulWidget {
 }
 
 class _MarkdownState extends State<Markdown>{
-
-  TextEditingController prompt = TextEditingController();
-
-  TextEditingController search = TextEditingController();
 
   static TextEditingController page = TextEditingController();
 
@@ -94,7 +93,7 @@ class _MarkdownState extends State<Markdown>{
                           context: context, 
                               
                           builder: (context){
-                            return const Editor();
+                            return Editor();
                           }
                         );
                       }, style: ButtonStyle(
@@ -166,8 +165,12 @@ String title(){
 
 
 // Editor Dialogue
+// ignore: must_be_immutable
 class Editor extends StatefulWidget {
-  const Editor({super.key});
+
+  NotesModel? note;
+
+  Editor({super.key, this.note});
 
   @override
   State<Editor> createState() => _EditorState();
@@ -175,133 +178,216 @@ class Editor extends StatefulWidget {
 
 class _EditorState extends State<Editor> {
   
-  int selectedIndex = 0;
+  // int selectedIndex = 0;
+
+  String category = 'Personal';
+
+  String date = "Date"; 
+
+  Color categoryColor(){
+
+    if(category == 'Personal'){
+      return Theme.of(context).colorScheme.tertiaryContainer;
+    }
+    else if(category == 'Office'){
+      return Theme.of(context).colorScheme.primaryContainer;
+    }
+    return Theme.of(context).colorScheme.secondaryContainer;
+  }
+
+    @override
+  void initState() {
+
+    super.initState();
+
+    if(widget.note != null){
+
+      _MarkdownState.pageTitle.text = widget.note!.title;
+
+      _MarkdownState.page.text = widget.note!.description;
+
+      category = widget.note!.category;
+
+      date = widget.note!.date;
+
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
 
-    return SimpleDialog(
+    return Consumer<DatabaseProvider>(builder:(context, value, child){
 
-      elevation: 0,
+      return SimpleDialog(
+      
+        elevation: 0,
+      
+        shadowColor: Colors.transparent,
+      
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      
+        title: Row(
+      
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      
+          children: [
+            
+            const Row(
+      
+              children: [
+      
+                Icon(CupertinoIcons.pencil_outline, size: 28),
+            
+                Gap(10),
+      
+                Text("Writer", style: TextStyle(fontSize: 24, fontFamily: 'Inter'),),
+              ],
+            ),
+      
+            // IconButton(onPressed: (){
+            //   Navigator.of(context).pop();
+            // }, icon: const Icon(CupertinoIcons.xmark, size: 20))
+            IconButton(
+              
+                onPressed: (){
+            
+                if(_MarkdownState.pageTitle.text.isNotEmpty && _MarkdownState.page.text.isNotEmpty){
+            
+                if(widget.note != null){
+            
+                value.dbHelper.update(NotesModel(title: _MarkdownState.pageTitle.text, description: _MarkdownState.page.text, category: category, date: date, id: widget.note!.id));
+              
+                value.initDatabase();
+              
+                  value.setLength();
+                } 
+            
+                else{
+            
+                  value.dbHelper.insert(NotesModel(title: _MarkdownState.pageTitle.text, description: _MarkdownState.page.text, category: category, date: date));
+              
+                  value.initDatabase();
+              
+                  value.setLength();
+                }
+            
+                Navigator.of(context).pop();
+            
+                } else{
+            
+                  showDialog(context: context, builder:(context) {
+                    
+                    return CupertinoAlertDialog(content: Padding(
+                      
+                      padding: const EdgeInsets.all(5.0),
+                      
+                      child: Text("Please enter title and description", style: TextStyle(fontSize: 24, color: Theme.of(context).colorScheme.tertiary, fontFamily: "Inter", height: 1.4), textAlign: TextAlign.left),
+                      ));
+                    });
+            
+                  }
+            
+                }, 
+              
+              
+                icon: const Icon(CupertinoIcons.square_arrow_down)
 
-      shadowColor: Colors.transparent,
-
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-
-      title: Row(
-
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
+                )
+          ],
+        ),
+      
+        titlePadding: const EdgeInsets.fromLTRB(30, 30, 20, 0),
+      
         children: [
-          
-          const Row(
-
-            children: [
-
-              Icon(CupertinoIcons.pencil_outline, size: 28),
-          
-              Gap(10),
-
-              Text("Writer", style: TextStyle(fontSize: 24, fontFamily: 'Inter'),),
-            ],
-          ),
-
-          IconButton(onPressed: (){
-            Navigator.of(context).pop();
-          }, icon: const Icon(CupertinoIcons.xmark, size: 20))
-        ],
-      ),
-
-      titlePadding: const EdgeInsets.fromLTRB(30, 30, 20, 0),
-
-      children: [
-
-        SizedBox(
-
-          height: 480,
-
-          width: 550,
-
-          child: Column(
-
-            children: [
-
-                toolbar(_MarkdownState.page, context),
-
-                  const Gap(8),
-          
-                  Column(
-          
-                    mainAxisAlignment: MainAxisAlignment.center,
-
-                    crossAxisAlignment: CrossAxisAlignment.center,
-          
-                    children: [
-          
-                      Padding(
-
-                        padding: const EdgeInsets.fromLTRB(18, 0, 18, 0),
-
-                        child: Container(
-                        
-                          height: 390,
-                        
-                          decoration: BoxDecoration(
-                            
-                            borderRadius: const BorderRadius.all(Radius.circular(16)),
-                            
-                            // TextBox
-                            color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
-                          ),
-                        
-                          child: Padding(
+      
+          SizedBox(
+      
+            height: 480,
+      
+            width: 550,
+      
+            child: Column(
+      
+              children: [
+      
+                  toolbar(_MarkdownState.page, context),
+      
+                    const Gap(8),
+            
+                    Column(
+            
+                      mainAxisAlignment: MainAxisAlignment.center,
+      
+                      crossAxisAlignment: CrossAxisAlignment.center,
+            
+                      children: [
+            
+                        Padding(
+      
+                          padding: const EdgeInsets.fromLTRB(18, 0, 18, 0),
+      
+                          child: Container(
                           
-                            padding: const EdgeInsets.all(6),
-                            // SCSV
-                            child: Column(
+                            height: 390,
+                          
+                            decoration: BoxDecoration(
                               
-                              mainAxisAlignment: MainAxisAlignment.start,
+                              borderRadius: const BorderRadius.all(Radius.circular(16)),
+                              
+                              // TextBox
+                              color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
+                            ),
+                          
+                            child: Padding(
                             
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                            
-                              children: [ 
-                            
-                                  SingleChildScrollView(
-                        
-                                    scrollDirection: Axis.vertical,
-                        
-                                    child: textField(context,
-                                            
-                                    lines: 9,
-                                            
-                                    onSubmitted: (text) {
-                                      _MarkdownState.page.text += '\n';
-                                    },
-                                    
-                                    onChanged: (text) {
-                                      setState(() {
-                                        _MarkdownState.md = text;
-                                      });
-                                    }, 
-                                    
-                                    controller: _MarkdownState.page, 
-                                    
-                                    focusNode: _MarkdownState._focusNode,
-                                                                  
-                                    color: Colors.transparent,
+                              padding: const EdgeInsets.all(6),
+                              // SCSV
+                              child: Column(
+                                
+                                mainAxisAlignment: MainAxisAlignment.start,
+                              
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                              
+                                children: [ 
+                              
+                                    SingleChildScrollView(
+                          
+                                      scrollDirection: Axis.vertical,
+                          
+                                      child: textField(context,
+                                              
+                                      lines: 9,
+                                              
+                                      onSubmitted: (text) {
+                                        _MarkdownState.page.text += '\n';
+                                      },
+                                      
+                                      onChanged: (text) {
+                                        setState(() {
+                                          _MarkdownState.md = text;
+                                        });
+                                      }, 
+                                      
+                                      controller: _MarkdownState.page, 
+                                      
+                                      focusNode: _MarkdownState._focusNode,
+                                                                    
+                                      color: Colors.transparent,
+                                      ),
                                     ),
-                                  ),
-                              ]
+                                ]
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-            ],
-          ),
-        )
-      ],
+                      ],
+                    ),
+              ],
+            ),
+          )
+        ],
+      );
+    }
     );
   }
 }
