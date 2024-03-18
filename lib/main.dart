@@ -3,8 +3,26 @@ import 'package:ozan/db/db_provider.dart';
 import 'package:ozan/theme/theme_provider.dart';
 import 'package:ozan/views/home.dart';
 import 'package:provider/provider.dart';
+import 'package:window_manager/window_manager.dart';
 
 void main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+  // Must add this line.
+  await windowManager.ensureInitialized();
+
+  WindowOptions windowOptions = const WindowOptions(
+    size: Size(800, 660),
+    center: true,
+    titleBarStyle: TitleBarStyle.normal,
+    title: 'Rofayel Notebook',
+    minimumSize: Size(700, 600),
+  );
+  windowManager.waitUntilReadyToShow(windowOptions, () async {
+    await windowManager.show();
+    await windowManager.focus();
+  });
+
   
   runApp(MultiProvider(providers: [
 
@@ -13,6 +31,8 @@ void main() async {
     ChangeNotifierProvider(create:(context) => ThemeSwitcher()),
 
   ],
+
+
 
   child: const Ozan()));
 }

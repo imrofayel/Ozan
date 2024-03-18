@@ -92,7 +92,7 @@ class _HomeState extends State<Home> {
                 
                 Padding(
                 
-                  padding: const EdgeInsets.only(left: 60, right: 60, bottom: 30),
+                  padding: const EdgeInsets.only(bottom: 30),
                 
                   child: FilledButton(onPressed: (){
                     Navigator.push(context, MaterialPageRoute(builder:(context) => const NotesView()));
