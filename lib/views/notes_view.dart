@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:ozan/db/db_provider.dart';
 import 'package:ozan/db/notes.dart';
-import 'package:ozan/views/markdown.dart';
+import 'package:ozan/views/update.dart';
 import 'package:provider/provider.dart';
 import 'package:popover/popover.dart';
 
@@ -98,7 +98,7 @@ class _NotesViewState extends State<NotesView> {
                                                                   
                                           onTap: (){
                                   
-                                            Navigator.push(context, MaterialPageRoute(builder:(context) => Editor(note: snapshot.data![index])));
+                                            Navigator.push(context, MaterialPageRoute(builder:(context) => UpdateView(note: snapshot.data![index])));
                                           },
                                   
                                           child: Container(

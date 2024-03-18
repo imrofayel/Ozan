@@ -6,6 +6,7 @@ import 'package:ozan/views/configure.dart';
 import 'package:ozan/views/markdown.dart';
 import 'package:ozan/components/sidebar.dart';
 import 'package:ozan/views/notes_view.dart';
+import 'package:ozan/views/update.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
@@ -35,7 +36,12 @@ class _HomeState extends State<Home> {
             
                   const Gap(10),
 
-                  IconButton(onPressed: () => Markdown.files.newFile(context), icon: Icon(CupertinoIcons.add, color: Theme.of(context).colorScheme.tertiary),),
+                  IconButton(onPressed: (){
+                    Markdown.files.newFile(context);
+                    Navigator.push(context, MaterialPageRoute(builder:(context) {
+                      return UpdateView(note: null);
+                    },));
+                  }, icon: Icon(CupertinoIcons.add, color: Theme.of(context).colorScheme.tertiary)),
 
                 ],
               ),
@@ -66,19 +72,19 @@ class _HomeState extends State<Home> {
               ],
             ),
 
-      body: const Row(
+      body: Row(
       
         crossAxisAlignment: CrossAxisAlignment.start,
         
         children: [
           
-          Expanded(flex: 1, child: Sidebar()),
+          const Expanded(flex: 1, child: Sidebar()),
 
-          Expanded(flex: 2, child: SizedBox()),
+          const Expanded(flex: 2, child: SizedBox()),
       
           Expanded(flex: 10, child: Markdown()),
 
-          Expanded(flex: 3, child: SizedBox()),
+          const Expanded(flex: 3, child: SizedBox()),
         ],
       ),
     );

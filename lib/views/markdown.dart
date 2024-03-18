@@ -8,9 +8,13 @@ import 'package:ozan/db/db_provider.dart';
 import 'package:ozan/db/notes.dart';
 import 'package:provider/provider.dart';
 import '../markdown/markdown_style.dart';
+
+// ignore: must_be_immutable
 class Markdown extends StatefulWidget {
 
-  const Markdown({super.key});
+  Markdown({super.key,  this.note});
+
+  NotesModel? note;
 
   static FileService files = FileService(_MarkdownState.page);
 
@@ -24,130 +28,157 @@ class _MarkdownState extends State<Markdown>{
 
   static TextEditingController pageTitle = TextEditingController();
 
-  static FocusNode _focusNode = FocusNode();// Declare the FocusNode
+  static FocusNode _focusNode = FocusNode(); // Declare the FocusNode
 
-  String data = ''; // AI Generated response
+  // ignore: unused_field
+  static String md = 'Open Editor & Capture your thoughts!'; // Markdown Bodata
 
-  static String md = '#### Start writing!!'; // Markdown Box data
-  
   @override
   void initState() {
       page.addListener(() => setState(() {})); 
       _focusNode = FocusNode(); // Assign a FocusNode
+
+      if(widget.note != null){
+
+        setState(() {
+          
+          pageTitle = TextEditingController(text: widget.note!.title);
+
+          page = TextEditingController(text: widget.note!.description);
+
+        });        
+      }
+
+      else{
+        setState(() {
+          
+          page = TextEditingController(text: '');
+
+          pageTitle = TextEditingController(text: 'Creation');
+        });
+      }
+
       super.initState();
 }
 
   @override
   void dispose() {
-      page.dispose(); // Dispose the TextEditingController
-      _focusNode.dispose(); // Dispose the FocusNode
+     // page.dispose(); // Dispose the TextEditingController
+     // _focusNode.dispose(); // Dispose the FocusNode
       super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
 
-    return Row(
+    return Consumer<DatabaseProvider>(builder:(context, value, child){
 
-      children: [
-
-        Expanded(
+      return Scaffold(
         
-          flex: 6,
+        body: Row(
         
-          child: SingleChildScrollView(
-           
-            scrollDirection: Axis.vertical,
-
-            child: Column(
+          children: [
+        
+            Expanded(
             
-              mainAxisAlignment: MainAxisAlignment.center,
+              flex: 6,
             
-              children: [
+              child: SingleChildScrollView(
+               
+                scrollDirection: Axis.vertical,
+        
+                child: Column(
                 
-                Container(
-
-                  decoration: BoxDecoration(
-
-                    color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
-
-                    borderRadius: const BorderRadius.all(Radius.circular(23)),
-
-                    border: Border.all(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.4))
-
-                  ),
-
-                  child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                
+                  children: [
                     
-                    children: [
-                  
-                      Expanded(child: titleBox(context, controller: pageTitle)),
-                  
-                      const Gap(20),
-                                                
-                      const Gap(15),
-                              
-                      FilledButton(onPressed: (){
-                              
-                        showDialog(
-                          context: context, 
-                              
-                          builder: (context){
-                            return Editor();
-                          }
-                        );
-                      }, style: ButtonStyle(
+                    Container(
+        
+                      decoration: BoxDecoration(
+        
+                        color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
+        
+                        borderRadius: const BorderRadius.all(Radius.circular(23)),
+        
+                        border: Border.all(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.4))
+        
+                      ),
+        
+                      child: Row(
                         
-                        shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
-                        
-                        backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.secondary), padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: const MaterialStatePropertyAll(Colors.transparent)), 
+                        children: [
+                      
+                          Expanded(child: titleBox(context, controller: pageTitle)),
+                      
+                          const Gap(20),
+                                                    
+                          const Gap(15),
+                                  
+                          FilledButton(onPressed: (){
+                                  
+                            showDialog(
+                              context: context, 
+                                  
+                              builder: (context){
+                                return Editor(note: widget.note);
+                              }
+                            );
+                          }, style: ButtonStyle(
+                            
+                            shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
+                            
+                            backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.secondary), padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: const MaterialStatePropertyAll(Colors.transparent)), 
+                            
+                            child: Row(
+        
+                              children: [
+        
+                                Icon(CupertinoIcons.pencil_outline, size: 26, color: Theme.of(context).colorScheme.primary),
+        
+                                const Gap(10),
+        
+                                Text('Writer', style: TextStyle(color: Theme.of(context).colorScheme.primary, fontSize: 20, fontFamily: 'Inter'),)
+                              ],
+                            )),
+        
+                          const Gap(15)
+                        ],
+                      ),
+                    ),
+                          
+                    SizedBox(
+                              
+                      height: 450,
+                              // change md to page.text
+                      child: markdown(page.text, 1.62, context)
+                    ),
+                            
+                      const Gap(10),
+                            
+                      Padding(
+                            
+                        padding: const EdgeInsets.fromLTRB(0,0,0,10),
                         
                         child: Row(
-
-                          children: [
-
-                            Icon(CupertinoIcons.pencil_outline, size: 26, color: Theme.of(context).colorScheme.primary),
-
-                            const Gap(10),
-
-                            Text('Writer', style: TextStyle(color: Theme.of(context).colorScheme.primary, fontSize: 20, fontFamily: 'Inter'),)
-                          ],
-                        )),
-
-                      const Gap(15)
-                    ],
-                  ),
-                ),
-                      
-                SizedBox(
-                          
-                  height: 450,
-                          
-                  child: markdown(md, 1.62, context)
-                ),
+                                          
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         
-                  const Gap(10),
+                        children: [
+                                          
+                          textEncode(context, words: page.text.split(' ').length-1, char: page.text.length, lines: page.text.split('\n').length-1),
                         
-                  Padding(
-                        
-                    padding: const EdgeInsets.fromLTRB(0,0,0,10),
-                    
-                    child: Row(
-                                      
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    
-                    children: [
-                                      
-                      textEncode(context, words: page.text.split(' ').length-1, char: page.text.length, lines: page.text.split('\n').length-1),
-                    
-                    ],
-                  ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
+          ],
         ),
-      ],
+      );
+    }
     );
 }
 }
@@ -170,7 +201,7 @@ class Editor extends StatefulWidget {
 
   NotesModel? note;
 
-  Editor({super.key, this.note});
+  Editor({super.key, required this.note});
 
   @override
   State<Editor> createState() => _EditorState();
@@ -182,29 +213,6 @@ class _EditorState extends State<Editor> {
 
   String date = DateTime.now().toString(); 
 
-  String? data, title;
-
-    @override
-  void initState() {
-
-    super.initState();
-
-    if(widget.note != null){
-
-      setState(() {
-        
-        _MarkdownState.pageTitle = TextEditingController(text: widget.note?.title ?? '');
-
-        _MarkdownState.page = TextEditingController(text: widget.note?.description ?? '');
-
-        date = widget.note!.date;
-      });
-
-
-    }
-
-
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -355,7 +363,7 @@ class _EditorState extends State<Editor> {
                                         setState(() {
                                           _MarkdownState.md = text;
                                         });
-                                      }, 
+                                      },
                                       
                                       controller: _MarkdownState.page, 
                                       
