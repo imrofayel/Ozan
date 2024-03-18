@@ -220,41 +220,54 @@ class _EditorState extends State<Editor> {
                 Text("Writer", style: TextStyle(fontSize: 24, fontFamily: 'Inter'),),
               ],
             ),
-            IconButton(
-              
-                onPressed: (){
-            
-                if(_MarkdownState.pageTitle.text.isNotEmpty && _MarkdownState.page.text.isNotEmpty){
-            
-                  value.dbHelper.insert(NotesModel(title: _MarkdownState.pageTitle.text, description: _MarkdownState.page.text, date: date));
-              
-                  value.initDatabase();
-              
-                  value.setLength();
-                  
-                  Navigator.of(context).pop();
-                }
-                        
-                else{
-            
-                  showDialog(context: context, builder:(context) {
-                    
-                    return CupertinoAlertDialog(content: Padding(
-                      
-                      padding: const EdgeInsets.all(5.0),
-                      
-                      child: Text("Please enter title and description", style: TextStyle(fontSize: 24, color: Theme.of(context).colorScheme.tertiary, fontFamily: "Inter", height: 1.4), textAlign: TextAlign.left),
-                      ));
-                    });
-            
-                  }
-            
-                }, 
-              
-              
-                icon: const Icon(CupertinoIcons.square_arrow_down)
 
-                )
+            Row(
+
+              children: [
+
+                IconButton(
+                  
+                    onPressed: (){
+                
+                    if(_MarkdownState.pageTitle.text.isNotEmpty && _MarkdownState.page.text.isNotEmpty){
+                
+                      value.dbHelper.insert(NotesModel(title: _MarkdownState.pageTitle.text, description: _MarkdownState.page.text, date: date));
+                  
+                      value.initDatabase();
+                  
+                      value.setLength();
+                      
+                      Navigator.of(context).pop();
+                    }
+                            
+                    else{
+                
+                      showDialog(context: context, builder:(context) {
+                        
+                        return CupertinoAlertDialog(content: Padding(
+                          
+                          padding: const EdgeInsets.all(5.0),
+                          
+                          child: Text("Please enter title and description", style: TextStyle(fontSize: 24, color: Theme.of(context).colorScheme.tertiary, fontFamily: "Inter", height: 1.4), textAlign: TextAlign.left),
+                          ));
+                        });
+                
+                      }
+                
+                    }, 
+                  
+                  
+                    icon: const Icon(CupertinoIcons.checkmark)
+                
+                    ),
+
+                  const Gap(10),
+
+                  IconButton(onPressed: (){
+                    Navigator.pop(context);
+                  }, icon: const Icon(CupertinoIcons.xmark))
+              ],
+            ),
           ],
         ),
       

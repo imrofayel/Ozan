@@ -37,9 +37,7 @@ class _HomeState extends State<Home> {
 
                   IconButton(onPressed: (){
                     Markdown.files.newFile(context);
-                    // Navigator.push(context, MaterialPageRoute(builder:(context) {
-                    //   return UpdateView(note: null);
-                    // },));
+ 
                   }, icon: Icon(CupertinoIcons.add, color: Theme.of(context).colorScheme.tertiary)),
 
                 ],
@@ -71,19 +69,19 @@ class _HomeState extends State<Home> {
               ],
             ),
 
-      body: Row(
+      body: const Row(
       
         crossAxisAlignment: CrossAxisAlignment.start,
         
         children: [
           
-          const Expanded(flex: 1, child: Sidebar()),
+          Expanded(flex: 1, child: Sidebar()),
 
-          const Expanded(flex: 2, child: SizedBox()),
+          Expanded(flex: 2, child: SizedBox()),
       
           Expanded(flex: 10, child: Markdown()),
 
-          const Expanded(flex: 3, child: SizedBox()),
+          Expanded(flex: 3, child: SizedBox()),
         ],
       ),
     );

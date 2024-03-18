@@ -37,7 +37,7 @@ class FileService {
           _selectedDirectory = metadataDirPath = directory!;
         }
 
-        filePath = '$metadataDirPath\\${title()}.md';
+        filePath = '$metadataDirPath\\${$title.text.isNotEmpty ? $title.text : title()}.md';
 
         final newFile = File(filePath);
         await newFile.writeAsString(content);
@@ -54,6 +54,7 @@ class FileService {
     _selectedFile = null;
     _selectedDirectory = '';
     markdown.clear();
+    $title.clear();
     SnackBarUtils.showSnackbar(
         context, FluentIcons.document_page_bottom_right_24_regular, "New File Loaded, Please write something in editor to see changes!");
   }

@@ -290,7 +290,7 @@ class _EditorState extends State<Editor> {
                 }, 
               
               
-                icon: const Icon(CupertinoIcons.square_arrow_down)
+                icon: const Icon(CupertinoIcons.check_mark)
 
                 )
           ],
