@@ -38,60 +38,11 @@ class _NotesViewState extends State<NotesView> {
 
           leadingWidth: 80,
 
-          leading: IconButton.filled(onPressed: (){}, icon: Icon(FluentIcons.access_time_20_filled, color: Theme.of(context).colorScheme.tertiary), padding: EdgeInsets.zero,
-            
-            style: ButtonStyle(
+          leading: IconButton.filled(onPressed: (){
+            Navigator.pop(context);
+          }, icon: Icon(CupertinoIcons.arrow_left, color: Theme.of(context).colorScheme.tertiary),
           
-              fixedSize: const MaterialStatePropertyAll(Size(55, 35)),
-          
-              backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.secondary),
-            )),
-
-          actions: [
-
-            Padding(
-
-              padding: const EdgeInsets.only(right: 20),
-
-              child: IconButton.filled(
-                
-                icon: Icon(
-
-                  FluentIcons.access_time_24_filled,
-                  
-                  color: Theme.of(context).colorScheme.tertiary, size: 32), 
-                
-                onPressed: (){
-
-                  Provider.of<ThemeSwitcher>(context, listen: false).toggleTheme();
-
-                }, 
-                
-                padding: EdgeInsets.zero, 
-                
-                style: ButtonStyle(
-
-                  backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background),
-                ),
-              ),
-            ),
-          ],
-        ),
-
-        floatingActionButton: IconButton(onPressed: (){
-
-          Navigator.push(context, 
-                    
-          MaterialPageRoute(builder: (context) => Editor()),
-                    
-          );
-          
-        }, 
-        
-        icon: const Icon(FluentIcons.xray_20_regular, size: 40),
-
-        style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), padding: const MaterialStatePropertyAll(EdgeInsets.all(20))),
-        
+          ),
         ),
 
         body: Column(
@@ -229,22 +180,23 @@ class _NotesViewState extends State<NotesView> {
                                                       
                                                           return SizedBox(
                                                       
-                                                            child: FilledButton.icon(onPressed: (){
+                                                            child: IconButton(onPressed: (){
 
-                                                                                                                                                value.dbHelper.delete(snapshot.data![index].id);
+                                                                                                                                                                    value.dbHelper.delete(snapshot.data![index].id);
+                                                            
                                                             value.initDatabase();
                                                             
                                                             value.setLength();
 
                                                             Navigator.pop(context);
 
-                                                            }, icon: const Icon(CupertinoIcons.delete, size: 18), label: Text("Delete", style: TextStyle(color: Colors.red.withOpacity(0.9), fontSize: 16)), style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.tertiary), padding: const MaterialStatePropertyAll(EdgeInsets.fromLTRB(18, 18, 18, 18))))
+                                                            }, icon: Icon(CupertinoIcons.delete, size: 20, color: Theme.of(context).colorScheme.tertiary), style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), padding: const MaterialStatePropertyAll(EdgeInsets.fromLTRB(18, 18, 18, 18))))
                                                       
                                                           );
                                                         },
                                                       );
                                                       
-                                                      }, icon: const Icon(FluentIcons.accessibility_16_filled, size: 28), padding: EdgeInsets.zero);
+                                                      }, icon: const Icon(CupertinoIcons.ellipsis_vertical, size: 24), padding: EdgeInsets.zero);
                                                     }
                                                   ),
 

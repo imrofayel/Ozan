@@ -28,16 +28,15 @@ class _HomeState extends State<Home> {
               child: Row(
                 
                 children: [
-              
-                  Icon(CupertinoIcons.scribble, size: 36, color: Theme.of(context).colorScheme.tertiary),
+
+                IconButton(onPressed: (){
+                     Navigator.push(context, MaterialPageRoute(builder:(context) => const NotesView()));
+                  }, icon: Icon(CupertinoIcons.scribble, size: 36, color: Theme.of(context).colorScheme.tertiary)),
             
                   const Gap(10),
 
                   IconButton(onPressed: () => Markdown.files.newFile(context), icon: Icon(CupertinoIcons.add, color: Theme.of(context).colorScheme.tertiary),),
 
-                  IconButton(onPressed: (){
-                     Navigator.push(context, MaterialPageRoute(builder:(context) => const NotesView()));
-                  }, icon: Icon(CupertinoIcons.book, color: Theme.of(context).colorScheme.tertiary),)
                 ],
               ),
             ),
