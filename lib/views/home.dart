@@ -38,9 +38,9 @@ class _HomeState extends State<Home> {
 
                   IconButton(onPressed: (){
                     Markdown.files.newFile(context);
-                    Navigator.push(context, MaterialPageRoute(builder:(context) {
-                      return UpdateView(note: null);
-                    },));
+                    // Navigator.push(context, MaterialPageRoute(builder:(context) {
+                    //   return UpdateView(note: null);
+                    // },));
                   }, icon: Icon(CupertinoIcons.add, color: Theme.of(context).colorScheme.tertiary)),
 
                 ],

@@ -12,7 +12,7 @@ import '../markdown/markdown_style.dart';
 // ignore: must_be_immutable
 class Markdown extends StatefulWidget {
 
-  Markdown({super.key,  this.note});
+  Markdown({super.key, this.note});
 
   NotesModel? note;
 
@@ -20,6 +20,7 @@ class Markdown extends StatefulWidget {
 
   @override
   State<Markdown> createState() => _MarkdownState();
+
 }
 
 class _MarkdownState extends State<Markdown>{
@@ -49,23 +50,24 @@ class _MarkdownState extends State<Markdown>{
         });        
       }
 
-      else{
-        setState(() {
-          
-          page = TextEditingController(text: page.text);
+      // else{
 
-          pageTitle = TextEditingController(text: 'Creation');
+      //   setState(() {
           
-        });
-      }
+      //     page = TextEditingController(text: page.text);
+
+      //     pageTitle = TextEditingController(text: 'Creation');
+          
+      //   });
+      // }
 
       super.initState();
 }
 
   @override
   void dispose() {
-     // page.dispose(); // Dispose the TextEditingController
-     // _focusNode.dispose(); // Dispose the FocusNode
+     page.dispose(); // Dispose the TextEditingController
+     _focusNode.dispose(); // Dispose the FocusNode
       super.dispose();
   }
 
@@ -202,7 +204,7 @@ class Editor extends StatefulWidget {
 
   NotesModel? note;
 
-  Editor({super.key, required this.note});
+  Editor({super.key, this.note});
 
   @override
   State<Editor> createState() => _EditorState();
@@ -357,7 +359,9 @@ class _EditorState extends State<Editor> {
                                       lines: 9,
                                               
                                       onSubmitted: (text) {
-                                        _MarkdownState.page.text += '\n';
+                                        setState(() {
+                                          _MarkdownState.page.text += '\n';
+                                        });
                                       },
                                       
                                       onChanged: (text) {
