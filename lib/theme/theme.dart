@@ -8,7 +8,7 @@ class Themes {
 
     useMaterial3: true,
 
-    fontFamily: "EB Garamond",
+    fontFamily: 'EB Garamond',
 
     textTheme: const TextTheme(
 
@@ -20,13 +20,15 @@ class Themes {
 
     ),
 
+    textSelectionTheme: const TextSelectionThemeData(cursorColor: Color.fromRGBO(61, 57, 41, 1), selectionColor: Color.fromRGBO(233, 231, 227, 1)),
+
     colorScheme: ColorScheme.fromSeed(
 
       brightness: Brightness.light,
 
       seedColor: Colors.brown,
 
-      background: const Color.fromRGBO(243, 242, 236, 1),
+      background: const Color.fromRGBO(249, 249, 249, 1),
 
       primary: const Color.fromRGBO(248, 248, 247, 1),
 
@@ -36,7 +38,7 @@ class Themes {
 
     ),
 
-    appBarTheme:  const AppBarTheme(backgroundColor: Color.fromRGBO(243, 242, 236, 1)),
+    appBarTheme:  const AppBarTheme(backgroundColor: Colors.transparent),
 
     tooltipTheme: TooltipThemeData(
 
@@ -111,6 +113,8 @@ class Themes {
       bodySmall: TextStyle(color: Color.fromRGBO(192, 212, 190, 1)),
 
     ),
+
+    textSelectionTheme: const TextSelectionThemeData(cursorColor: Color.fromRGBO(192, 212, 190, 1), selectionColor: Color.fromRGBO(44, 44, 41, 1)),
 
     colorScheme: ColorScheme.fromSeed(
 

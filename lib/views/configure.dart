@@ -60,7 +60,7 @@ class _InfoState extends State<Info> {
                       
               Gap(6),
                       
-              Text("Rofayel Notebook v4.0 (Grok)", style: TextStyle(fontSize: 20, fontFamily: 'Inter')),
+              Text("Rofayel Notebook v4.0", style: TextStyle(fontSize: 20, fontFamily: 'Inter')),
             ],
           ),
 
@@ -68,13 +68,35 @@ class _InfoState extends State<Info> {
 
           SizedBox(
 
-            width: 500,
+            width: 400,
 
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: MarkdownBody(data: "simple, elegant, enjoyable", styleSheet: MarkdownStyleSheet(p: const TextStyle(fontSize: 33, height: 2, fontStyle: FontStyle.italic))),
+
+              child: Column(
+
+                crossAxisAlignment: CrossAxisAlignment.start,
+
+                children: [
+
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: MarkdownBody(data: "simple, elegant, enjoyable", styleSheet: MarkdownStyleSheet(p: const TextStyle(fontSize: 38, height: 2, fontStyle: FontStyle.italic))),
+                  ),
+
+                  const Gap(14),
+
+                  RichText(
+
+                    text: TextSpan(
+
+                      children: [
+
+                        TextSpan(text: 'by Naveed azhar', style: TextStyle(fontSize: 30, fontStyle: FontStyle.italic, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'EB Garamond', fontWeight: FontWeight.w500)),
+                      ]
+                    )
+                  ),
+                ],
               )),
           ),
         ],

@@ -187,7 +187,7 @@ String greet(){
     text = 'Good Morning!';
   }
 
-  if(DateTime.now().hour > 11 && DateTime.now().hour <= 16){
+  else if(DateTime.now().hour > 11 && DateTime.now().hour <= 16){
     text = 'Good Afternoon!';
   }
 

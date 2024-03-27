@@ -48,7 +48,7 @@ class _SidebarState extends State<Sidebar> {
 
                 const Gap(14),
 
-                button(() => Markdown.files.saveContent(context), FluentIcons.arrow_down_32_filled, context, tooltip: "Save"),
+                button(() => Markdown.files.saveContent(context), FluentIcons.arrow_down_32_filled, context, tooltip: "Export"),
 
                 ],
               )

@@ -48,7 +48,9 @@ class _NotesViewState extends State<NotesView> {
           
           children: [
 
-              Text(greet(), textScaler: const TextScaler.linear(2.7),),
+              Text(greet(), textScaler: const TextScaler.linear(2.7)),
+
+              const Gap(30),
             
               FutureBuilder(
         
@@ -88,7 +90,9 @@ class _NotesViewState extends State<NotesView> {
                                       
                                         children: [
                                       
-                                          Text(snapshot.data![index].date, textScaler: const TextScaler.linear(1.5),),
+                                          Text(snapshot.data![index].date, textScaler: const TextScaler.linear(1.6)),
+
+                                          const Gap(10),
                                       
                                           InkWell(
                                   

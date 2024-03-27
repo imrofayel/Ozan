@@ -128,7 +128,7 @@ void applyCodeFormatting(TextEditingController controller, context) {
     try {
 
     String newText =
-        '${text.substring(0, selection.start)}\n```\n${text.substring(selection.start, selection.end)}\n```\n${text.substring(selection.end)}';
+        '${text.substring(0, selection.start)}\n```Text\n${text.substring(selection.start, selection.end).isNotEmpty ? text.substring(selection.start, selection.end) : 'Write your code here...'}\n```\n${text.substring(selection.end)}';
 
     controller.value = TextEditingValue(
       text: newText,
@@ -428,7 +428,7 @@ void linkDialog(context, TextEditingController controller){
 
                       hintText: " Title",
 
-                      hintStyle: TextStyle(fontWeight: FontWeight.w500, color: Theme.of(context).colorScheme.tertiary),
+                      hintStyle: TextStyle(fontWeight: FontWeight.w500, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'),
           
                       constraints: const BoxConstraints(maxHeight: 80, maxWidth: 250),
                          
@@ -447,7 +447,7 @@ void linkDialog(context, TextEditingController controller){
                       focusedBorder: OutlineInputBorder(borderSide:BorderSide.none, borderRadius: BorderRadius.circular(20))
                     ),
                   
-                    style: const TextStyle(fontSize: 19),
+                    style: const TextStyle(fontSize: 19, fontFamily: 'Inter'),
                   ),
               
                   const Gap(14),
@@ -478,7 +478,7 @@ void linkDialog(context, TextEditingController controller){
                       focusedBorder: OutlineInputBorder(borderSide:BorderSide.none, borderRadius: BorderRadius.circular(20))
                     ),
                   
-                    style: const TextStyle(fontSize: 19),
+                    style: const TextStyle(fontSize: 19, fontFamily: 'Inter'),
                   ),
                 ],
               ),
@@ -506,8 +506,9 @@ void linkDialog(context, TextEditingController controller){
                         );
                       } catch (e) {
                         // Textfield not selected
-                      }  
+                      }
                 }
+                Navigator.pop(context);
               },
               
               style: const ButtonStyle(fixedSize: MaterialStatePropertyAll(Size(50, 50)), shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30))))),

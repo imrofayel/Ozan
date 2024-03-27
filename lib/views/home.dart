@@ -29,8 +29,7 @@ class _HomeState extends State<Home> {
                 
                 children: [
 
-                IconButton(onPressed: (){
-                  }, icon: Icon(CupertinoIcons.scribble, size: 36, color: Theme.of(context).colorScheme.tertiary)),
+                Icon(CupertinoIcons.scribble, size: 36, color: Theme.of(context).colorScheme.tertiary),
             
                   const Gap(10),
 
@@ -107,7 +106,6 @@ class _HomeState extends State<Home> {
                   shadowColor: const MaterialStatePropertyAll(Colors.transparent)
                   
                   ),
-                  
                   
                   child: Text('Saved', style: TextStyle(fontSize: 20, fontFamily: 'Inter', color: Theme.of(context).colorScheme.tertiary, fontWeight: FontWeight.w400))),
                 ),

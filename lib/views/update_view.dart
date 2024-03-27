@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
+import 'package:ozan/components/snackbar.dart';
 import 'package:ozan/database/file_service.dart';
 import 'package:ozan/components/components.dart';
 import 'package:ozan/components/toolbar.dart';
@@ -32,7 +33,7 @@ class _UpdateState extends State<Update>{
   static FocusNode _focusNode = FocusNode(); // Declare the FocusNode
 
   // ignore: unused_field
-  static String md = 'Open Editor & Capture your thoughts!'; // Markdown Bodata
+  static String md = 'Capture your thoughts!'; // Markdown Bodata
 
   @override
   void initState() {
@@ -51,17 +52,6 @@ class _UpdateState extends State<Update>{
 
         });        
       }
-
-      // else{
-
-      //   setState(() {
-          
-      //     page = TextEditingController(text: page.text);
-
-      //     pageTitle = TextEditingController(text: 'Creation');
-          
-      //   });
-      // }
 
       super.initState();
 }
@@ -248,15 +238,25 @@ class _EditorState extends State<Editor> {
               ],
             ),
 
-            FilledButton.tonal(
+            FilledButton(
+
+                style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary.withOpacity(0.8)), padding: const MaterialStatePropertyAll(EdgeInsets.all(16)),
+                    
+                side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6))),
+
+                overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+
+                shadowColor: const MaterialStatePropertyAll(Colors.transparent)
+                    
+                ),
               
                 onPressed: (){
             
-                if(_UpdateState.pageTitle.text.isNotEmpty && _UpdateState.page.text.isNotEmpty){
+                if(_UpdateState.page.text.isNotEmpty){
             
                 if(widget.note != null){
             
-                value.dbHelper.update(NotesModel(title: _UpdateState.pageTitle.text, description: _UpdateState.page.text, date: date, id: widget.note!.id));
+                value.dbHelper.update(NotesModel(title:  _UpdateState.pageTitle.text.isNotEmpty ? _UpdateState.pageTitle.text : 'Untitled', description: _UpdateState.page.text, date: date, id: widget.note!.id));
               
                 value.initDatabase();
               
@@ -275,11 +275,15 @@ class _EditorState extends State<Editor> {
                 Navigator.of(context).pop();
             
                 }
+
+                else{
+                  SnackBarUtils.showSnackbar(context, CupertinoIcons.pencil_slash, "Please enter title and description");
+                }
             
                 }, 
               
               
-                child: const Text('Save', style: TextStyle(fontFamily: 'Inter', fontSize: 18))
+                child: Text('Update', style: TextStyle(fontFamily: 'Inter', fontSize: 18, fontWeight: FontWeight.w500, color: Theme.of(context).colorScheme.tertiary))
 
                 )
           ],

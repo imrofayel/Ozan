@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
+import 'package:ozan/components/snackbar.dart';
 import 'package:ozan/database/file_service.dart';
 import 'package:ozan/components/components.dart';
 import 'package:ozan/components/toolbar.dart';
@@ -225,14 +226,16 @@ class _EditorState extends State<Editor> {
 
               children: [
 
-                FilledButton.tonal(
+                FilledButton(
 
-                    style: const ButtonStyle(
-                      padding: MaterialStatePropertyAll(EdgeInsets.all(15)),
+                    style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary.withOpacity(0.8)), padding: const MaterialStatePropertyAll(EdgeInsets.all(16)),
+                    
+                    side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6))),
 
-                      overlayColor: MaterialStatePropertyAll(Colors.transparent),
+                    overlayColor: const MaterialStatePropertyAll(Colors.transparent),
 
-                      shadowColor: MaterialStatePropertyAll(Colors.transparent)
+                    shadowColor: const MaterialStatePropertyAll(Colors.transparent)
+                    
                     ),
                   
                     onPressed: (){
@@ -246,18 +249,21 @@ class _EditorState extends State<Editor> {
                       value.setLength();
                       
                       Navigator.of(context).pop();
-                    }
+                      
+                    } else{
+                      SnackBarUtils.showSnackbar(context, CupertinoIcons.pencil_slash, "Please enter title and description");
+                }
                     }, 
                   
-                    child: const Text('Save', style: TextStyle(fontFamily: 'Inter', fontSize: 18))
+                    child: Text('Save', style: TextStyle(fontFamily: 'Inter', fontSize: 18, fontWeight: FontWeight.w500, color: Theme.of(context).colorScheme.tertiary))
                 
                     ),
 
-                  const Gap(10),
+                  const Gap(8),
 
                   IconButton(onPressed: (){
                     Navigator.pop(context);
-                  }, icon: const Icon(CupertinoIcons.xmark))
+                  }, icon: const Icon(CupertinoIcons.xmark, size: 20, ))
               ],
             ),
           ],

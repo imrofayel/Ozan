@@ -18,6 +18,8 @@ Markdown markdown(String data, double scale, context){
     
       styleSheet: MarkdownStyleSheet(
 
+          a: const TextStyle(color: Color.fromARGB(255, 20, 53, 186), height: 1.6),
+
           codeblockDecoration: BoxDecoration(color: Theme.of(context).colorScheme.primary.withOpacity(0.8), borderRadius: BorderRadius.circular(20)),
 
           p: TextStyle(color: Theme.of(context).colorScheme.tertiary, height: 1.6),
@@ -30,7 +32,7 @@ Markdown markdown(String data, double scale, context){
 
           blockquoteDecoration: BoxDecoration(
             
-            color:  Theme.of(context).colorScheme.primary,
+            color:  Theme.of(context).colorScheme.primary.withOpacity(0.8),
 
             borderRadius: const BorderRadius.all(Radius.circular(16)),
           ),
