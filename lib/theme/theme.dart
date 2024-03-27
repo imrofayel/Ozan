@@ -12,33 +12,33 @@ class Themes {
 
     textTheme: const TextTheme(
 
-      bodyMedium: TextStyle(color: Color.fromRGBO(43, 43, 43, 1)),
+      bodyMedium: TextStyle(color: Color.fromARGB(255, 16, 16, 16)),
       
-      bodyLarge: TextStyle(color: Color.fromRGBO(43, 43, 43, 1)),
+      bodyLarge: TextStyle(color:  Color.fromARGB(255, 16, 16, 16)),
 
-      bodySmall: TextStyle(color: Color.fromRGBO(43, 43, 43, 1)),
+      bodySmall: TextStyle(color:  Color.fromARGB(255, 16, 16, 16))
 
     ),
 
-    textSelectionTheme: const TextSelectionThemeData(cursorColor: Color.fromRGBO(61, 57, 41, 1), selectionColor: Color.fromRGBO(233, 231, 227, 1)),
+    textSelectionTheme: const TextSelectionThemeData(cursorColor: Color.fromARGB(255, 16, 16, 16), selectionColor: Color.fromRGBO(233, 231, 227, 1)),
 
     colorScheme: ColorScheme.fromSeed(
 
       brightness: Brightness.light,
 
-      seedColor: Colors.brown,
+      seedColor: Colors.white,
 
       background: const Color.fromRGBO(249, 249, 249, 1),
 
-      primary: const Color.fromRGBO(248, 248, 247, 1),
+      secondary: const Color.fromRGBO(243, 243, 243, 1),
 
-      tertiary: const Color.fromRGBO(61, 57, 41, 1),
+      primary: const Color.fromARGB(255, 246, 246, 245),
 
-      secondary: const Color.fromRGBO(61, 57, 41, 1)
+      tertiary: const Color.fromARGB(255, 16, 16, 16),
 
     ),
 
-    appBarTheme:  const AppBarTheme(backgroundColor: Colors.transparent),
+    appBarTheme:  const AppBarTheme(backgroundColor: Colors.transparent, surfaceTintColor: Colors.transparent),
 
     tooltipTheme: TooltipThemeData(
 
@@ -48,7 +48,7 @@ class Themes {
 
       decoration: BoxDecoration(
 
-        color: const Color.fromARGB(255, 236, 236, 236),
+        color: const Color.fromARGB(255, 246, 246, 245),
         
         borderRadius: BorderRadius.circular(20)
       ),
@@ -188,3 +188,5 @@ class Themes {
     )
   );
 }
+
+

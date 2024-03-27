@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:ozan/components/snackbar.dart';
@@ -73,28 +74,32 @@ class _MarkdownState extends State<Markdown>{
                   mainAxisAlignment: MainAxisAlignment.center,
                 
                   children: [
+
+                    const Gap(12),
                     
                     Container(
-        
+
+                      alignment: Alignment.center,
+                      
+                      padding: const EdgeInsets.only(right: 14),
+
                       decoration: BoxDecoration(
         
-                        color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
+                        color: Theme.of(context).colorScheme.primary,
         
                         borderRadius: const BorderRadius.all(Radius.circular(23)),
         
-                        border: Border.all(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.4))
+                        border: Border.all(width: 1, color: Theme.of(context).colorScheme.secondary)
         
                       ),
         
                       child: Row(
+
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         
                         children: [
                       
                           Expanded(child: titleBox(context, controller: pageTitle)),
-                      
-                          const Gap(20),
-                                                    
-                          const Gap(15),
                                   
                           FilledButton(onPressed: (){
                                   
@@ -107,9 +112,9 @@ class _MarkdownState extends State<Markdown>{
                             );
                           }, style: ButtonStyle(
                             
-                            shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
+                            shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(18), side: BorderSide.none)),
                             
-                            backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.secondary), padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: const MaterialStatePropertyAll(Colors.transparent)), 
+                            backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.tertiary), padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: const MaterialStatePropertyAll(Colors.transparent)), 
                             
                             child: Row(
         
@@ -122,8 +127,6 @@ class _MarkdownState extends State<Markdown>{
                                 Text('Writer', style: TextStyle(color: Theme.of(context).colorScheme.primary, fontSize: 20, fontFamily: 'Inter'),)
                               ],
                             )),
-        
-                          const Gap(15)
                         ],
                       ),
                     ),
@@ -228,9 +231,9 @@ class _EditorState extends State<Editor> {
 
                 FilledButton(
 
-                    style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary.withOpacity(0.8)), padding: const MaterialStatePropertyAll(EdgeInsets.all(16)),
+                    style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), padding: const MaterialStatePropertyAll(EdgeInsets.all(16)),
                     
-                    side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6))),
+                    side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.secondary)),
 
                     overlayColor: const MaterialStatePropertyAll(Colors.transparent),
 
@@ -255,7 +258,7 @@ class _EditorState extends State<Editor> {
                 }
                     }, 
                   
-                    child: Text('Save', style: TextStyle(fontFamily: 'Inter', fontSize: 18, fontWeight: FontWeight.w500, color: Theme.of(context).colorScheme.tertiary))
+                    child: Text('Save', style: TextStyle(fontFamily: 'Inter', fontSize: 20, fontWeight: FontWeight.w500, color: Theme.of(context).colorScheme.tertiary))
                 
                     ),
 

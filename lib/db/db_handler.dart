@@ -92,14 +92,21 @@ initDatabase() async {
   }
 
 
-  // Future<void> resetDatabase() async {
-  //   final dbClient = await db;
-  //   await dbClient!.close();
+  Future<List<NotesModel>> searchNotes(String key) async {
+    final Database? dbClient = await db;
+    final List<Map<String, dynamic>> maps = await dbClient!.query(
+      'notes',
+      where: "title LIKE ? OR description LIKE ?",
+      whereArgs: ['%$key%', '%$key%'],
+    );
 
-  //   final databasesPath = await getDatabasesPath();
-  //   final path = join(databasesPath, 'your_database.db');
-
-  //   await deleteDatabase(path);
-  //   _db = null;
-  // }
+    return List.generate(maps.length, (i) {
+      return NotesModel(
+        id: maps[i]['id'],
+        title: maps[i]['title'],
+        description: maps[i]['description'],
+        date: maps[i]['date']
+      );
+    });
+  }
 }

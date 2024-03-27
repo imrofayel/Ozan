@@ -315,7 +315,7 @@ void tableDialog(context, TextEditingController controller){
                       focusedBorder: OutlineInputBorder(borderSide:BorderSide.none, borderRadius: BorderRadius.circular(20))
                     ),
                   
-                    style: const TextStyle(fontSize: 19),
+                    style: const TextStyle(fontSize: 19, fontFamily: "Inter"),
                   ),
               
                   const Gap(10),
@@ -346,7 +346,7 @@ void tableDialog(context, TextEditingController controller){
                       focusedBorder: OutlineInputBorder(borderSide:BorderSide.none, borderRadius: BorderRadius.circular(20))
                     ),
                   
-                    style: const TextStyle(fontSize: 19),
+                    style: const TextStyle(fontSize: 19, fontFamily: "Inter"),
                   ),
                 ],
               ),
