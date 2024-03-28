@@ -206,7 +206,6 @@ class _EditorState extends State<Editor> {
   
   String date = DateFormat('d MMM, yy').format(DateTime.now()); 
 
-
   @override
   Widget build(BuildContext context) {
 

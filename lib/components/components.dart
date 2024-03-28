@@ -17,12 +17,18 @@ IconButton button(void Function()? function, IconData icon, context, {Color? tex
     
       style: ButtonStyle(
 
-        iconSize: const MaterialStatePropertyAll(24),
+        iconSize: const MaterialStatePropertyAll(22),
 
-        iconColor: MaterialStatePropertyAll(textColor ?? Theme.of(context).colorScheme.tertiary),
+        padding: const MaterialStatePropertyAll(EdgeInsets.all(8)),
 
-        overlayColor: MaterialStatePropertyAll(overlayColor ?? Colors.transparent),
-      )
+        backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary),
+
+        iconColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.tertiary.withOpacity(0.6)),
+
+        overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+
+        side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)
+      ))
   );
 }
 
@@ -69,36 +75,6 @@ TextField textField(context, {int? lines = 1, required void Function(String)? on
   );
 }
 
-FilledButton tonalButton(context, {required void Function()? fn, required String text, required IconData icon, Size? size, double? textSize, double? iconSize}){
-
-  return FilledButton.tonal(onPressed: fn,
-
-    style: ButtonStyle(
-
-      fixedSize: MaterialStatePropertyAll(size ?? const Size(175, 50)),
-
-      backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary),
-
-      shadowColor: const MaterialStatePropertyAll(Colors.transparent),
-
-      overlayColor: const MaterialStatePropertyAll(Colors.white)
-
-    ),
-    
-    child: Row(
-
-      children: [
-        
-        Icon(icon, size: iconSize?? 25, color: Theme.of(context).colorScheme.tertiary),
-    
-        const Gap(8),
-        
-        Text(text, style: TextStyle(fontSize: textSize ?? 18, fontWeight: FontWeight.w400, color: Theme.of(context).colorScheme.tertiary)),
-      ],
-    ),
-  );
-}
-
 void copyToClipboard(context, String text){
 
       Clipboard.setData(ClipboardData(text: text));
@@ -121,9 +97,9 @@ SingleChildScrollView textEncode(context, {required int words, required int char
     
         FilledButton(onPressed: (){}, style: ButtonStyle(
           
-          side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.secondary)),
+          side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
 
-          padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("$words words", style: TextStyle(fontSize: 17, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
+          padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("$words words", style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
     
         const Gap(9),
     
@@ -131,7 +107,7 @@ SingleChildScrollView textEncode(context, {required int words, required int char
           
           side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.secondary)),
 
-          padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("$char characters", style: TextStyle(fontSize: 17, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
+          padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("$char characters", style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
     
         const Gap(9),
     
@@ -139,7 +115,7 @@ SingleChildScrollView textEncode(context, {required int words, required int char
 
           side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.secondary)),
 
-          padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("$lines lines", style: TextStyle(fontSize: 17, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
+          padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("$lines lines", style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
       ],
     ),
   );

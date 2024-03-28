@@ -1,4 +1,4 @@
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:ozan/views/markdown.dart';
@@ -44,11 +44,11 @@ class _SidebarState extends State<Sidebar> {
 
                 children: [
 
-                button(() => Markdown.files.loadFile(context), FluentIcons.attach_32_filled, context, tooltip: "Open"),
+                button(() => Markdown.files.loadFile(context), CupertinoIcons.control, context, tooltip: "Open"),
 
                 const Gap(14),
 
-                button(() => Markdown.files.saveContent(context), FluentIcons.arrow_down_32_filled, context, tooltip: "Export"),
+                button(() => Markdown.files.saveContent(context), CupertinoIcons.down_arrow, context, tooltip: "Export"),
 
                 ],
               )

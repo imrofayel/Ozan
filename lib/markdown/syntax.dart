@@ -20,7 +20,7 @@ class CodeElementBuilder extends MarkdownElementBuilder {
     var language = '';
 
     if(element.attributes['class'] == null){
-      return Text(element.textContent.toString(), textScaler: const TextScaler.linear(1.3), style: TextStyle(backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.8), color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Roboto Mono'));
+      return Text(element.textContent.toString(), textScaler: const TextScaler.linear(1.3), style: TextStyle(backgroundColor: Theme.of(context).colorScheme.primary, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.7), fontFamily: 'Roboto Mono'));
     }
 
     else{
@@ -56,7 +56,11 @@ class CodeElementBuilder extends MarkdownElementBuilder {
               
             children: [
               
-            FilledButton(onPressed: (){}, style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.all(15)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background), foregroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.tertiary)), child: Text(lang, textScaler: const TextScaler.linear(1.3), style: const TextStyle(fontFamily: 'Inter'))),
+        FilledButton(onPressed: (){}, style: ButtonStyle(
+          
+          side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
+
+          padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text(lang, style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
               
             IconButton(onPressed: (){
               copyToClipboard(context, element.textContent);
@@ -82,9 +86,9 @@ class CodeElementBuilder extends MarkdownElementBuilder {
             ? arduinoLightTheme
             : nordTheme,
         
-        padding: const EdgeInsets.fromLTRB(24, 10, 24, 10),
+        padding: const EdgeInsets.fromLTRB(24, 10, 10, 10),
     
-        textStyle: const TextStyle(fontSize: 17, fontFamily: "Roboto Mono", height: 2),
+        textStyle: const TextStyle(fontSize: 16, fontFamily: "Roboto Mono", height: 1),
         ),
       ]
     );

@@ -133,7 +133,7 @@ class _MarkdownState extends State<Markdown>{
                           
                     SizedBox(
                               
-                      height: 450,
+                      height: 430,
                               // change md to page.text
                       child: markdown(page.text, 1.62, context)
                     ),
@@ -151,7 +151,6 @@ class _MarkdownState extends State<Markdown>{
                         children: [
                                           
                           textEncode(context, words: page.text.split(' ').length-1, char: page.text.length, lines: page.text.split('\n').length-1),
-                        
                         ],
                       ),
                     ),

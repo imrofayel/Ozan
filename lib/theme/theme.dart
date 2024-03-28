@@ -28,11 +28,11 @@ class Themes {
 
       seedColor: Colors.white,
 
-      background: const Color.fromRGBO(249, 249, 249, 1),
+      background: const Color.fromRGBO(255, 255, 255, 1),
 
       secondary: const Color.fromRGBO(243, 243, 243, 1),
 
-      primary: const Color.fromARGB(255, 246, 246, 245),
+      primary: const Color.fromRGBO(249, 249, 252, 1),
 
       tertiary: const Color.fromARGB(255, 16, 16, 16),
 
@@ -48,7 +48,7 @@ class Themes {
 
       decoration: BoxDecoration(
 
-        color: const Color.fromARGB(255, 246, 246, 245),
+        color: const Color.fromRGBO(249, 249, 252, 1),
         
         borderRadius: BorderRadius.circular(20)
       ),

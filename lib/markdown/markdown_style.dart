@@ -20,7 +20,7 @@ Markdown markdown(String data, double scale, context){
 
           a: const TextStyle(color: Color.fromARGB(255, 20, 53, 186), height: 1.6),
 
-          codeblockDecoration: BoxDecoration(color: Theme.of(context).colorScheme.primary.withOpacity(0.8), borderRadius: BorderRadius.circular(20)),
+          codeblockDecoration: BoxDecoration(color: Theme.of(context).colorScheme.primary, borderRadius: BorderRadius.circular(20)),
 
           p: TextStyle(color: Theme.of(context).colorScheme.tertiary, height: 1.6),
 
