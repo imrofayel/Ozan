@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:popover/popover.dart';
 import 'package:gap/gap.dart';
-import 'package:ozan/components/components.dart';
 import 'package:ozan/db/db_provider.dart';
 import 'package:ozan/db/notes.dart';
+import 'package:ozan/markdown/markdown_style.dart';
 import 'package:ozan/views/update_view.dart';
 import 'package:provider/provider.dart';
-import 'package:popover/popover.dart';
 
 
 class NotesView extends StatefulWidget {
@@ -39,7 +40,9 @@ class _NotesViewState extends State<NotesView> {
 
           leading: IconButton.filled(onPressed: (){
             Navigator.pop(context);
-          }, icon: Icon(CupertinoIcons.arrow_left, color: Theme.of(context).colorScheme.tertiary),
+          }, 
+          
+          icon: Icon(CupertinoIcons.arrow_left, size: 22, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6)), style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)), overlayColor: const MaterialStatePropertyAll(Colors.transparent)),
           
           ),
         ),
@@ -47,10 +50,6 @@ class _NotesViewState extends State<NotesView> {
         body: Column(
           
           children: [
-
-              Text(greet(), textScaler: const TextScaler.linear(2.7)),
-
-              const Gap(30),
             
               FutureBuilder(
         
@@ -61,184 +60,160 @@ class _NotesViewState extends State<NotesView> {
                   if(snapshot.hasData && snapshot.data!.isNotEmpty){
                     
                     return Expanded(
-                                                      
+
                       child: Column(
-        
+                      
                         children: [
-        
+                      
+                          FilledButton(onPressed: (){}, style: ButtonStyle(
+                            
+                            side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
+                      
+                            padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text('${snapshot.data!.length} entries', style: TextStyle(fontSize: 17, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
+                          
+                          const Gap(14),
+                      
                           Expanded(
-        
-                            child: Row(
+                                                    
+                            child: Padding(
 
-                              children: [
+                              padding: const EdgeInsets.all(12),
 
-                                const Expanded(flex: 2,child: SizedBox()),
-
-                                Expanded(
+                              child: GridView.builder(
+                                                        
+                                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 400),
+                              
+                                scrollDirection: Axis.vertical,
+                                              
+                                itemCount: snapshot.data!.length,
                                 
-                                  flex: 7,
-                                
-                                  child: ListView.builder(
+                                itemBuilder:(context, index) {
                                   
-                                    scrollDirection: Axis.vertical,
-
-                                    itemCount: snapshot.data!.length,
-                                    
-                                    itemBuilder:(context, index) {
+                                  return InkWell(
+                              
+                                    overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+                                                                            
+                                    highlightColor: Colors.transparent,
+                                                                            
+                                    splashFactory: null,
+                              
+                                    onTap: (){
                                       
-                                      return Column(
+                                      Navigator.push(context, MaterialPageRoute(builder:(context){
+                                                  
+                                        return Scaffold(
+                                                      
+                                          body: Row(
+                                                      
+                                            children: [
+                                                      
+                                              Expanded(flex: 2, child: SizedBox(
+                                                      
+                                                child: Padding(
+                                                      
+                                                  padding: const EdgeInsets.all(20.0),
+                                                      
+                                                  child: Column(
+                                                                
+                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                                
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                                
+                                                  children: [
+                                                    
+                                                    IconButton(onPressed: (){
+                                                      
+                                                      Navigator.pop(context);
+                                                                      
+                                                    }, 
+                                                                    
+                                                    icon: Icon(CupertinoIcons.arrow_left, size: 22, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6)), style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)), overlayColor: const MaterialStatePropertyAll(Colors.transparent))),
+                                                                    
+                                                  ],
+                                                ),
+                                              ),
+                                            )),
+                                                      
+                                            Expanded(flex: 10, child: Padding(
+                                                      
+                                              padding: const EdgeInsets.all(26),
+                                                      
+                                              child: Update(note: snapshot.data![index]),
+                                            )),
+                                                      
+                                            const Expanded(flex: 2, child: SizedBox()),
+                                                      
+                                          ],
+                                        ),
+                                      );
+                                    }));
+                                  },
+                              
+                                    child: Container(
+                                      
+                                      decoration: BoxDecoration(
+                                        color: Theme.of(context).colorScheme.primary,
+                                                              
+                                        border: Border.all(color: Theme.of(context).colorScheme.secondary),
+                                                              
+                                        borderRadius: BorderRadius.circular(14)
+                                      ),
+                                                              
+                                      margin: const EdgeInsets.all(8),
+                                                              
+                                      padding: const EdgeInsets.all(8),
+                                                            
+                                      child: Column(
+                                      
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                       
                                         children: [
                                       
-                                          Text(snapshot.data![index].date, textScaler: const TextScaler.linear(1.6)),
-
-                                          const Gap(10),
-                                      
-                                          InkWell(
-                                  
-                                          overlayColor: const MaterialStatePropertyAll(Colors.transparent),
-                                  
-                                          highlightColor: Colors.transparent,
-                                  
-                                          splashFactory: null,
-                                                                  
-                                          onTap: (){
-                                  
-                                            Navigator.push(context, MaterialPageRoute(builder:(context){
-                                              
-                                              return Scaffold(
-
-                                                    body: Row(
-
-                                                      children: [
-
-                                                        Expanded(flex: 3, child: SizedBox(
-
-                                                          child: Padding(
-
-                                                            padding: const EdgeInsets.all(20.0),
-
-                                                            child: Column(
-                                                            
-                                                              mainAxisAlignment: MainAxisAlignment.start,
-                                                            
-                                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                                            
-                                                              children: [
-                                                                IconButton(onPressed: (){
-                                                                  Navigator.pop(context);
-                                                                  
-                                                                }, icon: const Icon(CupertinoIcons.arrow_left)),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        )),
-
-                                                        Expanded(flex: 8, child: Padding(
-
-                                                          padding: const EdgeInsets.all(26),
-
-                                                          child: Update(note: snapshot.data![index]),
-                                                        )),
-
-                                                        const Expanded(flex: 3, child: SizedBox()),
-
-                                                      ],
-                                                    ),
-                                                  );
-                                            }));
-                                          },
-                                  
-                                          child: Container(
-                                            
-                                              margin: const EdgeInsets.fromLTRB(14, 14, 14, 20),
-                                                                
-                                              padding: const EdgeInsets.all(20),
-                                            
-                                              decoration: BoxDecoration(
-                                            
-                                                color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
-                                            
-                                                border: Border.all(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.4)),
-                                            
-                                                borderRadius: BorderRadius.circular(23)
-                                              ),
-                                                                
-                                              child: Column(
-                                                              
-                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                              
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                              
-                                                children: [
-                                                              
-                                                  Row(
-                                                              
-                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                              
-                                                    children: [
-                                                      
-                                                      Text(snapshot.data![index].title, textScaler: const TextScaler.linear(2)),
-                                              
-                                                      Builder(
-                                                                            
-                                                        builder: (context) {
-                                                                                              
-                                                          return IconButton(onPressed: (){
-                                                          
-                                                            showPopover(context: context, 
-                                                                                              
-                                                            backgroundColor: Colors.transparent,
-                                                                                              
-                                                            direction: PopoverDirection.left,
-                                                                                              
-                                                            shadow: List.empty(),
-                                                                                              
-                                                            arrowWidth: 0, arrowHeight: 0,
-                                                            
-                                                            bodyBuilder:(context) {
-                                                          
-                                                              return SizedBox(
-                                                          
-                                                                child: IconButton(onPressed: (){
-                                                                                              
-                                                                value.dbHelper.delete(snapshot.data![index].id);
-                                                                
-                                                                value.initDatabase();
-                                                                
-                                                                value.setLength();
-                                                                                              
-                                                                Navigator.pop(context);
-                                                                                              
-                                                                }, icon: Icon(CupertinoIcons.delete, size: 20, color: Theme.of(context).colorScheme.tertiary), style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), padding: const MaterialStatePropertyAll(EdgeInsets.fromLTRB(18, 18, 18, 18))))
-                                                          
-                                                              );
-                                                            },
-                                                          );
-                                                          
-                                                          }, icon: const Icon(CupertinoIcons.ellipsis_vertical, size: 24), padding: EdgeInsets.zero);
-                                                        }
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
+                                          Row(
+                              
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              
+                                            children: [
+                              
+                                              FilledButton(onPressed: (){}, style: ButtonStyle(
+                                                
+                                                side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
+                                                                                  
+                                                padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text(snapshot.data![index].date, style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
+                              
+                                                SizedBox(child: Delete(id: snapshot.data![index].id)),
+                                            ],
                                           ),
+                                                  
+                                          const Gap(10),
+                                    
+                                          Padding(
+                                    
+                                            padding: const EdgeInsets.only(left: 8),
+                                    
+                                            child: Text(snapshot.data![index].title, textScaler: const TextScaler.linear(1.5)),
+                                          ),
+                                    
+                                          const Gap(14),
+                                    
+                                          Expanded(
+                                            
+                                            child: Container(
+                                              
+                                              decoration: BoxDecoration(color: Theme.of(context).colorScheme.background, border: Border.all(color: Theme.of(context).colorScheme.secondary), borderRadius: BorderRadius.circular(10)),
+                                              
+                                              child: markdown(snapshot.data![index].description, 1.18, context))
+                                          )
                                         ],
-                                      );
-                                    },  
-                                  ),
-                                ),
-
-                                const Expanded(flex: 2,child: SizedBox()),
-                              ],
+                                      ),
+                                    ),
+                                  );
+                                },  
+                              ),
                             ),
                           ),
                         ],
-                      )
+                      ),
                     );
                   }
         
@@ -256,7 +231,7 @@ class _NotesViewState extends State<NotesView> {
         
                           children: [
         
-                            Center(child: Text("Your canvas is blank.", textScaler: const TextScaler.linear(2.8), style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(1), fontStyle: FontStyle.italic))),
+                            Center(child: Text("Your canvas is blank.", textScaler: const TextScaler.linear(2.4), style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(1)))),
 
                             const Gap(100),
                           ],
@@ -270,6 +245,64 @@ class _NotesViewState extends State<NotesView> {
           )
         );
       }
+    );
+  }
+}
+
+// ignore: must_be_immutable
+class Delete extends StatelessWidget {
+
+  Delete({super.key, required this.id});
+
+  int? id;
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Consumer<DatabaseProvider>(builder:(context, value, child) =>
+
+      Builder(
+                                                                                  
+      builder: (context) {
+      
+      return IconButton(onPressed: (){
+                                                                
+        showPopover(context: context, 
+           
+           backgroundColor: Colors.transparent,
+           
+           direction: PopoverDirection.left,
+          
+           shadow: List.empty(),
+          
+           arrowWidth: 0, arrowHeight: 0,
+                                                                  
+           bodyBuilder:(context) {
+                                                                
+            return SizedBox(
+                                                                
+              child: IconButton(onPressed: (){
+                
+                value.dbHelper.delete(id);
+                                                                      
+                value.initDatabase();
+                                                                      
+                value.setLength();
+
+                Navigator.pop(context);
+              }, 
+              
+              icon: Icon(CupertinoIcons.delete, size: 22, 
+              
+              color: Theme.of(context).colorScheme.tertiary), 
+              
+              style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), padding: const MaterialStatePropertyAll(EdgeInsets.fromLTRB(18, 18, 18, 18))))                                                 
+              );
+            },
+          );                                                       
+         }, icon: const Icon(CupertinoIcons.ellipsis, size: 20), padding: EdgeInsets.zero);
+        }
+      ),
     );
   }
 }

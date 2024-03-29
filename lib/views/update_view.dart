@@ -96,7 +96,7 @@ class _UpdateState extends State<Update>{
         
                         borderRadius: const BorderRadius.all(Radius.circular(23)),
         
-                        border: Border.all(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.4))
+                        border: Border.all(color: Theme.of(context).colorScheme.secondary)
         
                       ),
         
@@ -119,11 +119,13 @@ class _UpdateState extends State<Update>{
                                 return Editor(note: widget.note);
                               }
                             );
-                          }, style: ButtonStyle(
+                          }, 
+                          
+                          style: ButtonStyle(
                             
-                            shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
+                            shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(18), side: BorderSide.none)),
                             
-                            backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.secondary), padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: const MaterialStatePropertyAll(Colors.transparent)), 
+                            backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.tertiary), padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: const MaterialStatePropertyAll(Colors.transparent)), 
                             
                             child: Row(
         
@@ -144,9 +146,9 @@ class _UpdateState extends State<Update>{
                           
                     SizedBox(
                               
-                      height: 450,
+                      height: 480,
                               // change md to page.text
-                      child: markdown(page.text, 1.62, context)
+                      child: markdown(page.text, 1.30, context)
                     ),
                             
                       const Gap(10),
@@ -180,7 +182,7 @@ class _UpdateState extends State<Update>{
 
 String title(){
   
-  String getTitle = 'Untitled';
+  String getTitle = 'Untitled${DateTime.now().microsecond}';
 
   if(_UpdateState.pageTitle.text.isNotEmpty){
     getTitle = _UpdateState.pageTitle.text;
@@ -237,17 +239,17 @@ class _EditorState extends State<Editor> {
               ],
             ),
 
-            FilledButton(
+              FilledButton(
 
-                style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary.withOpacity(0.8)), padding: const MaterialStatePropertyAll(EdgeInsets.all(16)),
+                    style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), padding: const MaterialStatePropertyAll(EdgeInsets.all(16)),
                     
-                side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6))),
+                    side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.secondary)),
 
-                overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+                    overlayColor: const MaterialStatePropertyAll(Colors.transparent),
 
-                shadowColor: const MaterialStatePropertyAll(Colors.transparent)
+                    shadowColor: const MaterialStatePropertyAll(Colors.transparent)
                     
-                ),
+                    ),
               
                 onPressed: (){
             

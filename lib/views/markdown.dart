@@ -110,7 +110,9 @@ class _MarkdownState extends State<Markdown>{
                                 return const Editor();
                               }
                             );
-                          }, style: ButtonStyle(
+                          }, 
+                          
+                          style: ButtonStyle(
                             
                             shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(18), side: BorderSide.none)),
                             
@@ -133,9 +135,9 @@ class _MarkdownState extends State<Markdown>{
                           
                     SizedBox(
                               
-                      height: 430,
+                      height: 440,
                               // change md to page.text
-                      child: markdown(page.text, 1.62, context)
+                      child: markdown(page.text, 1.30, context)
                     ),
                             
                       const Gap(10),
@@ -168,7 +170,7 @@ class _MarkdownState extends State<Markdown>{
 
 String title(){
   
-  String getTitle = 'Untitled';
+  String getTitle = 'Untitled${DateTime.now().microsecond}';
 
   if(_MarkdownState.pageTitle.text.isNotEmpty){
     getTitle = _MarkdownState.pageTitle.text;

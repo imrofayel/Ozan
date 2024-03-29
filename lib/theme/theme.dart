@@ -8,7 +8,7 @@ class Themes {
 
     useMaterial3: true,
 
-    fontFamily: 'EB Garamond',
+    fontFamily: 'Inter',
 
     textTheme: const TextTheme(
 

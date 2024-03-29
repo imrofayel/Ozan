@@ -141,7 +141,7 @@ Widget titleBox(context, {required TextEditingController controller}){
 
       constraints: const BoxConstraints(maxWidth: 520),
 
-      contentPadding: const EdgeInsets.all(20),
+      contentPadding: const EdgeInsets.all(18),
 
       focusColor: Colors.transparent,
 
@@ -151,24 +151,24 @@ Widget titleBox(context, {required TextEditingController controller}){
 
     ),
 
-    style: const TextStyle(fontSize: 30),
+    style: const TextStyle(fontSize: 24),
   );
 }
 
-String greet(){
+String greet(String name){
   
   String text;
 
   if(DateTime.now().hour > 0 && DateTime.now().hour <= 11){
-    text = 'Good Morning!';
+    text = 'Good Morning $name!';
   }
 
   else if(DateTime.now().hour > 11 && DateTime.now().hour <= 16){
-    text = 'Good Afternoon!';
+    text = 'Good Afternoon $name!';
   }
 
   else{
-    text = 'Good Evening!';
+    text = 'Good Evening $name!';
   }
 
   return text;
