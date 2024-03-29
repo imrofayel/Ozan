@@ -88,7 +88,7 @@ class CodeElementBuilder extends MarkdownElementBuilder {
         
         padding: const EdgeInsets.fromLTRB(24, 10, 10, 10),
     
-        textStyle: const TextStyle(fontSize: 16, fontFamily: "Roboto Mono", height: 1),
+        textStyle: const TextStyle(fontSize: 16, fontFamily: "Roboto Mono", height: 1.5),
         ),
       ]
     );

@@ -20,15 +20,15 @@ Markdown markdown(String data, double scale, context){
 
           a: const TextStyle(color: Color.fromARGB(255, 20, 53, 186), height: 1.6),
 
-          codeblockDecoration: BoxDecoration(color: Theme.of(context).colorScheme.primary, borderRadius: BorderRadius.circular(20)),
+          codeblockDecoration: BoxDecoration(color: Theme.of(context).colorScheme.primary, borderRadius: BorderRadius.circular(20), border: Border.all(color: Theme.of(context).colorScheme.secondary)),
 
           p: TextStyle(color: Theme.of(context).colorScheme.tertiary, height: 1.6),
 
           textScaleFactor: scale,
 
-          tableBorder: TableBorder.all(borderRadius: BorderRadius.circular(14), color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6), width: 1),
+          tableBorder: TableBorder.all(borderRadius: BorderRadius.circular(14), color: Theme.of(context).colorScheme.secondary, width: 1),
 
-          tableHead: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+          tableHead: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
 
           blockquoteDecoration: BoxDecoration(
             

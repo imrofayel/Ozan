@@ -221,6 +221,10 @@ class _EditorState extends State<Editor> {
                 Gap(10),
       
                 Text("Writer", style: TextStyle(fontSize: 24, fontFamily: 'Inter'),),
+
+                Gap(20),
+
+                DropdownMenu(dropdownMenuEntries: [])
               ],
             ),
 

@@ -54,7 +54,7 @@ class _HomeState extends State<Home> {
           
                       side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
 
-                      padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("Library", style: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
+                      padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("Library", style: TextStyle(fontSize: 17, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
 
                     const Gap(10),
 
@@ -62,7 +62,7 @@ class _HomeState extends State<Home> {
           
                       side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
 
-                      padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("Journal", style: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
+                      padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("Journal", style: TextStyle(fontSize: 17, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
       
                   ],
                 ),
@@ -137,7 +137,7 @@ class _HomeState extends State<Home> {
             Expanded(flex: 2, child: SizedBox()),
         
             Expanded(flex: 10, child: Markdown()),
-      
+
             Expanded(flex: 3, child: SizedBox()),
 
           ],
@@ -147,7 +147,6 @@ class _HomeState extends State<Home> {
     );
   }
 }
-
 
 showSearchView(value, List<NotesModel> notes, context){
 
@@ -159,3 +158,4 @@ showSearchView(value, List<NotesModel> notes, context){
   });
 
 }
+
