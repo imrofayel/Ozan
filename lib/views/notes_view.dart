@@ -202,7 +202,7 @@ class _NotesViewState extends State<NotesView> {
                                               
                                               decoration: BoxDecoration(color: Theme.of(context).colorScheme.background, border: Border.all(color: Theme.of(context).colorScheme.secondary), borderRadius: BorderRadius.circular(10)),
                                               
-                                              child: markdown(snapshot.data![index].description, 1.18, context))
+                                              child: markdown(snapshot.data![index].description, 1.14, context))
                                           )
                                         ],
                                       ),
@@ -267,7 +267,9 @@ class Delete extends StatelessWidget {
       
       return IconButton(onPressed: (){
                                                                 
-        showPopover(context: context, 
+        showPopover(context: context,
+
+           barrierColor: Colors.transparent,
            
            backgroundColor: Colors.transparent,
            
@@ -292,11 +294,11 @@ class Delete extends StatelessWidget {
                 Navigator.pop(context);
               }, 
               
-              icon: Icon(CupertinoIcons.delete, size: 22, 
+              icon: Icon(CupertinoIcons.delete, size: 20, 
               
-              color: Theme.of(context).colorScheme.tertiary), 
+              color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)), 
               
-              style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), padding: const MaterialStatePropertyAll(EdgeInsets.fromLTRB(18, 18, 18, 18))))                                                 
+              style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), padding: const MaterialStatePropertyAll(EdgeInsets.all(13)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), surfaceTintColor: const MaterialStatePropertyAll(Colors.transparent)))                                                 
               );
             },
           );                                                       
