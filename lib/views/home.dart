@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:ozan/db/db_provider.dart';
-import 'package:ozan/db/notes.dart';
 import 'package:ozan/theme/theme_provider.dart';
 import 'package:ozan/views/configure.dart';
 import 'package:ozan/views/markdown.dart';
 import 'package:ozan/components/sidebar.dart';
 import 'package:ozan/views/notes_view.dart';
+import 'package:ozan/views/search_view.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
@@ -20,8 +20,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-
-    TextEditingController search = TextEditingController();
 
     return Consumer<DatabaseProvider>(builder:(context, value, child){
 
@@ -76,37 +74,14 @@ class _HomeState extends State<Home> {
                 
                 [
                   
-                  Container(margin: const EdgeInsets.all(8), padding: const EdgeInsets.only(left: 16, right: 6, bottom: 6, top: 0), alignment: Alignment.center, width: 150, decoration: BoxDecoration(color: Theme.of(context).colorScheme.primary, border: Border.all(color: Theme.of(context).colorScheme.secondary), borderRadius: BorderRadius.circular(18)), 
-                  
-                  child: Row(
+                  IconButton(onPressed: () async{
       
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    // ignore: use_build_context_synchronously
+                    const SearchView();
       
-                    children: [
+                    }, icon: Icon(CupertinoIcons.search, size: 22, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6)), style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)), overlayColor: const MaterialStatePropertyAll(Colors.transparent))),
       
-                    Expanded(child: TextField(
-                        
-                        decoration: const InputDecoration(border: InputBorder.none),
-      
-                        style: const TextStyle(fontFamily: 'Inter', fontSize: 18),
-
-                        controller: search,
-
-                        maxLines: 1,
-                      )),
-      
-                      IconButton(onPressed: () async{
-
-                        // ignore: use_build_context_synchronously
-                        showSearchView(search.text, await value.dbHelper.getNotesList(), context);
-      
-                      }, icon: Icon(CupertinoIcons.search, size: 22, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6)), style: const ButtonStyle(overlayColor: MaterialStatePropertyAll(Colors.transparent)))
-                    ],
-                  ),
-                  
-                  ),
-      
-                  const Gap(4),
+                  const Gap(8),
       
                   IconButton(onPressed: (){
       
@@ -121,7 +96,7 @@ class _HomeState extends State<Home> {
                       return const Configuration();
                     });
 
-                    }, icon: Icon(CupertinoIcons.person, size: 22, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6)), style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)), overlayColor: const MaterialStatePropertyAll(Colors.transparent))),
+                    }, icon: Icon(CupertinoIcons.ellipsis, size: 20, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6)), style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)), overlayColor: const MaterialStatePropertyAll(Colors.transparent))),
       
                   const Gap(10),
                 
@@ -148,16 +123,5 @@ class _HomeState extends State<Home> {
     }
     );
   }
-}
-
-showSearchView(value, List<NotesModel> notes, context){
-
-  showDialog(context: context, builder:(context) {
-    
-    return Column(children: [
-      Text(notes.first.title)
-    ],);
-  });
-
 }
 
