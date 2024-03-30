@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:ozan/views/markdown.dart';
 import 'package:ozan/components/components.dart';
@@ -22,38 +21,27 @@ class _SidebarState extends State<Sidebar> {
       
       child: SizedBox(
 
-        height: MediaQuery.of(context).size.height - 80,
+        height: MediaQuery.of(context).size.height - 60,
         
-        child: Column(
+        child: Padding(
 
-          crossAxisAlignment: CrossAxisAlignment.center,
+          padding: const EdgeInsets.all(16),
 
-          mainAxisAlignment: MainAxisAlignment.end,
-            
-          children: [
-                  
-            Container(
-                  
-              decoration: const BoxDecoration(
-
-                color: Colors.transparent,
-
-              ),
-
-              child: Column(
-
-                children: [
-
-                button(() => Markdown.files.loadFile(context), CupertinoIcons.control, context, tooltip: "Open"),
-
-                const Gap(14),
-
-                button(() => Markdown.files.saveContent(context), CupertinoIcons.down_arrow, context, tooltip: "Export"),
-
-                ],
-              )
-            ),
-          ],
+          child: Column(
+          
+            crossAxisAlignment: CrossAxisAlignment.end,
+          
+            mainAxisAlignment: MainAxisAlignment.end,
+              
+            children: [
+                    
+              Row(children: [ button(() => Markdown.files.loadFile(context), CupertinoIcons.control, context, tooltip: "Open")]) ,
+                          
+              const Gap(14),
+                          
+              Row(children: [ button(() => Markdown.files.saveContent(context), CupertinoIcons.down_arrow, context, tooltip: "Export")]),
+            ],
+          ),
         )
       ),
     );

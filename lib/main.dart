@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ozan/db/db_provider.dart';
+import 'package:ozan/db/journal_db/journal_db_provider.dart';
 import 'package:ozan/theme/theme_provider.dart';
 import 'package:ozan/views/home.dart';
 import 'package:provider/provider.dart';
@@ -27,6 +28,8 @@ void main() async {
   runApp(MultiProvider(providers: [
 
     ChangeNotifierProvider(create:(context) => DatabaseProvider()),
+
+    ChangeNotifierProvider(create:(context) => JournalDatabaseProvider()),
 
     ChangeNotifierProvider(create:(context) => ThemeSwitcher()),
 

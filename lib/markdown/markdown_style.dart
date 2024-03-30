@@ -26,9 +26,11 @@ Markdown markdown(String data, double scale, context){
 
           textScaleFactor: scale,
 
-          tableBorder: TableBorder.all(borderRadius: BorderRadius.circular(14), color: Theme.of(context).colorScheme.secondary, width: 1),
+          tableBorder: TableBorder.all(borderRadius: BorderRadius.circular(10), color: Theme.of(context).colorScheme.secondary, width: 1),
 
-          tableHead: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+          tableHead: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+
+          tableBody: const TextStyle(fontSize: 13),
 
           blockquoteDecoration: BoxDecoration(
             

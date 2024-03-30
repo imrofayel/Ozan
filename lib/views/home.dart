@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:ozan/db/db_provider.dart';
 import 'package:ozan/theme/theme_provider.dart';
+import 'package:ozan/views/Journal/journal_view.dart';
 import 'package:ozan/views/configure.dart';
 import 'package:ozan/views/markdown.dart';
 import 'package:ozan/components/sidebar.dart';
@@ -32,7 +33,23 @@ class _HomeState extends State<Home> {
                   
                   children: [
       
-                  Icon(CupertinoIcons.scribble, size: 36, color: Theme.of(context).colorScheme.tertiary),
+                    IconButton(onPressed: (){}, 
+                    
+                    icon: Row(
+
+                      children: [
+
+                        Icon(CupertinoIcons.book, size: 22, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)),
+
+                        const Gap(6),
+
+                        Text('Caira', textScaler: const TextScaler.linear(1.4), style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8))),
+                      ],
+                    ),
+
+                     style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), padding: const MaterialStatePropertyAll(EdgeInsets.fromLTRB(14, 6, 14, 6))),
+                    
+                    ),
               
                     const Gap(14),
       
@@ -53,15 +70,42 @@ class _HomeState extends State<Home> {
           
                       side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
 
-                      padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("Library", style: TextStyle(fontSize: 17, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
+                      padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), 
+                      
+                      
+                      child: Row(
+
+                        children: [
+
+                          Icon(CupertinoIcons.collections, size: 20, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)),
+
+                          const Gap(8),
+
+                          Text('Library', textScaler: const TextScaler.linear(1.3), style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8))),
+                        ],
+                    )),
 
                     const Gap(10),
 
-                    FilledButton(onPressed: (){}, style: ButtonStyle(
+                    FilledButton(onPressed: (){
+                      Navigator.push(context, MaterialPageRoute(builder:(context) => const JournalView()));
+                    }, style: ButtonStyle(
           
                       side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
 
-                      padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("Journal", style: TextStyle(fontSize: 17, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
+                      padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), 
+                      
+                      child: Row(
+
+                        children: [
+
+                          Icon(CupertinoIcons.pen, size: 24, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)),
+
+                          const Gap(3),
+
+                          Text('Journal', textScaler: const TextScaler.linear(1.3), style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8))),
+                        ],
+                    )),
       
                   ],
                 ),
@@ -70,24 +114,28 @@ class _HomeState extends State<Home> {
               elevation: 0,
                   
               actions:
-                
-                [ // SEARCH BUTTON
+
+                [ 
                   
-                  // IconButton(onPressed: () async{
-      
-                  //   showDialog(context: context, builder: (context){
-                  //     return SearchView();
-                  //   }, barrierColor: Colors.transparent);
-      
-                  //   }, icon: Icon(CupertinoIcons.search, size: 22, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6)), style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)), overlayColor: const MaterialStatePropertyAll(Colors.transparent))),
-      
-                  // const Gap(8),
-      
-                  IconButton(onPressed: (){
-      
-                    Provider.of<ThemeSwitcher>(context, listen: false).toggleTheme();
-      
-                    }, icon: Icon(CupertinoIcons.sun_min, size: 22, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6)), style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)), overlayColor: const MaterialStatePropertyAll(Colors.transparent))),
+                  FilledButton(onPressed: (){
+                      Provider.of<ThemeSwitcher>(context, listen: false).toggleTheme();
+                    }, style: ButtonStyle(
+          
+                      side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
+
+                      padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), 
+                      
+                      child: Row(
+
+                        children: [
+
+                          Icon(CupertinoIcons.sun_min, size: 24, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)),
+
+                          const Gap(6),
+
+                          Text('Theme', textScaler: const TextScaler.linear(1.3), style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8))),
+                        ],
+                    )),
       
                   const Gap(8),
                                   
@@ -96,7 +144,7 @@ class _HomeState extends State<Home> {
                       return const Configuration();
                     });
 
-                    }, icon: Icon(CupertinoIcons.ellipsis, size: 20, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6)), style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)), overlayColor: const MaterialStatePropertyAll(Colors.transparent))),
+                    }, icon: Icon(CupertinoIcons.ellipsis, size: 20, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)), style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)), overlayColor: const MaterialStatePropertyAll(Colors.transparent))),
       
                   const Gap(10),
                 
@@ -109,11 +157,9 @@ class _HomeState extends State<Home> {
           
           children: [
             
-            Expanded(flex: 1, child: Sidebar()),
-      
-            Expanded(flex: 2, child: SizedBox()),
-        
-            Expanded(flex: 10, child: Markdown()),
+            Expanded(flex: 3, child: Sidebar()),
+              
+            Expanded(flex: 8, child: Markdown()),
 
             Expanded(flex: 3, child: SizedBox()),
 

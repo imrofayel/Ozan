@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
@@ -114,19 +115,19 @@ class _MarkdownState extends State<Markdown>{
                           
                           style: ButtonStyle(
                             
-                            shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(18), side: BorderSide.none)),
+                            shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(18), side: BorderSide(color: Theme.of(context).colorScheme.secondary))),
                             
-                            backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.tertiary), padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: const MaterialStatePropertyAll(Colors.transparent)), 
+                            backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background), padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: const MaterialStatePropertyAll(Colors.transparent)), 
                             
                             child: Row(
         
                               children: [
         
-                                Icon(CupertinoIcons.pencil_outline, size: 26, color: Theme.of(context).colorScheme.primary),
+                                Icon(CupertinoIcons.pencil_outline, size: 26, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)),
         
                                 const Gap(10),
         
-                                Text('Writer', style: TextStyle(color: Theme.of(context).colorScheme.primary, fontSize: 20, fontFamily: 'Inter'),)
+                                Text('Writer', style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontSize: 20, fontFamily: 'Inter'))
                               ],
                             )),
                         ],
@@ -135,7 +136,7 @@ class _MarkdownState extends State<Markdown>{
                           
                     SizedBox(
                               
-                      height: 440,
+                      height: 450,
                               // change md to page.text
                       child: markdown(page.text, 1.30, context)
                     ),
@@ -214,20 +215,22 @@ class _EditorState extends State<Editor> {
       
           children: [
             
-            const Row(
-      
-              children: [
-      
-                Icon(CupertinoIcons.pencil_outline, size: 28),
-            
-                Gap(10),
-      
-                Text("Writer", style: TextStyle(fontSize: 24, fontFamily: 'Inter'),),
+            const Opacity(
 
-                Gap(20),
+              opacity: 0.8,
 
-                DropdownMenu(dropdownMenuEntries: [])
-              ],
+              child: Row(
+                    
+                children: [
+                    
+                  Icon(CupertinoIcons.pencil_outline, size: 28),
+              
+                  Gap(10),
+                    
+                  Text("Writer", style: TextStyle(fontSize: 24, fontFamily: 'Inter')),
+              
+                ],
+              ),
             ),
 
             Row(
@@ -291,7 +294,7 @@ class _EditorState extends State<Editor> {
       
               children: [
       
-                  toolbar(_MarkdownState.page, context),
+                  Opacity(opacity: 0.8, child: toolbar(_MarkdownState.page, context)),
       
                     const Gap(8),
             

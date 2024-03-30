@@ -107,9 +107,7 @@ class _UpdateState extends State<Update>{
                           Expanded(child: titleBox(context, controller: pageTitle)),
                       
                           const Gap(20),
-                                                    
-                          const Gap(15),
-                                  
+
                           FilledButton(onPressed: (){
                                   
                             showDialog(
@@ -125,17 +123,17 @@ class _UpdateState extends State<Update>{
                             
                             shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(18), side: BorderSide.none)),
                             
-                            backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.tertiary), padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: const MaterialStatePropertyAll(Colors.transparent)), 
+                            backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)), padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: const MaterialStatePropertyAll(Colors.transparent)), 
                             
                             child: Row(
         
                               children: [
         
-                                Icon(CupertinoIcons.pencil_outline, size: 26, color: Theme.of(context).colorScheme.primary),
+                                Icon(CupertinoIcons.pencil_outline, size: 26, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)),
         
                                 const Gap(10),
         
-                                Text('Writer', style: TextStyle(color: Theme.of(context).colorScheme.primary, fontSize: 20, fontFamily: 'Inter'),)
+                                Text('Writer', style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontSize: 20, fontFamily: 'Inter'))
                               ],
                             )),
         
@@ -146,28 +144,23 @@ class _UpdateState extends State<Update>{
                           
                     SizedBox(
                               
-                      height: 480,
+                      height: 485,
                               // change md to page.text
                       child: markdown(page.text, 1.30, context)
                     ),
                             
                       const Gap(10),
-                            
-                      Padding(
-                            
-                        padding: const EdgeInsets.fromLTRB(0,0,0,10),
-                        
-                        child: Row(
-                                          
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        
-                        children: [
-                                          
-                          textEncode(context, words: page.text.split(' ').length-1, char: page.text.length, lines: page.text.split('\n').length-1),
-                        
-                        ],
-                      ),
-                    ),
+
+                      Row(
+                                        
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      
+                      children: [
+                                        
+                        textEncode(context, words: page.text.split(' ').length-1, char: page.text.length, lines: page.text.split('\n').length-1),
+                      
+                      ],
+                                            ),
                   ],
                 ),
               ),

@@ -1,35 +1,30 @@
 // import 'package:dictionaryx/dictionary_msa.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:ozan/components/snackbar.dart';
 
-IconButton button(void Function()? function, IconData icon, context, {Color? textColor, Color? overlayColor, required String tooltip}){
+FilledButton button(void Function()? function, IconData icon, context, {required String tooltip}){
 
-  return IconButton(
+  return  FilledButton(onPressed: function, style: ButtonStyle(
+          
+            side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
 
-      tooltip: tooltip,
+            padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), 
+                      
+            child: Row(
 
-      onPressed: function, 
+              children: [
 
-      icon: Icon(icon),
-    
-      style: ButtonStyle(
+                Icon(icon, size: 21, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)),
 
-        iconSize: const MaterialStatePropertyAll(22),
+                const Gap(8),
 
-        padding: const MaterialStatePropertyAll(EdgeInsets.all(8)),
-
-        backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary),
-
-        iconColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.tertiary.withOpacity(0.6)),
-
-        overlayColor: const MaterialStatePropertyAll(Colors.transparent),
-
-        side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)
-      ))
-  );
+                Text(tooltip, textScaler: const TextScaler.linear(1.3), style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8))),
+              ],
+      ));
 }
 
 TextField textField(context, {int? lines = 1, required void Function(String)? onSubmitted, required void Function(String)? onChanged, required TextEditingController controller, FocusNode? focusNode, required Color color, Color? textColor}){
