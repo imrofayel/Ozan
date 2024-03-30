@@ -7,7 +7,6 @@ import 'package:ozan/views/configure.dart';
 import 'package:ozan/views/markdown.dart';
 import 'package:ozan/components/sidebar.dart';
 import 'package:ozan/views/notes_view.dart';
-import 'package:ozan/views/search_view.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
@@ -72,16 +71,17 @@ class _HomeState extends State<Home> {
                   
               actions:
                 
-                [
+                [ // SEARCH BUTTON
                   
-                  IconButton(onPressed: () async{
+                  // IconButton(onPressed: () async{
       
-                    // ignore: use_build_context_synchronously
-                    const SearchView();
+                  //   showDialog(context: context, builder: (context){
+                  //     return SearchView();
+                  //   }, barrierColor: Colors.transparent);
       
-                    }, icon: Icon(CupertinoIcons.search, size: 22, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6)), style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)), overlayColor: const MaterialStatePropertyAll(Colors.transparent))),
+                  //   }, icon: Icon(CupertinoIcons.search, size: 22, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6)), style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)), overlayColor: const MaterialStatePropertyAll(Colors.transparent))),
       
-                  const Gap(8),
+                  // const Gap(8),
       
                   IconButton(onPressed: (){
       
