@@ -141,8 +141,10 @@ class _HomeState extends State<Home> {
                                   
                   IconButton(onPressed: (){
                     showDialog(context: context, builder: (context){
+
                       return const Configuration();
-                    });
+                      
+                    }, barrierColor: Colors.transparent);
 
                     }, icon: Icon(CupertinoIcons.ellipsis, size: 20, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)), style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)), overlayColor: const MaterialStatePropertyAll(Colors.transparent))),
       

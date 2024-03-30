@@ -1,8 +1,12 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:ozan/components/snackbar.dart';
 import 'package:ozan/db/journal_db/journal.dart';
 import 'package:ozan/db/journal_db/journal_db_provider.dart';
 import 'package:ozan/views/Journal/editor.dart';
+import 'package:ozan/views/Journal/editor_update.dart';
 import 'package:popover/popover.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +21,16 @@ class JournalView extends StatefulWidget {
 }
 
 class _JournalViewState extends State<JournalView> {
+
+  List<String> questions = [
+
+    "What happened today?",
+
+    "Things I am grateful for...",
+
+    "Daily affirmations"
+
+  ];
 
   @override
   void initState(){    
@@ -55,8 +69,16 @@ class _JournalViewState extends State<JournalView> {
 
                 children: [
 
-                  FilledButton(onPressed: (){
-                     showDialog(context: context, builder:(context) => const JournalEditor());
+                  FilledButton(onPressed: () async{
+                     if (await value.dbHelper.check(DateFormat('d/M/y').format(DateTime.now()))){
+
+                        // ignore: use_build_context_synchronously
+                        Navigator.push(context, MaterialPageRoute(builder:(context) => const JournalEditor()));
+                     } else{
+                      // ignore: use_build_context_synchronously
+                      SnackBarUtils.showSnackbar(context, FluentIcons.warning_24_regular, "Today's journal entry has already been recorded, try to update it.");
+                     }
+                  
                   }, style: ButtonStyle(
                             
                     side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
@@ -71,7 +93,7 @@ class _JournalViewState extends State<JournalView> {
                   
                         const Gap(6),
                   
-                        Text('Capture your thoughts!', textScaler: const TextScaler.linear(1.3), style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8))),
+                        Text('Capture your thoughts!', textScaler: const TextScaler.linear(1.3), style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(1))),
                       ],
                     )),
                 ],
@@ -97,7 +119,7 @@ class _JournalViewState extends State<JournalView> {
                             
                             side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
                       
-                            padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text('${snapshot.data!.length} entries', style: TextStyle(fontSize: 17, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
+                            padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text('${snapshot.data!.length} entries', style: TextStyle(fontSize: 17, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
                           
                           const Gap(14),
                       
@@ -109,7 +131,7 @@ class _JournalViewState extends State<JournalView> {
 
                               child: GridView.builder(
                                                         
-                                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 400),
+                                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 390, mainAxisExtent: 250),
                               
                                 scrollDirection: Axis.vertical,
                                               
@@ -126,7 +148,7 @@ class _JournalViewState extends State<JournalView> {
                                     splashFactory: null,
                               
                                     onTap: (){
-                                      
+                                      showDialog(context: context, builder:(context) => UpdateJournalEditor(entry: snapshot.data![index]),);
                                     },
                               
                                     child: Container(
@@ -159,24 +181,28 @@ class _JournalViewState extends State<JournalView> {
                                                 
                                                 side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
                                                                                   
-                                                padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text(snapshot.data![index].date, style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
+                                                padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text(DateFormat('d MMMM, yy').format(DateFormat('d/M/y').parse(snapshot.data![index].date),), style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary.withOpacity(1), fontFamily: 'Inter'))),
                               
                                                 SizedBox(child: Delete(id: snapshot.data![index].id)),
                                             ],
                                           ),
                                     
                                           const Gap(14),
+
+                                            FilledButton(onPressed: (){}, style: ButtonStyle(
+                                                
+                                                side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
+                                                                                  
+                                                padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text(questions[0], style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
+
+                                                const Gap(6),
                                     
-                                          Expanded(
-                                            
-                                            child: Container(
-                                              
-                                              decoration: BoxDecoration(color: Theme.of(context).colorScheme.background, border: Border.all(color: Theme.of(context).colorScheme.secondary), borderRadius: BorderRadius.circular(10)),
-                                              
-                                              child: Text(snapshot.data![index].description))
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text(snapshot.data![index].description.split('~~~')[1], textScaler: const TextScaler.linear(1.2), maxLines: 4),
                                           )
                                         ],
-                                      ),
+                                      )
                                     ),
                                   );
                                 },  
@@ -202,7 +228,11 @@ class _JournalViewState extends State<JournalView> {
         
                           children: [
         
-                            Center(child: Text("Your canvas is blank.", textScaler: const TextScaler.linear(2.4), style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(1)))),
+                            FilledButton(onPressed: (){}, style: ButtonStyle(
+                                                
+                              side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
+                                                                                  
+                              padding: const MaterialStatePropertyAll(EdgeInsets.all(20)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text('Your canvas is blank', style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
 
                             const Gap(100),
                           ],
@@ -278,4 +308,24 @@ class Delete extends StatelessWidget {
       ),
     );
   }
+}
+
+Map<String, dynamic> findLargestStringAndIndex(List<String> strings) {
+  if (strings.isEmpty) {
+    throw ArgumentError("Input list cannot be empty");
+  }
+
+  strings.remove('');
+
+  String largestString = strings.first;
+  int largestIndex = 0;
+
+  for (int i = 1; i < strings.length; i++) {
+    if (strings[i].length > largestString.length) {
+      largestString = strings[i];
+      largestIndex = i;
+    }
+  }
+
+  return {'string': largestString, 'index': largestIndex};
 }

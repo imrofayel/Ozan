@@ -223,19 +223,18 @@ class _NotesViewState extends State<NotesView> {
         
                       visible: snapshot.connectionState == ConnectionState.done,
         
-                      child: Expanded(
-                
-                        child: Column(
-        
-                          mainAxisAlignment: MainAxisAlignment.center,
-        
-                          children: [
-        
-                            Center(child: Text("Your canvas is blank.", textScaler: const TextScaler.linear(2.4), style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(1)))),
-
-                            const Gap(100),
-                          ],
-                        ),
+                      child: Row(
+                          
+                        mainAxisAlignment: MainAxisAlignment.center,
+                      
+                        children: [
+                              
+                          FilledButton(onPressed: (){}, style: ButtonStyle(
+                                              
+                            side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
+                                                                                
+                            padding: const MaterialStatePropertyAll(EdgeInsets.all(20)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text('Your canvas is blank', style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
+                        ],
                       ),
                     );
                   }

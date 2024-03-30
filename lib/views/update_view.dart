@@ -160,7 +160,7 @@ class _UpdateState extends State<Update>{
                         textEncode(context, words: page.text.split(' ').length-1, char: page.text.length, lines: page.text.split('\n').length-1),
                       
                       ],
-                                            ),
+                    ),
                   ],
                 ),
               ),

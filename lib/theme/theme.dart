@@ -96,13 +96,11 @@ class Themes {
     ),
   );
 
-  static ThemeData darkTheme = ThemeData(
-
-    brightness: Brightness.dark,
+   static ThemeData darkTheme = ThemeData(
 
     useMaterial3: true,
 
-    fontFamily: "EB Garamond",
+    fontFamily: 'Inter',
 
     textTheme: const TextTheme(
 
@@ -114,23 +112,26 @@ class Themes {
 
     ),
 
-    textSelectionTheme: const TextSelectionThemeData(cursorColor: Color.fromRGBO(192, 212, 190, 1), selectionColor: Color.fromRGBO(44, 44, 41, 1)),
-
     colorScheme: ColorScheme.fromSeed(
 
       brightness: Brightness.dark,
 
-      seedColor: Colors.brown,
+      seedColor: Colors.green,
 
-      background: const Color.fromRGBO(44, 44, 41, 1),
+      background: const Color.fromRGBO(40, 47, 40, 1),
 
-      primary: const Color.fromRGBO(51, 51, 48, 1),
+      secondary: const Color.fromRGBO(45, 63, 50, 1),
+
+      primary: const Color.fromRGBO(45, 63, 50, 1),
 
       tertiary: const Color.fromRGBO(192, 212, 190, 1),
 
     ),
 
-    appBarTheme:  const AppBarTheme(backgroundColor: Color.fromRGBO(44, 44, 41, 1)),
+    textSelectionTheme: const TextSelectionThemeData(cursorColor: Color.fromARGB(255, 16, 16, 16), selectionColor: Color.fromRGBO(46, 66, 52, 1)),
+
+
+    appBarTheme:  const AppBarTheme(backgroundColor: Colors.transparent, surfaceTintColor: Colors.transparent),
 
     tooltipTheme: TooltipThemeData(
 
@@ -140,12 +141,12 @@ class Themes {
 
       decoration: BoxDecoration(
 
-        color: const Color.fromARGB(255, 8, 8, 8),
+        color: const  Color.fromRGBO(45, 63, 50, 1),
         
         borderRadius: BorderRadius.circular(20)
       ),
 
-      textStyle: TextStyle(fontSize: 18, color: const Color.fromARGB(255, 255, 255, 255).withOpacity(0.8), fontFamily: 'Inter'),
+      textStyle: const TextStyle(fontSize: 18, color: Color.fromRGBO(192, 212, 190, 1), fontFamily: 'Inter'),
     ),
 
     dropdownMenuTheme: DropdownMenuThemeData(
@@ -158,7 +159,7 @@ class Themes {
 
       borderRadius: BorderRadius.circular(30),
 
-      borderSide: BorderSide.none,
+      borderSide: BorderSide.none
                 
       ),
 
@@ -169,7 +170,7 @@ class Themes {
             borderSide: BorderSide.none
                 
           )
-      
+
       ),
 
       menuStyle: MenuStyle(
@@ -185,7 +186,7 @@ class Themes {
         visualDensity: VisualDensity.comfortable,
 
       )
-    )
+    ),
   );
 }
 
