@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:intl/intl.dart';
 import 'package:ozan/db/journal_db/journal.dart';
 import 'package:ozan/db/journal_db/journal_db_provider.dart';
 import 'package:ozan/views/Journal/editor_component.dart';
@@ -102,7 +101,7 @@ class _UpdateJournalEditorState extends State<UpdateJournalEditor> {
           
                     controller[0].text.isNotEmpty && controller[1].text.isNotEmpty && controller[2].text.isNotEmpty ? (){
           
-                            value.dbHelper.update(Journal(description: "${controller[0].text}~~~${controller[0].text}~~~${controller[2].text}", date: DateFormat('d/M/y').format(DateTime.now()), id: widget.entry!.id));
+                            value.dbHelper.update(Journal(description: "${controller[0].text}~~~${controller[0].text}~~~${controller[2].text}", date: widget.entry!.date, id: widget.entry!.id));
           
                             value.initDatabase();
                             

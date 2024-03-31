@@ -84,7 +84,7 @@ class _InfoState extends State<Info> {
                               
                       const Gap(8),
                               
-                      Text("Caira v2.0", style: TextStyle(fontSize: 19, fontFamily: 'Inter', color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
+                      Text("Ozan v2.0", style: TextStyle(fontSize: 19, fontFamily: 'Inter', color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
                     ],
                   ),
                 ),

@@ -43,7 +43,7 @@ class _HomeState extends State<Home> {
 
                         const Gap(6),
 
-                        Text('Caira', textScaler: const TextScaler.linear(1.4), style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8))),
+                        Text('Ozan', textScaler: const TextScaler.linear(1.4), style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8))),
                       ],
                     ),
 
