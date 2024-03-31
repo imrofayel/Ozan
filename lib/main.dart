@@ -59,7 +59,7 @@ class _OzanState extends State<Ozan> {
 
     return MaterialApp(
 
-        title: "Rofayel Notebook",
+        title: "Ozan",
 
         debugShowCheckedModeBanner: false,
 
