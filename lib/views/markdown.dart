@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
+import 'package:ozan/components/snackbar.dart';
 import 'package:ozan/database/file_service.dart';
 import 'package:ozan/components/components.dart';
 import 'package:ozan/components/toolbar.dart';
@@ -72,28 +73,32 @@ class _MarkdownState extends State<Markdown>{
                   mainAxisAlignment: MainAxisAlignment.center,
                 
                   children: [
+
+                    const Gap(12),
                     
                     Container(
-        
+
+                      alignment: Alignment.center,
+                      
+                      padding: const EdgeInsets.only(right: 14),
+
                       decoration: BoxDecoration(
         
-                        color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
+                        color: Theme.of(context).colorScheme.primary,
         
                         borderRadius: const BorderRadius.all(Radius.circular(23)),
         
-                        border: Border.all(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.4))
+                        border: Border.all(width: 1, color: Theme.of(context).colorScheme.secondary)
         
                       ),
         
                       child: Row(
+
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         
                         children: [
                       
                           Expanded(child: titleBox(context, controller: pageTitle)),
-                      
-                          const Gap(20),
-                                                    
-                          const Gap(15),
                                   
                           FilledButton(onPressed: (){
                                   
@@ -104,25 +109,25 @@ class _MarkdownState extends State<Markdown>{
                                 return const Editor();
                               }
                             );
-                          }, style: ButtonStyle(
+                          }, 
+                          
+                          style: ButtonStyle(
                             
-                            shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
+                            shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(18), side: BorderSide(color: Theme.of(context).colorScheme.secondary))),
                             
-                            backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.secondary), padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: const MaterialStatePropertyAll(Colors.transparent)), 
+                            backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background), padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: const MaterialStatePropertyAll(Colors.transparent)), 
                             
                             child: Row(
         
                               children: [
         
-                                Icon(CupertinoIcons.pencil_outline, size: 26, color: Theme.of(context).colorScheme.primary),
+                                Icon(CupertinoIcons.pencil_outline, size: 26, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)),
         
                                 const Gap(10),
         
-                                Text('Writer', style: TextStyle(color: Theme.of(context).colorScheme.primary, fontSize: 20, fontFamily: 'Inter'),)
+                                Text('Writer', style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontSize: 20, fontFamily: 'Inter'))
                               ],
                             )),
-        
-                          const Gap(15)
                         ],
                       ),
                     ),
@@ -131,7 +136,7 @@ class _MarkdownState extends State<Markdown>{
                               
                       height: 450,
                               // change md to page.text
-                      child: markdown(page.text, 1.62, context)
+                      child: markdown(page.text, 1.30, context)
                     ),
                             
                       const Gap(10),
@@ -147,7 +152,6 @@ class _MarkdownState extends State<Markdown>{
                         children: [
                                           
                           textEncode(context, words: page.text.split(' ').length-1, char: page.text.length, lines: page.text.split('\n').length-1),
-                        
                         ],
                       ),
                     ),
@@ -165,7 +169,7 @@ class _MarkdownState extends State<Markdown>{
 
 String title(){
   
-  String getTitle = 'Untitled';
+  String getTitle = 'Untitled${DateTime.now().microsecond}';
 
   if(_MarkdownState.pageTitle.text.isNotEmpty){
     getTitle = _MarkdownState.pageTitle.text;
@@ -209,30 +213,38 @@ class _EditorState extends State<Editor> {
       
           children: [
             
-            const Row(
-      
-              children: [
-      
-                Icon(CupertinoIcons.pencil_outline, size: 28),
-            
-                Gap(10),
-      
-                Text("Writer", style: TextStyle(fontSize: 24, fontFamily: 'Inter'),),
-              ],
+            const Opacity(
+
+              opacity: 0.8,
+
+              child: Row(
+                    
+                children: [
+                    
+                  Icon(CupertinoIcons.pencil_outline, size: 28),
+              
+                  Gap(10),
+                    
+                  Text("Writer", style: TextStyle(fontSize: 24, fontFamily: 'Inter')),
+              
+                ],
+              ),
             ),
 
             Row(
 
               children: [
 
-                FilledButton.tonal(
+                FilledButton(
 
-                    style: const ButtonStyle(
-                      padding: MaterialStatePropertyAll(EdgeInsets.all(15)),
+                    style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), padding: const MaterialStatePropertyAll(EdgeInsets.all(16)),
+                    
+                    side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.secondary)),
 
-                      overlayColor: MaterialStatePropertyAll(Colors.transparent),
+                    overlayColor: const MaterialStatePropertyAll(Colors.transparent),
 
-                      shadowColor: MaterialStatePropertyAll(Colors.transparent)
+                    shadowColor: const MaterialStatePropertyAll(Colors.transparent)
+                    
                     ),
                   
                     onPressed: (){
@@ -246,18 +258,21 @@ class _EditorState extends State<Editor> {
                       value.setLength();
                       
                       Navigator.of(context).pop();
-                    }
+                      
+                    } else{
+                      SnackBarUtils.showSnackbar(context, CupertinoIcons.pencil_slash, "Please enter title and description");
+                }
                     }, 
                   
-                    child: const Text('Save', style: TextStyle(fontFamily: 'Inter', fontSize: 18))
+                    child: Text('Save', style: TextStyle(fontFamily: 'Inter', fontSize: 20, fontWeight: FontWeight.w500, color: Theme.of(context).colorScheme.tertiary))
                 
                     ),
 
-                  const Gap(10),
+                  const Gap(8),
 
                   IconButton(onPressed: (){
                     Navigator.pop(context);
-                  }, icon: const Icon(CupertinoIcons.xmark))
+                  }, icon: const Icon(CupertinoIcons.xmark, size: 20, ))
               ],
             ),
           ],
@@ -277,7 +292,7 @@ class _EditorState extends State<Editor> {
       
               children: [
       
-                  toolbar(_MarkdownState.page, context),
+                  Opacity(opacity: 0.8, child: toolbar(_MarkdownState.page, context)),
       
                     const Gap(8),
             

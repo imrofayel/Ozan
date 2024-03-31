@@ -8,35 +8,37 @@ class Themes {
 
     useMaterial3: true,
 
-    fontFamily: "EB Garamond",
+    fontFamily: 'Inter',
 
     textTheme: const TextTheme(
 
-      bodyMedium: TextStyle(color: Color.fromRGBO(43, 43, 43, 1)),
+      bodyMedium: TextStyle(color: Color.fromARGB(255, 16, 16, 16)),
       
-      bodyLarge: TextStyle(color: Color.fromRGBO(43, 43, 43, 1)),
+      bodyLarge: TextStyle(color:  Color.fromARGB(255, 16, 16, 16)),
 
-      bodySmall: TextStyle(color: Color.fromRGBO(43, 43, 43, 1)),
+      bodySmall: TextStyle(color:  Color.fromARGB(255, 16, 16, 16))
 
     ),
+
+    textSelectionTheme: const TextSelectionThemeData(cursorColor: Color.fromARGB(255, 16, 16, 16), selectionColor: Color.fromRGBO(233, 231, 227, 1)),
 
     colorScheme: ColorScheme.fromSeed(
 
       brightness: Brightness.light,
 
-      seedColor: Colors.brown,
+      seedColor: Colors.white,
 
-      background: const Color.fromRGBO(243, 242, 236, 1),
+      background: const Color.fromRGBO(255, 255, 255, 1),
 
-      primary: const Color.fromRGBO(248, 248, 247, 1),
+      secondary: const Color.fromRGBO(243, 243, 243, 1),
 
-      tertiary: const Color.fromRGBO(61, 57, 41, 1),
+      primary: const Color.fromRGBO(249, 249, 252, 1),
 
-      secondary: const Color.fromRGBO(61, 57, 41, 1)
+      tertiary: const Color.fromARGB(255, 16, 16, 16),
 
     ),
 
-    appBarTheme:  const AppBarTheme(backgroundColor: Color.fromRGBO(243, 242, 236, 1)),
+    appBarTheme:  const AppBarTheme(backgroundColor: Colors.transparent, surfaceTintColor: Colors.transparent),
 
     tooltipTheme: TooltipThemeData(
 
@@ -46,7 +48,7 @@ class Themes {
 
       decoration: BoxDecoration(
 
-        color: const Color.fromARGB(255, 236, 236, 236),
+        color: const Color.fromRGBO(249, 249, 252, 1),
         
         borderRadius: BorderRadius.circular(20)
       ),
@@ -94,13 +96,11 @@ class Themes {
     ),
   );
 
-  static ThemeData darkTheme = ThemeData(
-
-    brightness: Brightness.dark,
+   static ThemeData darkTheme = ThemeData(
 
     useMaterial3: true,
 
-    fontFamily: "EB Garamond",
+    fontFamily: 'Inter',
 
     textTheme: const TextTheme(
 
@@ -116,17 +116,22 @@ class Themes {
 
       brightness: Brightness.dark,
 
-      seedColor: Colors.brown,
+      seedColor: Colors.green,
 
-      background: const Color.fromRGBO(44, 44, 41, 1),
+      background: const Color.fromARGB(255, 3, 13, 17),
 
-      primary: const Color.fromRGBO(51, 51, 48, 1),
+      secondary: const Color.fromRGBO(6, 32, 42, 1),
+
+      primary: const Color.fromRGBO(4, 19, 25, 1),
 
       tertiary: const Color.fromRGBO(192, 212, 190, 1),
 
     ),
 
-    appBarTheme:  const AppBarTheme(backgroundColor: Color.fromRGBO(44, 44, 41, 1)),
+    textSelectionTheme: const TextSelectionThemeData(cursorColor: Color.fromARGB(255, 16, 16, 16), selectionColor: Color.fromRGBO(6, 32, 42, 1)),
+
+
+    appBarTheme:  const AppBarTheme(backgroundColor: Colors.transparent, surfaceTintColor: Colors.transparent),
 
     tooltipTheme: TooltipThemeData(
 
@@ -136,12 +141,12 @@ class Themes {
 
       decoration: BoxDecoration(
 
-        color: const Color.fromARGB(255, 8, 8, 8),
+        color: const  Color.fromRGBO(6, 32, 42, 1),
         
         borderRadius: BorderRadius.circular(20)
       ),
 
-      textStyle: TextStyle(fontSize: 18, color: const Color.fromARGB(255, 255, 255, 255).withOpacity(0.8), fontFamily: 'Inter'),
+      textStyle: const TextStyle(fontSize: 18, color: Color.fromRGBO(192, 212, 190, 1), fontFamily: 'Inter'),
     ),
 
     dropdownMenuTheme: DropdownMenuThemeData(
@@ -154,7 +159,7 @@ class Themes {
 
       borderRadius: BorderRadius.circular(30),
 
-      borderSide: BorderSide.none,
+      borderSide: BorderSide.none
                 
       ),
 
@@ -165,14 +170,14 @@ class Themes {
             borderSide: BorderSide.none
                 
           )
-      
+
       ),
 
       menuStyle: MenuStyle(
         
         elevation: const MaterialStatePropertyAll(0),
 
-        backgroundColor: const MaterialStatePropertyAll(Color.fromRGBO(45, 63, 50, 1)),
+        backgroundColor: const MaterialStatePropertyAll(Color.fromRGBO(6, 32, 42, 1)),
 
         shadowColor: const MaterialStatePropertyAll(Colors.transparent),   
 
@@ -181,6 +186,8 @@ class Themes {
         visualDensity: VisualDensity.comfortable,
 
       )
-    )
+    ),
   );
 }
+
+

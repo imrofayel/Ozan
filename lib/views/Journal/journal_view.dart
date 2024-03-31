@@ -1,24 +1,36 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
+import 'package:ozan/components/snackbar.dart';
+import 'package:ozan/db/journal_db/journal.dart';
+import 'package:ozan/db/journal_db/journal_db_provider.dart';
+import 'package:ozan/views/Journal/editor.dart';
+import 'package:ozan/views/Journal/editor_update.dart';
 import 'package:popover/popover.dart';
 import 'package:gap/gap.dart';
-import 'package:ozan/db/db_provider.dart';
-import 'package:ozan/db/notes.dart';
-import 'package:ozan/markdown/markdown_style.dart';
-import 'package:ozan/views/update_view.dart';
 import 'package:provider/provider.dart';
 
 
-class NotesView extends StatefulWidget {
+class JournalView extends StatefulWidget {
   
-  const NotesView({super.key});
+  const JournalView({super.key});
 
   @override
-  State<NotesView> createState() => _NotesViewState();
+  State<JournalView> createState() => _JournalViewState();
 }
 
-class _NotesViewState extends State<NotesView> {
+class _JournalViewState extends State<JournalView> {
+
+  List<String> questions = [
+
+    "What happened today?",
+
+    "Things I am grateful for...",
+
+    "Daily affirmations"
+
+  ];
 
   @override
   void initState(){    
@@ -28,7 +40,7 @@ class _NotesViewState extends State<NotesView> {
   @override
   Widget build(BuildContext context) {
 
-    return Consumer<DatabaseProvider>(
+    return Consumer<JournalDatabaseProvider>(
 
       builder: (context, value, child){
       
@@ -50,12 +62,48 @@ class _NotesViewState extends State<NotesView> {
         body: Column(
           
           children: [
+
+              Row(
+
+                mainAxisAlignment: MainAxisAlignment.center,
+
+                children: [
+
+                  FilledButton(onPressed: () async{
+                     if (await value.dbHelper.check(DateFormat('d/M/y').format(DateTime.now()))){
+
+                        // ignore: use_build_context_synchronously
+                        Navigator.push(context, MaterialPageRoute(builder:(context) => const JournalEditor()));
+                     } else{
+                      // ignore: use_build_context_synchronously
+                      SnackBarUtils.showSnackbar(context, FluentIcons.warning_24_regular, "Today's journal entry has already been recorded, try to update it.");
+                     }
+                  
+                  }, style: ButtonStyle(
+                            
+                    side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
+                  
+                    padding: const MaterialStatePropertyAll(EdgeInsets.all(20)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),
+                          
+                    child: Row(
+                  
+                      children: [
+                  
+                        Icon(CupertinoIcons.pen, size: 24, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)),
+                  
+                        const Gap(6),
+                  
+                        Text('Capture your thoughts!', textScaler: const TextScaler.linear(1.3), style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(1))),
+                      ],
+                    )),
+                ],
+              ),
             
               FutureBuilder(
         
                 future: value.notesList,
         
-                builder: (context, AsyncSnapshot<List<NotesModel>> snapshot) {
+                builder: (context, AsyncSnapshot<List<Journal>> snapshot) {
                   
                   if(snapshot.hasData && snapshot.data!.isNotEmpty){
                     
@@ -64,12 +112,14 @@ class _NotesViewState extends State<NotesView> {
                       child: Column(
                       
                         children: [
+
+                          const Gap(14),
                       
                           FilledButton(onPressed: (){}, style: ButtonStyle(
                             
                             side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
                       
-                            padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text('${snapshot.data!.length} entries', style: TextStyle(fontSize: 17, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
+                            padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text('${snapshot.data!.length} entries', style: TextStyle(fontSize: 17, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
                           
                           const Gap(14),
                       
@@ -81,7 +131,7 @@ class _NotesViewState extends State<NotesView> {
 
                               child: GridView.builder(
                                                         
-                                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 400),
+                                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 390, mainAxisExtent: 250),
                               
                                 scrollDirection: Axis.vertical,
                                               
@@ -98,56 +148,8 @@ class _NotesViewState extends State<NotesView> {
                                     splashFactory: null,
                               
                                     onTap: (){
-                                      
-                                      Navigator.push(context, MaterialPageRoute(builder:(context){
-                                                  
-                                        return Scaffold(
-                                                      
-                                          body: Row(
-                                                      
-                                            children: [
-                                                      
-                                              Expanded(flex: 2, child: SizedBox(
-                                                      
-                                                child: Padding(
-                                                      
-                                                  padding: const EdgeInsets.all(20.0),
-                                                      
-                                                  child: Column(
-                                                                
-                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                                
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                                
-                                                  children: [
-                                                    
-                                                    IconButton(onPressed: (){
-                                                      
-                                                      Navigator.pop(context);
-                                                                      
-                                                    }, 
-                                                                    
-                                                    icon: Icon(CupertinoIcons.arrow_left, size: 22, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6)), style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)), overlayColor: const MaterialStatePropertyAll(Colors.transparent))),
-                                                                    
-                                                  ],
-                                                ),
-                                              ),
-                                            )),
-                                                      
-                                            Expanded(flex: 10, child: Padding(
-                                                      
-                                              padding: const EdgeInsets.all(26),
-                                                      
-                                              child: Update(note: snapshot.data![index]),
-                                            )),
-                                                      
-                                            const Expanded(flex: 2, child: SizedBox()),
-                                                      
-                                          ],
-                                        ),
-                                      );
-                                    }));
-                                  },
+                                      showDialog(context: context, builder:(context) => UpdateJournalEditor(entry: snapshot.data![index]),);
+                                    },
                               
                                     child: Container(
                                       
@@ -179,33 +181,28 @@ class _NotesViewState extends State<NotesView> {
                                                 
                                                 side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
                                                                                   
-                                                padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text(snapshot.data![index].date, style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
+                                                padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text(DateFormat('d MMMM, yy').format(DateFormat('d/M/y').parse(snapshot.data![index].date),), style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary.withOpacity(1), fontFamily: 'Inter'))),
                               
                                                 SizedBox(child: Delete(id: snapshot.data![index].id)),
                                             ],
                                           ),
-                                                  
-                                          const Gap(10),
-                                    
-                                          Padding(
-                                    
-                                            padding: const EdgeInsets.only(left: 8),
-                                    
-                                            child: Text(snapshot.data![index].title, textScaler: const TextScaler.linear(1.5)),
-                                          ),
                                     
                                           const Gap(14),
+
+                                            FilledButton(onPressed: (){}, style: ButtonStyle(
+                                                
+                                                side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
+                                                                                  
+                                                padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text(questions[0], style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
+
+                                                const Gap(6),
                                     
-                                          Expanded(
-                                            
-                                            child: Container(
-                                              
-                                              decoration: BoxDecoration(color: Theme.of(context).colorScheme.background, border: Border.all(color: Theme.of(context).colorScheme.secondary), borderRadius: BorderRadius.circular(10)),
-                                              
-                                              child: markdown(snapshot.data![index].description, 1.14, context))
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text(snapshot.data![index].description.split('~~~')[1], textScaler: const TextScaler.linear(1.2), maxLines: 4),
                                           )
                                         ],
-                                      ),
+                                      )
                                     ),
                                   );
                                 },  
@@ -223,18 +220,23 @@ class _NotesViewState extends State<NotesView> {
         
                       visible: snapshot.connectionState == ConnectionState.done,
         
-                      child: Row(
-                          
-                        mainAxisAlignment: MainAxisAlignment.center,
-                      
-                        children: [
-                              
-                          FilledButton(onPressed: (){}, style: ButtonStyle(
-                                              
-                            side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
-                                                                                
-                            padding: const MaterialStatePropertyAll(EdgeInsets.all(20)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text('Your canvas is blank', style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
-                        ],
+                      child: Expanded(
+                
+                        child: Column(
+        
+                          mainAxisAlignment: MainAxisAlignment.center,
+        
+                          children: [
+        
+                            FilledButton(onPressed: (){}, style: ButtonStyle(
+                                                
+                              side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
+                                                                                  
+                              padding: const MaterialStatePropertyAll(EdgeInsets.all(20)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text('Your canvas is blank', style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
+
+                            const Gap(100),
+                          ],
+                        ),
                       ),
                     );
                   }
@@ -258,7 +260,7 @@ class Delete extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Consumer<DatabaseProvider>(builder:(context, value, child) =>
+    return Consumer<JournalDatabaseProvider>(builder:(context, value, child) =>
 
       Builder(
                                                                                   
@@ -306,4 +308,24 @@ class Delete extends StatelessWidget {
       ),
     );
   }
+}
+
+Map<String, dynamic> findLargestStringAndIndex(List<String> strings) {
+  if (strings.isEmpty) {
+    throw ArgumentError("Input list cannot be empty");
+  }
+
+  strings.remove('');
+
+  String largestString = strings.first;
+  int largestIndex = 0;
+
+  for (int i = 1; i < strings.length; i++) {
+    if (strings[i].length > largestString.length) {
+      largestString = strings[i];
+      largestIndex = i;
+    }
+  }
+
+  return {'string': largestString, 'index': largestIndex};
 }

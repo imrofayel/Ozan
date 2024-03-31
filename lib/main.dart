@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ozan/db/db_provider.dart';
+import 'package:ozan/db/journal_db/journal_db_provider.dart';
 import 'package:ozan/theme/theme_provider.dart';
 import 'package:ozan/views/home.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +16,7 @@ void main() async {
     size: Size(800, 660),
     center: true,
     titleBarStyle: TitleBarStyle.normal,
-    title: 'Rofayel Notebook',
+    title: 'Ozan',
     minimumSize: Size(700, 600),
   );
   windowManager.waitUntilReadyToShow(windowOptions, () async {
@@ -27,6 +28,8 @@ void main() async {
   runApp(MultiProvider(providers: [
 
     ChangeNotifierProvider(create:(context) => DatabaseProvider()),
+
+    ChangeNotifierProvider(create:(context) => JournalDatabaseProvider()),
 
     ChangeNotifierProvider(create:(context) => ThemeSwitcher()),
 

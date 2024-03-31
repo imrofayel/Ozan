@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
+import 'package:ozan/components/snackbar.dart';
 import 'package:ozan/database/file_service.dart';
 import 'package:ozan/components/components.dart';
 import 'package:ozan/components/toolbar.dart';
@@ -32,7 +33,7 @@ class _UpdateState extends State<Update>{
   static FocusNode _focusNode = FocusNode(); // Declare the FocusNode
 
   // ignore: unused_field
-  static String md = 'Open Editor & Capture your thoughts!'; // Markdown Bodata
+  static String md = 'Capture your thoughts!'; // Markdown Bodata
 
   @override
   void initState() {
@@ -51,17 +52,6 @@ class _UpdateState extends State<Update>{
 
         });        
       }
-
-      // else{
-
-      //   setState(() {
-          
-      //     page = TextEditingController(text: page.text);
-
-      //     pageTitle = TextEditingController(text: 'Creation');
-          
-      //   });
-      // }
 
       super.initState();
 }
@@ -106,7 +96,7 @@ class _UpdateState extends State<Update>{
         
                         borderRadius: const BorderRadius.all(Radius.circular(23)),
         
-                        border: Border.all(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.4))
+                        border: Border.all(color: Theme.of(context).colorScheme.secondary)
         
                       ),
         
@@ -117,9 +107,7 @@ class _UpdateState extends State<Update>{
                           Expanded(child: titleBox(context, controller: pageTitle)),
                       
                           const Gap(20),
-                                                    
-                          const Gap(15),
-                                  
+
                           FilledButton(onPressed: (){
                                   
                             showDialog(
@@ -129,21 +117,23 @@ class _UpdateState extends State<Update>{
                                 return Editor(note: widget.note);
                               }
                             );
-                          }, style: ButtonStyle(
+                          }, 
+                          
+                          style: ButtonStyle(
                             
-                            shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
+                            shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(18), side: BorderSide.none)),
                             
-                            backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.secondary), padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: const MaterialStatePropertyAll(Colors.transparent)), 
+                            backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)), padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: const MaterialStatePropertyAll(Colors.transparent)), 
                             
                             child: Row(
         
                               children: [
         
-                                Icon(CupertinoIcons.pencil_outline, size: 26, color: Theme.of(context).colorScheme.primary),
+                                Icon(CupertinoIcons.pencil_outline, size: 26, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)),
         
                                 const Gap(10),
         
-                                Text('Writer', style: TextStyle(color: Theme.of(context).colorScheme.primary, fontSize: 20, fontFamily: 'Inter'),)
+                                Text('Writer', style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontSize: 20, fontFamily: 'Inter'))
                               ],
                             )),
         
@@ -154,27 +144,22 @@ class _UpdateState extends State<Update>{
                           
                     SizedBox(
                               
-                      height: 450,
+                      height: 485,
                               // change md to page.text
-                      child: markdown(page.text, 1.62, context)
+                      child: markdown(page.text, 1.30, context)
                     ),
                             
                       const Gap(10),
-                            
-                      Padding(
-                            
-                        padding: const EdgeInsets.fromLTRB(0,0,0,10),
-                        
-                        child: Row(
-                                          
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        
-                        children: [
-                                          
-                          textEncode(context, words: page.text.split(' ').length-1, char: page.text.length, lines: page.text.split('\n').length-1),
-                        
-                        ],
-                      ),
+
+                      Row(
+                                        
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      
+                      children: [
+                                        
+                        textEncode(context, words: page.text.split(' ').length-1, char: page.text.length, lines: page.text.split('\n').length-1),
+                      
+                      ],
                     ),
                   ],
                 ),
@@ -190,7 +175,7 @@ class _UpdateState extends State<Update>{
 
 String title(){
   
-  String getTitle = 'Untitled';
+  String getTitle = 'Untitled${DateTime.now().microsecond}';
 
   if(_UpdateState.pageTitle.text.isNotEmpty){
     getTitle = _UpdateState.pageTitle.text;
@@ -215,7 +200,6 @@ class Editor extends StatefulWidget {
 class _EditorState extends State<Editor> {
   
   String date = DateFormat('d MMM, yy').format(DateTime.now()); 
-
 
   @override
   Widget build(BuildContext context) {
@@ -248,15 +232,25 @@ class _EditorState extends State<Editor> {
               ],
             ),
 
-            FilledButton.tonal(
+              FilledButton(
+
+                    style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), padding: const MaterialStatePropertyAll(EdgeInsets.all(16)),
+                    
+                    side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.secondary)),
+
+                    overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+
+                    shadowColor: const MaterialStatePropertyAll(Colors.transparent)
+                    
+                    ),
               
                 onPressed: (){
             
-                if(_UpdateState.pageTitle.text.isNotEmpty && _UpdateState.page.text.isNotEmpty){
+                if(_UpdateState.page.text.isNotEmpty){
             
                 if(widget.note != null){
             
-                value.dbHelper.update(NotesModel(title: _UpdateState.pageTitle.text, description: _UpdateState.page.text, date: date, id: widget.note!.id));
+                value.dbHelper.update(NotesModel(title:  _UpdateState.pageTitle.text.isNotEmpty ? _UpdateState.pageTitle.text : 'Untitled', description: _UpdateState.page.text, date: date, id: widget.note!.id));
               
                 value.initDatabase();
               
@@ -275,11 +269,15 @@ class _EditorState extends State<Editor> {
                 Navigator.of(context).pop();
             
                 }
+
+                else{
+                  SnackBarUtils.showSnackbar(context, CupertinoIcons.pencil_slash, "Please enter title and description");
+                }
             
                 }, 
               
               
-                child: const Text('Save', style: TextStyle(fontFamily: 'Inter', fontSize: 18))
+                child: Text('Update', style: TextStyle(fontFamily: 'Inter', fontSize: 18, fontWeight: FontWeight.w500, color: Theme.of(context).colorScheme.tertiary))
 
                 )
           ],

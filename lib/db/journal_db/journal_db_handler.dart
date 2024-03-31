@@ -1,11 +1,11 @@
+import 'package:ozan/db/journal_db/journal.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart'; // Import from sqflite_common_ffi
 import 'package:path_provider/path_provider.dart';
-import 'package:ozan/db/notes.dart';
 // ignore: depend_on_referenced_packages
 import 'package:path/path.dart';
 import 'dart:io' show Platform;
 
-class DBHelper {
+class JournalDBHelper {
   static Database? _db;
 
   Future<Database?> get db async {
@@ -32,10 +32,10 @@ initDatabase() async {
 
     } else {
       // For other platforms (e.g., Windows)
-      databasesPath = 'C:/ProgramData/Ozan'; // Specify your custom directory path
+      databasesPath = 'C:/ProgramData/Caira'; // Specify your custom directory path
     }
 
-    final path = join(databasesPath, 'notesDB.db');
+    final path = join(databasesPath, 'cairaDB.db');
 
     if(Platform.isAndroid || Platform.isIOS){
 
@@ -59,32 +59,32 @@ initDatabase() async {
 
   _onCreate(Database db, int version) async {
     await db.execute(
-        'CREATE TABLE notes (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, description TEXT NOT NULL, date TEXT NOT NULL)');
+        'CREATE TABLE journal (id INTEGER PRIMARY KEY AUTOINCREMENT, description TEXT NOT NULL, date DATE NOT NULL)');
   }
 
-  Future<NotesModel> insert(NotesModel notesModel) async {
+  Future<Journal> insert(Journal notesModel) async {
     var dbClient = await db;
-    await dbClient!.insert('notes', notesModel.toMap());
+    await dbClient!.insert('journal', notesModel.toMap());
     return notesModel;
   }
 
-  Future<List<NotesModel>> getNotesList() async {
+  Future<List<Journal>> getNotesList() async {
     var dbClient = await db;
 
-    final List<Map<String, Object?>> queryResult = await dbClient!.query('notes');
+    final List<Map<String, Object?>> queryResult = await dbClient!.query('journal');
 
-    return queryResult.map((e) => NotesModel.fromMap(e)).toList();
+    return queryResult.map((e) => Journal.fromMap(e)).toList();
   }
 
   Future<int> delete(int? id) async {
     var dbClient = await db;
-    return await dbClient!.delete('notes', where: 'id = ?', whereArgs: [id]);
+    return await dbClient!.delete('journal', where: 'id = ?', whereArgs: [id]);
   }
 
-  Future<int> update(NotesModel notesModel) async {
+  Future<int> update(Journal notesModel) async {
     var dbClient = await db;
     return dbClient!.update(
-      'notes',
+      'journal',
       notesModel.toMap(),
       where: 'id = ?',
       whereArgs: [notesModel.id],
@@ -92,21 +92,18 @@ initDatabase() async {
   }
 
 
-  Future<List<NotesModel>> searchNotes(String key) async {
-    final Database? dbClient = await db;
+  Future<bool> check(String date) async {
+
+    final dbClient = await db;
+
     final List<Map<String, dynamic>> maps = await dbClient!.query(
-      'notes',
-      where: "title LIKE ? OR description LIKE ?",
-      whereArgs: ['%$key%', '%$key%'],
+      'journal',
+      where: 'date = ?',
+      whereArgs: [date],
     );
 
-    return List.generate(maps.length, (i) {
-      return NotesModel(
-        id: maps[i]['id'],
-        title: maps[i]['title'],
-        description: maps[i]['description'],
-        date: maps[i]['date']
-      );
-    });
+    // Check if any entry exists for the given date
+    return maps.isEmpty;
   }
+
 }

@@ -128,7 +128,7 @@ void applyCodeFormatting(TextEditingController controller, context) {
     try {
 
     String newText =
-        '${text.substring(0, selection.start)}\n```\n${text.substring(selection.start, selection.end)}\n```\n${text.substring(selection.end)}';
+        '${text.substring(0, selection.start)}\n```Text\n${text.substring(selection.start, selection.end).isNotEmpty ? text.substring(selection.start, selection.end) : 'Write your code here...'}\n```\n${text.substring(selection.end)}';
 
     controller.value = TextEditingValue(
       text: newText,
@@ -260,10 +260,18 @@ void tableDialog(context, TextEditingController controller){
   showDialog(
 
     context: context,
+    
+    barrierColor: Colors.transparent,
 
     builder: (context) {
 
       return AlertDialog(
+
+        shape: RoundedRectangleBorder(side: BorderSide(color: Theme.of(context).colorScheme.secondary,), borderRadius: BorderRadius.circular(20)),
+
+        backgroundColor: Theme.of(context).colorScheme.primary,
+
+        elevation: 0,
 
         shadowColor: Colors.transparent,
 
@@ -295,43 +303,7 @@ void tableDialog(context, TextEditingController controller){
           
                       constraints: const BoxConstraints(maxHeight: 80, maxWidth: 100),
                       
-                      prefixIcon: Padding(
-                        padding: const EdgeInsets.fromLTRB(12.0, 0, 0, 0),
-                        child: IconButton(onPressed: (){}, icon: Icon(FluentIcons.align_left_24_regular, color: Theme.of(context).colorScheme.tertiary, size: 24), tooltip: "Rows"),
-                      ),
-                         
-                      border: InputBorder.none,
-          
-                      filled: true,
-                  
-                      fillColor: Theme.of(context).colorScheme.primary,
-                  
-                      focusColor: Theme.of(context).colorScheme.primary,
-                  
-                      hoverColor: Theme.of(context).colorScheme.primary,
-
-                      enabledBorder: OutlineInputBorder(borderSide:BorderSide.none, borderRadius: BorderRadius.circular(20)),
-
-                      focusedBorder: OutlineInputBorder(borderSide:BorderSide.none, borderRadius: BorderRadius.circular(20))
-                    ),
-                  
-                    style: const TextStyle(fontSize: 19),
-                  ),
-              
-                  const Gap(10),
-              
-                  TextField( 
-
-                    controller: col,
-                    
-                    decoration: InputDecoration(
-          
-                      constraints: const BoxConstraints(maxHeight: 80, maxWidth: 100),
-                      
-                      prefixIcon: Padding(
-                        padding: const EdgeInsets.fromLTRB(12.0, 0, 0, 0),
-                        child: IconButton(onPressed: (){}, icon: Icon(FluentIcons.align_top_24_regular, color: Theme.of(context).colorScheme.tertiary, size: 24), tooltip: "Columns"),
-                      ),
+                      prefixIcon: IconButton(onPressed: (){}, icon: Icon(FluentIcons.align_left_24_regular, color: Theme.of(context).colorScheme.tertiary, size: 24), tooltip: "Rows", style: ButtonStyle(shape: MaterialStatePropertyAll(RoundedRectangleBorder(side: BorderSide(color: Theme.of(context).colorScheme.secondary), borderRadius: BorderRadius.circular(20))), padding: const MaterialStatePropertyAll(EdgeInsets.all(12)), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background), overlayColor: const MaterialStatePropertyAll(Colors.transparent))),
                                    
                       filled: true,
                   
@@ -344,15 +316,45 @@ void tableDialog(context, TextEditingController controller){
                       enabledBorder: OutlineInputBorder(borderSide:BorderSide.none, borderRadius: BorderRadius.circular(20)),
 
                       focusedBorder: OutlineInputBorder(borderSide:BorderSide.none, borderRadius: BorderRadius.circular(20))
+                      
                     ),
                   
-                    style: const TextStyle(fontSize: 19),
+                    style: const TextStyle(fontSize: 19, fontFamily: "Inter"),
+                  ),
+              
+                  const Gap(10),
+              
+                  TextField( 
+
+                    controller: col,
+                    
+                    decoration: InputDecoration(
+          
+                      constraints: const BoxConstraints(maxHeight: 80, maxWidth: 100),
+                      
+                      prefixIcon: IconButton(onPressed: (){}, icon: Icon(FluentIcons.align_top_24_regular, color: Theme.of(context).colorScheme.tertiary, size: 24), tooltip: "Columns", style: ButtonStyle(shape: MaterialStatePropertyAll(RoundedRectangleBorder(side: BorderSide(color: Theme.of(context).colorScheme.secondary), borderRadius: BorderRadius.circular(20))), padding: const MaterialStatePropertyAll(EdgeInsets.all(12)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background))),
+                                   
+                      filled: true,
+                  
+                      fillColor: Theme.of(context).colorScheme.primary,
+                  
+                      focusColor: Theme.of(context).colorScheme.primary,
+                  
+                      hoverColor: Theme.of(context).colorScheme.primary,
+
+                      enabledBorder: OutlineInputBorder(borderSide:BorderSide.none, borderRadius: BorderRadius.circular(20)),
+
+                      focusedBorder: OutlineInputBorder(borderSide:BorderSide.none, borderRadius: BorderRadius.circular(20))
+                      
+                    ),
+                  
+                    style: const TextStyle(fontSize: 19, fontFamily: "Inter"),
                   ),
                 ],
               ),
-              
-              const Gap(20),
-          
+
+              const Gap(14),
+                        
               IconButton.filled(onPressed: (){
 
                 if(isValidInteger(row.text) && isValidInteger(col.text)){
@@ -364,7 +366,11 @@ void tableDialog(context, TextEditingController controller){
                 }
               },
 
-              icon: Icon(FluentIcons.add_24_regular, color: Theme.of(context).colorScheme.tertiary),  tooltip: "Create")
+              icon: Icon(FluentIcons.add_24_regular, color: Theme.of(context).colorScheme.tertiary),  tooltip: "Create", style: ButtonStyle(
+          
+                      side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
+
+                      overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)),)
             ],
           ),
         ),
@@ -394,15 +400,25 @@ void linkDialog(context, TextEditingController controller){
 
     context: context,
 
+    barrierColor: Colors.transparent,
+
     builder: (context) {
 
       return AlertDialog(
+
+        shape: RoundedRectangleBorder(side: BorderSide(color: Theme.of(context).colorScheme.secondary,), borderRadius: BorderRadius.circular(20)),
+
+        backgroundColor: Theme.of(context).colorScheme.primary,
+
+        elevation: 0,
 
         shadowColor: Colors.transparent,
 
         contentPadding: const EdgeInsets.all(4),
 
         insetPadding: EdgeInsets.zero,
+
+        surfaceTintColor: Colors.transparent,
         
         content: SizedBox(
 
@@ -428,26 +444,22 @@ void linkDialog(context, TextEditingController controller){
 
                       hintText: " Title",
 
-                      hintStyle: TextStyle(fontWeight: FontWeight.w500, color: Theme.of(context).colorScheme.tertiary),
+                      hintStyle: TextStyle(fontWeight: FontWeight.w500, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter', fontSize: 20),
           
                       constraints: const BoxConstraints(maxHeight: 80, maxWidth: 250),
                          
                       border: InputBorder.none,
-          
-                      filled: true,
-                  
-                      fillColor: Theme.of(context).colorScheme.primary,
-                  
-                      focusColor: Theme.of(context).colorScheme.primary,
-                  
-                      hoverColor: Theme.of(context).colorScheme.primary,
 
                       enabledBorder: OutlineInputBorder(borderSide:BorderSide.none, borderRadius: BorderRadius.circular(20)),
 
                       focusedBorder: OutlineInputBorder(borderSide:BorderSide.none, borderRadius: BorderRadius.circular(20))
                     ),
                   
-                    style: const TextStyle(fontSize: 19),
+                    style: const TextStyle(fontSize: 20, fontFamily: 'Inter'),
+
+                    cursorHeight: 40,
+
+                    cursorColor: Theme.of(context).colorScheme.secondary,
                   ),
               
                   const Gap(14),
@@ -461,8 +473,12 @@ void linkDialog(context, TextEditingController controller){
                       constraints: const BoxConstraints(maxHeight: 80, maxWidth: 250),
                       
                       prefixIcon: Padding(
-                        padding: const EdgeInsets.fromLTRB(12.0, 0, 10, 0),
-                        child: IconButton(onPressed: (){}, icon: Icon(FluentIcons.link_24_regular, color: Theme.of(context).colorScheme.tertiary, size: 24), tooltip: "Link"),
+                      
+                      padding: const EdgeInsets.fromLTRB(12.0, 0, 10, 0),
+                      
+                      child: IconButton(onPressed: (){}, icon: Icon(FluentIcons.link_24_regular, color: Theme.of(context).colorScheme.tertiary, size: 26), tooltip: "Link", style: ButtonStyle(side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
+
+                      overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), padding: const EdgeInsets.all(12),),
                       ),
                                    
                       filled: true,
@@ -478,7 +494,7 @@ void linkDialog(context, TextEditingController controller){
                       focusedBorder: OutlineInputBorder(borderSide:BorderSide.none, borderRadius: BorderRadius.circular(20))
                     ),
                   
-                    style: const TextStyle(fontSize: 19),
+                    style: const TextStyle(fontSize: 19, fontFamily: 'Inter'),
                   ),
                 ],
               ),
@@ -506,13 +522,16 @@ void linkDialog(context, TextEditingController controller){
                         );
                       } catch (e) {
                         // Textfield not selected
-                      }  
+                      }
                 }
+                Navigator.pop(context);
               },
               
-              style: const ButtonStyle(fixedSize: MaterialStatePropertyAll(Size(50, 50)), shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30))))),
+              style: ButtonStyle(side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
+
+              overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background), padding: const MaterialStatePropertyAll(EdgeInsets.all(12))),
               
-              icon: Icon(FluentIcons.add_24_regular, color: Theme.of(context).colorScheme.tertiary,), tooltip: "Create")
+              icon: Icon(FluentIcons.add_24_regular, color: Theme.of(context).colorScheme.tertiary,), tooltip: "Create",),
             ],
           ),
         ),

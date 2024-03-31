@@ -1,29 +1,30 @@
 // import 'package:dictionaryx/dictionary_msa.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:ozan/components/snackbar.dart';
 
-IconButton button(void Function()? function, IconData icon, context, {Color? textColor, Color? overlayColor, required String tooltip}){
+FilledButton button(void Function()? function, IconData icon, context, {required String tooltip}){
 
-  return IconButton(
+  return  FilledButton(onPressed: function, style: ButtonStyle(
+          
+            side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
 
-      tooltip: tooltip,
+            padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), 
+                      
+            child: Row(
 
-      onPressed: function, 
+              children: [
 
-      icon: Icon(icon),
-    
-      style: ButtonStyle(
+                Icon(icon, size: 21, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)),
 
-        iconSize: const MaterialStatePropertyAll(24),
+                const Gap(8),
 
-        iconColor: MaterialStatePropertyAll(textColor ?? Theme.of(context).colorScheme.tertiary),
-
-        overlayColor: MaterialStatePropertyAll(overlayColor ?? Colors.transparent),
-      )
-  );
+                Text(tooltip, textScaler: const TextScaler.linear(1.3), style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8))),
+              ],
+      ));
 }
 
 TextField textField(context, {int? lines = 1, required void Function(String)? onSubmitted, required void Function(String)? onChanged, required TextEditingController controller, FocusNode? focusNode, required Color color, Color? textColor}){
@@ -69,36 +70,6 @@ TextField textField(context, {int? lines = 1, required void Function(String)? on
   );
 }
 
-FilledButton tonalButton(context, {required void Function()? fn, required String text, required IconData icon, Size? size, double? textSize, double? iconSize}){
-
-  return FilledButton.tonal(onPressed: fn,
-
-    style: ButtonStyle(
-
-      fixedSize: MaterialStatePropertyAll(size ?? const Size(175, 50)),
-
-      backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary),
-
-      shadowColor: const MaterialStatePropertyAll(Colors.transparent),
-
-      overlayColor: const MaterialStatePropertyAll(Colors.white)
-
-    ),
-    
-    child: Row(
-
-      children: [
-        
-        Icon(icon, size: iconSize?? 25, color: Theme.of(context).colorScheme.tertiary),
-    
-        const Gap(8),
-        
-        Text(text, style: TextStyle(fontSize: textSize ?? 18, fontWeight: FontWeight.w400, color: Theme.of(context).colorScheme.tertiary)),
-      ],
-    ),
-  );
-}
-
 void copyToClipboard(context, String text){
 
       Clipboard.setData(ClipboardData(text: text));
@@ -121,25 +92,25 @@ SingleChildScrollView textEncode(context, {required int words, required int char
     
         FilledButton(onPressed: (){}, style: ButtonStyle(
           
-          side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6))),
+          side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
 
-          padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary.withOpacity(0.8))), child: Text("$words words", style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
+          padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("$words words", style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
     
-        const Gap(7),
+        const Gap(9),
     
         FilledButton(onPressed: (){}, style: ButtonStyle(
           
-          side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6))),
+          side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.secondary)),
 
-          padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary.withOpacity(0.8))), child: Text("$char characters", style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
+          padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("$char characters", style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
     
-        const Gap(7),
+        const Gap(9),
     
         FilledButton(onPressed: (){}, style: ButtonStyle(
 
-          side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6))),
+          side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.secondary)),
 
-          padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary.withOpacity(0.8))), child: Text("$lines lines", style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
+          padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("$lines lines", style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
       ],
     ),
   );
@@ -159,13 +130,13 @@ Widget titleBox(context, {required TextEditingController controller}){
 
     decoration: InputDecoration(
 
-      hintText: "Creation",
+      hintText: "Untitled",
 
       hintStyle: TextStyle(fontWeight: FontWeight.w400, color: Theme.of(context).colorScheme.tertiary),
 
       constraints: const BoxConstraints(maxWidth: 520),
 
-      contentPadding: const EdgeInsets.all(20),
+      contentPadding: const EdgeInsets.all(18),
 
       focusColor: Colors.transparent,
 
@@ -175,24 +146,24 @@ Widget titleBox(context, {required TextEditingController controller}){
 
     ),
 
-    style: const TextStyle(fontSize: 30),
+    style: const TextStyle(fontSize: 24),
   );
 }
 
-String greet(){
+String greet(String name){
   
   String text;
 
   if(DateTime.now().hour > 0 && DateTime.now().hour <= 11){
-    text = 'Good Morning!';
+    text = 'Good Morning $name!';
   }
 
-  if(DateTime.now().hour > 11 && DateTime.now().hour <= 16){
-    text = 'Good Afternoon!';
+  else if(DateTime.now().hour > 11 && DateTime.now().hour <= 16){
+    text = 'Good Afternoon $name!';
   }
 
   else{
-    text = 'Good Evening!';
+    text = 'Good Evening $name!';
   }
 
   return text;

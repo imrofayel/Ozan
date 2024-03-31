@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:ozan/db/db_provider.dart';
 import 'package:ozan/theme/theme_provider.dart';
+import 'package:ozan/views/Journal/journal_view.dart';
 import 'package:ozan/views/configure.dart';
 import 'package:ozan/views/markdown.dart';
 import 'package:ozan/components/sidebar.dart';
@@ -19,103 +21,155 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
+    return Consumer<DatabaseProvider>(builder:(context, value, child){
 
-      appBar: AppBar(
-             
-            title: SizedBox(
-              
-              child: Row(
+      return Scaffold(
+      
+        appBar: AppBar(
+               
+              title: SizedBox(
                 
-                children: [
+                child: Row(
+                  
+                  children: [
+      
+                    IconButton(onPressed: (){}, 
+                    
+                    icon: Row(
 
-                IconButton(onPressed: (){
-                  }, icon: Icon(CupertinoIcons.scribble, size: 36, color: Theme.of(context).colorScheme.tertiary)),
-            
-                  const Gap(10),
+                      children: [
 
+                        Icon(CupertinoIcons.book, size: 22, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)),
+
+                        const Gap(6),
+
+                        Text('Ozan', textScaler: const TextScaler.linear(1.4), style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8))),
+                      ],
+                    ),
+
+                     style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), padding: const MaterialStatePropertyAll(EdgeInsets.fromLTRB(14, 6, 14, 6))),
+                    
+                    ),
+              
+                    const Gap(14),
+      
+                    IconButton(onPressed: (){
+                      Markdown.files.newFile(context);
+       
+                    }, 
+                    
+                    icon: Icon(CupertinoIcons.add, size: 22, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6)), style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)), overlayColor: const MaterialStatePropertyAll(Colors.transparent))),
+                    
+                    const Gap(13),
+
+                    FilledButton(onPressed: (){
+
+                      Navigator.push(context, MaterialPageRoute(builder:(context) => const NotesView()));
+
+                    }, style: ButtonStyle(
+          
+                      side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
+
+                      padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), 
+                      
+                      
+                      child: Row(
+
+                        children: [
+
+                          Icon(CupertinoIcons.collections, size: 20, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)),
+
+                          const Gap(8),
+
+                          Text('Library', textScaler: const TextScaler.linear(1.3), style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8))),
+                        ],
+                    )),
+
+                    const Gap(10),
+
+                    FilledButton(onPressed: (){
+                      Navigator.push(context, MaterialPageRoute(builder:(context) => const JournalView()));
+                    }, style: ButtonStyle(
+          
+                      side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
+
+                      padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), 
+                      
+                      child: Row(
+
+                        children: [
+
+                          Icon(CupertinoIcons.pen, size: 24, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)),
+
+                          const Gap(3),
+
+                          Text('Journal', textScaler: const TextScaler.linear(1.3), style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8))),
+                        ],
+                    )),
+      
+                  ],
+                ),
+              ),
+                  
+              elevation: 0,
+                  
+              actions:
+
+                [ 
+                  
+                  FilledButton(onPressed: (){
+                      Provider.of<ThemeSwitcher>(context, listen: false).toggleTheme();
+                    }, style: ButtonStyle(
+          
+                      side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
+
+                      padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), 
+                      
+                      child: Row(
+
+                        children: [
+
+                          Icon(CupertinoIcons.sun_min, size: 24, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)),
+
+                          const Gap(6),
+
+                          Text('Theme', textScaler: const TextScaler.linear(1.3), style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8))),
+                        ],
+                    )),
+      
+                  const Gap(8),
+                                  
                   IconButton(onPressed: (){
-                    Markdown.files.newFile(context);
- 
-                  }, icon: Icon(CupertinoIcons.add, color: Theme.of(context).colorScheme.tertiary)),
+                    showDialog(context: context, builder: (context){
 
+                      return const Configuration();
+                      
+                    }, barrierColor: Colors.transparent);
+
+                    }, icon: Icon(CupertinoIcons.ellipsis, size: 20, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)), style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)), overlayColor: const MaterialStatePropertyAll(Colors.transparent))),
+      
+                  const Gap(10),
+                
                 ],
               ),
-            ),
-                
-            elevation: 0,
-                
-            actions:
-              
-              [
-
-                IconButton(onPressed: (){
-
-                  Provider.of<ThemeSwitcher>(context, listen: false).toggleTheme();
-
-                }, icon: Icon(CupertinoIcons.sun_min, size: 26, color: Theme.of(context).colorScheme.tertiary)),
-
-                const Gap(3),
-                                
-                IconButton(onPressed: (){
-                  showDialog(context: context, builder: (context){
-                    return const Configuration();
-                  });
-                }, icon: Icon(CupertinoIcons.person, size: 26, color: Theme.of(context).colorScheme.tertiary,)),
-
-                const Gap(10),
-              
-              ],
-            ),
-
-      body: Row(
       
-        crossAxisAlignment: CrossAxisAlignment.start,
+        body: const Row(
         
-        children: [
+          crossAxisAlignment: CrossAxisAlignment.start,
           
-          const Expanded(flex: 1, child: Sidebar()),
+          children: [
+            
+            Expanded(flex: 3, child: Sidebar()),
+              
+            Expanded(flex: 8, child: Markdown()),
 
-          const Expanded(flex: 2, child: SizedBox()),
-      
-          const Expanded(flex: 10, child: Markdown()),
+            Expanded(flex: 3, child: SizedBox()),
 
-          Expanded(flex: 3, child: SizedBox(
-
-            child: Column(
-
-              crossAxisAlignment: CrossAxisAlignment.center,
-
-              mainAxisAlignment: MainAxisAlignment.end,
-
-              children: [
-                
-                Padding(
-                
-                  padding: const EdgeInsets.only(bottom: 30),
-                
-                  child: FilledButton(onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder:(context) => const NotesView()));
-                  }, 
-                  
-                  style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary.withOpacity(0.8)), padding: const MaterialStatePropertyAll(EdgeInsets.all(20)),
-                  
-                  side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6))),
-
-                  overlayColor: const MaterialStatePropertyAll(Colors.transparent),
-
-                  shadowColor: const MaterialStatePropertyAll(Colors.transparent)
-                  
-                  ),
-                  
-                  
-                  child: Text('Saved', style: TextStyle(fontSize: 20, fontFamily: 'Inter', color: Theme.of(context).colorScheme.tertiary, fontWeight: FontWeight.w400))),
-                ),
-              ],
-            ),
-          )),
-        ],
-      ),
+          ],
+        ),
+      );
+    }
     );
   }
 }
+

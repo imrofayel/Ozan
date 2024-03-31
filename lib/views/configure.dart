@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:gap/gap.dart';
 
 class Configuration extends StatefulWidget {
@@ -15,11 +14,17 @@ class _ConfigurationState extends State<Configuration> {
   @override
   Widget build(BuildContext context) {
 
-    return const SimpleDialog(
+    return SimpleDialog(
+
+      shape: RoundedRectangleBorder(side: BorderSide(color: Theme.of(context).colorScheme.secondary), borderRadius: BorderRadius.circular(16)),
+
+      surfaceTintColor: Colors.transparent,
+
+      elevation: 0,
 
       shadowColor: Colors.transparent,
 
-      children: [
+      children: const[
 
         Info(),
 
@@ -36,12 +41,13 @@ class Info extends StatefulWidget {
 }
 
 class _InfoState extends State<Info> {
+
   @override
   Widget build(BuildContext context) {
 
     return Container(
       
-      padding: const EdgeInsets.all(30),
+      padding: const EdgeInsets.all(14),
 
       child: Column(
 
@@ -52,15 +58,37 @@ class _InfoState extends State<Info> {
         children: [
       
           // Name & Icon
-          const Row(
-            
+          Row(
+
             children: [
-          
-              Icon(CupertinoIcons.pencil_outline, size: 30),
-                      
-              Gap(6),
-                      
-              Text("Rofayel Notebook v4.0 (Grok)", style: TextStyle(fontSize: 20, fontFamily: 'Inter')),
+
+              FilledButton(
+              
+                onPressed: (){},
+              
+                style: ButtonStyle(
+              
+                  side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
+              
+                  padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), 
+              
+                child: Padding(
+
+                  padding: const EdgeInsets.all(4),
+
+                  child: Row(
+                    
+                    children: [
+                  
+                      Icon(CupertinoIcons.book, size: 24, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9),),
+                              
+                      const Gap(8),
+                              
+                      Text("Ozan v2.0", style: TextStyle(fontSize: 19, fontFamily: 'Inter', color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
 
@@ -68,13 +96,31 @@ class _InfoState extends State<Info> {
 
           SizedBox(
 
-            width: 500,
+            width: 400,
 
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: MarkdownBody(data: "simple, elegant, enjoyable", styleSheet: MarkdownStyleSheet(p: const TextStyle(fontSize: 33, height: 2, fontStyle: FontStyle.italic))),
+
+              child: Column(
+
+                crossAxisAlignment: CrossAxisAlignment.start,
+
+                children: [
+
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10.0),
+                    child: RichText(
+                    
+                      text: TextSpan(
+                    
+                        children: [
+                    
+                          TextSpan(text: 'by Naveed azhar', style: TextStyle(fontSize: 32, fontStyle: FontStyle.italic, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9), fontFamily: 'EB Garamond', fontWeight: FontWeight.w500)),
+                        ]
+                      )
+                    ),
+                  ),
+                ],
               )),
           ),
         ],

@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
@@ -16,39 +18,72 @@ class FileService {
   File? _selectedFile;
   String? _selectedDirectory = '';
 
-  Future<void> saveContent(context) async {
+Future<void> saveContent(context) async {
+  final content = markdown.text;
 
-    final content = markdown.text;
-
+  try {
     String? filePath;
 
-    try {
+    final String? directoryPath = await FilePicker.platform.getDirectoryPath();
 
-      if (_selectedFile != null) {
-
-        await _selectedFile!.writeAsString(content);
-
-      } else {
-
-        String metadataDirPath = _selectedDirectory!;
-
-        if (metadataDirPath.isEmpty) {
-          final directory = await FilePicker.platform.getDirectoryPath();
-          _selectedDirectory = metadataDirPath = directory!;
-        }
-
-        filePath = '$metadataDirPath\\${$title.text.isNotEmpty ? $title.text : title()}.md';
-
-        final newFile = File(filePath);
-        await newFile.writeAsString(content);
-      }
-
-      SnackBarUtils.showSnackbar(
-          context, Icons.check, "File Saved at ${filePath ?? _selectedDirectory}");
-    } catch (e) {
-      SnackBarUtils.showSnackbar(context, FluentIcons.warning_24_regular, "Unexpected error occurred");
+    if (directoryPath != null) {
+      final fileName = $title.text.isNotEmpty ? $title.text : title();
+      filePath = '$directoryPath\\$fileName.md';
+    } else {
+      // User canceled the save operation
+      return;
     }
+
+    final newFile = File(filePath);
+    await newFile.writeAsString(content);
+
+    SnackBarUtils.showSnackbar(
+      context,
+      Icons.check,
+      "File Saved at $filePath",
+    );
+  } catch (e) {
+    SnackBarUtils.showSnackbar(
+      context,
+      FluentIcons.warning_24_regular,
+      "Unexpected error occurred",
+    );
   }
+}
+
+  // Future<void> saveContent(context) async {
+
+  //   final content = markdown.text;
+
+  //   String? filePath;
+
+  //   try {
+
+  //     if (_selectedFile != null) {
+
+  //       await _selectedFile!.writeAsString(content);
+
+  //     } else {
+
+  //       String metadataDirPath = _selectedDirectory!;
+
+  //       if (metadataDirPath.isEmpty) {
+  //         final directory = await FilePicker.platform.getDirectoryPath();
+  //         _selectedDirectory = metadataDirPath = directory!;
+  //       }
+
+  //       filePath = '$metadataDirPath\\${$title.text.isNotEmpty ? $title.text : title()}.md';
+
+  //       final newFile = File(filePath);
+  //       await newFile.writeAsString(content);
+  //     }
+
+  //     SnackBarUtils.showSnackbar(
+  //         context, Icons.check, "File Saved at ${filePath ?? _selectedDirectory}");
+  //   } catch (e) {
+  //     SnackBarUtils.showSnackbar(context, FluentIcons.warning_24_regular, "Unexpected error occurred");
+  //   }
+  // }
 
   void newFile(context) {
     _selectedFile = null;
@@ -61,7 +96,7 @@ class FileService {
 
   Future<void> loadFile(context) async {
     try {
-      FilePickerResult? result = await FilePicker.platform.pickFiles();
+      FilePickerResult? result = await FilePicker.platform.pickFiles(type: FileType.any, allowedExtensions: ['md']);
 
       if (result != null) {
         File file = File(result.files.single.path!);
