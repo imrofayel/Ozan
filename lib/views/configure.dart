@@ -74,17 +74,17 @@ class _InfoState extends State<Info> {
               
                 child: Padding(
 
-                  padding: const EdgeInsets.all(6),
+                  padding: const EdgeInsets.all(4),
 
                   child: Row(
                     
                     children: [
                   
-                      Icon(CupertinoIcons.pencil_outline, size: 24, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9),),
+                      Icon(CupertinoIcons.book, size: 24, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9),),
                               
                       const Gap(8),
                               
-                      Text("Rofayel Notebook v4.0", style: TextStyle(fontSize: 19, fontFamily: 'Inter', color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
+                      Text("Caira v2.0", style: TextStyle(fontSize: 19, fontFamily: 'Inter', color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
                     ],
                   ),
                 ),
@@ -118,35 +118,6 @@ class _InfoState extends State<Info> {
                           TextSpan(text: 'by Naveed azhar', style: TextStyle(fontSize: 32, fontStyle: FontStyle.italic, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9), fontFamily: 'EB Garamond', fontWeight: FontWeight.w500)),
                         ]
                       )
-                    ),
-                  ),
-
-                  FilledButton(
-                  
-                    onPressed: (){
-                    },
-                  
-                    style: ButtonStyle(
-                  
-                      side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
-                  
-                      padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), 
-                  
-                    child: Padding(
-
-                      padding: const EdgeInsets.all(6),
-
-                      child: Row(
-                        
-                        children: [
-                      
-                          Icon(CupertinoIcons.pencil_outline, size: 24, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9),),
-                                  
-                          const Gap(8),
-                                  
-                          Text("Rofayel Notebook v4.0", style: TextStyle(fontSize: 19, fontFamily: 'Inter', color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
-                        ],
-                      ),
                     ),
                   ),
                 ],

@@ -118,17 +118,17 @@ class Themes {
 
       seedColor: Colors.green,
 
-      background: const Color.fromRGBO(40, 47, 40, 1),
+      background: const Color.fromARGB(255, 3, 13, 17),
 
-      secondary: const Color.fromRGBO(45, 63, 50, 1),
+      secondary: const Color.fromRGBO(6, 32, 42, 1),
 
-      primary: const Color.fromRGBO(45, 63, 50, 1),
+      primary: const Color.fromRGBO(4, 19, 25, 1),
 
       tertiary: const Color.fromRGBO(192, 212, 190, 1),
 
     ),
 
-    textSelectionTheme: const TextSelectionThemeData(cursorColor: Color.fromARGB(255, 16, 16, 16), selectionColor: Color.fromRGBO(46, 66, 52, 1)),
+    textSelectionTheme: const TextSelectionThemeData(cursorColor: Color.fromARGB(255, 16, 16, 16), selectionColor: Color.fromRGBO(6, 32, 42, 1)),
 
 
     appBarTheme:  const AppBarTheme(backgroundColor: Colors.transparent, surfaceTintColor: Colors.transparent),
@@ -141,7 +141,7 @@ class Themes {
 
       decoration: BoxDecoration(
 
-        color: const  Color.fromRGBO(45, 63, 50, 1),
+        color: const  Color.fromRGBO(6, 32, 42, 1),
         
         borderRadius: BorderRadius.circular(20)
       ),
@@ -177,7 +177,7 @@ class Themes {
         
         elevation: const MaterialStatePropertyAll(0),
 
-        backgroundColor: const MaterialStatePropertyAll(Color.fromRGBO(45, 63, 50, 1)),
+        backgroundColor: const MaterialStatePropertyAll(Color.fromRGBO(6, 32, 42, 1)),
 
         shadowColor: const MaterialStatePropertyAll(Colors.transparent),   
 

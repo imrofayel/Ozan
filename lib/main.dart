@@ -16,7 +16,7 @@ void main() async {
     size: Size(800, 660),
     center: true,
     titleBarStyle: TitleBarStyle.normal,
-    title: 'Rofayel Notebook',
+    title: 'Caira',
     minimumSize: Size(700, 600),
   );
   windowManager.waitUntilReadyToShow(windowOptions, () async {
