@@ -13,6 +13,7 @@ void main() async {
   await windowManager.ensureInitialized();
 
   WindowOptions windowOptions = const WindowOptions(
+    size: Size(800, 660),
     center: true,
     titleBarStyle: TitleBarStyle.normal,
     title: 'Ozan',

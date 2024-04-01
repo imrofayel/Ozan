@@ -32,7 +32,7 @@ initDatabase() async {
 
     } else {
       // For other platforms (e.g., Windows)
-      databasesPath = 'C:/ProgramData/Caira'; // Specify your custom directory path
+      databasesPath = 'C:/ProgramData/Ozan'; // Specify your custom directory path
     }
 
     final path = join(databasesPath, 'cairaDB.db');
