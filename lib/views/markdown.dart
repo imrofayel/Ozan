@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:ozan/components/snackbar.dart';
-import 'package:ozan/database/file_service.dart';
+import 'package:ozan/file_service/file_service.dart';
 import 'package:ozan/components/components.dart';
 import 'package:ozan/components/toolbar.dart';
 import 'package:ozan/db/db_provider.dart';
