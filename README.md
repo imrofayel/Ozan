@@ -1,4 +1,4 @@
-<img src="https://github.com/imrofayel/Ozan/assets/134688534/5d21cfb6-e15c-4309-8719-14a51f618d2a height="140" weight="140"">
+<img src="https://github.com/imrofayel/Ozan/assets/134688534/5d21cfb6-e15c-4309-8719-14a51f618d2a" height="140" weight="140">
 
 ## Ozan - Capture your thoughts!
 
@@ -6,7 +6,7 @@
 
 Ozan is a personal knowledge base and journal application.
 
-<img src="https://github.com/imrofayel/Ozan/assets/134688534/0489b757-6d3d-4741-8fea-5d056849ddac" height="400"><br>
+<img src="https://github.com/imrofayel/Ozan/assets/134688534/0489b757-6d3d-4741-8fea-5d056849ddac" height="400" weight="400"><br>
 
 ### Features
 
