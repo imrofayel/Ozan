@@ -6,7 +6,7 @@
 
 Ozan is a personal knowledge base and journal application.
 
-<img src="https://github.com/imrofayel/Ozan/assets/134688534/0489b757-6d3d-4741-8fea-5d056849ddac" height="400" weight="400"><br>
+<img src="https://github.com/imrofayel/Ozan/assets/134688534/0489b757-6d3d-4741-8fea-5d056849ddac"><br>
 
 ### Features
 
