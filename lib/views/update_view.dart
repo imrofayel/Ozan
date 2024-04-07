@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:ozan/components/snackbar.dart';
@@ -220,16 +221,21 @@ class _EditorState extends State<Editor> {
       
           children: [
             
-            const Row(
-      
-              children: [
-      
-                Icon(CupertinoIcons.pencil_outline, size: 28),
-            
-                Gap(10),
-      
-                Text("Writer", style: TextStyle(fontSize: 24, fontFamily: 'Inter'),),
-              ],
+            const Opacity(
+
+              opacity: 0.8,
+              
+              child: Row(
+                    
+                children: [
+                    
+                  Icon(CupertinoIcons.pencil_outline, size: 28),
+              
+                  Gap(10),
+                    
+                  Text("Writer", style: TextStyle(fontSize: 24, fontFamily: 'Inter'),),
+                ],
+              ),
             ),
 
               FilledButton(
@@ -277,7 +283,7 @@ class _EditorState extends State<Editor> {
                 }, 
               
               
-                child: Text('Update', style: TextStyle(fontFamily: 'Inter', fontSize: 18, fontWeight: FontWeight.w500, color: Theme.of(context).colorScheme.tertiary))
+                child: Text('Update', style: TextStyle(fontFamily: 'Inter', fontSize: 18, fontWeight: FontWeight.w500, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)))
 
                 )
           ],
@@ -297,7 +303,7 @@ class _EditorState extends State<Editor> {
       
               children: [
       
-                  toolbar(_UpdateState.page, context),
+                  Opacity(opacity: 0.8, child: toolbar(_UpdateState.page, context)),
       
                     const Gap(8),
             

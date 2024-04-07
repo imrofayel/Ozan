@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:popover/popover.dart';
 import 'package:gap/gap.dart';
 import 'package:ozan/db/db_provider.dart';

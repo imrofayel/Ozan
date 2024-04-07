@@ -79,7 +79,7 @@ class _JournalEditorState extends State<JournalEditor> {
           
               FilledButton(onPressed:
           
-                    controller[0].text.isNotEmpty && controller[1].text.isNotEmpty && controller[2].text.isNotEmpty ? (){
+                    controller[0].text.isNotEmpty ? (){
           
                             value.dbHelper.insert(Journal(description: "${controller[0].text}~~~${controller[0].text}~~~${controller[2].text}", date: DateFormat('d/M/y').format(DateTime.now())));
           
