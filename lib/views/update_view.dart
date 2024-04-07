@@ -250,16 +250,16 @@ class _EditorState extends State<Editor> {
             
                 if(widget.note != null){
             
-                value.dbHelper.update(NotesModel(title:  _UpdateState.pageTitle.text.isNotEmpty ? _UpdateState.pageTitle.text : 'Untitled', description: _UpdateState.page.text, date: date, id: widget.note!.id));
+                value.dbHelper.update(NotesModel(title:  _UpdateState.pageTitle.text.isNotEmpty ? _UpdateState.pageTitle.text : 'Untitled', description: _UpdateState.page.text, date: date, id: widget.note!.id, favourite: widget.note!.favourite));
               
                 value.initDatabase();
               
-                  value.setLength();
+                value.setLength();
                 } 
             
                 else{
             
-                  value.dbHelper.insert(NotesModel(title: _UpdateState.pageTitle.text.isNotEmpty ? _UpdateState.pageTitle.text : 'Untitled', description: _UpdateState.page.text, date: date));
+                  value.dbHelper.insert(NotesModel(title: _UpdateState.pageTitle.text.isNotEmpty ? _UpdateState.pageTitle.text : 'Untitled', description: _UpdateState.page.text, date: date, favourite: 0));
               
                   value.initDatabase();
               

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:gap/gap.dart';
-import 'package:ozan/views/markdown.dart';
+import 'package:ozan/home_window.dart';
 import 'package:ozan/components/components.dart';
 
 class Sidebar extends StatefulWidget {

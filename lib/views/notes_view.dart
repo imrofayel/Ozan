@@ -181,7 +181,26 @@ class _NotesViewState extends State<NotesView> {
                                                                                   
                                                 padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text(snapshot.data![index].date, style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
                               
-                                                SizedBox(child: Delete(id: snapshot.data![index].id)),
+                                                Row(
+
+                                                  children: [
+
+                                                  FilledButton(onPressed: (){
+
+                                                    value.dbHelper.update(NotesModel(title: snapshot.data![index].title, description: snapshot.data![index].description, date: snapshot.data![index].date, id: snapshot.data![index].id, favourite: 1));
+
+                                                    value.initDatabase();
+                                                    
+                                                    value.setLength();
+
+                                                  }, style: const ButtonStyle(
+                                                    
+                                                    padding: MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: MaterialStatePropertyAll(Colors.transparent), shadowColor: MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Colors.transparent)), child: Icon(snapshot.data![index].favourite == 0 ? CupertinoIcons.heart : CupertinoIcons.heart_fill, color: snapshot.data![index].favourite == 0 ? Theme.of(context).colorScheme.tertiary : Colors.red)),
+
+                                                    SizedBox(child: Delete(id: snapshot.data![index].id)),
+
+                                                  ],
+                                                ),
                                             ],
                                           ),
                                                   

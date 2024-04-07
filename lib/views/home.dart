@@ -5,7 +5,7 @@ import 'package:ozan/db/db_provider.dart';
 import 'package:ozan/theme/theme_provider.dart';
 import 'package:ozan/views/Journal/journal_view.dart';
 import 'package:ozan/views/configure.dart';
-import 'package:ozan/views/markdown.dart';
+import 'package:ozan/home_window.dart';
 import 'package:ozan/components/sidebar.dart';
 import 'package:ozan/views/notes_view.dart';
 import 'package:provider/provider.dart';

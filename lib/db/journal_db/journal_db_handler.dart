@@ -35,7 +35,7 @@ initDatabase() async {
       databasesPath = 'C:/ProgramData/Ozan'; // Specify your custom directory path
     }
 
-    final path = join(databasesPath, 'cairaDB.db');
+    final path = join(databasesPath, 'journal.db');
 
     if(Platform.isAndroid || Platform.isIOS){
 

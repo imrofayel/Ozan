@@ -9,7 +9,7 @@ import 'package:ozan/components/toolbar.dart';
 import 'package:ozan/db/db_provider.dart';
 import 'package:ozan/db/notes.dart';
 import 'package:provider/provider.dart';
-import '../markdown/markdown_style.dart';
+import 'markdown/markdown_style.dart';
 
 // ignore: must_be_immutable
 class Markdown extends StatefulWidget {
@@ -251,7 +251,7 @@ class _EditorState extends State<Editor> {
                 
                     if(_MarkdownState.page.text.isNotEmpty){
                 
-                      value.dbHelper.insert(NotesModel(title: _MarkdownState.pageTitle.text.isNotEmpty ? _MarkdownState.pageTitle.text : 'Untitled', description: _MarkdownState.page.text, date: date));
+                      value.dbHelper.insert(NotesModel(title: _MarkdownState.pageTitle.text.isNotEmpty ? _MarkdownState.pageTitle.text : 'Untitled', description: _MarkdownState.page.text, date: date, favourite: 0));
                   
                       value.initDatabase();
                   
