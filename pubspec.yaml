@@ -45,8 +45,6 @@ dependencies:
   sqflite: ^2.3.2
   cupertino_icons: ^1.0.6
   popover: ^0.3.0  
-  line_icons: ^2.0.3
-  url_launcher: ^6.2.5
   page_transition: ^2.1.0
     
 dev_dependencies:
