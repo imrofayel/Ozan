@@ -86,13 +86,13 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: EB Garamond
-      fonts:
-        - asset: assets/EBGaramond.ttf
-        - asset: assets/EBGaramond-Italic.ttf
-          style: italic
-        - asset: assets/EBGaramond-Medium.ttf
-          weight: 700
+    # - family: EB Garamond
+    #   fonts:
+    #     - asset: assets/EBGaramond.ttf
+    #     - asset: assets/EBGaramond-Italic.ttf
+    #       style: italic
+    #     - asset: assets/EBGaramond-Medium.ttf
+    #       weight: 700
 
     - family: 'Inter'
       fonts:
