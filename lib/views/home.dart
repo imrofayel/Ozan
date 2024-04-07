@@ -8,6 +8,7 @@ import 'package:ozan/views/configure.dart';
 import 'package:ozan/home_window.dart';
 import 'package:ozan/components/sidebar.dart';
 import 'package:ozan/views/notes_view.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
@@ -64,7 +65,7 @@ class _HomeState extends State<Home> {
 
                     FilledButton(onPressed: (){
 
-                      Navigator.push(context, MaterialPageRoute(builder:(context) => const NotesView()));
+                      Navigator.push(context, PageTransition(type: PageTransitionType.fade, duration: const Duration(milliseconds: 300), child: const NotesView()));
 
                     }, style: ButtonStyle(
           
@@ -88,7 +89,7 @@ class _HomeState extends State<Home> {
                     const Gap(10),
 
                     FilledButton(onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder:(context) => const JournalView()));
+                      Navigator.push(context, PageTransition(type: PageTransitionType.fade, duration: const Duration(milliseconds: 300), child: const JournalView()));
                     }, style: ButtonStyle(
           
                       side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),

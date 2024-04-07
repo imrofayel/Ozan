@@ -7,6 +7,7 @@ import 'package:ozan/db/journal_db/journal.dart';
 import 'package:ozan/db/journal_db/journal_db_provider.dart';
 import 'package:ozan/views/Journal/editor.dart';
 import 'package:ozan/views/Journal/editor_update.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:popover/popover.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
@@ -73,7 +74,7 @@ class _JournalViewState extends State<JournalView> {
                      if (await value.dbHelper.check(DateFormat('d/M/y').format(DateTime.now()))){
 
                         // ignore: use_build_context_synchronously
-                        Navigator.push(context, MaterialPageRoute(builder:(context) => const JournalEditor()));
+                        Navigator.push(context, PageTransition(type: PageTransitionType.fade, duration: const Duration(milliseconds: 300), child: const JournalEditor()));
                      } else{
                       // ignore: use_build_context_synchronously
                       SnackBarUtils.showSnackbar(context, FluentIcons.warning_24_regular, "Today's journal entry has already been recorded, try to update it.");
