@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_acrylic/window.dart';
 import 'package:ozan/db/db_provider.dart';
 import 'package:ozan/db/journal_db/journal_db_provider.dart';
 import 'package:ozan/theme/theme_provider.dart';
@@ -7,8 +8,10 @@ import 'package:provider/provider.dart';
 import 'package:window_manager/window_manager.dart';
 
 void main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Window.initialize();
+
   // Must add this line.
   await windowManager.ensureInitialized();
 
@@ -24,20 +27,14 @@ void main() async {
     await windowManager.focus();
   });
 
-  
-  runApp(MultiProvider(providers: [
-
-    ChangeNotifierProvider(create:(context) => DatabaseProvider()),
-
-    ChangeNotifierProvider(create:(context) => JournalDatabaseProvider()),
-
-    ChangeNotifierProvider(create:(context) => ThemeSwitcher()),
-
-  ],
-
-
-
-  child: const Ozan()));
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => DatabaseProvider()),
+      ChangeNotifierProvider(create: (context) => JournalDatabaseProvider()),
+      ChangeNotifierProvider(create: (context) => ThemeSwitcher()),
+    ],
+    child: const Ozan(),
+  ));
 }
 
 class Ozan extends StatefulWidget {
@@ -48,27 +45,20 @@ class Ozan extends StatefulWidget {
 }
 
 class _OzanState extends State<Ozan> {
-
-    @override
+  @override
   void initState() {
     super.initState();
   }
-  
+
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
-
-        title: "Ozan",
-
-        debugShowCheckedModeBanner: false,
-
-        theme: Provider.of<ThemeSwitcher>(context).themeData,
-        
-        home: const Scaffold(
-
-          body: Home(),
-        ),
-      );
+      title: "Ozan",
+      debugShowCheckedModeBanner: false,
+      theme: Provider.of<ThemeSwitcher>(context).themeData,
+      home: const Scaffold(
+        body: Home(),
+      ),
+    );
   }
 }

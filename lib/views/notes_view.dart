@@ -178,7 +178,7 @@ class _NotesViewState extends State<NotesView> {
                                                 
                                                 side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
                                                                                   
-                                                padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text(snapshot.data![index].date, style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
+                                                padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text(snapshot.data![index].date, style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary.withOpacity(1), fontFamily: 'Inter'))),
                               
                                                 Row(
 
@@ -186,11 +186,23 @@ class _NotesViewState extends State<NotesView> {
 
                                                   FilledButton(onPressed: (){
 
-                                                    value.dbHelper.update(NotesModel(title: snapshot.data![index].title, description: snapshot.data![index].description, date: snapshot.data![index].date, id: snapshot.data![index].id, favourite: 1));
-
-                                                    value.initDatabase();
+                                                    if(snapshot.data![index].favourite == 0){
                                                     
-                                                    value.setLength();
+                                                      value.dbHelper.update(NotesModel(title: snapshot.data![index].title, description: snapshot.data![index].description, date: snapshot.data![index].date, id: snapshot.data![index].id, favourite: 1));
+
+                                                      value.initDatabase();
+                                                    
+                                                      value.setLength();
+                                                    }
+
+                                                    else if(snapshot.data![index].favourite == 1){
+                                                    
+                                                      value.dbHelper.update(NotesModel(title: snapshot.data![index].title, description: snapshot.data![index].description, date: snapshot.data![index].date, id: snapshot.data![index].id, favourite: 0));
+
+                                                      value.initDatabase();
+                                                    
+                                                      value.setLength();
+                                                    }
 
                                                   }, style: const ButtonStyle(
                                                     
