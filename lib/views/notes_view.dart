@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ozan/home_window.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:popover/popover.dart';
 import 'package:gap/gap.dart';
 import 'package:ozan/db/db_provider.dart';
@@ -33,20 +35,11 @@ class _NotesViewState extends State<NotesView> {
       
       return Scaffold(
 
-        appBar: AppBar(
-
-          leadingWidth: 80,
-
-          leading: IconButton.filled(onPressed: (){
-            Navigator.pop(context);
-          }, 
-          
-          icon: Icon(CupertinoIcons.arrow_left, size: 22, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6)), style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)), overlayColor: const MaterialStatePropertyAll(Colors.transparent)),
-          
-          ),
-        ),
-
         body: Column(
+
+          mainAxisAlignment: MainAxisAlignment.start,
+
+          crossAxisAlignment: CrossAxisAlignment.start,
           
           children: [
             
@@ -64,11 +57,50 @@ class _NotesViewState extends State<NotesView> {
                       
                         children: [
                       
-                          FilledButton(onPressed: (){}, style: ButtonStyle(
-                            
-                            side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
-                      
-                            padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text('${snapshot.data!.length} entries', style: TextStyle(fontSize: 17, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
+                          Row(
+
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                            children: [
+
+                              const Opacity(opacity: 0.9, child: Text('Good Afternoon Adam!', textScaler: TextScaler.linear(1.7))),
+                              
+                              Padding(
+
+                                padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
+
+                                child: Row(
+                                
+                                  children: [
+                                
+                                    FilledButton(onPressed: (){}, style: ButtonStyle(
+                                                  
+                                    side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
+                                                                                  
+                                    padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary)), child: Text('${snapshot.data!.length} entries', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
+
+                                    const Gap(14),
+
+                                    FilledButton(onPressed: (){
+                                      Navigator.push(context, PageTransition(type: PageTransitionType.fade, duration: const Duration(milliseconds: 300), child: const Markdown()));
+                                    }, style: ButtonStyle(
+                                                  
+                                    side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
+                                                                                  
+                                    padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.4) : Theme.of(context).colorScheme.primary)), child: Row(
+                                      children: [
+                                        Icon(CupertinoIcons.pencil, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, size: 20),
+
+                                        const Gap(4),
+
+                                        Text('Write', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter')),
+                                      ],
+                                    )),                                    
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                           
                           const Gap(14),
                       
@@ -76,11 +108,11 @@ class _NotesViewState extends State<NotesView> {
                                                     
                             child: Padding(
 
-                              padding: const EdgeInsets.all(12),
+                              padding: const EdgeInsets.all(8),
 
                               child: GridView.builder(
                                                         
-                                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 400),
+                                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 300),
                               
                                 scrollDirection: Axis.vertical,
                                               
@@ -151,16 +183,16 @@ class _NotesViewState extends State<NotesView> {
                                     child: Container(
                                       
                                       decoration: BoxDecoration(
-                                        color: Theme.of(context).colorScheme.primary,
+                                        color: Theme.of(context).colorScheme.primary.withOpacity(0.6),
                                                               
-                                        border: Border.all(color: Theme.of(context).colorScheme.secondary),
+                                        border: Border.all(color: Theme.of(context).colorScheme.secondary.withOpacity(0.8)),
                                                               
                                         borderRadius: BorderRadius.circular(14)
                                       ),
                                                               
-                                      margin: const EdgeInsets.all(8),
+                                      margin: const EdgeInsets.all(4),
                                                               
-                                      padding: const EdgeInsets.all(8),
+                                      padding: const EdgeInsets.all(6),
                                                             
                                       child: Column(
                                       
@@ -176,9 +208,9 @@ class _NotesViewState extends State<NotesView> {
                               
                                               FilledButton(onPressed: (){}, style: ButtonStyle(
                                                 
-                                                side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
+                                                side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
                                                                                   
-                                                padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text(snapshot.data![index].date, style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary.withOpacity(1), fontFamily: 'Inter'))),
+                                                padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.2) : Theme.of(context).colorScheme.background)), child: Text(snapshot.data![index].date, style: TextStyle(fontSize: 15, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
                               
                                                 Row(
 
@@ -206,7 +238,7 @@ class _NotesViewState extends State<NotesView> {
 
                                                   }, style: const ButtonStyle(
                                                     
-                                                    padding: MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: MaterialStatePropertyAll(Colors.transparent), shadowColor: MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Colors.transparent)), child: Icon(snapshot.data![index].favourite == 0 ? CupertinoIcons.heart : CupertinoIcons.heart_fill, color: snapshot.data![index].favourite == 0 ? Theme.of(context).colorScheme.tertiary : Colors.red)),
+                                                    padding: MaterialStatePropertyAll(EdgeInsets.all(10)), overlayColor: MaterialStatePropertyAll(Colors.transparent), shadowColor: MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Colors.transparent)), child: Icon(snapshot.data![index].favourite == 0 ? CupertinoIcons.heart : CupertinoIcons.heart_fill, color: snapshot.data![index].favourite == 0 ? Theme.of(context).colorScheme.tertiary : Colors.red)),
 
                                                     SizedBox(child: Delete(id: snapshot.data![index].id)),
 
@@ -221,10 +253,10 @@ class _NotesViewState extends State<NotesView> {
                                     
                                             padding: const EdgeInsets.only(left: 8),
                                     
-                                            child: Text(snapshot.data![index].title, textScaler: const TextScaler.linear(1.5)),
+                                            child: Text(snapshot.data![index].title, textScaler: const TextScaler.linear(1.4)),
                                           ),
                                     
-                                          const Gap(14),
+                                          const Gap(10),
                                     
                                           Expanded(
                                             
@@ -232,7 +264,7 @@ class _NotesViewState extends State<NotesView> {
                                               
                                               decoration: BoxDecoration(color: Theme.of(context).colorScheme.background, border: Border.all(color: Theme.of(context).colorScheme.secondary), borderRadius: BorderRadius.circular(10)),
                                               
-                                              child: markdown(snapshot.data![index].description, 1.14, context))
+                                              child: markdown(snapshot.data![index].description, 1.12, context))
                                           )
                                         ],
                                       ),

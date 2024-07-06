@@ -1,7 +1,9 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:ozan/home_window.dart';
-import 'package:ozan/components/components.dart';
+import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:ozan/views/Journal/journal_view.dart';
+import 'package:ozan/views/notes_view.dart';
+import 'package:page_transition/page_transition.dart';
 
 class Sidebar extends StatefulWidget {
   const Sidebar({super.key});
@@ -29,17 +31,44 @@ class _SidebarState extends State<Sidebar> {
 
           child: Column(
           
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
           
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
               
             children: [
+
+              Column(
+                children: [
+
+                  InkWell(child: Icon(Iconsax.home_2_copy, size: 23, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8))),
+                  
+                  const Gap(33),
+
+                  InkWell(child: Icon(Iconsax.hierarchy_copy, size: 21, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8))),
+
+                  const Gap(35),
+
+                  InkWell(child: Icon(Iconsax.note_2_copy, size: 23, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)),
+                  
+                  onTap: () => Navigator.push(context, PageTransition(type: PageTransitionType.fade, duration: const Duration(milliseconds: 300), child: const NotesView()))),
+
+                  const Gap(33),
+
+                  InkWell(child: Icon(Iconsax.heart_copy, size: 23, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)),
+                  
+                  onTap: () => Navigator.push(context, PageTransition(type: PageTransitionType.fade, duration: const Duration(milliseconds: 300), child: const JournalView()))),
+
+                ],
+              ),
                     
-              Row(children: [ button(() => Markdown.files.loadFile(context), CupertinoIcons.control, context, tooltip: "Open")]) ,
+              Row(children: [
+                
+                InkWell(child: Icon(Iconsax.flash_copy, size: 24, color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.tertiary.withOpacity(0.8) : Colors.blue.shade900),
+                
+                ),
+
+              ])
                           
-              const Gap(14),
-                          
-              Row(children: [ button(() => Markdown.files.saveContent(context), CupertinoIcons.down_arrow, context, tooltip: "Export")]),
             ],
           ),
         )
