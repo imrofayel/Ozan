@@ -25,10 +25,10 @@ class _HomeState extends State<Home> {
                
               leading: const Padding(
                 padding: EdgeInsets.all(10),
-                child: Opacity(opacity: 0.9, child: Text('Caira', textScaler: TextScaler.linear(1.6))),
+                child: Opacity(opacity: 0.9, child: Text('Ozan', textScaler: TextScaler.linear(1.6))),
               ),
 
-              leadingWidth: 100,
+              leadingWidth: 200,
 
               centerTitle: true,
                   
@@ -60,9 +60,9 @@ class _HomeState extends State<Home> {
           
           children: [
             
-            Expanded(flex: 1, child: Sidebar()),
+            Expanded(flex: 2, child: Sidebar()),
               
-            Expanded(flex: 12, child: NotesView()),
+            Expanded(flex: 18, child: NotesView()),
 
           ],
         ),

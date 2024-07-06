@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:ozan/components/ai.dart';
 import 'package:ozan/views/Journal/journal_view.dart';
 import 'package:ozan/views/notes_view.dart';
 import 'package:page_transition/page_transition.dart';
@@ -63,8 +64,15 @@ class _SidebarState extends State<Sidebar> {
                     
               Row(children: [
                 
-                InkWell(child: Icon(Iconsax.flash_copy, size: 24, color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.tertiary.withOpacity(0.8) : Colors.blue.shade900),
+                InkWell(onTap: () => {
+
+                  show
+
+                },
                 
+                
+                
+                child: Icon(Iconsax.flash_copy, size: 24, color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.tertiary.withOpacity(0.8) : Colors.blue.shade900,),
                 ),
 
               ])
