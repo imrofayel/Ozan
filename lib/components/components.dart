@@ -42,11 +42,11 @@ TextField textField(context, {int? lines = 1, required void Function(String)? on
 
     focusNode: focusNode,
 
-    style: TextStyle(color: textColor ?? (Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary), fontSize: 16, height: 2, fontFamily: 'Inter'),
+    style: TextStyle(color: textColor ?? Theme.of(context).colorScheme.tertiary, fontSize: 16.6, height: 2, fontFamily: 'Inter'),
 
     decoration: InputDecoration(
 
-      filled: true,
+      filled: true, 
 
       fillColor: color,
 
@@ -145,7 +145,7 @@ Widget titleBox(context, {required TextEditingController controller}){
 
     ),
 
-    style: TextStyle(fontSize: 20, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary),
+    style: TextStyle(fontSize: 18, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary),
   );
 }
 

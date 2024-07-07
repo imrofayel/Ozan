@@ -5,8 +5,6 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:gap/gap.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:ozan/components/components.dart';
-import 'package:ozan/components/snackbar.dart';
-import 'package:ozan/markdown/syntax.dart';
 import 'package:ozan/views/Journal/journal_view.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';

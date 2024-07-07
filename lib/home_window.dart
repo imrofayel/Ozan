@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
+import 'package:ozan/components/sidebar.dart';
 import 'package:ozan/components/snackbar.dart';
 import 'package:ozan/file_service/file_service.dart';
 import 'package:ozan/components/components.dart';
@@ -41,12 +42,12 @@ class _MarkdownState extends State<Markdown> {
     });
   }
 
-  @override
-  void dispose() {
-    page.dispose(); // Dispose the TextEditingController
-    _focusNode.dispose(); // Dispose the FocusNode
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   page.dispose(); // Dispose the TextEditingController
+  //   _focusNode.dispose(); // Dispose the FocusNode
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +56,7 @@ class _MarkdownState extends State<Markdown> {
     return Consumer<DatabaseProvider>(builder: (context, value, child) {
       return Scaffold(
         appBar: AppBar(
-          toolbarHeight: 80,
+          toolbarHeight: 60,
           leading: InkWell(
             onTap: () => Navigator.pop(context),
             child: Icon(
@@ -89,7 +90,9 @@ class _MarkdownState extends State<Markdown> {
                               : 'Untitled',
                           description: _MarkdownState.page.text,
                           date: date,
-                          favourite: 0));
+                          favourite: 0,
+                          tag: _EditorState.selected.name,
+                          ));
                       value.initDatabase();
                       value.setLength();
                       Markdown.files.newFile(context);
@@ -113,7 +116,7 @@ class _MarkdownState extends State<Markdown> {
                               : Theme.of(context).colorScheme.primary)),
                   child: Text('Save',
                       style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 16,
                           color: Theme.of(context).brightness == Brightness.light
                               ? Colors.blue.shade900
                               : Theme.of(context).colorScheme.tertiary,
@@ -121,64 +124,78 @@ class _MarkdownState extends State<Markdown> {
             ),
           ],
         ),
-        body: Center(
-          
-          child: Column(
-                    
-            children: [
-              ToggleButtons(
-                isSelected: [isCodeView, !isCodeView],
-                onPressed: (int index) {
-                  setState(() {
-                    isCodeView = index == 0;
-                  });
-                },
+        body: Row(
 
-                splashColor: Colors.transparent,
+          children: [
 
-                hoverColor: Colors.transparent,
+            const Expanded(flex: 1, child: Sidebar()),
+
+            Expanded(
+
+              flex: 10,
+
+              child: Center(
                 
-                selectedBorderColor: Theme.of(context).brightness == Brightness.light
-                              ? Colors.blue.shade100.withOpacity(0.2)
-                              : Theme.of(context).colorScheme.secondary,
+                child: Column(
+                          
+                  children: [
+                    ToggleButtons(
+              
+                      constraints: const BoxConstraints(minWidth: 50, minHeight: 35), 
+              
+                      isSelected: [isCodeView, !isCodeView],
+                      onPressed: (int index) {
+                        setState(() {
+                          isCodeView = index == 0;
+                        });
+                      },
+              
+                      splashColor: Colors.transparent,
+              
+                      hoverColor: Colors.transparent,
+                      
+                      selectedBorderColor: Theme.of(context).brightness == Brightness.light
+                                    ? Colors.blue.shade100.withOpacity(0.2)
+                                    : Theme.of(context).colorScheme.secondary,
+              
+                      borderColor: Theme.of(context).brightness == Brightness.light
+                                    ? Colors.blue.shade100.withOpacity(0.2)
+                                    : Theme.of(context).colorScheme.secondary,
+                
+                      borderRadius: BorderRadius.circular(50),
+                
+                      fillColor: Theme.of(context).brightness == Brightness.light
+                                  ? Colors.blue.shade50.withOpacity(0.3)
+                                  : Theme.of(context).colorScheme.primary,
+                
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                          child: Text('Code', style: TextStyle(
+                              fontSize: 15,
+                              color: Theme.of(context).colorScheme.tertiary,
+                              fontFamily: 'Inter')),
+                        ),
+                
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                          child: Text('Preview', style: TextStyle(
+                              fontSize: 15,
+                              color: Theme.of(context).colorScheme.tertiary,
+                              fontFamily: 'Inter')),
+                        ),
+                      ],
+                    ),
+                    Expanded(
+                      child: isCodeView ? const Editor() : preview(context),
+                    ),
+                  ],
+                ),
+              ),
+            ),
 
-                borderColor: Theme.of(context).brightness == Brightness.light
-                              ? Colors.blue.shade100.withOpacity(0.2)
-                              : Theme.of(context).colorScheme.secondary,
-          
-                borderRadius: BorderRadius.circular(50),
-          
-                fillColor: Theme.of(context).brightness == Brightness.light
-                            ? Colors.blue.shade50.withOpacity(0.3)
-                            : Theme.of(context).colorScheme.primary,
-          
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                    child: Text('Code', style: TextStyle(
-                        fontSize: 16,
-                        color: Theme.of(context).brightness == Brightness.light
-                            ? Colors.blue.shade900
-                            : Theme.of(context).colorScheme.tertiary,
-                        fontFamily: 'Inter')),
-                  ),
-          
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                    child: Text('Preview', style: TextStyle(
-                        fontSize: 16,
-                        color: Theme.of(context).brightness == Brightness.light
-                            ? Colors.blue.shade900
-                            : Theme.of(context).colorScheme.tertiary,
-                        fontFamily: 'Inter')),
-                  ),
-                ],
-              ),
-              Expanded(
-                child: isCodeView ? const Editor() : preview(context),
-              ),
-            ],
-          ),
+            const Expanded(flex: 1, child: SizedBox()),
+          ],
         ),
       );
     });
@@ -226,7 +243,13 @@ class Editor extends StatefulWidget {
   State<Editor> createState() => _EditorState();
 }
 
+// ignore: constant_identifier_names
+enum Tags {General, Studies, Work, Dairy}
+
 class _EditorState extends State<Editor> {
+
+  static Tags selected = Tags.General;
+
   @override
   Widget build(BuildContext context) {
     return Consumer<DatabaseProvider>(builder: (context, value, child) {
@@ -234,10 +257,45 @@ class _EditorState extends State<Editor> {
         width: 500,
         child: Column(
           children: [
+
+            const Gap(20),
+            
+            SegmentedButton(segments: const[
+
+              ButtonSegment(value: Tags.General, label: Text('General')),
+
+              ButtonSegment(value: Tags.Studies, label: Text('Studies')),
+
+              ButtonSegment(value: Tags.Work, label: Text('Work')),
+
+              ButtonSegment(value: Tags.Dairy, label: Text('Dairy')),
+
+            ], selected: <Tags>{selected},
+            
+            onSelectionChanged: (Set<Tags> newSelection) => {
+              setState(() {
+                selected = newSelection.first;
+              })
+            },
+            
+            style: ButtonStyle(
+                side: MaterialStatePropertyAll(BorderSide(
+                  color: Theme.of(context).brightness == Brightness.light
+                              ? Colors.blue.shade100.withOpacity(0.2)
+                              : Theme.of(context).colorScheme.secondary)),
+                  padding: const MaterialStatePropertyAll(EdgeInsets.all(14)),
+                  overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+                  shadowColor: const MaterialStatePropertyAll(Colors.transparent),
+                  backgroundColor: MaterialStatePropertyAll(
+                          Theme.of(context).brightness == Brightness.light
+                              ? Colors.blue.shade50.withOpacity(0.3)
+                              : Theme.of(context).colorScheme.primary)),
+            ),
+
             Opacity(opacity: 0.8, child: toolbar(_MarkdownState.page, context)),
 
             Container(
-             height: 410,
+             height: 350,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(12)),
                 border: Border.all(
@@ -259,7 +317,7 @@ class _EditorState extends State<Editor> {
                         scrollDirection: Axis.vertical,
                         child: textField(
                           context,
-                          lines: 11,
+                          lines: 8,
                           onSubmitted: (text) {
                             setState(() {
                               _MarkdownState.page.text += '\n';

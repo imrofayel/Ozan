@@ -197,9 +197,33 @@ class Editor extends StatefulWidget {
   State<Editor> createState() => _EditorState();
 }
 
+// ignore: constant_identifier_names
+enum Tags {General, Studies, Work, Dairy}
+
 class _EditorState extends State<Editor> {
   
   String date = DateFormat('d MMM, yy').format(DateTime.now()); 
+
+  Tags selected = Tags.General;
+
+  getTag(){
+
+    if(widget.note!.tag == 'General'){
+      selected = Tags.General;
+    } else if(widget.note!.tag == 'Work'){
+      selected = Tags.Work;
+    } else if(widget.note!.tag == 'Studies'){
+      selected = Tags.Studies;
+    } else if(widget.note!.tag == 'Dairy'){
+      selected = Tags.Dairy;
+    }
+  }
+
+    @override
+  void initState() {
+    super.initState();
+    getTag();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -255,7 +279,7 @@ class _EditorState extends State<Editor> {
             
                 if(widget.note != null){
             
-                value.dbHelper.update(NotesModel(title:  _UpdateState.pageTitle.text.isNotEmpty ? _UpdateState.pageTitle.text : 'Untitled', description: _UpdateState.page.text, date: date, id: widget.note!.id, favourite: widget.note!.favourite));
+                value.dbHelper.update(NotesModel(title:  _UpdateState.pageTitle.text.isNotEmpty ? _UpdateState.pageTitle.text : 'Untitled', description: _UpdateState.page.text, date: date, id: widget.note!.id, favourite: widget.note!.favourite, tag: selected.name));
               
                 value.initDatabase();
               
@@ -264,7 +288,8 @@ class _EditorState extends State<Editor> {
             
                 else{
             
-                  value.dbHelper.insert(NotesModel(title: _UpdateState.pageTitle.text.isNotEmpty ? _UpdateState.pageTitle.text : 'Untitled', description: _UpdateState.page.text, date: date, favourite: 0));
+                  value.dbHelper.insert(NotesModel(title: _UpdateState.pageTitle.text.isNotEmpty ? _UpdateState.pageTitle.text : 'Untitled', description: _UpdateState.page.text, date: date, 
+                  favourite: 0, tag: widget.note!.tag));
               
                   value.initDatabase();
               
@@ -301,11 +326,42 @@ class _EditorState extends State<Editor> {
             child: Column(
       
               children: [
+
+                  SegmentedButton(segments: const[
+
+                    ButtonSegment(value: Tags.General, label: Text('General')),
+
+                    ButtonSegment(value: Tags.Studies, label: Text('Studies')),
+
+                    ButtonSegment(value: Tags.Work, label: Text('Work')),
+
+                    ButtonSegment(value: Tags.Dairy, label: Text('Dairy')),
+
+                  ], selected: <Tags>{selected},
+                  
+                  onSelectionChanged: (Set<Tags> newSelection) => {
+                    setState(() {
+                      selected = newSelection.first;
+                    })
+                  },
+                  
+                  style: ButtonStyle(
+                      side: MaterialStatePropertyAll(BorderSide(
+                        color: Theme.of(context).brightness == Brightness.light
+                                    ? Colors.blue.shade100.withOpacity(0.2)
+                                    : Theme.of(context).colorScheme.secondary)),
+                        padding: const MaterialStatePropertyAll(EdgeInsets.all(14)),
+                        overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+                        shadowColor: const MaterialStatePropertyAll(Colors.transparent),
+                        backgroundColor: MaterialStatePropertyAll(
+                                Theme.of(context).brightness == Brightness.light
+                                    ? Colors.blue.shade50.withOpacity(0.3)
+                                    : Theme.of(context).colorScheme.primary)),
+                  ),
+
       
                   Opacity(opacity: 0.8, child: toolbar(_UpdateState.page, context)),
-      
-                    const Gap(8),
-            
+                  
                     Column(
             
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -320,7 +376,7 @@ class _EditorState extends State<Editor> {
       
                           child: Container(
                           
-                            height: 390,
+                            height: 370,
                           
                             decoration: BoxDecoration(
                               

@@ -220,7 +220,7 @@ class _NotesViewState extends State<NotesView> {
 
                                                     if(snapshot.data![index].favourite == 0){
                                                     
-                                                      value.dbHelper.update(NotesModel(title: snapshot.data![index].title, description: snapshot.data![index].description, date: snapshot.data![index].date, id: snapshot.data![index].id, favourite: 1));
+                                                      value.dbHelper.update(NotesModel(title: snapshot.data![index].title, description: snapshot.data![index].description, date: snapshot.data![index].date, id: snapshot.data![index].id, favourite: 1, tag: snapshot.data![index].tag));
 
                                                       value.initDatabase();
                                                     
@@ -229,7 +229,7 @@ class _NotesViewState extends State<NotesView> {
 
                                                     else if(snapshot.data![index].favourite == 1){
                                                     
-                                                      value.dbHelper.update(NotesModel(title: snapshot.data![index].title, description: snapshot.data![index].description, date: snapshot.data![index].date, id: snapshot.data![index].id, favourite: 0));
+                                                      value.dbHelper.update(NotesModel(title: snapshot.data![index].title, description: snapshot.data![index].description, date: snapshot.data![index].date, id: snapshot.data![index].id, favourite: 0, tag: snapshot.data![index].tag));
 
                                                       value.initDatabase();
                                                     
@@ -265,7 +265,20 @@ class _NotesViewState extends State<NotesView> {
                                               decoration: BoxDecoration(color: Theme.of(context).colorScheme.background, border: Border.all(color: Theme.of(context).colorScheme.secondary), borderRadius: BorderRadius.circular(10)),
                                               
                                               child: markdown(snapshot.data![index].description, 1.12, context))
-                                          )
+                                          ),
+
+                                        const Gap(10),
+
+                                        Row(
+                                          children: [
+                                            FilledButton(onPressed: (){}
+                                              , style: ButtonStyle(
+                                                            
+                                              side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).brightness == Brightness.light ? (getColor(snapshot.data![index].tag))[1]  : Theme.of(context).colorScheme.secondary)),
+
+                                              padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? getColor(snapshot.data![index].tag)[1] : Theme.of(context).colorScheme.primary)), child: Text(snapshot.data![index].tag, style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.light ? getColor(snapshot.data![index].tag)[2] : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
+                                          ],
+                                        ), 
                                         ],
                                       ),
                                     ),
@@ -286,18 +299,49 @@ class _NotesViewState extends State<NotesView> {
                       visible: snapshot.connectionState == ConnectionState.done,
         
                       child: Row(
-                          
-                        mainAxisAlignment: MainAxisAlignment.center,
-                      
-                        children: [
+
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                            children: [
+
+                              const Opacity(opacity: 0.9, child: Text('Good Afternoon Adam!', textScaler: TextScaler.linear(1.7))),
                               
-                          FilledButton(onPressed: (){}, style: ButtonStyle(
-                                              
-                            side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
-                                                                                
-                            padding: const MaterialStatePropertyAll(EdgeInsets.all(20)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text('Your canvas is blank', style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
-                        ],
-                      ),
+                              Padding(
+
+                                padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
+
+                                child: Row(
+                                
+                                  children: [
+                                
+                                    FilledButton(onPressed: (){}, style: ButtonStyle(
+                                                  
+                                    side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
+                                                                                  
+                                    padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary)), child: Text('${snapshot.data!.length} entries', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
+
+                                    const Gap(14),
+
+                                    FilledButton(onPressed: (){
+                                      Navigator.push(context, PageTransition(type: PageTransitionType.fade, duration: const Duration(milliseconds: 300), child: const Markdown()));
+                                    }, style: ButtonStyle(
+                                                  
+                                    side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
+                                                                                  
+                                    padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.4) : Theme.of(context).colorScheme.primary)), child: Row(
+                                      children: [
+                                        Icon(CupertinoIcons.pencil, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, size: 20),
+
+                                        const Gap(4),
+
+                                        Text('Write', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter')),
+                                      ],
+                                    )),                                    
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                     );
                   }
                 },
@@ -368,4 +412,39 @@ class Delete extends StatelessWidget {
       ),
     );
   }
+}
+
+List<Color> getColor(String tag){
+
+  if(tag == 'General'){
+      return [
+      Colors.grey.shade50.withOpacity(0.2),
+      Colors.grey.shade100.withOpacity(0.2),
+      Colors.grey.shade900
+    ];
+  } else if(tag == 'Work'){
+      return [
+      Colors.red.shade50.withOpacity(0.2),
+      Colors.red.shade100.withOpacity(0.2),
+      Colors.red.shade900
+    ];
+  } else if(tag == 'Studies'){
+    return  [
+      Colors.green.shade50.withOpacity(0.2),
+      Colors.green.shade100.withOpacity(0.2),
+      Colors.green.shade900
+    ];
+  } else if (tag == 'Dairy'){
+      return [
+      Colors.blue.shade50.withOpacity(0.2),
+      Colors.blue.shade100.withOpacity(0.2),
+      Colors.blue.shade900
+    ];
+  }
+
+  return [
+      Colors.blue.shade50.withOpacity(0.2),
+      Colors.blue.shade100.withOpacity(0.2),
+      Colors.blue.shade900.withOpacity(0.2)
+    ];
 }

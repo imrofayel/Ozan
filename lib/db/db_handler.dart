@@ -59,7 +59,7 @@ initDatabase() async {
 
   _onCreate(Database db, int version) async {
     await db.execute(
-        'CREATE TABLE notes (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, description TEXT NOT NULL, date TEXT NOT NULL, favourite INTEGER)');
+        'CREATE TABLE notes (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, description TEXT NOT NULL, date TEXT NOT NULL, favourite INTEGER, tag TEXT NOT NULL)');
   }
 
   Future<NotesModel> insert(NotesModel notesModel) async {
@@ -106,7 +106,8 @@ initDatabase() async {
         title: maps[i]['title'],
         description: maps[i]['description'],
         date: maps[i]['date'],
-        favourite: maps[i]['favourite']
+        favourite: maps[i]['favourite'],
+        tag: maps[i]['tag']
       );
     });
   }
