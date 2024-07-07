@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:gap/gap.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:ozan/components/components.dart';
+import 'package:ozan/components/snackbar.dart';
+import 'package:ozan/markdown/syntax.dart';
 import 'package:ozan/views/Journal/journal_view.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
@@ -107,6 +110,9 @@ class _SidebarState extends State<Sidebar> {
     showDialog(
       context: context,
       barrierColor: Colors.transparent,
+
+      barrierDismissible: false,
+
       builder: (BuildContext context) {
         return Padding(
           padding: const EdgeInsets.all(12),
@@ -183,25 +189,46 @@ class _AIChatInterfaceState extends State<AIChatInterface> {
                   ],
                 )),
 
-                FilledButton(onPressed: (){
-                  setState(() {
-                    _messages.clear();
-                  });
-              }, style: ButtonStyle(
-                                                    
-                side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
-                                                                                  
-                padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary)), child: Row(
-
+                Row(
                   children: [
+
+                    FilledButton(onPressed: (){
+                      setState(() {
+                        _messages.clear();
+                      });
+                                  }, style: ButtonStyle(
+                                                        
+                    side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
+                                                                                      
+                    padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary)), child: Row(
                     
-                    Icon(FluentIcons.sparkle_28_regular, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, size: 24),
+                      children: [
+                        
+                        Icon(FluentIcons.sparkle_28_regular, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, size: 24),
+                    
+                        const Gap(10),
+                    
+                        Text('New Chat', style: TextStyle(fontSize: 18, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter')),
+                      ],
+                    )),
 
                     const Gap(10),
 
-                    Text('New Chat', style: TextStyle(fontSize: 18, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter')),
+                    IconButton(
+                      icon:  const Icon(CupertinoIcons.xmark, size: 18),
+                    onPressed: () => {
+                      Navigator.pop(context)
+                    },
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Theme.of(context).colorScheme.tertiary.withOpacity(0.8)
+                          : Colors.blue.shade900,
+
+                      style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.2) : Theme.of(context).colorScheme.primary), 
+                      
+                      side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary))),
+                    ),
                   ],
-                )),
+                ),
   
               ],
             ),
@@ -229,10 +256,10 @@ class _AIChatInterfaceState extends State<AIChatInterface> {
 
                       border: InputBorder.none,
 
-                      hintStyle: TextStyle(fontSize: 18, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'),
+                      hintStyle: TextStyle(fontSize: 17, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'),
                     ),
 
-                    style: TextStyle(fontSize: 18, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'),
+                    style: TextStyle(fontSize: 17, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'),
 
                     onSubmitted: (_) => _sendMessage(),
                   ),
@@ -322,51 +349,75 @@ class ChatBubble extends StatelessWidget {
 
             border: Border.all(color:Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)
           ),
-          child: !message.isUser ? MarkdownBody(selectable: true,
-    
-      data: message.text,
-      
-      softLineBreak: true,
-    
-      styleSheet: MarkdownStyleSheet(
+          child: !message.isUser ? Column(
 
-          a: const TextStyle(color: Color.fromARGB(255, 20, 53, 186), height: 1.6),
+            crossAxisAlignment: CrossAxisAlignment.start,
 
-          codeblockDecoration: BoxDecoration(color: Theme.of(context).colorScheme.primary, borderRadius: BorderRadius.circular(20), border: Border.all(color: Theme.of(context).colorScheme.secondary)),
+            children: [
+                
+              MarkdownBody(selectable: true,
+                  
+                    data: message.text,
+                    
+                    softLineBreak: true,
+                  
+                    styleSheet: MarkdownStyleSheet(
+              
+              a: const TextStyle(color: Color.fromARGB(255, 20, 53, 186), height: 1.6),
+              
+              codeblockDecoration: BoxDecoration(color: Theme.of(context).colorScheme.primary.withOpacity(0.3), borderRadius: BorderRadius.circular(10), border: Border.all(color: Theme.of(context).colorScheme.secondary.withOpacity(0.7))),
 
-          p: TextStyle(color: Theme.of(context).colorScheme.tertiary, height: 1.6),
+              code: TextStyle(backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.4), color: Theme.of(context).colorScheme.tertiary.withOpacity(0.7), fontFamily: 'Roboto Mono', fontSize: 14),
+              
+              p: TextStyle(color: Theme.of(context).colorScheme.tertiary, height: 1.6),
+              
+              textScaler: const TextScaler.linear(1.1),
+              
+              h2: const TextStyle(fontSize: 17),
+              
+              h1: Theme.of(context).textTheme.titleLarge,
+              
+              h3: const TextStyle(fontSize: 16),
+              
+              tableBorder: TableBorder.all(borderRadius: BorderRadius.circular(10), color: Theme.of(context).colorScheme.secondary, width: 1),
+              
+              tableHead: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+              
+              tableBody: const TextStyle(fontSize: 13),
+              
+              blockquoteDecoration: BoxDecoration(
+                
+                color:  Theme.of(context).colorScheme.primary.withOpacity(0.8),
+              
+                borderRadius: const BorderRadius.all(Radius.circular(16)),
+              ),
+              
+              blockquotePadding: const EdgeInsets.all(20),
+              
+              blockquote: const TextStyle(fontSize: 16),
+              
+              horizontalRuleDecoration: BoxDecoration(borderRadius: BorderRadius.circular(30), border: Border.all(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8))),
+              
+              strong: const TextStyle(fontWeight: FontWeight.w500), 
+              
+              em: const TextStyle(fontStyle: FontStyle.italic),
+                    )),
 
-          textScaler: const TextScaler.linear(1.1),
+              const Gap(10),
 
-          h2: const TextStyle(fontSize: 17),
+              IconButton(
+                icon:  const Icon(Iconsax.copy_copy, size: 23),
+              onPressed: () => {
+                copyToClipboard(context, message.text)
+              },
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Theme.of(context).colorScheme.tertiary.withOpacity(0.8)
+                    : Colors.blue.shade900,
 
-          h1: Theme.of(context).textTheme.titleLarge,
-
-          h3: const TextStyle(fontSize: 16),
-
-          tableBorder: TableBorder.all(borderRadius: BorderRadius.circular(10), color: Theme.of(context).colorScheme.secondary, width: 1),
-
-          tableHead: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
-
-          tableBody: const TextStyle(fontSize: 13),
-
-          blockquoteDecoration: BoxDecoration(
-            
-            color:  Theme.of(context).colorScheme.primary.withOpacity(0.8),
-
-            borderRadius: const BorderRadius.all(Radius.circular(16)),
-          ),
-
-          blockquotePadding: const EdgeInsets.all(20),
-
-          blockquote: const TextStyle(fontSize: 16),
-
-          horizontalRuleDecoration: BoxDecoration(borderRadius: BorderRadius.circular(30), border: Border.all(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8))),
-
-          strong: const TextStyle(fontWeight: FontWeight.w500), 
-
-          em: const TextStyle(fontStyle: FontStyle.italic),
-      ))
+                style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.2) : Theme.of(context).colorScheme.primary)),
+              ),
+            ],
+          )
         : Text(message.text, style: TextStyle(color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, fontSize: 17))), 
       ),
     );
