@@ -26,6 +26,12 @@ Markdown markdown(String data, double scale, context){
 
           p: TextStyle(color: Theme.of(context).colorScheme.tertiary, height: 1.6),
 
+          h2: const TextStyle(fontSize: 18),
+
+          h1: Theme.of(context).textTheme.titleLarge,
+
+          h3: const TextStyle(fontSize: 17),
+
           // ignore: deprecated_member_use
           textScaleFactor: scale,
 

@@ -50,6 +50,8 @@ dependencies:
   bitsdojo_window: ^0.1.6
   flutter_markdown_latex: ^0.3.3
   iconsax_flutter: ^1.0.0
+  flutter_gemini: ^2.0.4
+  google_generative_ai: ^0.4.3
     
 dev_dependencies:
   flutter_test:
