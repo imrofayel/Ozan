@@ -68,18 +68,19 @@ class _GraphViewPageState extends State<GraphViewPage> {
                         
                       builder: (Node node) {
                         var nodeId = node.key!.value;
+
                         if (nodeId == 'NOTES') {
                           return _buildNode(nodeId, Theme.of(context).brightness == Brightness.light
                               ? Colors.blue.shade50.withOpacity(0.3)
-                              : Theme.of(context).colorScheme.primary);
+                              : Theme.of(context).colorScheme.primary, false);
                         } else if (notes.any((note) => note.tag == nodeId)) {
                           return _buildNode(nodeId, Theme.of(context).brightness == Brightness.light
                               ? Colors.blue.shade50
-                              : Theme.of(context).colorScheme.primary);
+                              : Theme.of(context).colorScheme.primary, false);
                         } else {
                           return _buildNode(nodeId, Theme.of(context).brightness == Brightness.light
                               ? Colors.grey.shade50
-                              : Theme.of(context).colorScheme.primary);
+                              : Theme.of(context).colorScheme.primary, true);
                         }
                       },
                     ),
@@ -130,44 +131,23 @@ class _GraphViewPageState extends State<GraphViewPage> {
     return graph;
   }
 
-  // Widget _buildNode(String text, Color color) {
-  //   return Container(
-  //     padding: const EdgeInsets.all(8.0),
-  //     decoration: BoxDecoration(
-  //       color: color,
-  //       borderRadius: BorderRadius.circular(14),
-  //       border: Border.all(color: Theme.of(context).brightness == Brightness.light
-  //                             ? Colors.blue.shade200.withOpacity(0.2)
-  //                             : Theme.of(context).colorScheme.secondary, width: 2)
-  //     ),
-  //     child: Text(
-  //       text,
-  //       style: TextStyle(color: Theme.of(context).brightness == Brightness.light
-  //                             ? Colors.blue.shade900
-  //                             : Theme.of(context).colorScheme.tertiary, fontSize: 16),
-  //     ),
-  //   );
-  // }
-
-    Widget _buildNode(String text, Color color) {
+    Widget _buildNode(String text, Color color, bool isNote) {
     return InkWell(
-      onTap: () {
-        _openNoteUpdate(text);
-      },
+      onTap: isNote ? () => _openNoteUpdate(text) : null,
       child: Container(
         padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(color: Theme.of(context).brightness == Brightness.light
-                                ? Colors.blue.shade200.withOpacity(0.2)
-                                : Theme.of(context).colorScheme.secondary, width: 2)
+              ? Colors.blue.shade200.withOpacity(0.2)
+              : Theme.of(context).colorScheme.secondary, width: 2),
         ),
         child: Text(
           text,
           style: TextStyle(color: Theme.of(context).brightness == Brightness.light
-                                ? Colors.blue.shade900
-                                : Theme.of(context).colorScheme.tertiary, fontSize: 16),
+              ? Colors.blue.shade900
+              : Theme.of(context).colorScheme.tertiary, fontSize: 16),
         ),
       ),
     );
@@ -178,61 +158,40 @@ class _GraphViewPageState extends State<GraphViewPage> {
     final databaseProvider = Provider.of<DatabaseProvider>(context, listen: false);
     databaseProvider.notesList.then((notes) {
       final clickedNote = notes.firstWhere(
-        (note) => note.title == nodeText || note.tag == nodeText,
+            (note) => note.title == nodeText,
         orElse: () => NotesModel(title: '', description: '', date: '', favourite: 0, tag: ''),
       );
 
       // If a matching note is found, open the Update view
-      if (clickedNote.title.isNotEmpty || clickedNote.tag.isNotEmpty) {
-
-          Navigator.push(context, MaterialPageRoute(builder:(context){
-                                                  
-                                        return Scaffold(
-                                                      
-                                          body: Row(
-                                                      
-                                            children: [
-                                                      
-                                              Expanded(flex: 2, child: SizedBox(
-                                                      
-                                                child: Padding(
-                                                      
-                                                  padding: const EdgeInsets.all(20.0),
-                                                      
-                                                  child: Column(
-                                                                
-                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                                
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                                
-                                                  children: [
-                                                    
-                                                    IconButton(onPressed: (){
-                                                      
-                                                      Navigator.pop(context);
-                                                                      
-                                                    }, 
-                                                                    
-                                                    icon: Icon(CupertinoIcons.arrow_left, size: 22, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6)), style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)), overlayColor: const MaterialStatePropertyAll(Colors.transparent))),
-                                                                    
-                                                  ],
-                                                ),
-                                              ),
-                                            )),
-                                                      
-                                            Expanded(flex: 10, child: Padding(
-                                                      
-                                              padding: const EdgeInsets.all(26),
-                                                      
-                                              child: Update(note: clickedNote),
-                                            )),
-                                                      
-                                            const Expanded(flex: 2, child: SizedBox()),
-                                                      
-                                          ],
-                                        ),
-                                      );
-                                    }));
+      if (clickedNote.title.isNotEmpty) {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return Scaffold(
+            body: Row(
+              children: [
+                Expanded(flex: 2, child: SizedBox(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        IconButton(onPressed: () {
+                          Navigator.pop(context);
+                        },
+                          icon: Icon(CupertinoIcons.arrow_left, size: 22, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6)), style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)), overlayColor: const MaterialStatePropertyAll(Colors.transparent))),
+                      ],
+                    ),
+                  ),
+                )),
+                Expanded(flex: 10, child: Padding(
+                  padding: const EdgeInsets.all(26),
+                  child: Update(note: clickedNote),
+                )),
+                const Expanded(flex: 2, child: SizedBox()),
+              ],
+            ),
+          );
+        }));
       }
     });
   }
