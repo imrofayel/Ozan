@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graphview/GraphView.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +27,19 @@ class _GraphViewPageState extends State<GraphViewPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Graph'),
+
+        centerTitle: true,
+
+        leading: InkWell(
+
+          onTap: () => {Navigator.pop(context)},
+
+          child: Icon(
+                CupertinoIcons.arrow_left,
+                size: 20,
+                color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8),
+              ),
+        ),
       ),
       body: Consumer<DatabaseProvider>(
         builder: (context, value, child) {
@@ -43,21 +57,28 @@ class _GraphViewPageState extends State<GraphViewPage> {
                     minScale: 1,
                     maxScale: 1.6,
                     child: GraphView(
-                      animated: false,
+                      animated: true,
                       graph: graph,
                       algorithm: builder,
                       paint: Paint()
-                        ..color = Colors.blue
-                        ..strokeWidth = 1
+                        ..color = Colors.grey.shade50
+                        ..strokeWidth = 0.6
                         ..style = PaintingStyle.stroke,
+                        
                       builder: (Node node) {
                         var nodeId = node.key!.value;
                         if (nodeId == 'NOTES') {
-                          return _buildNode(nodeId, Colors.blue);
+                          return _buildNode(nodeId, Theme.of(context).brightness == Brightness.light
+                              ? Colors.blue.shade50.withOpacity(0.3)
+                              : Theme.of(context).colorScheme.primary);
                         } else if (notes.any((note) => note.tag == nodeId)) {
-                          return _buildNode(nodeId, Colors.green);
+                          return _buildNode(nodeId, Theme.of(context).brightness == Brightness.light
+                              ? Colors.blue.shade50
+                              : Theme.of(context).colorScheme.primary);
                         } else {
-                          return _buildNode(nodeId, Colors.orange);
+                          return _buildNode(nodeId, Theme.of(context).brightness == Brightness.light
+                              ? Colors.grey.shade50
+                              : Theme.of(context).colorScheme.primary);
                         }
                       },
                     ),
@@ -98,20 +119,38 @@ class _GraphViewPageState extends State<GraphViewPage> {
       }
     }
 
+    for (var edge in graph.edges) {
+      edge.paint = Paint()
+      ..color = Colors.grey  // Change this to your desired color
+      ..strokeWidth = 1.3    // Change this to your desired width
+      ..style = PaintingStyle.stroke;
+    }
+
     return graph;
   }
 
   Widget _buildNode(String text, Color color) {
-    return Container(
-      padding: const EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(8.0),
+    return InkWell(
+      child: Container(
+        padding: const EdgeInsets.all(8.0),
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: Theme.of(context).brightness == Brightness.light
+                                ? Colors.blue.shade200.withOpacity(0.2)
+                                : Theme.of(context).colorScheme.secondary, width: 2)
+        ),
+        child: Text(
+          text,
+          style: TextStyle(color: Theme.of(context).brightness == Brightness.light
+                                ? Colors.blue.shade900
+                                : Theme.of(context).colorScheme.secondary, fontSize: 16),
+        ),
       ),
-      child: Text(
-        text,
-        style: const TextStyle(color: Colors.white),
-      ),
+
+      onTap: () => {
+        
+      },
     );
   }
 }

@@ -182,7 +182,7 @@ class _AIChatInterfaceState extends State<AIChatInterface> {
                 padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary)), child: Row(
 
                   children: [
-                    Text('Ask Caira', style: TextStyle(fontSize: 18, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter')),
+                    Text('Ask', style: TextStyle(fontSize: 18, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter')),
 
                     const Gap(10),
 
