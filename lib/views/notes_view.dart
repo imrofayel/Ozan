@@ -168,7 +168,7 @@ class _NotesViewState extends State<NotesView> {
                                               ),
                                             )),
                                                       
-                                            Expanded(flex: 10, child: Padding(
+                                            Expanded(flex: 5, child: Padding(
                                                       
                                               padding: const EdgeInsets.all(26),
                                                       
@@ -437,7 +437,7 @@ List<Color> getColor(String tag){
       Colors.green.shade100.withOpacity(0.2),
       Colors.green.shade900
     ];
-  } else if (tag == 'Dairy'){
+  } else if (tag == 'Personal'){
       return [
       Colors.blue.shade50.withOpacity(0.2),
       Colors.blue.shade100.withOpacity(0.2),
@@ -448,6 +448,6 @@ List<Color> getColor(String tag){
   return [
       Colors.blue.shade50.withOpacity(0.2),
       Colors.blue.shade100.withOpacity(0.2),
-      Colors.blue.shade900.withOpacity(0.2)
+      Colors.blue.shade900
     ];
 }

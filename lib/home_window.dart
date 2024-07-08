@@ -238,7 +238,7 @@ class Editor extends StatefulWidget {
 }
 
 // ignore: constant_identifier_names
-enum Tags {General, Studies, Work, Dairy}
+enum Tags {General, Studies, Work, Personal}
 
 class _EditorState extends State<Editor> {
 
@@ -262,7 +262,7 @@ class _EditorState extends State<Editor> {
 
               ButtonSegment(value: Tags.Work, label: Text('Work', style: TextStyle(fontSize: 15))),
 
-              ButtonSegment(value: Tags.Dairy, label: Text('Dairy', style: TextStyle(fontSize: 15))),
+              ButtonSegment(value: Tags.Personal, label: Text('Personal', style: TextStyle(fontSize: 15))),
 
             ], selected: <Tags>{selected},
             

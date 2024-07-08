@@ -198,7 +198,7 @@ class Editor extends StatefulWidget {
 }
 
 // ignore: constant_identifier_names
-enum Tags {General, Studies, Work, Dairy}
+enum Tags {General, Studies, Work, Personal}
 
 class _EditorState extends State<Editor> {
   
@@ -214,8 +214,8 @@ class _EditorState extends State<Editor> {
       selected = Tags.Work;
     } else if(widget.note!.tag == 'Studies'){
       selected = Tags.Studies;
-    } else if(widget.note!.tag == 'Dairy'){
-      selected = Tags.Dairy;
+    } else if(widget.note!.tag == 'Personal'){
+      selected = Tags.Personal;
     }
   }
 
@@ -335,7 +335,7 @@ class _EditorState extends State<Editor> {
 
                     ButtonSegment(value: Tags.Work, label: Text('Work')),
 
-                    ButtonSegment(value: Tags.Dairy, label: Text('Dairy')),
+                    ButtonSegment(value: Tags.Personal, label: Text('Personal')),
 
                   ], selected: <Tags>{selected},
                   
