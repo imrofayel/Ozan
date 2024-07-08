@@ -51,6 +51,8 @@ class _NotesViewState extends State<NotesView> {
                 builder: (context, AsyncSnapshot<List<NotesModel>> snapshot) {
                   
                   if(snapshot.hasData && snapshot.data!.isNotEmpty){
+
+                    snapshot.data!.sort((a, b) => b.date.compareTo(a.date));
                     
                     return Expanded(
 

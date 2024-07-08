@@ -130,27 +130,21 @@ class _GraphViewPageState extends State<GraphViewPage> {
   }
 
   Widget _buildNode(String text, Color color) {
-    return InkWell(
-      child: Container(
-        padding: const EdgeInsets.all(8.0),
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: Theme.of(context).brightness == Brightness.light
-                                ? Colors.blue.shade200.withOpacity(0.2)
-                                : Theme.of(context).colorScheme.secondary, width: 2)
-        ),
-        child: Text(
-          text,
-          style: TextStyle(color: Theme.of(context).brightness == Brightness.light
-                                ? Colors.blue.shade900
-                                : Theme.of(context).colorScheme.secondary, fontSize: 16),
-        ),
+    return Container(
+      padding: const EdgeInsets.all(8.0),
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: Theme.of(context).brightness == Brightness.light
+                              ? Colors.blue.shade200.withOpacity(0.2)
+                              : Theme.of(context).colorScheme.secondary, width: 2)
       ),
-
-      onTap: () => {
-        
-      },
+      child: Text(
+        text,
+        style: TextStyle(color: Theme.of(context).brightness == Brightness.light
+                              ? Colors.blue.shade900
+                              : Theme.of(context).colorScheme.tertiary, fontSize: 16),
+      ),
     );
   }
 }
