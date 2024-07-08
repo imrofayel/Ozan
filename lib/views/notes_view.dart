@@ -168,7 +168,7 @@ class _NotesViewState extends State<NotesView> {
                                               ),
                                             )),
                                                       
-                                            Expanded(flex: 5, child: Padding(
+                                            Expanded(flex: 10, child: Padding(
                                                       
                                               padding: const EdgeInsets.all(26),
                                                       

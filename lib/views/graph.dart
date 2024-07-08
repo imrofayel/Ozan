@@ -183,7 +183,7 @@ class _GraphViewPageState extends State<GraphViewPage> {
                     ),
                   ),
                 )),
-                Expanded(flex: 5, child: Padding(
+                Expanded(flex: 10, child: Padding(
                   padding: const EdgeInsets.all(26),
                   child: Update(note: clickedNote),
                 )),
