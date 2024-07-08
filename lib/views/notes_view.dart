@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ozan/components/components.dart';
 import 'package:ozan/home_window.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:popover/popover.dart';
@@ -63,7 +64,7 @@ class _NotesViewState extends State<NotesView> {
 
                             children: [
 
-                              const Opacity(opacity: 0.9, child: Text('Good Afternoon Adam!', textScaler: TextScaler.linear(1.7))),
+                              Opacity(opacity: 0.9, child: Text(greet('Adam'), textScaler: const TextScaler.linear(1.7))),
                               
                               Padding(
 

@@ -104,7 +104,7 @@ class _UpdateState extends State<Update>{
                         
                         children: [
                       
-                          Expanded(child: titleBox(context, controller: pageTitle)),
+                          Expanded(child: titleBox(context, controller: pageTitle, enabled: true)),
                       
                           const Gap(20),
 

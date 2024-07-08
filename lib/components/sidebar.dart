@@ -6,6 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:ozan/components/components.dart';
 import 'package:ozan/views/Journal/journal_view.dart';
+import 'package:ozan/views/graph.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 
@@ -59,7 +60,9 @@ class _SidebarState extends State<Sidebar> {
                 children: [
                   _buildIconButton(Iconsax.home_2_copy, 23, () {}),
                   const Gap(33),
-                  _buildIconButton(Iconsax.hierarchy_copy, 21, () {}),
+                  _buildIconButton(Iconsax.hierarchy_copy, 21, () {
+                    _navigateTo(context, const GraphViewPage());
+                  }),
                   const Gap(35),
                   _buildIconButton(Iconsax.note_2_copy, 23, () => {}),
                   const Gap(33),

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:ozan/components/sidebar.dart';
@@ -31,6 +30,8 @@ class _MarkdownState extends State<Markdown> {
   static String md = 'Open Editor & Capture your thoughts!'; // Markdown Body
 
   bool isCodeView = true; // Variable to toggle between Code and Preview
+
+  bool enableTitle = true;
 
   @override
   void initState() {
@@ -66,17 +67,7 @@ class _MarkdownState extends State<Markdown> {
             ),
           ),
           title: Expanded(
-              child: Container(
-                  decoration: BoxDecoration(
-                      color: Theme.of(context).brightness == Brightness.light
-                          ? Colors.blue.shade50.withOpacity(0.3)
-                          : Theme.of(context).colorScheme.primary,
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(
-                          color: Theme.of(context).brightness == Brightness.light
-                              ? Colors.blue.shade100.withOpacity(0.2)
-                              : Theme.of(context).colorScheme.secondary)),
-                  child: titleBox(context, controller: pageTitle))),
+              child: titleBox(context, controller: pageTitle, enabled: enableTitle)),
           centerTitle: true,
           actions: [
             Padding(
@@ -132,7 +123,7 @@ class _MarkdownState extends State<Markdown> {
 
             Expanded(
 
-              flex: 10,
+              flex: 8,
 
               child: Center(
                 
@@ -147,6 +138,9 @@ class _MarkdownState extends State<Markdown> {
                       onPressed: (int index) {
                         setState(() {
                           isCodeView = index == 0;
+
+                          enableTitle = isCodeView;
+
                         });
                       },
               
@@ -262,13 +256,13 @@ class _EditorState extends State<Editor> {
             
             SegmentedButton(segments: const[
 
-              ButtonSegment(value: Tags.General, label: Text('General')),
+              ButtonSegment(value: Tags.General, label: Text('General', style: TextStyle(fontSize: 15))),
 
-              ButtonSegment(value: Tags.Studies, label: Text('Studies')),
+              ButtonSegment(value: Tags.Studies, label: Text('Studies', style: TextStyle(fontSize: 15))),
 
-              ButtonSegment(value: Tags.Work, label: Text('Work')),
+              ButtonSegment(value: Tags.Work, label: Text('Work', style: TextStyle(fontSize: 15))),
 
-              ButtonSegment(value: Tags.Dairy, label: Text('Dairy')),
+              ButtonSegment(value: Tags.Dairy, label: Text('Dairy', style: TextStyle(fontSize: 15))),
 
             ], selected: <Tags>{selected},
             
@@ -290,12 +284,14 @@ class _EditorState extends State<Editor> {
                           Theme.of(context).brightness == Brightness.light
                               ? Colors.blue.shade50.withOpacity(0.3)
                               : Theme.of(context).colorScheme.primary)),
+
+
             ),
 
             Opacity(opacity: 0.8, child: toolbar(_MarkdownState.page, context)),
 
             Container(
-             height: 350,
+             height: 380,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(12)),
                 border: Border.all(
@@ -308,7 +304,7 @@ class _EditorState extends State<Editor> {
                     : Theme.of(context).colorScheme.primary,
               ),
               child: Padding(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(0),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -317,7 +313,7 @@ class _EditorState extends State<Editor> {
                         scrollDirection: Axis.vertical,
                         child: textField(
                           context,
-                          lines: 8,
+                          lines: 10,
                           onSubmitted: (text) {
                             setState(() {
                               _MarkdownState.page.text += '\n';

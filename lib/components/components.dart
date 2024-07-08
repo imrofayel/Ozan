@@ -121,11 +121,13 @@ IconButton suffix(context){
       }, icon: const Icon(FluentIcons.mic_24_regular), padding: const EdgeInsets.all(1));
 }
 
-Widget titleBox(context, {required TextEditingController controller}){
+Widget titleBox(context, {required TextEditingController controller, required bool enabled}){
 
   return TextField(
 
     controller: controller,
+
+    enabled: enabled,
 
     decoration: InputDecoration(
 
@@ -145,7 +147,7 @@ Widget titleBox(context, {required TextEditingController controller}){
 
     ),
 
-    style: TextStyle(fontSize: 18, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary),
+    style: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.tertiary),
   );
 }
 
