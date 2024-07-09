@@ -50,9 +50,9 @@ class PdfExport {
             mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
 
             children: [
-              pw.Text(note.title, style: pw.TextStyle(fontSize: 12, font: textcustomFont, color: PdfColors.blueGrey900)),
+              pw.Text(note.title, style: pw.TextStyle(fontSize: 12, font: textcustomFont, color: PdfColors.blueGrey200)),
 
-              pw.Text('Ozan', style: pw.TextStyle(fontSize: 12, font: textcustomFont, color: PdfColors.blueGrey900)),
+              pw.Text('Ozan', style: pw.TextStyle(fontSize: 12, font: textcustomFont, color: PdfColors.blueGrey200)),
 
             ]
           ),
@@ -165,12 +165,12 @@ class PdfExport {
     String text = line.substring(level + 1);
     double fontSize = 20 - (level * 3);
     return pw.Column(children: [
-      pw.SizedBox(height: 6),
+      pw.SizedBox(height: 10),
       pw.Text(
         text,
         style: pw.TextStyle(fontSize: fontSize, font: textcustomFont, color: PdfColors.blueGrey900),
       ),
-      pw.SizedBox(height: 6),
+      pw.SizedBox(height: 8),
     ]);
   }
 
@@ -243,20 +243,39 @@ class PdfExport {
 
   static pw.Widget renderQuote(String text) {
     return pw.Container(
-      margin: const pw.EdgeInsets.symmetric(vertical: 10),
-      padding: const pw.EdgeInsets.all(10),
-      decoration: const pw.BoxDecoration(
-        border: pw.Border(left: pw.BorderSide(color: PdfColors.grey, width: 4)),
-        color: PdfColors.grey200,
+      decoration: pw.BoxDecoration(
+        borderRadius: pw.BorderRadius.circular(6),
+        color: PdfColor.fromHex('fbfbfd'),
+        border: pw.Border.all(color: PdfColors.blueGrey50)
       ),
-      child: pw.Text(
-        text,
-        style: pw.TextStyle(
-          fontStyle: pw.FontStyle.italic,
-          color: PdfColors.blueGrey900,
-          font: textcustomFont,
-          fontSize: 12,
-        ),
+      margin: const pw.EdgeInsets.fromLTRB(0, 6, 0, 6),
+      padding: const pw.EdgeInsets.all(10),
+      child: pw.Row(
+        crossAxisAlignment: pw.CrossAxisAlignment.center,
+        children: [
+          pw.Row(
+            mainAxisAlignment: pw.MainAxisAlignment.start,
+            crossAxisAlignment: pw.CrossAxisAlignment.center,
+            children: [
+              pw.Text(
+                "''",
+                style: pw.TextStyle(
+                  fontSize: 40,
+                  font: pw.Font.times(),
+                  color: PdfColors.blueGrey100
+              )),
+            ],
+          ),
+          pw.SizedBox(width: 10),
+          pw.Text(
+            text,
+            style: pw.TextStyle(
+              font: textcustomFont,
+              fontSize: 13,
+              color: PdfColors.blueGrey900
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -271,7 +290,7 @@ class PdfExport {
         border: pw.Border.all(color: PdfColors.blueGrey50)
       ),
       margin: const pw.EdgeInsets.fromLTRB(0, 6, 0, 6),
-      padding: const pw.EdgeInsets.all(10),
+      padding: const pw.EdgeInsets.all(15),
       child: pw.Column(
         crossAxisAlignment: pw.CrossAxisAlignment.start,
         children: [
@@ -283,7 +302,8 @@ class PdfExport {
                 style: pw.TextStyle(
                   fontSize: 13,
                   font: textcustomFont,
-                  color: PdfColors.blueGrey900
+                  color: PdfColors.blueGrey900,
+                  lineSpacing: 10
               )),
             ],
           ),
@@ -293,7 +313,8 @@ class PdfExport {
             style: pw.TextStyle(
               font: customFont,
               fontSize: 13,
-              color: PdfColors.blueGrey900
+              color: PdfColors.blueGrey900,
+              lineSpacing: 8
             ),
           ),
         ],
