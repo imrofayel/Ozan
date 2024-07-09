@@ -1,11 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:ozan/components/components.dart';
-import 'package:ozan/components/snackbar.dart';
+import 'package:ozan/file_service/pdf_export.dart';
 import 'package:ozan/home_window.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:popover/popover.dart';
@@ -15,9 +13,6 @@ import 'package:ozan/db/notes.dart';
 import 'package:ozan/markdown/markdown_style.dart';
 import 'package:ozan/views/update_view.dart';
 import 'package:provider/provider.dart';
-import 'package:pdf/widgets.dart' as pw;
-
-import 'dart:io';
 
 class NotesView extends StatefulWidget {
   const NotesView({super.key});
@@ -30,45 +25,6 @@ class _NotesViewState extends State<NotesView> {
   @override
   void initState() {
     super.initState();
-  }
-
-  Future<void> generateAndSavePDF(NotesModel note) async {
-    final pdf = pw.Document();
-
-    pdf.addPage(
-      pw.Page(
-        build: (pw.Context context) {
-          return pw.Column(
-            crossAxisAlignment: pw.CrossAxisAlignment.start,
-            children: [
-              pw.Text(note.title, style: pw.TextStyle(fontSize: 24, fontWeight: pw.FontWeight.bold)),
-              pw.SizedBox(height: 20),
-              pw.Text(note.description),
-              pw.SizedBox(height: 20),
-              pw.Text('Date: ${note.date}'),
-              pw.Text('Tag: ${note.tag}'),
-            ],
-          );
-        },
-      ),
-    );
-
-    final bytes = await pdf.save();
-
-    String? outputFile = await FilePicker.platform.saveFile(
-      dialogTitle: 'Please select an output file:',
-      fileName: '${note.title}.pdf',
-    );
-
-    if (outputFile == null) {
-      // User canceled the picker
-      return;
-    }
-
-    final file = File(outputFile);
-    await file.writeAsBytes(bytes);
-
-    SnackBarUtils.showSnackbar(context, Iconsax.tick_circle, 'Success');
   }
 
   @override
@@ -216,7 +172,7 @@ class _NotesViewState extends State<NotesView> {
                                                 children: [
                                                   FilledButton(
                                                     onPressed: () async {
-                                                      await generateAndSavePDF(snapshot.data![index]);
+                                                      await PdfExport.generateAndSavePDF(context, snapshot.data![index]);
                                                       if (snapshot.data![index].favourite == 0) {
                                                         value.dbHelper.update(NotesModel(
                                                           title: snapshot.data![index].title,
