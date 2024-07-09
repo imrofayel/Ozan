@@ -53,6 +53,8 @@ dependencies:
   flutter_gemini: ^2.0.4
   google_generative_ai: ^0.4.3
   graphview: ^1.2.0
+  pdf: ^3.11.0
+  printing: ^5.12.0
     
 dev_dependencies:
   flutter_test:
