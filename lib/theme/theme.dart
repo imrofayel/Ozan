@@ -40,6 +40,8 @@ class Themes {
 
     appBarTheme:  const AppBarTheme(backgroundColor: Colors.transparent, surfaceTintColor: Colors.transparent),
 
+    drawerTheme: DrawerThemeData(scrimColor: Colors.transparent),
+
     tooltipTheme: TooltipThemeData(
 
       height: 13,
@@ -53,7 +55,7 @@ class Themes {
         borderRadius: BorderRadius.circular(20)
       ),
 
-      textStyle: TextStyle(fontSize: 18, color: const Color.fromARGB(255, 3, 7, 3).withOpacity(0.8), fontFamily: 'Inter'),
+      textStyle: TextStyle(fontSize: 15, color: const Color.fromARGB(255, 3, 7, 3).withOpacity(0.8), fontFamily: 'Inter'),
     ),
 
     dropdownMenuTheme: DropdownMenuThemeData(
