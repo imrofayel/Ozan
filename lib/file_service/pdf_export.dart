@@ -65,19 +65,19 @@ class PdfExport {
 
     final bytes = await pdf.save();
     String? outputFile = await FilePicker.platform.saveFile(
-      dialogTitle: 'Please select file location:',
+      dialogTitle: 'Save:',
       fileName: '${note.title}.pdf',
     );
 
     if (outputFile == null) {
-      SnackBarUtils.showSnackbar(context, Iconsax.tick_circle, 'PDF Export failed');
+      SnackBarUtils.showSnackbar(context, CupertinoIcons.clear_circled_solid, 'PDF export failed');
       return;
     }
 
     final file = File(outputFile);
     await file.writeAsBytes(bytes);
 
-    SnackBarUtils.showSnackbar(context, Iconsax.tick_circle, 'PDF Exported Successfully at $outputFile');
+    SnackBarUtils.showSnackbar(context, Iconsax.tick_circle, 'PDF exported successfully at $outputFile');
   }
 
   static List<pw.Widget> parseMarkdown(String markdown) {

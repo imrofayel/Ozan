@@ -24,22 +24,20 @@ class _HomeState extends State<Home> {
 
       return Scaffold(
 
-        drawer: const SidebarDrawer(),
+        endDrawer: const SidebarDrawer(),
       
         appBar: AppBar(
                
-              leading:Builder(
+              title: Builder(
 
                 builder: (BuildContext context) {
                   return IconButton(
-                    icon: Icon(Iconsax.sidebar_right_copy, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), size: 23),
-                    onPressed: () { Scaffold.of(context).openDrawer(); },
-                    tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip, hoverColor: Theme.of(context).colorScheme.primary,
+                    icon: Icon(CupertinoIcons.ellipsis, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.7), size: 22),
+                    onPressed: () { Scaffold.of(context).openEndDrawer(); },
+                    tooltip: 'Sidebar', hoverColor: Theme.of(context).colorScheme.primary, style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),
                   );
                 },
               ),
-
-              centerTitle: true,
                   
               elevation: 0,
 
@@ -52,9 +50,13 @@ class _HomeState extends State<Home> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
                     child: InkWell(
-                      child: Icon(
-                        Theme.of(context).brightness == Brightness.dark ? Iconsax.toggle_on_circle_copy : Iconsax.toggle_off_circle_copy,
-                        ),
+                      overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+                      child: Tooltip(
+                        message: Theme.of(context).brightness == Brightness.dark ? 'Light Theme' : 'Dark Theme',
+                        child: Icon(
+                          Theme.of(context).brightness == Brightness.dark ? Iconsax.toggle_on_circle_copy : Iconsax.toggle_off_circle_copy,
+                          ),
+                      ),
 
                         onTap: () => Provider.of<ThemeSwitcher>(context, listen: false).toggleTheme()
                     )

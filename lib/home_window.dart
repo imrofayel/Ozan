@@ -108,9 +108,7 @@ class _MarkdownState extends State<Markdown> {
                   child: Text('Save',
                       style: TextStyle(
                           fontSize: 16,
-                          color: Theme.of(context).brightness == Brightness.light
-                              ? Colors.blue.shade900
-                              : Theme.of(context).colorScheme.tertiary,
+                          color: Theme.of(context).colorScheme.tertiary,
                           fontFamily: 'Inter'))),
             ),
           ],
@@ -202,7 +200,7 @@ class _MarkdownState extends State<Markdown> {
             height: 430,
             width: 550,
             // change md to page.text
-            child: markdown(page.text, 1.25, context)),
+            child: markdown(page.text, 1.2, context)),
         const Gap(14),
         Padding(
           padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
@@ -288,7 +286,7 @@ class _EditorState extends State<Editor> {
 
             ),
 
-            Opacity(opacity: 0.8, child: toolbar(_MarkdownState.page, context)),
+            toolbar(_MarkdownState.page, context),
 
             Container(
              height: 380,

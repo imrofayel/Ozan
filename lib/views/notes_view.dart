@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ozan/components/components.dart';
+import 'package:ozan/file_service/file_service.dart';
 import 'package:ozan/file_service/pdf_export.dart';
 import 'package:ozan/home_window.dart';
 import 'package:page_transition/page_transition.dart';
@@ -46,7 +47,7 @@ class _NotesViewState extends State<NotesView> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Opacity(opacity: 0.9, child: Text(greet('Adam'), textScaler: const TextScaler.linear(1.7))),
+                              Opacity(opacity: 0.9, child: Text(greet('Buddy'), textScaler: const TextScaler.linear(1.5))),
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
                                 child: Row(
@@ -60,9 +61,34 @@ class _NotesViewState extends State<NotesView> {
                                         shadowColor: const MaterialStatePropertyAll(Colors.transparent),
                                         backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary),
                                       ),
-                                      child: Text('${snapshot.data!.length} entries', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter')),
+                                      child: Text('${snapshot.data!.length} entries', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.8) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter')),
                                     ),
                                     const Gap(14),
+
+                                    FilledButton(
+                                      onPressed: () {
+                                        
+                                        Markdown.files.loadFile(context);
+                                      },
+
+                                      style: ButtonStyle(
+                                        side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
+                                        padding: const MaterialStatePropertyAll(EdgeInsets.all(14)),
+                                        overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+                                        shadowColor: const MaterialStatePropertyAll(Colors.transparent),
+                                        backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.4) : Theme.of(context).colorScheme.primary),
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Icon(CupertinoIcons.folder, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.8) : Theme.of(context).colorScheme.tertiary, size: 18),
+                                          const Gap(8),
+                                          Text('Open', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.8) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter')),
+                                        ],
+                                      ),
+                                    ),
+
+                                    const Gap(10),
+
                                     FilledButton(
                                       onPressed: () {
                                         Navigator.push(context, PageTransition(type: PageTransitionType.fade, duration: const Duration(milliseconds: 300), child: const Markdown()));
@@ -76,9 +102,9 @@ class _NotesViewState extends State<NotesView> {
                                       ),
                                       child: Row(
                                         children: [
-                                          Icon(CupertinoIcons.pencil, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, size: 20),
+                                          Icon(CupertinoIcons.pencil, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, size: 19),
                                           const Gap(4),
-                                          Text('Write', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter')),
+                                          Text('Write', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.8) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter')),
                                         ],
                                       ),
                                     ),
@@ -166,13 +192,12 @@ class _NotesViewState extends State<NotesView> {
                                                   shadowColor: const MaterialStatePropertyAll(Colors.transparent),
                                                   backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.2) : Theme.of(context).colorScheme.background),
                                                 ),
-                                                child: Text(snapshot.data![index].date, style: TextStyle(fontSize: 15, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter')),
+                                                child: Text(snapshot.data![index].date, style: TextStyle(fontSize: 14.5, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.8) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter')),
                                               ),
                                               Row(
                                                 children: [
                                                   FilledButton(
                                                     onPressed: () async {
-                                                      await PdfExport.generateAndSavePDF(context, snapshot.data![index]);
                                                       if (snapshot.data![index].favourite == 0) {
                                                         value.dbHelper.update(NotesModel(
                                                           title: snapshot.data![index].title,
@@ -201,20 +226,24 @@ class _NotesViewState extends State<NotesView> {
                                                       shadowColor: MaterialStatePropertyAll(Colors.transparent),
                                                       backgroundColor: MaterialStatePropertyAll(Colors.transparent),
                                                     ),
-                                                    child: Icon(
-                                                      snapshot.data![index].favourite == 0 ? CupertinoIcons.heart : CupertinoIcons.heart_fill,
-                                                      color: snapshot.data![index].favourite == 0 ? Theme.of(context).colorScheme.tertiary : Colors.red,
-                                                    ),
+                                                    child: Tooltip(
+                                                      message: 'Bookmark',
+                                                      child: Icon(
+                                                        snapshot.data![index].favourite == 0 ? CupertinoIcons.bookmark : CupertinoIcons.bookmark_fill,
+                                                        color: snapshot.data![index].favourite == 0 ? Theme.of(context).colorScheme.tertiary : Theme.of(context).colorScheme.tertiary.withOpacity(0.8), size: 19),
+                                                    )
                                                   ),
+                                                  
                                                   SizedBox(child: Delete(id: snapshot.data![index].id)),
                                                 ],
                                               ),
                                             ],
                                           ),
-                                          const Gap(10),
+                                          const Gap(7),
+
                                           Padding(
                                             padding: const EdgeInsets.only(left: 8),
-                                            child: Text(snapshot.data![index].title, textScaler: const TextScaler.linear(1.4)),
+                                            child: Text(snapshot.data![index].title, style: TextStyle(fontSize: 17, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
                                           ),
                                           const Gap(10),
                                           Expanded(
@@ -224,11 +253,12 @@ class _NotesViewState extends State<NotesView> {
                                                 border: Border.all(color: Theme.of(context).colorScheme.secondary),
                                                 borderRadius: BorderRadius.circular(10),
                                               ),
-                                              child: markdown(snapshot.data![index].description, 1.12, context),
+                                              child: markdown(snapshot.data![index].description, 1, context),
                                             ),
                                           ),
                                           const Gap(10),
                                           Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
                                               FilledButton(
                                                 onPressed: () {},
@@ -241,8 +271,13 @@ class _NotesViewState extends State<NotesView> {
                                                 ),
                                                 child: Text(
                                                   snapshot.data![index].tag,
-                                                  style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.light ? getColor(snapshot.data![index].tag)[2] : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'),
+                                                  style: TextStyle(fontSize: 14.3, color: Theme.of(context).brightness == Brightness.light ? getColor(snapshot.data![index].tag)[2] : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'),
                                                 ),
+                                              ),
+
+                                              Padding(
+                                                padding: const EdgeInsets.only(right: 6),
+                                                child: IconButton(icon: Icon(CupertinoIcons.down_arrow, size: 19, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)), onPressed: () async{ await PdfExport.generateAndSavePDF(context, snapshot.data![index]);}, style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), tooltip: 'Export to PDF')
                                               ),
                                             ],
                                           ),
@@ -268,7 +303,7 @@ class _NotesViewState extends State<NotesView> {
 
                             children: [
 
-                              const Opacity(opacity: 0.9, child: Text('Good Afternoon Adam!', textScaler: TextScaler.linear(1.7))),
+                              Opacity(opacity: 0.9, child: Text(greet('Buddy'), textScaler: const TextScaler.linear(1.5))),
                               
                               Padding(
 
@@ -282,7 +317,7 @@ class _NotesViewState extends State<NotesView> {
                                                   
                                     side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
                                                                                   
-                                    padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary)), child: Text('${snapshot.data!.length} entries', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
+                                    padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary)), child: Text('${snapshot.data!.length} entries', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.8) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
 
                                     const Gap(14),
 
@@ -294,11 +329,11 @@ class _NotesViewState extends State<NotesView> {
                                                                                   
                                     padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.4) : Theme.of(context).colorScheme.primary)), child: Row(
                                       children: [
-                                        Icon(CupertinoIcons.pencil, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, size: 20),
+                                        Icon(CupertinoIcons.pencil, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, size: 19),
 
                                         const Gap(4),
 
-                                        Text('Write', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter')),
+                                        Text('Write', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.8) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter')),
                                       ],
                                     )),                                    
                                   ],
@@ -367,7 +402,7 @@ class Delete extends StatelessWidget {
               
               color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)), 
               
-              style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), padding: const MaterialStatePropertyAll(EdgeInsets.all(13)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), surfaceTintColor: const MaterialStatePropertyAll(Colors.transparent)))                                                 
+              style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), padding: const MaterialStatePropertyAll(EdgeInsets.all(10)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), surfaceTintColor: const MaterialStatePropertyAll(Colors.transparent)))                                                 
               );
             },
           );                                                       
@@ -382,27 +417,27 @@ List<Color> getColor(String tag){
 
   if(tag == 'General'){
       return [
-      Colors.grey.shade50.withOpacity(0.2),
+      Colors.grey.shade50.withOpacity(0.4),
       Colors.grey.shade100.withOpacity(0.2),
       Colors.grey.shade900
     ];
   } else if(tag == 'Work'){
       return [
-      Colors.red.shade50.withOpacity(0.2),
+      Colors.red.shade50.withOpacity(0.4),
       Colors.red.shade100.withOpacity(0.2),
-      Colors.red.shade900
+      Colors.red.shade900.withOpacity(0.8)
     ];
   } else if(tag == 'Studies'){
     return  [
-      Colors.green.shade50.withOpacity(0.2),
+      Colors.green.shade50.withOpacity(0.4),
       Colors.green.shade100.withOpacity(0.2),
-      Colors.green.shade900
+      Colors.green.shade900.withOpacity(0.8)
     ];
   } else if (tag == 'Personal'){
       return [
-      Colors.blue.shade50.withOpacity(0.2),
+      Colors.blue.shade50.withOpacity(0.4),
       Colors.blue.shade100.withOpacity(0.2),
-      Colors.blue.shade900
+      Colors.blue.shade900.withOpacity(0.8)
     ];
   }
 

@@ -94,7 +94,7 @@ class _UpdateState extends State<Update>{
         
                         color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
         
-                        borderRadius: const BorderRadius.all(Radius.circular(23)),
+                        borderRadius: const BorderRadius.all(Radius.circular(15)),
         
                         border: Border.all(color: Theme.of(context).colorScheme.secondary)
         
@@ -121,21 +121,11 @@ class _UpdateState extends State<Update>{
                           
                           style: ButtonStyle(
                             
-                            shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(18), side: BorderSide.none)),
+                            shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15), side: BorderSide.none)),
                             
-                            backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)), padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: const MaterialStatePropertyAll(Colors.transparent)), 
+                            backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background.withOpacity(0.3)), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.8))), padding: const MaterialStatePropertyAll(EdgeInsets.all(15)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: const MaterialStatePropertyAll(Colors.transparent)), 
                             
-                            child: Row(
-        
-                              children: [
-        
-                                Icon(CupertinoIcons.pencil_outline, size: 26, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)),
-        
-                                const Gap(10),
-        
-                                Text('Writer', style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontSize: 20, fontFamily: 'Inter'))
-                              ],
-                            )),
+                            child: Text('Writer', style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontSize: 18, fontFamily: 'Inter'))),
         
                           const Gap(15)
                         ],
@@ -145,8 +135,7 @@ class _UpdateState extends State<Update>{
                     SizedBox(
                               
                       height: 485,
-                              // change md to page.text
-                      child: markdown(page.text, 1.30, context)
+                      child: markdown(page.text, 1.15, context)
                     ),
                             
                       const Gap(10),
@@ -244,28 +233,23 @@ class _EditorState extends State<Editor> {
       
           children: [
             
-            const Opacity(
-
-              opacity: 0.8,
-              
-              child: Row(
-                    
-                children: [
-                    
-                  Icon(CupertinoIcons.pencil_outline, size: 28),
-              
-                  Gap(10),
-                    
-                  Text("Writer", style: TextStyle(fontSize: 24, fontFamily: 'Inter'),),
-                ],
-              ),
+            Row(
+                  
+              children: [
+                  
+                Icon(CupertinoIcons.pencil_outline, size: 25, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)),
+            
+                const Gap(10),
+                  
+                Text("Writer", style: TextStyle(fontSize: 20, fontFamily: 'Inter', color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)),),
+              ],
             ),
 
               FilledButton(
 
-                    style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), padding: const MaterialStatePropertyAll(EdgeInsets.all(16)),
+                    style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.blue.shade50.withOpacity(0.3)), padding: const MaterialStatePropertyAll(EdgeInsets.all(16)),
                     
-                    side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.secondary)),
+                    side: MaterialStatePropertyAll(BorderSide(width: 1, color: Colors.blue.shade100.withOpacity(0.2))),
 
                     overlayColor: const MaterialStatePropertyAll(Colors.transparent),
 
@@ -307,7 +291,7 @@ class _EditorState extends State<Editor> {
                 }, 
               
               
-                child: Text('Update', style: TextStyle(fontFamily: 'Inter', fontSize: 18, fontWeight: FontWeight.w500, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)))
+                child: Text('Save', style: TextStyle(fontFamily: 'Inter', fontSize: 16, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)))
 
                 )
           ],
@@ -329,13 +313,13 @@ class _EditorState extends State<Editor> {
 
                   SegmentedButton(segments: const[
 
-                    ButtonSegment(value: Tags.General, label: Text('General')),
+                    ButtonSegment(value: Tags.General, label: Text('General', style: TextStyle(fontSize: 15))),
 
-                    ButtonSegment(value: Tags.Studies, label: Text('Studies')),
+                    ButtonSegment(value: Tags.Studies, label: Text('Studies', style: TextStyle(fontSize: 15))),
 
-                    ButtonSegment(value: Tags.Work, label: Text('Work')),
+                    ButtonSegment(value: Tags.Work, label: Text('Work', style: TextStyle(fontSize: 15))),
 
-                    ButtonSegment(value: Tags.Personal, label: Text('Personal')),
+                    ButtonSegment(value: Tags.Personal, label: Text('Personal', style: TextStyle(fontSize: 15))),
 
                   ], selected: <Tags>{selected},
                   
@@ -360,7 +344,7 @@ class _EditorState extends State<Editor> {
                   ),
 
       
-                  Opacity(opacity: 0.8, child: toolbar(_UpdateState.page, context)),
+                  toolbar(_UpdateState.page, context),
                   
                     Column(
             

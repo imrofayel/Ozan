@@ -10,17 +10,17 @@ class Themes {
 
     fontFamily: 'Inter',
 
-    textTheme: const TextTheme(
+    textTheme: TextTheme(
 
-      bodyMedium: TextStyle(color: Color.fromARGB(255, 16, 16, 16)),
+      bodyMedium: TextStyle(color: Colors.blueGrey.shade900),
       
-      bodyLarge: TextStyle(color:  Color.fromARGB(255, 16, 16, 16)),
+      bodyLarge: TextStyle(color:  Colors.blueGrey.shade900),
 
-      bodySmall: TextStyle(color:  Color.fromARGB(255, 16, 16, 16))
+      bodySmall: TextStyle(color:  Colors.blueGrey.shade900)
 
     ),
 
-    textSelectionTheme: const TextSelectionThemeData(cursorColor: Color.fromARGB(255, 16, 16, 16), selectionColor: Color.fromRGBO(233, 231, 227, 1)),
+    textSelectionTheme: TextSelectionThemeData(cursorColor: Colors.blueGrey.shade900, selectionColor: const Color.fromARGB(255, 241, 240, 237)),
 
     colorScheme: ColorScheme.fromSeed(
 
@@ -34,13 +34,13 @@ class Themes {
 
       primary: const Color.fromRGBO(249, 249, 252, 1),
 
-      tertiary: const Color.fromARGB(255, 16, 16, 16),
+      tertiary: Colors.blueGrey.shade900,
 
     ),
 
     appBarTheme:  const AppBarTheme(backgroundColor: Colors.transparent, surfaceTintColor: Colors.transparent),
 
-    drawerTheme: DrawerThemeData(scrimColor: Colors.transparent),
+    drawerTheme: const DrawerThemeData(scrimColor: Colors.transparent),
 
     tooltipTheme: TooltipThemeData(
 
@@ -55,7 +55,7 @@ class Themes {
         borderRadius: BorderRadius.circular(20)
       ),
 
-      textStyle: TextStyle(fontSize: 15, color: const Color.fromARGB(255, 3, 7, 3).withOpacity(0.8), fontFamily: 'Inter'),
+      textStyle: TextStyle(fontSize: 14, color: Colors.blueGrey.shade900.withOpacity(0.9), fontFamily: 'Inter'),
     ),
 
     dropdownMenuTheme: DropdownMenuThemeData(
@@ -148,8 +148,10 @@ class Themes {
         borderRadius: BorderRadius.circular(20)
       ),
 
-      textStyle: const TextStyle(fontSize: 18, color: Color.fromRGBO(192, 212, 190, 1), fontFamily: 'Inter'),
+      textStyle: const TextStyle(fontSize: 14, color: Color.fromRGBO(192, 212, 190, 1), fontFamily: 'Inter'),
     ),
+
+    
 
     dropdownMenuTheme: DropdownMenuThemeData(
 

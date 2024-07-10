@@ -58,26 +58,23 @@ class _SidebarState extends State<Sidebar> {
             children: [
               Column(
                 children: [
-                  _buildIconButton(Iconsax.home_2_copy, 23, () {}),
-                  const Gap(33),
-                  _buildIconButton(Iconsax.hierarchy_copy, 21, () {
-                    _navigateTo(context, const GraphViewPage());
-                  }),
+                  _buildIconButton(CupertinoIcons.pencil_circle, 24, () {}, 'Notes'),
                   const Gap(35),
-                  _buildIconButton(Iconsax.note_2_copy, 23, () => {}),
-                  const Gap(33),
-                  _buildIconButton(Iconsax.heart_copy, 23, () => _navigateTo(context, const JournalView())),
+                  _buildIconButton(CupertinoIcons.map, 22, () {
+                    _navigateTo(context, const GraphViewPage());
+                  }, 'Brain'),
+                  const Gap(35),
+                  _buildIconButton(CupertinoIcons.book, 22, () => {}, 'Journal'),
+                  const Gap(35),
+                  _buildIconButton(CupertinoIcons.bookmark, 22, () => _navigateTo(context, const JournalView()), 'Bookmarks'),
                 ],
               ),
-              IconButton(
-                icon:  const Icon(FluentIcons.sparkle_32_regular, size: 26),
-                onPressed: () => _openAIChat(context),
-                color: Theme.of(context).brightness == Brightness.dark
-                    ? Theme.of(context).colorScheme.tertiary.withOpacity(0.8)
-                    : Colors.blue.shade900,
 
-                style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.5) : Theme.of(context).colorScheme.primary)),
-              ),
+              IconButton(
+                    icon: Icon(CupertinoIcons.sparkles, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), size: 26),
+                    onPressed: () { _openAIChat(context); },
+                    tooltip: 'Ask AI', hoverColor: Theme.of(context).colorScheme.primary, style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), padding: const MaterialStatePropertyAll(EdgeInsets.zero)),
+              )
             ],
           ),
         ),
@@ -85,13 +82,22 @@ class _SidebarState extends State<Sidebar> {
     );
   }
 
-  Widget _buildIconButton(IconData icon, double size, VoidCallback onTap, {Color? color}) {
-    return InkWell(
-      onTap: onTap,
-      child: Icon(
-        icon,
-        size: size,
-        color: color ?? Theme.of(context).colorScheme.tertiary.withOpacity(0.8),
+  Widget _buildIconButton(IconData icon, double size, VoidCallback onTap, String tooltip, {Color? color}) {
+    return Tooltip(
+
+      message: tooltip,
+
+      child: InkWell(
+        onTap: onTap,
+      
+        hoverColor: Colors.transparent,
+        overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+      
+        child: Icon(
+          icon,
+          size: size,
+          color: color ?? Theme.of(context).colorScheme.tertiary.withOpacity(0.8),
+        ),
       ),
     );
   }
@@ -132,7 +138,7 @@ class _SidebarState extends State<Sidebar> {
           
             shape: RoundedRectangleBorder(
               
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(10),
 
               side: BorderSide(color:Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)
             ),
@@ -179,16 +185,7 @@ class _AIChatInterfaceState extends State<AIChatInterface> {
                                                     
                 side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
                                                                                   
-                padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary)), child: Row(
-
-                  children: [
-                    Text('Ask', style: TextStyle(fontSize: 18, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter')),
-
-                    const Gap(10),
-
-                    Icon(CupertinoIcons.question_circle, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, size: 22)
-                  ],
-                )),
+                padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary)), child: Text('Caira', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.8) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
 
                 Row(
                   children: [
@@ -201,33 +198,17 @@ class _AIChatInterfaceState extends State<AIChatInterface> {
                                                         
                     side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
                                                                                       
-                    padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary)), child: Row(
-                    
-                      children: [
-                        
-                        Icon(FluentIcons.sparkle_28_regular, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, size: 24),
-                    
-                        const Gap(10),
-                    
-                        Text('New Chat', style: TextStyle(fontSize: 18, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter')),
-                      ],
-                    )),
+                    padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary)), child: Text('Clear', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.8) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
 
                     const Gap(10),
 
-                    IconButton(
-                      icon:  const Icon(CupertinoIcons.xmark, size: 18),
-                    onPressed: () => {
-                      Navigator.pop(context)
-                    },
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Theme.of(context).colorScheme.tertiary.withOpacity(0.8)
-                          : Colors.blue.shade900,
+                    InkWell(
 
-                      style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.2) : Theme.of(context).colorScheme.primary), 
+                      overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+
+                      hoverColor: Colors.transparent,
                       
-                      side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary))),
-                    ),
+                      onTap: () => Navigator.pop(context), child: Tooltip(message: 'Close', child: Icon(CupertinoIcons.xmark_circle_fill, size: 22, color: Colors.red.withOpacity(0.8))))
                   ],
                 ),
   
@@ -257,10 +238,10 @@ class _AIChatInterfaceState extends State<AIChatInterface> {
 
                       border: InputBorder.none,
 
-                      hintStyle: TextStyle(fontSize: 17, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'),
+                      hintStyle: TextStyle(fontSize: 16.5, color: Theme.of(context).brightness == Brightness.light ? Colors.blueGrey.shade900.withOpacity(0.85) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'),
                     ),
 
-                    style: TextStyle(fontSize: 17, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'),
+                    style: TextStyle(fontSize: 16.5, color: Theme.of(context).brightness == Brightness.light ? Colors.blueGrey.shade900.withOpacity(0.85) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'),
 
                     onSubmitted: (_) => _sendMessage(),
                   ),
@@ -419,7 +400,7 @@ class ChatBubble extends StatelessWidget {
               ),
             ],
           )
-        : Text(message.text, style: TextStyle(color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, fontSize: 17))), 
+        : Text(message.text, style: TextStyle(color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.8) : Theme.of(context).colorScheme.tertiary, fontSize: 16))), 
       ),
     );
   }
