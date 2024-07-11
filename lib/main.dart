@@ -19,11 +19,11 @@ void main() async {
   await windowManager.ensureInitialized();
 
   WindowOptions windowOptions = const WindowOptions(
-    size: Size(800, 660),
+    size: Size(635, 650),
     center: true,
     titleBarStyle: TitleBarStyle.normal,
     title: 'Ozan',
-    minimumSize: Size(700, 600),
+    minimumSize: Size(635, 650),
   );
   windowManager.waitUntilReadyToShow(windowOptions, () async {
     await windowManager.show();
@@ -33,7 +33,6 @@ void main() async {
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (context) => DatabaseProvider()),
-      // ChangeNotifierProvider(create: (context) => JournalDatabaseProvider()),
       ChangeNotifierProvider(create: (_) => FilterState()),
       ChangeNotifierProvider(create: (context) => AppState()),
          ChangeNotifierProxyProvider<AppState, ThemeSwitcher>(

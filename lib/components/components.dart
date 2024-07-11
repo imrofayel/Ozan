@@ -156,15 +156,15 @@ String greet(String name){
   String text;
 
   if(DateTime.now().hour > 0 && DateTime.now().hour <= 11){
-    text = 'Good Morning $name!';
+    text = 'Good Morning ${name.split(' ')[0]}!';
   }
 
   else if(DateTime.now().hour > 11 && DateTime.now().hour <= 16){
-    text = 'Good Afternoon $name!';
+    text = 'Good Afternoon ${name.split(' ')[0]}!';
   }
 
   else{
-    text = 'Good Evening $name!';
+    text = 'Good Evening ${name.split(' ')[0]}!';
   }
 
   return text;
