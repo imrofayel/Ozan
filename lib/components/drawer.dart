@@ -42,7 +42,7 @@ class _SidebarDrawerState extends State<SidebarDrawer> {
       surfaceTintColor: Colors.transparent,
       shadowColor: Colors.transparent,
       width: 280,
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.primary,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero, side: BorderSide(color: Theme.of(context).colorScheme.secondary)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -79,7 +79,7 @@ class _SidebarDrawerState extends State<SidebarDrawer> {
         child: Switch(
           activeColor: Theme.of(context).colorScheme.tertiary.withOpacity(0.6),
           activeTrackColor: Theme.of(context).colorScheme.secondary.withOpacity(0.6),
-          inactiveThumbColor: Colors.blue.shade900,
+          inactiveThumbColor: Colors.blue.shade900.withOpacity(0.7),
           inactiveTrackColor: Colors.transparent,
           value: appState.isDarkMode,
           onChanged: (value) => appState.setDarkMode(value),
