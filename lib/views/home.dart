@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:ozan/db/db_provider.dart';
-import 'package:ozan/theme/theme_provider.dart';
 import 'package:ozan/components/sidebar.dart';
 import 'package:ozan/views/notes_view.dart';
 import 'package:provider/provider.dart';

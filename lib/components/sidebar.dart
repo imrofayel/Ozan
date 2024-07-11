@@ -4,6 +4,7 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:gap/gap.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:ozan/components/components.dart';
+import 'package:ozan/components/filter_db.dart';
 import 'package:ozan/components/preferences.dart';
 import 'package:ozan/components/snackbar.dart';
 // import 'package:ozan/views/Journal/journal_view.dart';
@@ -58,15 +59,19 @@ class _SidebarState extends State<Sidebar> {
             children: [
               Column(
                 children: [
-                  _buildIconButton(CupertinoIcons.pencil_circle, 24, () {}, 'Notes'),
+                  _buildIconButton(CupertinoIcons.pencil_circle, 24, () {
+                    Provider.of<FilterState>(context, listen: false).setShowFavouritesOnly(false);
+                  }, 'Notes'),
                   const Gap(35),
                   _buildIconButton(CupertinoIcons.map, 22, () {
                     _navigateTo(context, const GraphViewPage());
                   }, 'Brain'),
                   const Gap(35),
-                  _buildIconButton(CupertinoIcons.book, 22, () => {}, 'Journal'),
+                  _buildIconButton(CupertinoIcons.book, 22, () => {}, 'Journal (Soon)'),
                   const Gap(35),
-                  _buildIconButton(CupertinoIcons.bookmark, 22, (){}, 'Bookmarks'),
+                  _buildIconButton(!Provider.of<FilterState>(context).isBookmark() ? CupertinoIcons.bookmark : CupertinoIcons.bookmark_fill, 22, (){
+                    Provider.of<FilterState>(context, listen: false).toggleShowFavouritesOnly();
+                  }, 'Bookmarks'),
                 ],
               ),
 
