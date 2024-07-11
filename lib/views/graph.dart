@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:graphview/GraphView.dart';
 import 'package:ozan/views/update_view.dart';
 import 'package:provider/provider.dart';
@@ -27,7 +28,25 @@ class _GraphViewPageState extends State<GraphViewPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Graph'),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+           const Text('Graph'),
+
+           const Gap(10),
+
+          FilledButton(
+            onPressed: () {},
+            style: ButtonStyle(
+            side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).brightness == Brightness.light ? Colors.red.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
+            padding: const MaterialStatePropertyAll(EdgeInsets.all(14)),
+            overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+            backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.red.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary),
+            ),
+            child: Text('Beta', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.red.shade900.withOpacity(0.8) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter')),
+            ),
+          ],
+        ),
 
         centerTitle: true,
 
@@ -133,6 +152,9 @@ class _GraphViewPageState extends State<GraphViewPage> {
 
     Widget _buildNode(String text, Color color, bool isNote) {
     return InkWell(
+
+      overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+
       onTap: isNote ? () => _openNoteUpdate(text) : null,
       child: Container(
         padding: const EdgeInsets.all(8.0),

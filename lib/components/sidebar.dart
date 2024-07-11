@@ -1,11 +1,10 @@
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:gap/gap.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:ozan/components/components.dart';
-import 'package:ozan/views/Journal/journal_view.dart';
+// import 'package:ozan/views/Journal/journal_view.dart';
 import 'package:ozan/views/graph.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
@@ -66,7 +65,7 @@ class _SidebarState extends State<Sidebar> {
                   const Gap(35),
                   _buildIconButton(CupertinoIcons.book, 22, () => {}, 'Journal'),
                   const Gap(35),
-                  _buildIconButton(CupertinoIcons.bookmark, 22, () => _navigateTo(context, const JournalView()), 'Bookmarks'),
+                  _buildIconButton(CupertinoIcons.bookmark, 22, (){}, 'Bookmarks'),
                 ],
               ),
 

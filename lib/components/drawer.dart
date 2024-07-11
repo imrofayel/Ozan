@@ -1,7 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 
 class SidebarDrawer extends StatelessWidget {
   const SidebarDrawer({
@@ -24,6 +21,13 @@ class SidebarDrawer extends StatelessWidget {
       backgroundColor: Theme.of(context).colorScheme.primary,
 
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+
+      child: const Row(
+        children: [
+
+          
+        ],
+      ),
       
     );
   }
