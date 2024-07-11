@@ -41,7 +41,7 @@ class _HomeState extends State<Home> {
                   
               elevation: 0,
 
-              actionsIconTheme: IconThemeData(size: 26, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.7)),
+              actionsIconTheme: IconThemeData(size: 24, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)),
                   
               actions:
 
@@ -51,14 +51,14 @@ class _HomeState extends State<Home> {
                     padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
                     child: InkWell(
                       overlayColor: const MaterialStatePropertyAll(Colors.transparent),
-                      child: Tooltip(
-                        message: Theme.of(context).brightness == Brightness.dark ? 'Light Theme' : 'Dark Theme',
+                      child: const Tooltip(
+                        message: 'Sync Coming Soon',
                         child: Icon(
-                          Theme.of(context).brightness == Brightness.dark ? Iconsax.toggle_on_circle_copy : Iconsax.toggle_off_circle_copy,
+                          CupertinoIcons.cloud
                           ),
                       ),
 
-                        onTap: () => Provider.of<ThemeSwitcher>(context, listen: false).toggleTheme()
+                        onTap: (){}
                     )
                     ),
                 

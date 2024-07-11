@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_acrylic/window.dart';
+import 'package:ozan/components/preferences.dart';
 import 'package:ozan/db/db_provider.dart';
+import 'package:ozan/theme/theme.dart';
 // import 'package:ozan/db/journal_db/journal_db_provider.dart';
 import 'package:ozan/theme/theme_provider.dart';
 import 'package:ozan/views/home.dart';
@@ -31,7 +33,19 @@ void main() async {
     providers: [
       ChangeNotifierProvider(create: (context) => DatabaseProvider()),
       // ChangeNotifierProvider(create: (context) => JournalDatabaseProvider()),
-      ChangeNotifierProvider(create: (context) => ThemeSwitcher()),
+      ChangeNotifierProvider(create: (context) => AppState()),
+         ChangeNotifierProxyProvider<AppState, ThemeSwitcher>(
+        create: (context) => ThemeSwitcher(context),
+        update: (context, appState, themeSwitcher) {
+          themeSwitcher ??= ThemeSwitcher(context);
+          if (appState.isDarkMode) {
+            themeSwitcher.themeData = Themes.darkTheme;
+          } else {
+            themeSwitcher.themeData = Themes.lightTheme;
+          }
+          return themeSwitcher;
+        },
+      ),
     ],
     child: const Ozan(),
   ));

@@ -4,14 +4,15 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:gap/gap.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:ozan/components/components.dart';
+import 'package:ozan/components/preferences.dart';
+import 'package:ozan/components/snackbar.dart';
 // import 'package:ozan/views/Journal/journal_view.dart';
 import 'package:ozan/views/graph.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
+import 'package:provider/provider.dart';
 
 // Ensure to replace with your actual API key
-const apiKey = 'AIzaSyDS08hZlaB5hJfRUi8SyyX9iOZ9Z69uadY';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
@@ -161,11 +162,19 @@ class _AIChatInterfaceState extends State<AIChatInterface> {
   final TextEditingController _messageController = TextEditingController();
   final List<ChatMessage> _messages = [];
   final ScrollController _scrollController = ScrollController();
-  final model = GenerativeModel(
-    model: 'gemini-1.5-flash-latest',
-    apiKey: apiKey,
-  );
+  late GenerativeModel model;
   final List<String> _conversationHistory = [];
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize the model with the API key from AppState
+    final apiKey = Provider.of<AppState>(context, listen: false).apiKey;
+    model = GenerativeModel(
+      model: 'gemini-1.5-flash-latest',
+      apiKey: apiKey,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -179,12 +188,27 @@ class _AIChatInterfaceState extends State<AIChatInterface> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                FilledButton(onPressed: (){
-              }, style: ButtonStyle(
-                                                    
-                side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
+                Row(
+                  children: [
+                    FilledButton(onPressed: (){
+                    }, style: ButtonStyle(
+                                                        
+                    side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
+                                                                                      
+                    padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary)), child: Text('Caira', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.8) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
+
+                    const Gap(10),
+
+                    FilledButton(onPressed: (){
+                      SnackBarUtils.showSnackbar(context, CupertinoIcons.ellipsis, 'Open the sidebar and add the API key');
+                    }, style: ButtonStyle(
+                                                          
+                      side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).brightness == Brightness.light ? Colors.red.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
                                                                                   
-                padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary)), child: Text('Caira', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.8) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
+                      padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.red.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary)), child: Text('APIs', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.red.shade900.withOpacity(0.8) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
+                  ],
+                ),
+
 
                 Row(
                   children: [
@@ -193,7 +217,7 @@ class _AIChatInterfaceState extends State<AIChatInterface> {
                       setState(() {
                         _messages.clear();
                       });
-                                  }, style: ButtonStyle(
+                    }, style: ButtonStyle(
                                                         
                     side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
                                                                                       
@@ -283,7 +307,11 @@ class _AIChatInterfaceState extends State<AIChatInterface> {
       }
     } catch (e) {
       setState(() {
-        _messages.add(ChatMessage(text: "An error occurred. Please try again.", isUser: false));
+        _messages.add(ChatMessage(text: '''An error occurred. Please try again.
+- Check your internet connection.
+- Open sidebar and check APIs
+
+Get the API key from [ai.google.dev](ai.google.dev) and update in the sidebar.''', isUser: false));
       });
     }
 
