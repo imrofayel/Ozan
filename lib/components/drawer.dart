@@ -168,7 +168,11 @@ class _SidebarDrawerState extends State<SidebarDrawer> {
               controller: _apiKeyController,
               enabled: _isEditingApiKey,
 
-              style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)),
+              obscureText: !_isEditingApiKey,
+
+              obscuringCharacter: '*',
+              
+              style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Roboto Mono'),
 
               onEditingComplete: () {
                 if (_isEditingApiKey) {
