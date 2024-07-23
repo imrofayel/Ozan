@@ -29,7 +29,7 @@ void main() async {
     await windowManager.show();
     await windowManager.focus();
   });
-
+  
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (context) => DatabaseProvider()),
