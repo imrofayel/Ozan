@@ -55,7 +55,7 @@ class Themes {
         borderRadius: BorderRadius.circular(20)
       ),
 
-      textStyle: TextStyle(fontSize: 14, color: Colors.blueGrey.shade900.withOpacity(0.9), fontFamily: 'Inter'),
+      textStyle: TextStyle(fontSize: 14, color: Colors.blueGrey.shade900.withOpacity(0.95), fontFamily: 'Inter'),
     ),
 
     dropdownMenuTheme: DropdownMenuThemeData(

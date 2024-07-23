@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_acrylic/window.dart';
 import 'package:ozan/components/filter_db.dart';
@@ -29,7 +31,7 @@ void main() async {
     await windowManager.show();
     await windowManager.focus();
   });
-  
+
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (context) => DatabaseProvider()),
@@ -48,7 +50,7 @@ void main() async {
         },
       ),
     ],
-    child: const Ozan(),
+    child: ImageFiltered(imageFilter: ImageFilter.blur(sigmaX: 0.3, sigmaY: 0.3), child: const Ozan()),
   ));
 }
 

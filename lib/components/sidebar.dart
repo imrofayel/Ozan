@@ -76,7 +76,7 @@ class _SidebarState extends State<Sidebar> {
               ),
 
               IconButton(
-                    icon: Icon(CupertinoIcons.sparkles, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), size: 26),
+                    icon: Icon(CupertinoIcons.sparkles, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.95), size: 26),
                     onPressed: () { _openAIChat(context); },
                     tooltip: 'Ask AI', hoverColor: Theme.of(context).colorScheme.primary, style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), padding: const MaterialStatePropertyAll(EdgeInsets.zero)),
               )
@@ -262,14 +262,14 @@ class _AIChatInterfaceState extends State<AIChatInterface> {
                   child: TextField(
                     controller: _messageController,
                     decoration: InputDecoration(
-                      hintText: 'Ask me anything...',
+                      hintText: 'Type...',
 
                       border: InputBorder.none,
 
-                      hintStyle: TextStyle(fontSize: 16.5, color: Theme.of(context).brightness == Brightness.light ? Colors.blueGrey.shade900.withOpacity(0.85) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'),
+                      hintStyle: TextStyle(fontSize: 16.5, color: Theme.of(context).brightness == Brightness.light ? Colors.blueGrey.shade900 : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'),
                     ),
 
-                    style: TextStyle(fontSize: 16.5, color: Theme.of(context).brightness == Brightness.light ? Colors.blueGrey.shade900.withOpacity(0.85) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'),
+                    style: TextStyle(fontSize: 16.5, color: Theme.of(context).brightness == Brightness.light ? Colors.blueGrey.shade900 : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'),
 
                     onSubmitted: (_) => _sendMessage(),
                   ),
