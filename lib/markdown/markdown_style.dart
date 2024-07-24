@@ -4,8 +4,10 @@ import 'package:flutter_markdown_latex/flutter_markdown_latex.dart';
 import 'package:markdown/markdown.dart' as md;
 import 'package:ozan/markdown/colors/colored.dart';
 import 'package:ozan/markdown/colors/highlight.dart';
+import 'package:ozan/markdown/strike.dart';
 
 import 'package:ozan/markdown/syntax.dart';
+import 'package:ozan/markdown/wavy.dart';
 Markdown markdown(String data, double scale, context){
 
   return Markdown(
@@ -22,6 +24,10 @@ Markdown markdown(String data, double scale, context){
         'highlight': HighlightBuilder(),
 
         'chighlight': CHighlightBuilder(),
+
+        'wavy' : WavyBuilder(),
+
+        'strike' : StrikeBuilder(),
 
         'latex': LatexElementBuilder(
           textStyle: const TextStyle(
@@ -43,6 +49,8 @@ Markdown markdown(String data, double scale, context){
         md.InlineHtmlSyntax(),
         HighlightSyntax(),
         CHighlightSyntax(),
+        Wavy(),
+        Strike(),
         md.EmojiSyntax(),
         md.AutolinkExtensionSyntax(),
         md.EmailAutolinkSyntax(),

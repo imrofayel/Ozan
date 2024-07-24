@@ -139,7 +139,7 @@ class _NotesViewState extends State<NotesView> {
                               child: Padding(
                                 padding: const EdgeInsets.all(8),
                                 child: GridView.builder(
-                                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 300),
+                                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 340),
                                   scrollDirection: Axis.vertical,
                                   itemCount: notes.length,
                                   itemBuilder: (context, index) {

@@ -2,6 +2,7 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:markdown/markdown.dart' as md;
 import 'package:gap/gap.dart';
 import 'package:ozan/components/snackbar.dart';
 
@@ -168,4 +169,31 @@ String greet(String name){
   }
 
   return text;
+}
+
+// Function to generate table of contents from Markdown notes
+String generateTableOfContents(String markdown) {
+  final document = md.Document();
+  final List<String> headings = [];
+
+  // Parse the Markdown and collect headings
+  document.parseLines(markdown.split('\n')).forEach((element) {
+    if (element is md.Element && element.tag.startsWith('h') && element.tag.length == 2) {
+      headings.add(element.textContent);
+    }
+  });
+
+  // Generate the TOC Markdown string
+  final buffer = StringBuffer('# Table of Contents\n\n');
+  for (final heading in headings) {
+    final level = int.tryParse(heading[1]) ?? 1;
+    buffer.writeln('${'  ' * (level - 1)}- [${heading.substring(heading.indexOf(' ') + 1)}](#${_slugify(heading.substring(heading.indexOf(' ') + 1))})');
+  }
+
+  return buffer.toString();
+}
+
+// Helper function to generate a slug for a heading
+String _slugify(String text) {
+  return text.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]+'), '-').replaceAll(RegExp(r'-$'), '');
 }

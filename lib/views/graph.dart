@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:graphview/GraphView.dart';
 import 'package:ozan/views/update_view.dart';
 import 'package:provider/provider.dart';
@@ -28,37 +27,15 @@ class _GraphViewPageState extends State<GraphViewPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-           const Text('Graph'),
-
-           const Gap(10),
-
-          FilledButton(
-            onPressed: () {},
-            style: ButtonStyle(
-            side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).brightness == Brightness.light ? Colors.red.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
-            padding: const MaterialStatePropertyAll(EdgeInsets.all(14)),
-            overlayColor: const MaterialStatePropertyAll(Colors.transparent),
-            backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.red.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary),
-            ),
-            child: Text('Pre-Alpha', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.red.shade900.withOpacity(0.9) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter')),
-            ),
-          ],
-        ),
-
+        title: const Text('Graph'),
         centerTitle: true,
-
         leading: InkWell(
-
           onTap: () => {Navigator.pop(context)},
-
           child: Icon(
-                CupertinoIcons.arrow_left,
-                size: 20,
-                color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9),
-              ),
+            CupertinoIcons.arrow_left,
+            size: 20,
+            color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9),
+          ),
         ),
       ),
       body: Consumer<DatabaseProvider>(
@@ -81,25 +58,20 @@ class _GraphViewPageState extends State<GraphViewPage> {
                       graph: graph,
                       algorithm: builder,
                       paint: Paint()
-                        ..color = Colors.grey.shade50
+                        ..color = Colors.grey.shade100
                         ..strokeWidth = 0.6
                         ..style = PaintingStyle.stroke,
-                        
                       builder: (Node node) {
                         var nodeId = node.key!.value;
 
                         if (nodeId == 'NOTES') {
-                          return _buildNode(nodeId, Theme.of(context).brightness == Brightness.light
-                              ? Colors.blue.shade50.withOpacity(0.3)
-                              : Theme.of(context).colorScheme.primary, false);
+                          return _buildNode(
+                              nodeId, getColor(nodeId, context)[0], getColor(nodeId, context)[2], getColor(nodeId, context)[1], false
+                              );
                         } else if (notes.any((note) => note.tag == nodeId)) {
-                          return _buildNode(nodeId, Theme.of(context).brightness == Brightness.light
-                              ? Colors.blue.shade50
-                              : Theme.of(context).colorScheme.primary, false);
+                          return _buildNode(nodeId, getColor(nodeId, context)[0], getColor(nodeId, context)[2], getColor(nodeId, context)[1], false);
                         } else {
-                          return _buildNode(nodeId, Theme.of(context).brightness == Brightness.light
-                              ? Colors.grey.shade50
-                              : Theme.of(context).colorScheme.primary, true);
+                          return _buildNode(nodeId, getColor(nodeId, context)[0], getColor(nodeId, context)[2], getColor(nodeId, context)[1], true);
                         }
                       },
                     ),
@@ -142,34 +114,37 @@ class _GraphViewPageState extends State<GraphViewPage> {
 
     for (var edge in graph.edges) {
       edge.paint = Paint()
-      ..color = Colors.grey  // Change this to your desired color
-      ..strokeWidth = 1.3    // Change this to your desired width
-      ..style = PaintingStyle.stroke;
+        ..color = Colors.grey.shade300
+ // Change this to your desired color
+        ..strokeWidth = 1.4 // Change this to your desired width
+        ..style = PaintingStyle.stroke;
     }
 
     return graph;
   }
 
-    Widget _buildNode(String text, Color color, bool isNote) {
+  Widget _buildNode(String text, Color color, Color textC, Color border, bool isNote) {
     return InkWell(
-
       overlayColor: const MaterialStatePropertyAll(Colors.transparent),
-
       onTap: isNote ? () => _openNoteUpdate(text) : null,
       child: Container(
         padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
-          color: color,
+          color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.primary : color,
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: Theme.of(context).brightness == Brightness.light
-              ? Colors.blue.shade200.withOpacity(0.2)
-              : Theme.of(context).colorScheme.secondary, width: 2),
+          border: Border.all(
+              color: Theme.of(context).brightness == Brightness.light
+                  ? border
+                  : Theme.of(context).colorScheme.secondary,
+              width: 2),
         ),
         child: Text(
           text,
-          style: TextStyle(color: Theme.of(context).brightness == Brightness.light
-              ? Colors.blue.shade900
-              : Theme.of(context).colorScheme.tertiary, fontSize: 16),
+          style: TextStyle(
+              color: Theme.of(context).brightness == Brightness.light
+                  ? textC
+                  : Theme.of(context).colorScheme.tertiary,
+              fontSize: 16),
         ),
       ),
     );
@@ -190,25 +165,43 @@ class _GraphViewPageState extends State<GraphViewPage> {
           return Scaffold(
             body: Row(
               children: [
-                Expanded(flex: 2, child: SizedBox(
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        IconButton(onPressed: () {
-                          Navigator.pop(context);
-                        },
-                          icon: Icon(CupertinoIcons.arrow_left, size: 22, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6)), style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)), overlayColor: const MaterialStatePropertyAll(Colors.transparent))),
-                      ],
-                    ),
-                  ),
-                )),
-                Expanded(flex: 10, child: Padding(
-                  padding: const EdgeInsets.all(26),
-                  child: Update(note: clickedNote),
-                )),
+                Expanded(
+                    flex: 2,
+                    child: SizedBox(
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            IconButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                icon: Icon(CupertinoIcons.arrow_left,
+                                    size: 22,
+                                    color: Theme.of(context).colorScheme.tertiary
+                                        .withOpacity(0.6)),
+                                style: ButtonStyle(
+                                    backgroundColor: MaterialStatePropertyAll(
+                                        Theme.of(context).colorScheme.primary),
+                                    side: MaterialStatePropertyAll(BorderSide(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary)),
+                                    overlayColor:
+                                        const MaterialStatePropertyAll(
+                                            Colors.transparent))),
+                          ],
+                        ),
+                      ),
+                    )),
+                Expanded(
+                    flex: 10,
+                    child: Padding(
+                      padding: const EdgeInsets.all(26),
+                      child: Update(note: clickedNote),
+                    )),
                 const Expanded(flex: 2, child: SizedBox()),
               ],
             ),
@@ -216,5 +209,39 @@ class _GraphViewPageState extends State<GraphViewPage> {
         }));
       }
     });
+  }
+
+  List<Color> getColor(String tag, BuildContext context) {
+    if (tag == 'General') {
+      return [
+        const Color.fromRGBO(247, 247, 246, 1),
+        const Color.fromARGB(255, 239, 239, 238),
+        const Color.fromRGBO(31, 28, 25, 1)
+      ];
+    } else if (tag == 'Work') {
+      return [
+        const Color.fromRGBO(255, 234, 236, 1),
+        const Color.fromARGB(255, 255, 223, 226),
+        const Color.fromRGBO(140, 40, 67, 1),
+      ];
+    } else if (tag == 'Studies') {
+      return [
+        const Color.fromRGBO(221, 251, 235, 1),
+        const Color.fromARGB(255, 207, 245, 209),
+        Colors.green.shade900.withOpacity(0.9)
+      ];
+    } else if (tag == 'Personal') {
+      return [
+        Colors.blue.shade50,
+        Colors.blue.shade100,
+        Colors.blue.shade900
+      ];
+    }
+
+    return [
+        Colors.white,
+        Colors.grey.shade200,
+        Theme.of(context).colorScheme.tertiary.withOpacity(0.9)
+    ];
   }
 }
