@@ -1,7 +1,5 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_acrylic/window.dart';
 import 'package:ozan/components/filter_db.dart';
 import 'package:ozan/components/preferences.dart';
 import 'package:ozan/db/db_provider.dart';
@@ -14,8 +12,6 @@ import 'package:window_manager/window_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  await Window.initialize();
 
   // Must add this line.
   await windowManager.ensureInitialized();

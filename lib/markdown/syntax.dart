@@ -1,4 +1,3 @@
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_highlighter/flutter_highlighter.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';

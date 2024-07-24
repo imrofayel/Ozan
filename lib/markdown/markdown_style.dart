@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:flutter_markdown_latex/flutter_markdown_latex.dart';
+import 'package:markdown/markdown.dart' as md;
+
 import 'package:ozan/markdown/syntax.dart';
 Markdown markdown(String data, double scale, context){
 
@@ -13,7 +16,26 @@ Markdown markdown(String data, double scale, context){
 
       builders: {
         'code': CodeElementBuilder(context: context),
+
+        'latex': LatexElementBuilder(
+          textStyle: const TextStyle(
+          // color: Colors.blue,
+          fontWeight: FontWeight.w100,
+          ),
+          textScaleFactor: 1.4,
+        ),
       },
+
+    extensionSet: md.ExtensionSet(
+      [
+        LatexBlockSyntax(),
+        const md.FencedCodeBlockSyntax(), // Add this line
+      ],
+      [
+        LatexInlineSyntax(),
+        md.InlineHtmlSyntax(),
+      ],
+    ),
     
       styleSheet: MarkdownStyleSheet(
 
