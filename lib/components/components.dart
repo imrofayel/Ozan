@@ -17,11 +17,11 @@ FilledButton button(void Function()? function, IconData icon, context, {required
 
               children: [
 
-                Icon(icon, size: 21, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)),
+                Icon(icon, size: 21, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)),
 
                 const Gap(8),
 
-                Text(tooltip, textScaler: const TextScaler.linear(1.3), style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8))),
+                Text(tooltip, textScaler: const TextScaler.linear(1.3), style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
               ],
       ));
 }

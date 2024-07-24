@@ -79,7 +79,7 @@ class _SidebarDrawerState extends State<SidebarDrawer> {
         child: Switch(
           activeColor: Theme.of(context).colorScheme.tertiary.withOpacity(0.6),
           activeTrackColor: Theme.of(context).colorScheme.secondary.withOpacity(0.6),
-          inactiveThumbColor: Colors.blue.shade900.withOpacity(0.7),
+          inactiveThumbColor: Colors.blue.shade900.withOpacity(0.9),
           inactiveTrackColor: Colors.transparent,
           value: appState.isDarkMode,
           onChanged: (value) => appState.setDarkMode(value),
@@ -106,7 +106,7 @@ class _SidebarDrawerState extends State<SidebarDrawer> {
               controller: _usernameController,
               enabled: _isEditingUsername,
 
-              style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)),
+              style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)),
 
               onEditingComplete: () {
                 if (_isEditingUsername) {
@@ -128,7 +128,7 @@ class _SidebarDrawerState extends State<SidebarDrawer> {
 
           IconButton(
             icon: Icon(_isEditingUsername ? CupertinoIcons.arrow_right : CupertinoIcons.pencil,
-              color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.7) : Theme.of(context).colorScheme.tertiary.withOpacity(0.8),
+              color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.9) : Theme.of(context).colorScheme.tertiary.withOpacity(0.9),
                 size: 21),
             onPressed: () {
               setState(() {
@@ -139,7 +139,7 @@ class _SidebarDrawerState extends State<SidebarDrawer> {
               });
             },
             tooltip: _isEditingUsername ? 'Save' : 'Edit',
-            hoverColor: Theme.of(context).colorScheme.primary.withOpacity(0.8),
+            hoverColor: Theme.of(context).colorScheme.primary.withOpacity(0.9),
             style: ButtonStyle(
                 backgroundColor: MaterialStatePropertyAll(
                     Theme.of(context).colorScheme.primary.withOpacity(0.5)),
@@ -172,7 +172,7 @@ class _SidebarDrawerState extends State<SidebarDrawer> {
 
               obscuringCharacter: '*',
               
-              style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Roboto Mono'),
+              style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9), fontFamily: 'Roboto Mono'),
 
               onEditingComplete: () {
                 if (_isEditingApiKey) {
@@ -182,7 +182,7 @@ class _SidebarDrawerState extends State<SidebarDrawer> {
               },
 
               decoration: InputDecoration(
-                prefixIcon: Tooltip(message: 'API Setting', child: Icon(CupertinoIcons.sparkles, size: 23, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.8) : Theme.of(context).colorScheme.tertiary.withOpacity(0.8))),
+                prefixIcon: Tooltip(message: 'API Setting', child: Icon(CupertinoIcons.sparkles, size: 23, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.9) : Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
                 border: InputBorder.none,
                 fillColor: Colors.transparent,
                 hintText: 'Google AI API',
@@ -195,7 +195,7 @@ class _SidebarDrawerState extends State<SidebarDrawer> {
 
           IconButton(
             icon: Icon(_isEditingApiKey ? CupertinoIcons.arrow_right : CupertinoIcons.pencil,
-                color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.8) : Theme.of(context).colorScheme.tertiary.withOpacity(0.8),
+                color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.9) : Theme.of(context).colorScheme.tertiary.withOpacity(0.9),
                 size: 21),
             onPressed: () {
                   setState(() {
@@ -206,7 +206,7 @@ class _SidebarDrawerState extends State<SidebarDrawer> {
                   });
             },
             tooltip: _isEditingApiKey ? 'Save' : 'Edit API',
-            hoverColor: Theme.of(context).colorScheme.primary.withOpacity(0.8),
+            hoverColor: Theme.of(context).colorScheme.primary.withOpacity(0.9),
             style: ButtonStyle(
                 backgroundColor: MaterialStatePropertyAll(
                     Theme.of(context).colorScheme.primary.withOpacity(0.5)),

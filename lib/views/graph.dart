@@ -43,7 +43,7 @@ class _GraphViewPageState extends State<GraphViewPage> {
             overlayColor: const MaterialStatePropertyAll(Colors.transparent),
             backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.red.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary),
             ),
-            child: Text('Pre-Alpha', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.red.shade900.withOpacity(0.8) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter')),
+            child: Text('Pre-Alpha', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.red.shade900.withOpacity(0.9) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter')),
             ),
           ],
         ),
@@ -57,7 +57,7 @@ class _GraphViewPageState extends State<GraphViewPage> {
           child: Icon(
                 CupertinoIcons.arrow_left,
                 size: 20,
-                color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8),
+                color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9),
               ),
         ),
       ),

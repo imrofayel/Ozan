@@ -100,11 +100,11 @@ class _JournalEditorState extends State<JournalEditor> {
               
                             children: [
               
-                              Icon(CupertinoIcons.arrow_turn_up_right, size: 20, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)),
+                              Icon(CupertinoIcons.arrow_turn_up_right, size: 20, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)),
           
                               const Gap(6),
               
-                              Text('Done', textScaler: const TextScaler.linear(1.3), style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8))),
+                              Text('Done', textScaler: const TextScaler.linear(1.3), style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
           
                             ],
                         )),

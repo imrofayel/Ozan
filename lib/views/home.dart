@@ -30,7 +30,7 @@ class _HomeState extends State<Home> {
 
                 builder: (BuildContext context) {
                   return IconButton(
-                    icon: Icon(CupertinoIcons.ellipsis, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.7), size: 22),
+                    icon: Icon(CupertinoIcons.ellipsis, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9), size: 22),
                     onPressed: () { Scaffold.of(context).openEndDrawer(); },
                     tooltip: 'Sidebar', hoverColor: Theme.of(context).colorScheme.primary, style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),
                   );
@@ -39,7 +39,7 @@ class _HomeState extends State<Home> {
                   
               elevation: 0,
 
-              actionsIconTheme: IconThemeData(size: 24, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)),
+              actionsIconTheme: IconThemeData(size: 24, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)),
                   
               actions:
 

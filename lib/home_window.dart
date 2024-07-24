@@ -63,7 +63,7 @@ class _MarkdownState extends State<Markdown> {
             child: Icon(
               CupertinoIcons.arrow_left,
               size: 20,
-              color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8),
+              color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9),
             ),
           ),
           title: Expanded(

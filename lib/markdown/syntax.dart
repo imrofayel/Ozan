@@ -18,7 +18,7 @@ class CodeElementBuilder extends MarkdownElementBuilder {
     var language = '';
 
     if(element.attributes['class'] == null){
-      return Text(element.textContent.toString(), textScaler: const TextScaler.linear(1.2), style: TextStyle(backgroundColor: Theme.of(context).colorScheme.primary, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.7), fontFamily: 'Roboto Mono'));
+      return Text(element.textContent.toString(), textScaler: const TextScaler.linear(1.2), style: TextStyle(backgroundColor: Theme.of(context).colorScheme.primary, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9), fontFamily: 'Roboto Mono'));
     }
 
     else{
@@ -56,11 +56,11 @@ class CodeElementBuilder extends MarkdownElementBuilder {
           
           side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
 
-          padding: const MaterialStatePropertyAll(EdgeInsets.all(8)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text(lang, style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
+          padding: const MaterialStatePropertyAll(EdgeInsets.all(8)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text(lang, style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9), fontFamily: 'Inter'))),
               
             IconButton(onPressed: (){
               copyToClipboard(context, element.textContent);
-            }, icon: Icon(Iconsax.copy_copy, size: 21, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)), padding: EdgeInsets.zero),
+            }, icon: Icon(Iconsax.copy_copy, size: 21, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)), padding: EdgeInsets.zero),
             ],
           ),
         ),

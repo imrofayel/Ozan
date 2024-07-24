@@ -92,7 +92,7 @@ class _UpdateState extends State<Update>{
         
                       decoration: BoxDecoration(
         
-                        color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
+                        color: Theme.of(context).colorScheme.primary.withOpacity(0.9),
         
                         borderRadius: const BorderRadius.all(Radius.circular(15)),
         
@@ -123,9 +123,9 @@ class _UpdateState extends State<Update>{
                             
                             shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15), side: BorderSide.none)),
                             
-                            backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background.withOpacity(0.3)), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.8))), padding: const MaterialStatePropertyAll(EdgeInsets.all(15)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: const MaterialStatePropertyAll(Colors.transparent)), 
+                            backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background.withOpacity(0.3)), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.9))), padding: const MaterialStatePropertyAll(EdgeInsets.all(15)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: const MaterialStatePropertyAll(Colors.transparent)), 
                             
-                            child: Text('Writer', style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontSize: 18, fontFamily: 'Inter'))),
+                            child: Text('Writer', style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9), fontSize: 18, fontFamily: 'Inter'))),
         
                           const Gap(15)
                         ],
@@ -291,7 +291,7 @@ class _EditorState extends State<Editor> {
                 }, 
               
               
-                child: Text('Save', style: TextStyle(fontFamily: 'Inter', fontSize: 16, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)))
+                child: Text('Save', style: TextStyle(fontFamily: 'Inter', fontSize: 16, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)))
 
                 )
           ],
@@ -305,7 +305,7 @@ class _EditorState extends State<Editor> {
       
             height: 480,
       
-            width: 550,
+            width: 600,
       
             child: Column(
       
@@ -367,7 +367,7 @@ class _EditorState extends State<Editor> {
                               borderRadius: const BorderRadius.all(Radius.circular(16)),
                               
                               // TextBox
-                              color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
+                              color: Theme.of(context).colorScheme.primary.withOpacity(0.9),
                             ),
                           
                             child: Padding(

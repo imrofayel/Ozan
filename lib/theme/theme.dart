@@ -10,17 +10,17 @@ class Themes {
 
     fontFamily: 'Inter',
 
-    textTheme: TextTheme(
+    textTheme: const TextTheme(
 
-      bodyMedium: TextStyle(color: Colors.blueGrey.shade900),
+      bodyMedium: TextStyle(color: Color.fromARGB(255, 9, 13, 16)),
       
-      bodyLarge: TextStyle(color:  Colors.blueGrey.shade900),
+      bodyLarge: TextStyle(color:  Color.fromARGB(255, 9, 13, 16)),
 
-      bodySmall: TextStyle(color:  Colors.blueGrey.shade900)
+      bodySmall: TextStyle(color:  Color.fromARGB(255, 9, 13, 16))
 
     ),
 
-    textSelectionTheme: TextSelectionThemeData(cursorColor: Colors.blueGrey.shade900, selectionColor: const Color.fromARGB(255, 241, 240, 237)),
+    textSelectionTheme: const TextSelectionThemeData(cursorColor: Color.fromARGB(255, 9, 13, 16), selectionColor:  Color.fromARGB(255, 241, 240, 237)),
 
     colorScheme: ColorScheme.fromSeed(
 
@@ -34,7 +34,7 @@ class Themes {
 
       primary: const Color.fromRGBO(249, 249, 252, 1),
 
-      tertiary: Colors.blueGrey.shade900,
+      tertiary: const Color.fromARGB(255, 9, 13, 16),
 
     ),
 

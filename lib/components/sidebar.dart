@@ -101,7 +101,7 @@ class _SidebarState extends State<Sidebar> {
         child: Icon(
           icon,
           size: size,
-          color: color ?? Theme.of(context).colorScheme.tertiary.withOpacity(0.8),
+          color: color ?? Theme.of(context).colorScheme.tertiary.withOpacity(0.9),
         ),
       ),
     );
@@ -200,7 +200,7 @@ class _AIChatInterfaceState extends State<AIChatInterface> {
                                                         
                     side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
                                                                                       
-                    padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary)), child: Text('Caira', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.8) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
+                    padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary)), child: Text('Caira', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.9) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
 
                     const Gap(10),
 
@@ -210,7 +210,7 @@ class _AIChatInterfaceState extends State<AIChatInterface> {
                                                           
                       side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).brightness == Brightness.light ? Colors.red.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
                                                                                   
-                      padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.red.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary)), child: Text('APIs', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.red.shade900.withOpacity(0.8) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
+                      padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.red.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary)), child: Text('APIs', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.red.shade900.withOpacity(0.9) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
                   ],
                 ),
 
@@ -226,7 +226,7 @@ class _AIChatInterfaceState extends State<AIChatInterface> {
                                                         
                     side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
                                                                                       
-                    padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary)), child: Text('Clear', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.8) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
+                    padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary)), child: Text('Clear', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.9) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
 
                     const Gap(10),
 
@@ -236,7 +236,7 @@ class _AIChatInterfaceState extends State<AIChatInterface> {
 
                       hoverColor: Colors.transparent,
                       
-                      onTap: () => Navigator.pop(context), child: Tooltip(message: 'Close', child: Icon(CupertinoIcons.xmark_circle_fill, size: 22, color: Colors.red.withOpacity(0.8))))
+                      onTap: () => Navigator.pop(context), child: Tooltip(message: 'Close', child: Icon(CupertinoIcons.xmark_circle_fill, size: 22, color: Colors.red.withOpacity(0.9))))
                   ],
                 ),
   
@@ -379,9 +379,9 @@ class ChatBubble extends StatelessWidget {
               
               a: const TextStyle(color: Color.fromARGB(255, 20, 53, 186), height: 1.6),
               
-              codeblockDecoration: BoxDecoration(color: Theme.of(context).colorScheme.primary.withOpacity(0.3), borderRadius: BorderRadius.circular(10), border: Border.all(color: Theme.of(context).colorScheme.secondary.withOpacity(0.7))),
+              codeblockDecoration: BoxDecoration(color: Theme.of(context).colorScheme.primary.withOpacity(0.3), borderRadius: BorderRadius.circular(10), border: Border.all(color: Theme.of(context).colorScheme.secondary.withOpacity(0.9))),
 
-              code: TextStyle(backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.4), color: Theme.of(context).colorScheme.tertiary.withOpacity(0.7), fontFamily: 'Roboto Mono', fontSize: 14),
+              code: TextStyle(backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.4), color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9), fontFamily: 'Roboto Mono', fontSize: 14),
               
               p: TextStyle(color: Theme.of(context).colorScheme.tertiary, height: 1.6),
               
@@ -401,7 +401,7 @@ class ChatBubble extends StatelessWidget {
               
               blockquoteDecoration: BoxDecoration(
                 
-                color:  Theme.of(context).colorScheme.primary.withOpacity(0.8),
+                color:  Theme.of(context).colorScheme.primary.withOpacity(0.9),
               
                 borderRadius: const BorderRadius.all(Radius.circular(16)),
               ),
@@ -410,7 +410,7 @@ class ChatBubble extends StatelessWidget {
               
               blockquote: const TextStyle(fontSize: 16),
               
-              horizontalRuleDecoration: BoxDecoration(borderRadius: BorderRadius.circular(30), border: Border.all(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8))),
+              horizontalRuleDecoration: BoxDecoration(borderRadius: BorderRadius.circular(30), border: Border.all(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
               
               strong: const TextStyle(fontWeight: FontWeight.w500), 
               
@@ -425,14 +425,14 @@ class ChatBubble extends StatelessWidget {
                 copyToClipboard(context, message.text)
               },
                 color: Theme.of(context).brightness == Brightness.dark
-                    ? Theme.of(context).colorScheme.tertiary.withOpacity(0.8)
+                    ? Theme.of(context).colorScheme.tertiary.withOpacity(0.9)
                     : Colors.blue.shade900,
 
                 style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.2) : Theme.of(context).colorScheme.primary)),
               ),
             ],
           )
-        : Text(message.text, style: TextStyle(color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.8) : Theme.of(context).colorScheme.tertiary, fontSize: 16))), 
+        : Text(message.text, style: TextStyle(color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.9) : Theme.of(context).colorScheme.tertiary, fontSize: 16))), 
       ),
     );
   }
