@@ -28,7 +28,7 @@ class Themes {
 
       seedColor: Colors.white,
 
-      background: const Color.fromRGBO(250, 250, 250, 1), 
+      background: const Color.fromRGBO(248, 248, 248, 1), 
 
       secondary: const Color.fromRGBO(243, 243, 243, 1),
 

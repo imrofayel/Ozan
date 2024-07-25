@@ -5,65 +5,13 @@ import 'package:markdown/markdown.dart' as md;
 import 'package:ozan/markdown/colors/colored.dart';
 import 'package:ozan/markdown/colors/highlight.dart';
 import 'package:ozan/markdown/strike.dart';
-import 'package:ozan/markdown/syntax.dart';
 import 'package:ozan/markdown/wavy.dart';
-Markdown markdown(String data, double scale, context){
 
-  return Markdown(
-      
-      selectable: true,
+class MarkdownStyle{
+
+  static MarkdownStyleSheet style(context, scale){ 
     
-      data: data,
-      
-      softLineBreak: true,
-
-      onSelectionChanged: (text, selection, cause) => {},
-
-      onTapLink:(text, href, title) => {},
-
-      onTapText: () => {},
-
-      builders: {
-        'code': CodeElementBuilder(context: context),
-
-        'highlight': HighlightBuilder(),
-
-        'chighlight': CHighlightBuilder(),
-
-        'wavy' : WavyBuilder(),
-
-        'strike' : StrikeBuilder(),
-
-        'latex': LatexElementBuilder(
-          textStyle: const TextStyle(
-          // color: Colors.blue,
-          fontWeight: FontWeight.w100,
-          ),
-          textScaleFactor: 1.4,
-        ),
-      },
-
-    extensionSet: md.ExtensionSet(
-      [
-        LatexBlockSyntax(),
-        const md.FencedCodeBlockSyntax(),
-        const md.AlertBlockSyntax(),
-      ],
-      [
-        LatexInlineSyntax(),
-        md.InlineHtmlSyntax(),
-        HighlightSyntax(),
-        CHighlightSyntax(),
-        Wavy(),
-        Strike(),
-        md.EmojiSyntax(),
-        md.AutolinkExtensionSyntax(),
-        md.EmailAutolinkSyntax(),
-        md.StrikethroughSyntax(),
-      ],
-    ),
-    
-      styleSheet: MarkdownStyleSheet(
+    return MarkdownStyleSheet(
 
           a: const TextStyle(color: Color.fromARGB(255, 20, 53, 186), height: 1.6),
 
@@ -104,6 +52,30 @@ Markdown markdown(String data, double scale, context){
 
           em: const TextStyle(fontStyle: FontStyle.italic),
 
-      )
-    );
+      );
+    }
+
+    static md.ExtensionSet extension(){
+
+      return md.ExtensionSet(
+      [
+        LatexBlockSyntax(),
+        const md.FencedCodeBlockSyntax(),
+        const md.AlertBlockSyntax(),
+      ],
+      [
+        LatexInlineSyntax(),
+        md.InlineHtmlSyntax(),
+        HighlightSyntax(),
+        CHighlightSyntax(),
+        Wavy(),
+        Strike(),
+        md.EmojiSyntax(),
+        md.AutolinkExtensionSyntax(),
+        md.EmailAutolinkSyntax(),
+        md.StrikethroughSyntax(),
+      ],
+      );
+    }
+
 }

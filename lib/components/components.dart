@@ -184,16 +184,18 @@ String generateTableOfContents(String markdown) {
   });
 
   // Generate the TOC Markdown string
-  final buffer = StringBuffer('# Table of Contents\n\n');
+  final buffer = StringBuffer('\$Table\$ \$of\$ \$Contents\$\n\n');
+  int count = 1;
   for (final heading in headings) {
-    final level = int.tryParse(heading[1]) ?? 1;
-    buffer.writeln('${'  ' * (level - 1)}- [${heading.substring(heading.indexOf(' ') + 1)}](#${_slugify(heading.substring(heading.indexOf(' ') + 1))})');
+    buffer.writeln('''\$$count.\$ \$${heading.substring(heading.indexOf(' ') + 1)}\$\n
+    
+\n
+    ''');
+    count++;
   }
 
-  return buffer.toString();
+  return '''$buffer
+  ---
+  ''';
 }
 
-// Helper function to generate a slug for a heading
-String _slugify(String text) {
-  return text.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]+'), '-').replaceAll(RegExp(r'-$'), '');
-}

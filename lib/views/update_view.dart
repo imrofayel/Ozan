@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:flutter_markdown_latex/flutter_markdown_latex.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
+import 'package:ozan/components/styleComponents.dart';
 import 'package:ozan/components/snackbar.dart';
 import 'package:ozan/file_service/file_service.dart';
 import 'package:ozan/components/components.dart';
@@ -131,6 +135,16 @@ class _UpdateState extends State<Update>{
                         ],
                       ),
                     ),
+
+                    ExpansionTile(title: const Text('Table Of Contents'), children: [MarkdownBody(data: generateTableOfContents(page.text), styleSheet: MarkdownStyle.style(context, 1.2), extensionSet: MarkdownStyle.extension(), builders: {
+                       'latex': LatexElementBuilder(
+                          textStyle: const TextStyle(
+                          // color: Colors.blue,
+                          fontWeight: FontWeight.w100,
+                          ),
+                          textScaleFactor: 1.4,
+                        ),
+                    })]),
                           
                     SizedBox(
                               
