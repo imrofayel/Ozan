@@ -76,7 +76,7 @@ class _SidebarState extends State<Sidebar> {
               ),
 
               IconButton(
-                    icon: Icon(CupertinoIcons.sparkles, color: Colors.deepPurple.shade500, size: 26),
+                    icon: Icon(CupertinoIcons.sparkles, color: Colors.blue.shade900, size: 26),
                     onPressed: () { _openAIChat(context); },
                     tooltip: 'Ask AI', hoverColor: Colors.transparent, splashColor: Colors.transparent, highlightColor: Colors.transparent, style: ButtonStyle(backgroundColor: const MaterialStatePropertyAll(Colors.transparent), padding: const MaterialStatePropertyAll(EdgeInsets.zero), shape:MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))))
               )

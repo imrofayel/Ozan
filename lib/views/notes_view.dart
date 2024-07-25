@@ -68,7 +68,7 @@ class _NotesViewState extends State<NotesView> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Opacity(opacity: 0.9, child: Text(greet(Provider.of<AppState>(context, listen: false).userName), textScaler: const TextScaler.linear(1.5), style: TextStyle(color: Colors.blue.shade900.withOpacity(0.9), decoration: TextDecoration.underline, decorationStyle: TextDecorationStyle.wavy, decorationThickness: 2, decorationColor: Colors.blue.shade200.withOpacity(0.4)))),
+                                Opacity(opacity: 0.9, child: Text(greet(Provider.of<AppState>(context, listen: false).userName), textScaler: const TextScaler.linear(1.5), style: TextStyle(color: Theme.of(context).colorScheme.tertiary, decoration: TextDecoration.underline, decorationStyle: TextDecorationStyle.wavy, decorationThickness: 2, decorationColor: Colors.blue.shade200.withOpacity(0.4)))),
 
                                 const Gap(10),
 
@@ -344,6 +344,30 @@ class _NotesViewState extends State<NotesView> {
 
                                       padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary)), child: Text('0 entries', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.9) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
       
+                                      const Gap(14),
+
+                                      FilledButton(
+                                        onPressed: () {
+                                          
+                                          Markdown.files.loadFile(context);
+                                        },
+      
+                                        style: ButtonStyle(
+                                          side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
+                                          padding: const MaterialStatePropertyAll(EdgeInsets.all(14)),
+                                          overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+                                          shadowColor: const MaterialStatePropertyAll(Colors.transparent),
+                                          backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.4) : Theme.of(context).colorScheme.primary),
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Icon(CupertinoIcons.folder, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.9) : Theme.of(context).colorScheme.tertiary, size: 18),
+                                            const Gap(8),
+                                            Text('Open', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.9) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter')),
+                                          ],
+                                        ),
+                                      ),
+
                                       const Gap(14),
       
                                       FilledButton(onPressed: (){

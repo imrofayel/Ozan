@@ -17,9 +17,18 @@ class StrikeBuilder extends MarkdownElementBuilder {
   @override
   Widget? visitElementAfter(md.Element element, TextStyle? preferredStyle) {
     if (element.tag == 'strike') {
-      return Text(
-        element.textContent,
-        style: TextStyle(decoration: TextDecoration.lineThrough, decorationStyle: TextDecorationStyle.wavy, decorationThickness: 2, decorationColor: Colors.red.shade400), textScaler: const TextScaler.linear(1.2),
+      return Container(
+        padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(0),         
+        color: Colors.transparent,
+),
+        child: Text(
+          element.textContent,
+          style: TextStyle(decoration: TextDecoration.lineThrough,
+          decorationStyle: TextDecorationStyle.wavy,
+          decorationThickness: 2,
+          decorationColor: Colors.red.shade400), textScaler: const TextScaler.linear(1.2)
+        ),
       );
     }
     return null;
