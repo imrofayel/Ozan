@@ -34,7 +34,8 @@ class CHighlightBuilder extends MarkdownElementBuilder {
         ),
         child: Text(
           element.textContent,
-          style: preferredStyle?.copyWith(color: textColor, fontSize: 16) ?? TextStyle(color: textColor, fontSize: 15),
+          style: TextStyle(color: textColor),
+          textScaler: const TextScaler.linear(1.25)
         ),
       );
     }

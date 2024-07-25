@@ -23,7 +23,7 @@ class HighlightBuilder extends MarkdownElementBuilder {
 ),
         child: Text(
           element.textContent,
-          style: TextStyle(fontSize: 14.5, color: Colors.yellow.shade900),
+          style: TextStyle(color: Colors.yellow.shade900), textScaler: const TextScaler.linear(1.2)
         ),
       );
     }

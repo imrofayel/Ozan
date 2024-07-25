@@ -68,7 +68,10 @@ class _NotesViewState extends State<NotesView> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Opacity(opacity: 0.9, child: Text(greet(Provider.of<AppState>(context, listen: false).userName), textScaler: const TextScaler.linear(1.5))),
+                                Opacity(opacity: 0.9, child: Text(greet(Provider.of<AppState>(context, listen: false).userName), textScaler: const TextScaler.linear(1.5), style: TextStyle(color: Colors.blue.shade900.withOpacity(0.9), decoration: TextDecoration.underline, decorationStyle: TextDecorationStyle.wavy, decorationThickness: 2, decorationColor: Colors.blue.shade200.withOpacity(0.4)))),
+
+                                const Gap(10),
+
                                 Padding(
                                   padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
                                   child: Row(
@@ -165,7 +168,7 @@ class _NotesViewState extends State<NotesView> {
                                                             onPressed: () {
                                                               Navigator.pop(context);
                                                             },
-                                                            icon: Icon(CupertinoIcons.arrow_left, size: 22, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.6)),
+                                                            icon: Icon(CupertinoIcons.arrow_left, size: 22, color: Theme.of(context).colorScheme.tertiary),
                                                             style: const ButtonStyle(
                                                               backgroundColor: MaterialStatePropertyAll(Colors.transparent),
                                                               overlayColor: MaterialStatePropertyAll(Colors.transparent),
@@ -191,8 +194,8 @@ class _NotesViewState extends State<NotesView> {
                                       },
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          color: Theme.of(context).colorScheme.primary.withOpacity(0.6),
-                                          border: Border.all(color: Theme.of(context).colorScheme.secondary.withOpacity(0.9)),
+                                          color: Theme.of(context).colorScheme.primary,
+                                          border: Border.all(color: Theme.of(context).colorScheme.secondary),
                                           borderRadius: BorderRadius.circular(14),
                                         ),
                                         margin: const EdgeInsets.all(4),
@@ -206,8 +209,9 @@ class _NotesViewState extends State<NotesView> {
                                                 FilledButton(
                                                   onPressed: () {},
                                                   style: ButtonStyle(
+                                                    shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                                                     side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
-                                                    padding: const MaterialStatePropertyAll(EdgeInsets.all(14)),
+                                                    padding: const MaterialStatePropertyAll(EdgeInsets.all(8)),
                                                     overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                                                     shadowColor: const MaterialStatePropertyAll(Colors.transparent),
                                                     backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.2) : Theme.of(context).colorScheme.background),
@@ -283,8 +287,9 @@ class _NotesViewState extends State<NotesView> {
                                                 FilledButton(
                                                   onPressed: () {},
                                                   style: ButtonStyle(
+                                                    shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                                                     side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).brightness == Brightness.light ? (getColor(notes[index].tag, context))[1] : Theme.of(context).colorScheme.secondary)),
-                                                    padding: const MaterialStatePropertyAll(EdgeInsets.all(14)),
+                                                    padding: const MaterialStatePropertyAll(EdgeInsets.all(8)),
                                                     overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                                                     shadowColor: const MaterialStatePropertyAll(Colors.transparent),
                                                     backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? getColor(notes[index].tag, context)[0] : Theme.of(context).colorScheme.primary),
@@ -294,7 +299,7 @@ class _NotesViewState extends State<NotesView> {
                                                     style: TextStyle(fontSize: 14.3, color: Theme.of(context).brightness == Brightness.light ? getColor(notes[index].tag, context)[2] : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'),
                                                   ),
                                                 ),
-      
+    
                                                 Padding(
                                                   padding: const EdgeInsets.only(right: 6),
                                                   child: IconButton(icon: Icon(CupertinoIcons.down_arrow, size: 20, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.95)), onPressed: () async{ await PdfExport.generateAndSavePDF(context, notes[index]);}, style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), tooltip: 'Export to PDF')
@@ -323,7 +328,7 @@ class _NotesViewState extends State<NotesView> {
       
                               children: [
       
-                                Text(greet('Buddy'), textScaler: const TextScaler.linear(1.5)),
+                                Opacity(opacity: 0.9, child: Text(greet(Provider.of<AppState>(context, listen: false).userName), textScaler: const TextScaler.linear(1.5), style: TextStyle(color: Colors.blue.shade900.withOpacity(0.9), decoration: TextDecoration.underline, decorationStyle: TextDecorationStyle.wavy, decorationThickness: 2, decorationColor: Colors.blue.shade200.withOpacity(0.4)))),
                                 
                                 Padding(
       

@@ -19,7 +19,7 @@ class StrikeBuilder extends MarkdownElementBuilder {
     if (element.tag == 'strike') {
       return Text(
         element.textContent,
-        style: const TextStyle(decoration: TextDecoration.lineThrough, decorationStyle: TextDecorationStyle.wavy, decorationThickness: 2),
+        style: TextStyle(decoration: TextDecoration.lineThrough, decorationStyle: TextDecorationStyle.wavy, decorationThickness: 2, decorationColor: Colors.red.shade400), textScaler: const TextScaler.linear(1.2),
       );
     }
     return null;

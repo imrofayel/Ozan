@@ -57,15 +57,13 @@ Markdown markdown(String data, double scale, context){
         Wavy(),
         Strike(),
         md.EmojiSyntax(),
-        md.AutolinkExtensionSyntax(),
-        md.EmailAutolinkSyntax(),
         md.StrikethroughSyntax(),
       ],
     ),
     
       styleSheet: MarkdownStyleSheet(
 
-          a: const TextStyle(color: Color.fromARGB(255, 20, 53, 186), height: 1.6),
+          a: const TextStyle(color: Color.fromRGBO(19, 69, 137, 1), height: 1.6, decoration: TextDecoration.underline, decorationColor: Color.fromRGBO(223, 151, 173, 1), decorationThickness: 2),
 
           codeblockDecoration: BoxDecoration(color: Theme.of(context).colorScheme.primary.withOpacity(0.9), borderRadius: BorderRadius.circular(10), border: Border.all(color: Theme.of(context).colorScheme.secondary)),
 
@@ -80,6 +78,10 @@ Markdown markdown(String data, double scale, context){
           del: TextStyle(color: Theme.of(context).colorScheme.tertiary, height: 1.6, decoration: TextDecoration.underline),
 
           textScaler: TextScaler.linear(scale),
+
+          listBullet: const TextStyle(fontSize: 16),
+
+          listBulletPadding: const EdgeInsets.only(right: 10),
 
           tableBorder: TableBorder.all(borderRadius: BorderRadius.circular(10), color: Theme.of(context).colorScheme.secondary, width: 1),
 
@@ -98,7 +100,7 @@ Markdown markdown(String data, double scale, context){
 
           blockquote: const TextStyle(fontSize: 16),
 
-          horizontalRuleDecoration: BoxDecoration(borderRadius: BorderRadius.circular(30), border: Border.all(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
+          horizontalRuleDecoration: BoxDecoration(borderRadius: BorderRadius.circular(100), border: Border.all(width: 1, color: Theme.of(context).colorScheme.secondary.withOpacity(0.9))),
 
           strong: const TextStyle(fontWeight: FontWeight.w600), 
 

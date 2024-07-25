@@ -138,8 +138,6 @@ Widget titleBox(context, {required TextEditingController controller, required bo
 
       constraints: const BoxConstraints(maxWidth: 400),
 
-      contentPadding: const EdgeInsets.all(16),
-
       focusColor: Colors.transparent,
 
       hoverColor: Colors.transparent,
@@ -148,7 +146,7 @@ Widget titleBox(context, {required TextEditingController controller, required bo
 
     ),
 
-    style: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.tertiary),
+    style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.tertiary),
   );
 }
 
@@ -179,23 +177,20 @@ String generateTableOfContents(String markdown) {
   // Parse the Markdown and collect headings
   document.parseLines(markdown.split('\n')).forEach((element) {
     if (element is md.Element && element.tag.startsWith('h') && element.tag.length == 2) {
+      // Add the whole heading text without cutting off any part
       headings.add(element.textContent);
     }
   });
 
   // Generate the TOC Markdown string
-  final buffer = StringBuffer('\$Table\$ \$of\$ \$Contents\$\n\n');
+  final buffer = StringBuffer();
   int count = 1;
   for (final heading in headings) {
-    buffer.writeln('''\$$count.\$ \$${heading.substring(heading.indexOf(' ') + 1)}\$\n
-    
-\n
-    ''');
+    buffer.writeln('$count. $heading\n');
     count++;
   }
 
-  return '''$buffer
-  ---
-  ''';
+  return buffer.toString();
 }
+
 

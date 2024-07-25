@@ -17,7 +17,7 @@ class MarkdownStyle{
 
           codeblockDecoration: BoxDecoration(color: Theme.of(context).colorScheme.primary.withOpacity(0.9), borderRadius: BorderRadius.circular(10), border: Border.all(color: Theme.of(context).colorScheme.secondary)),
 
-          p: TextStyle(color: Theme.of(context).colorScheme.tertiary, height: 1.6),
+          p: TextStyle(fontSize: 13, color: Colors.deepPurple.shade400, fontWeight: FontWeight.bold),
 
           h2: const TextStyle(fontSize: 17),
 
@@ -46,11 +46,15 @@ class MarkdownStyle{
 
           blockquote: const TextStyle(fontSize: 16),
 
-          horizontalRuleDecoration: BoxDecoration(borderRadius: BorderRadius.circular(30), border: Border.all(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
+          horizontalRuleDecoration: BoxDecoration(borderRadius: BorderRadius.circular(100), border: Border.all(width: 1, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.5))),
 
           strong: const TextStyle(fontWeight: FontWeight.w600), 
 
           em: const TextStyle(fontStyle: FontStyle.italic),
+
+          listBullet: TextStyle(fontSize: 16, color: Colors.deepPurple.shade200, fontWeight: FontWeight.bold),
+
+          listBulletPadding: const EdgeInsets.only(right: 10)
 
       );
     }

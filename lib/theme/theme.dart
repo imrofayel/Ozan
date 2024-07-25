@@ -42,6 +42,15 @@ class Themes {
 
     drawerTheme: const DrawerThemeData(scrimColor: Colors.transparent),
 
+    expansionTileTheme: ExpansionTileThemeData(
+      backgroundColor: Colors.deepPurple.shade50.withOpacity(0.4),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14), side: BorderSide(color: Colors.deepPurple.shade50)),
+      collapsedShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14), side: BorderSide(color: Colors.deepPurple.shade50)),
+      expandedAlignment: Alignment.centerLeft,
+      collapsedIconColor: Colors.deepPurple.shade100,
+      iconColor: Colors.deepPurple.shade100,
+    ),
+
     tooltipTheme: TooltipThemeData(
 
       height: 13,

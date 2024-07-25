@@ -1,11 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:flutter_markdown_latex/flutter_markdown_latex.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
-import 'package:ozan/components/styleComponents.dart';
+import 'package:ozan/components/style_components.dart';
 import 'package:ozan/components/snackbar.dart';
 import 'package:ozan/file_service/file_service.dart';
 import 'package:ozan/components/components.dart';
@@ -92,27 +90,17 @@ class _UpdateState extends State<Update>{
                 
                   children: [
                     
-                    Container(
-        
-                      decoration: BoxDecoration(
-        
-                        color: Theme.of(context).colorScheme.primary.withOpacity(0.9),
-        
-                        borderRadius: const BorderRadius.all(Radius.circular(15)),
-        
-                        border: Border.all(color: Theme.of(context).colorScheme.secondary)
-        
-                      ),
-        
-                      child: Row(
-                        
-                        children: [
+                    Row(
                       
-                          Expanded(child: titleBox(context, controller: pageTitle, enabled: true)),
-                      
-                          const Gap(20),
+                      children: [
+                    
+                        Expanded(child: titleBox(context, controller: pageTitle, enabled: true)),
+                                        
+                        Tooltip(
+                          
+                          message: 'Writer',
 
-                          FilledButton(onPressed: (){
+                          child: FilledButton(onPressed: (){
                                   
                             showDialog(
                               context: context, 
@@ -127,29 +115,33 @@ class _UpdateState extends State<Update>{
                             
                             shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15), side: BorderSide.none)),
                             
-                            backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background.withOpacity(0.3)), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.9))), padding: const MaterialStatePropertyAll(EdgeInsets.all(15)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: const MaterialStatePropertyAll(Colors.transparent)), 
+                            backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background.withOpacity(0.3)), padding: const MaterialStatePropertyAll(EdgeInsets.all(15)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: const MaterialStatePropertyAll(Colors.transparent)), 
                             
-                            child: Text('Writer', style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9), fontSize: 18, fontFamily: 'Inter'))),
-        
-                          const Gap(15)
-                        ],
-                      ),
+                            child: Icon(CupertinoIcons.pen, color: Colors.deepPurple.shade400, size: 26)),
+                        ),
+                            
+                        const Gap(15)
+                      ],
                     ),
 
-                    ExpansionTile(title: const Text('Table Of Contents'), children: [MarkdownBody(data: generateTableOfContents(page.text), styleSheet: MarkdownStyle.style(context, 1.2), extensionSet: MarkdownStyle.extension(), builders: {
-                       'latex': LatexElementBuilder(
-                          textStyle: const TextStyle(
-                          // color: Colors.blue,
-                          fontWeight: FontWeight.w100,
-                          ),
-                          textScaleFactor: 1.4,
-                        ),
-                    })]),
+                    const Gap(8),
+
+                    Theme(
+                      data: Theme.of(context).copyWith(
+                        splashColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        hoverColor: Colors.transparent
+                      ),
+                      child: ExpansionTile(leading: const Icon(CupertinoIcons.book), title: Text('Table Of Contents', style: TextStyle(color: Colors.deepPurple.shade400, fontWeight: FontWeight.bold, fontSize: 16, decoration: TextDecoration.underline, decorationStyle: TextDecorationStyle.wavy, decorationColor: Colors.deepPurple.shade100, decorationThickness: 2.3)), children: [Padding(
+                        padding: const EdgeInsets.only(bottom: 20, left: 15),
+                        child: MarkdownBody(data: generateTableOfContents(page.text), styleSheet: MarkdownStyle.style(context, 1.25), extensionSet: MarkdownStyle.extension()),
+                      )]),
+                    ),
                           
                     SizedBox(
                               
                       height: 485,
-                      child: markdown(page.text, 1.15, context)
+                      child: markdown(page.text, 1.2, context)
                     ),
                             
                       const Gap(10),

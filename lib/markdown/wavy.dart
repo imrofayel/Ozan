@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
 class Wavy extends md.InlineSyntax {
-  Wavy() : super(r'#(.*?)#');
+  Wavy() : super(r'%(.*?)%');
 
   @override
   bool onMatch(md.InlineParser parser, Match match) {
@@ -19,7 +19,7 @@ class WavyBuilder extends MarkdownElementBuilder {
     if (element.tag == 'wavy') {
       return Text(
         element.textContent,
-        style: const TextStyle(decoration: TextDecoration.underline, decorationStyle: TextDecorationStyle.wavy, decorationThickness: 2),
+        style: TextStyle(decoration: TextDecoration.underline, decorationStyle: TextDecorationStyle.wavy, decorationThickness: 2, decorationColor: Colors.deepPurple.shade400), textScaler: const TextScaler.linear(1.2),
       );
     }
     return null;

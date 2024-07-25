@@ -31,6 +31,7 @@ class _GraphViewPageState extends State<GraphViewPage> {
         centerTitle: true,
         leading: InkWell(
           onTap: () => {Navigator.pop(context)},
+          overlayColor: const MaterialStatePropertyAll(Colors.transparent),
           child: Icon(
             CupertinoIcons.arrow_left,
             size: 20,
@@ -114,7 +115,7 @@ class _GraphViewPageState extends State<GraphViewPage> {
 
     for (var edge in graph.edges) {
       edge.paint = Paint()
-        ..color = Colors.grey.shade300
+        ..color = Colors.grey.shade300.withOpacity(0.6)
  // Change this to your desired color
         ..strokeWidth = 1.4 // Change this to your desired width
         ..style = PaintingStyle.stroke;
