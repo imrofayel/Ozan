@@ -141,7 +141,7 @@ class _UpdateState extends State<Update>{
                     SizedBox(
                               
                       height: 485,
-                      child: markdown(page.text, 1.2, context)
+                      child: markdown(page.text, 1.14, context)
                     ),
                             
                       const Gap(10),

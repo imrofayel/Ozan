@@ -27,7 +27,7 @@ class CHighlightBuilder extends MarkdownElementBuilder {
       final textColor = _parseColor(textColorString ?? '#000000'); // Default to black if no textColor is provided
 
       return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: bgColor,
