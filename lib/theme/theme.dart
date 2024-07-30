@@ -12,15 +12,15 @@ class Themes {
 
     textTheme: const TextTheme(
 
-      bodyMedium: TextStyle(color: Color.fromARGB(255, 16, 16, 16)),
+      bodyMedium: TextStyle(color: Color.fromARGB(255, 9, 13, 16)),
       
-      bodyLarge: TextStyle(color:  Color.fromARGB(255, 16, 16, 16)),
+      bodyLarge: TextStyle(color:  Color.fromARGB(255, 9, 13, 16)),
 
-      bodySmall: TextStyle(color:  Color.fromARGB(255, 16, 16, 16))
+      bodySmall: TextStyle(color:  Color.fromARGB(255, 9, 13, 16))
 
     ),
 
-    textSelectionTheme: const TextSelectionThemeData(cursorColor: Color.fromARGB(255, 16, 16, 16), selectionColor: Color.fromRGBO(233, 231, 227, 1)),
+    textSelectionTheme: const TextSelectionThemeData(cursorColor: Color.fromARGB(255, 9, 13, 16), selectionColor:  Color.fromARGB(255, 241, 240, 237)),
 
     colorScheme: ColorScheme.fromSeed(
 
@@ -28,17 +28,28 @@ class Themes {
 
       seedColor: Colors.white,
 
-      background: const Color.fromRGBO(255, 255, 255, 1),
+      background: const Color.fromARGB(255, 250, 250, 250), 
 
       secondary: const Color.fromRGBO(243, 243, 243, 1),
 
       primary: const Color.fromRGBO(249, 249, 252, 1),
 
-      tertiary: const Color.fromARGB(255, 16, 16, 16),
+      tertiary: const Color.fromARGB(255, 9, 13, 16),
 
     ),
 
     appBarTheme:  const AppBarTheme(backgroundColor: Colors.transparent, surfaceTintColor: Colors.transparent),
+
+    drawerTheme: const DrawerThemeData(scrimColor: Colors.transparent),
+
+    expansionTileTheme: ExpansionTileThemeData(
+      backgroundColor: Colors.deepPurple.shade50.withOpacity(0.4),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14), side: BorderSide(color: Colors.deepPurple.shade50)),
+      collapsedShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14), side: BorderSide(color: Colors.deepPurple.shade50)),
+      expandedAlignment: Alignment.centerLeft,
+      collapsedIconColor: Colors.deepPurple.shade100,
+      iconColor: Colors.deepPurple.shade100,
+    ),
 
     tooltipTheme: TooltipThemeData(
 
@@ -53,7 +64,7 @@ class Themes {
         borderRadius: BorderRadius.circular(20)
       ),
 
-      textStyle: TextStyle(fontSize: 18, color: const Color.fromARGB(255, 3, 7, 3).withOpacity(0.8), fontFamily: 'Inter'),
+      textStyle: TextStyle(fontSize: 14, color: Colors.blueGrey.shade900.withOpacity(0.95), fontFamily: 'Inter'),
     ),
 
     dropdownMenuTheme: DropdownMenuThemeData(
@@ -146,8 +157,10 @@ class Themes {
         borderRadius: BorderRadius.circular(20)
       ),
 
-      textStyle: const TextStyle(fontSize: 18, color: Color.fromRGBO(192, 212, 190, 1), fontFamily: 'Inter'),
+      textStyle: const TextStyle(fontSize: 14, color: Color.fromRGBO(192, 212, 190, 1), fontFamily: 'Inter'),
     ),
+
+    
 
     dropdownMenuTheme: DropdownMenuThemeData(
 

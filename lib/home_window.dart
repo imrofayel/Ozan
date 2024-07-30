@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
+import 'package:ozan/components/sidebar.dart';
 import 'package:ozan/components/snackbar.dart';
 import 'package:ozan/file_service/file_service.dart';
 import 'package:ozan/components/components.dart';
@@ -11,367 +12,327 @@ import 'package:ozan/db/notes.dart';
 import 'package:provider/provider.dart';
 import 'markdown/markdown_style.dart';
 
-// ignore: must_be_immutable
 class Markdown extends StatefulWidget {
-
   const Markdown({super.key});
 
   static FileService files = FileService(_MarkdownState.page, _MarkdownState.pageTitle);
 
   @override
   State<Markdown> createState() => _MarkdownState();
-
 }
 
-class _MarkdownState extends State<Markdown>{
-
+class _MarkdownState extends State<Markdown> {
   static TextEditingController page = TextEditingController();
-
   static TextEditingController pageTitle = TextEditingController();
-
-  static FocusNode _focusNode = FocusNode(); // Declare the FocusNode
+  static final FocusNode _focusNode = FocusNode(); // Declare the FocusNode
 
   // ignore: unused_field
-  static String md = 'Open Editor & Capture your thoughts!'; // Markdown Bodata
+  static String md = 'Open Editor & Capture your thoughts!'; // Markdown Body
+
+  bool isCodeView = true; // Variable to toggle between Code and Preview
+
+  bool enableTitle = true;
 
   @override
   void initState() {
-      page.addListener(() => setState(() {})); 
-      _focusNode = FocusNode(); // Assign a FocusNode
-
-      super.initState();
-}
-
-  @override
-  void dispose() {
-    //  page.dispose(); // Dispose the TextEditingController
-    //  _focusNode.dispose(); // Dispose the FocusNode
-      super.dispose();
+    super.initState();
+    page.addListener(() {
+      if (mounted) {
+        setState(() {});
+      }
+    });
   }
+
+  // @override
+  // void dispose() {
+  //   page.dispose(); // Dispose the TextEditingController
+  //   _focusNode.dispose(); // Dispose the FocusNode
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
+    String date = DateFormat('d MMM, yy').format(DateTime.now());
 
-    return Consumer<DatabaseProvider>(builder:(context, value, child){
-
+    return Consumer<DatabaseProvider>(builder: (context, value, child) {
       return Scaffold(
-        
+        appBar: AppBar(
+          toolbarHeight: 60,
+          leading: InkWell(
+            onTap: () => Navigator.pop(context),
+            child: Icon(
+              CupertinoIcons.arrow_left,
+              size: 20,
+              color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9),
+            ),
+          ),
+          title: Expanded(
+              child: titleBox(context, controller: pageTitle, enabled: enableTitle)),
+          centerTitle: true,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 14, 0),
+              child: FilledButton(
+                  onPressed: () {
+                    if (_MarkdownState.page.text.isNotEmpty) {
+                      value.dbHelper.insert(NotesModel(
+                          title: _MarkdownState.pageTitle.text.isNotEmpty
+                              ? _MarkdownState.pageTitle.text
+                              : 'Untitled',
+                          description: _MarkdownState.page.text,
+                          date: date,
+                          favourite: 0,
+                          tag: _EditorState.selected.name,
+                          ));
+                      value.initDatabase();
+                      value.setLength();
+                      Markdown.files.newFile(context);
+                      Navigator.of(context).pop();
+                    } else {
+                      SnackBarUtils.showSnackbar(context,
+                          CupertinoIcons.pencil_slash, "Please enter title and description");
+                    }
+                  },
+                  style: ButtonStyle(
+                      side: MaterialStatePropertyAll(BorderSide(
+                          color: Theme.of(context).brightness == Brightness.light
+                              ? Colors.blue.shade100.withOpacity(0.2)
+                              : Theme.of(context).colorScheme.secondary)),
+                      padding: const MaterialStatePropertyAll(EdgeInsets.all(14)),
+                      overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+                      shadowColor: const MaterialStatePropertyAll(Colors.transparent),
+                      backgroundColor: MaterialStatePropertyAll(
+                          Theme.of(context).brightness == Brightness.light
+                              ? Colors.blue.shade50.withOpacity(0.3)
+                              : Theme.of(context).colorScheme.primary)),
+                  child: Text('Save',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Theme.of(context).colorScheme.tertiary,
+                          fontFamily: 'Inter'))),
+            ),
+          ],
+        ),
         body: Row(
-        
+
           children: [
-        
+
+            const Expanded(flex: 1, child: Sidebar()),
+
             Expanded(
-            
-              flex: 6,
-            
-              child: SingleChildScrollView(
-               
-                scrollDirection: Axis.vertical,
-        
+
+              flex: 8,
+
+              child: Center(
+                
                 child: Column(
-                
-                  mainAxisAlignment: MainAxisAlignment.center,
-                
+                          
                   children: [
+                    ToggleButtons(
+              
+                      constraints: const BoxConstraints(minWidth: 50, minHeight: 35), 
+              
+                      isSelected: [isCodeView, !isCodeView],
+                      onPressed: (int index) {
+                        setState(() {
+                          isCodeView = index == 0;
 
-                    const Gap(12),
-                    
-                    Container(
+                          enableTitle = isCodeView;
 
-                      alignment: Alignment.center,
+                        });
+                      },
+              
+                      splashColor: Colors.transparent,
+              
+                      hoverColor: Colors.transparent,
                       
-                      padding: const EdgeInsets.only(right: 14),
-
-                      decoration: BoxDecoration(
-        
-                        color: Theme.of(context).colorScheme.primary,
-        
-                        borderRadius: const BorderRadius.all(Radius.circular(23)),
-        
-                        border: Border.all(width: 1, color: Theme.of(context).colorScheme.secondary)
-        
-                      ),
-        
-                      child: Row(
-
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        
-                        children: [
-                      
-                          Expanded(child: titleBox(context, controller: pageTitle)),
-                                  
-                          FilledButton(onPressed: (){
-                                  
-                            showDialog(
-                              context: context, 
-                                  
-                              builder: (context){
-                                return const Editor();
-                              }
-                            );
-                          }, 
-                          
-                          style: ButtonStyle(
-                            
-                            shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(18), side: BorderSide(color: Theme.of(context).colorScheme.secondary))),
-                            
-                            backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background), padding: const MaterialStatePropertyAll(EdgeInsets.all(18)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: const MaterialStatePropertyAll(Colors.transparent)), 
-                            
-                            child: Row(
-        
-                              children: [
-        
-                                Icon(CupertinoIcons.pencil_outline, size: 26, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)),
-        
-                                const Gap(10),
-        
-                                Text('Writer', style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontSize: 20, fontFamily: 'Inter'))
-                              ],
-                            )),
-                        ],
-                      ),
+                      selectedBorderColor: Theme.of(context).brightness == Brightness.light
+                                    ? Colors.blue.shade100.withOpacity(0.2)
+                                    : Theme.of(context).colorScheme.secondary,
+              
+                      borderColor: Theme.of(context).brightness == Brightness.light
+                                    ? Colors.blue.shade100.withOpacity(0.2)
+                                    : Theme.of(context).colorScheme.secondary,
+                
+                      borderRadius: BorderRadius.circular(50),
+                
+                      fillColor: Theme.of(context).brightness == Brightness.light
+                                  ? Colors.blue.shade50.withOpacity(0.3)
+                                  : Theme.of(context).colorScheme.primary,
+                
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                          child: Text('Code', style: TextStyle(
+                              fontSize: 15,
+                              color: Theme.of(context).colorScheme.tertiary,
+                              fontFamily: 'Inter')),
+                        ),
+                
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                          child: Text('Preview', style: TextStyle(
+                              fontSize: 15,
+                              color: Theme.of(context).colorScheme.tertiary,
+                              fontFamily: 'Inter')),
+                        ),
+                      ],
                     ),
-                          
-                    SizedBox(
-                              
-                      height: 450,
-                              // change md to page.text
-                      child: markdown(page.text, 1.30, context)
-                    ),
-                            
-                      const Gap(10),
-                            
-                      Padding(
-                            
-                        padding: const EdgeInsets.fromLTRB(0,0,0,10),
-                        
-                        child: Row(
-                                          
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        
-                        children: [
-                                          
-                          textEncode(context, words: page.text.split(' ').length-1, char: page.text.length, lines: page.text.split('\n').length-1),
-                        ],
-                      ),
+                    Expanded(
+                      child: isCodeView ? const Editor() : preview(context),
                     ),
                   ],
                 ),
               ),
             ),
+
+            const Expanded(flex: 1, child: SizedBox()),
           ],
         ),
       );
-    }
+    });
+  }
+  Widget preview(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(
+            height: 430,
+            width: 550,
+            // change md to page.text
+            child: markdown(page.text, 1.2, context)),
+        const Gap(14),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              textEncode(context,
+                  words: page.text.split(' ').length - 1,
+                  char: page.text.length,
+                  lines: page.text.split('\n').length - 1),
+            ],
+          ),
+        ),
+      ],
     );
+  }
 }
-}
-
-String title(){
-  
+String title() {
   String getTitle = 'Untitled${DateTime.now().microsecond}';
-
-  if(_MarkdownState.pageTitle.text.isNotEmpty){
+  if (_MarkdownState.pageTitle.text.isNotEmpty) {
     getTitle = _MarkdownState.pageTitle.text;
   }
-
   return getTitle;
 }
-
 
 // Editor Dialogue
 // ignore: must_be_immutable
 class Editor extends StatefulWidget {
-
   const Editor({super.key});
 
   @override
   State<Editor> createState() => _EditorState();
 }
 
-class _EditorState extends State<Editor> {
-  
-  String date = DateFormat('d MMM, yy').format(DateTime.now()); 
+// ignore: constant_identifier_names
+enum Tags {General, Studies, Work, Personal}
 
+class _EditorState extends State<Editor> {
+
+  static Tags selected = Tags.General;
 
   @override
   Widget build(BuildContext context) {
-
-    return Consumer<DatabaseProvider>(builder:(context, value, child){
-
-      return SimpleDialog(
-      
-        elevation: 0,
-      
-        shadowColor: Colors.transparent,
-      
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      
-        title: Row(
-      
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      
+    return Consumer<DatabaseProvider>(builder: (context, value, child) {
+      return SizedBox(
+        width: 500,
+        child: Column(
           children: [
+
+            const Gap(20),
             
-            const Opacity(
+            SegmentedButton(segments: const[
 
-              opacity: 0.8,
+              ButtonSegment(value: Tags.General, label: Text('General', style: TextStyle(fontSize: 15))),
 
-              child: Row(
-                    
-                children: [
-                    
-                  Icon(CupertinoIcons.pencil_outline, size: 28),
-              
-                  Gap(10),
-                    
-                  Text("Writer", style: TextStyle(fontSize: 24, fontFamily: 'Inter')),
-              
-                ],
-              ),
+              ButtonSegment(value: Tags.Studies, label: Text('Studies', style: TextStyle(fontSize: 15))),
+
+              ButtonSegment(value: Tags.Work, label: Text('Work', style: TextStyle(fontSize: 15))),
+
+              ButtonSegment(value: Tags.Personal, label: Text('Personal', style: TextStyle(fontSize: 15))),
+
+            ], selected: <Tags>{selected},
+            
+            onSelectionChanged: (Set<Tags> newSelection) => {
+              setState(() {
+                selected = newSelection.first;
+              })
+            },
+            
+            style: ButtonStyle(
+                side: MaterialStatePropertyAll(BorderSide(
+                  color: Theme.of(context).brightness == Brightness.light
+                              ? Colors.blue.shade100.withOpacity(0.2)
+                              : Theme.of(context).colorScheme.secondary)),
+                  padding: const MaterialStatePropertyAll(EdgeInsets.all(14)),
+                  overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+                  shadowColor: const MaterialStatePropertyAll(Colors.transparent),
+                  backgroundColor: MaterialStatePropertyAll(
+                          Theme.of(context).brightness == Brightness.light
+                              ? Colors.blue.shade50.withOpacity(0.3)
+                              : Theme.of(context).colorScheme.primary)),
+
+
             ),
 
-            Row(
+            toolbar(_MarkdownState.page, context),
 
-              children: [
-
-                FilledButton(
-
-                    style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary), padding: const MaterialStatePropertyAll(EdgeInsets.all(16)),
-                    
-                    side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.secondary)),
-
-                    overlayColor: const MaterialStatePropertyAll(Colors.transparent),
-
-                    shadowColor: const MaterialStatePropertyAll(Colors.transparent)
-                    
-                    ),
-                  
-                    onPressed: (){
-                
-                    if(_MarkdownState.page.text.isNotEmpty){
-                
-                      value.dbHelper.insert(NotesModel(title: _MarkdownState.pageTitle.text.isNotEmpty ? _MarkdownState.pageTitle.text : 'Untitled', description: _MarkdownState.page.text, date: date, favourite: 0));
-                  
-                      value.initDatabase();
-                  
-                      value.setLength();
-                      
-                      Navigator.of(context).pop();
-                      
-                    } else{
-                      SnackBarUtils.showSnackbar(context, CupertinoIcons.pencil_slash, "Please enter title and description");
-                }
-                    }, 
-                  
-                    child: Text('Save', style: TextStyle(fontFamily: 'Inter', fontSize: 20, fontWeight: FontWeight.w500, color: Theme.of(context).colorScheme.tertiary))
-                
-                    ),
-
-                  const Gap(8),
-
-                  IconButton(onPressed: (){
-                    Navigator.pop(context);
-                  }, icon: const Icon(CupertinoIcons.xmark, size: 20, ))
-              ],
+            Container(
+             height: 380,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(12)),
+                border: Border.all(
+                    color: Theme.of(context).brightness == Brightness.light
+                        ? Colors.blue.shade100.withOpacity(0.2)
+                        : Theme.of(context).colorScheme.secondary),
+                // TextBox
+                color: Theme.of(context).brightness == Brightness.light
+                    ? Colors.blue.shade50.withOpacity(0.3)
+                    : Theme.of(context).colorScheme.primary,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(0),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: textField(
+                          context,
+                          lines: 10,
+                          onSubmitted: (text) {
+                            setState(() {
+                              _MarkdownState.page.text += '\n';
+                            });
+                          },
+                          onChanged: (text) {
+                            setState(() {
+                              _MarkdownState.md = text;
+                            });
+                          },
+                          controller: _MarkdownState.page,
+                          focusNode: _MarkdownState._focusNode,
+                          color: Colors.transparent,
+                        ),
+                      ),
+                    ]),
+              ),
             ),
           ],
         ),
-      
-        titlePadding: const EdgeInsets.fromLTRB(30, 30, 20, 0),
-      
-        children: [
-      
-          SizedBox(
-      
-            height: 480,
-      
-            width: 550,
-      
-            child: Column(
-      
-              children: [
-      
-                  Opacity(opacity: 0.8, child: toolbar(_MarkdownState.page, context)),
-      
-                    const Gap(8),
-            
-                    Column(
-            
-                      mainAxisAlignment: MainAxisAlignment.center,
-      
-                      crossAxisAlignment: CrossAxisAlignment.center,
-            
-                      children: [
-            
-                        Padding(
-      
-                          padding: const EdgeInsets.fromLTRB(18, 0, 18, 0),
-      
-                          child: Container(
-                          
-                            height: 390,
-                          
-                            decoration: BoxDecoration(
-                              
-                              borderRadius: const BorderRadius.all(Radius.circular(16)),
-                              
-                              // TextBox
-                              color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
-                            ),
-                          
-                            child: Padding(
-                            
-                              padding: const EdgeInsets.all(6),
-                              // SCSV
-                              child: Column(
-                                
-                                mainAxisAlignment: MainAxisAlignment.start,
-                              
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                              
-                                children: [ 
-                              
-                                    SingleChildScrollView(
-                          
-                                      scrollDirection: Axis.vertical,
-                          
-                                      child: textField(context,
-                                              
-                                      lines: 9,
-                                              
-                                      onSubmitted: (text) {
-                                        setState(() {
-                                          _MarkdownState.page.text += '\n';
-                                        });
-                                      },
-                                      
-                                      onChanged: (text) {
-                                        setState(() {
-                                          _MarkdownState.md = text;
-                                        });
-                                      },
-                                      
-                                      controller: _MarkdownState.page, 
-                                      
-                                      focusNode: _MarkdownState._focusNode,
-                                                                    
-                                      color: Colors.transparent,
-                                      ),
-                                    ),
-                                ]
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-              ],
-            ),
-          )
-        ],
       );
-    }
-    );
+    });
   }
 }

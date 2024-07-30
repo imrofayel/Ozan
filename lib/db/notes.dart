@@ -11,7 +11,9 @@ class NotesModel{
 
   final int favourite;
 
-  NotesModel({required this.title, this.id, required this.description, required this.date, required this.favourite});
+  final String tag;
+
+  NotesModel({required this.title, this.id, required this.description, required this.date, required this.favourite, required this.tag});
 
   NotesModel.fromMap(Map<String, dynamic> res):
 
@@ -23,7 +25,9 @@ class NotesModel{
 
   date = res['date'],
 
-  favourite = res['favourite'];
+  favourite = res['favourite'],
+
+  tag = res['tag'];
 
   Map<String, Object?> toMap(){
 
@@ -37,7 +41,9 @@ class NotesModel{
 
       'date' : date,
 
-      'favourite' : favourite
+      'favourite' : favourite,
+
+      'tag' : tag
     };
   }
 

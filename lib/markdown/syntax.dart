@@ -1,12 +1,10 @@
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_highlighter/flutter_highlighter.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:gap/gap.dart';
+import 'package:iconsax_flutter/iconsax_flutter.dart';
 // ignore: depend_on_referenced_packages
 import 'package:markdown/markdown.dart' as md;
 import 'package:ozan/components/components.dart';
-import 'package:ozan/components/snackbar.dart';
 class CodeElementBuilder extends MarkdownElementBuilder {
 
     CodeElementBuilder({required this.context});
@@ -20,7 +18,7 @@ class CodeElementBuilder extends MarkdownElementBuilder {
     var language = '';
 
     if(element.attributes['class'] == null){
-      return Text(element.textContent.toString(), textScaler: const TextScaler.linear(1.3), style: TextStyle(backgroundColor: Theme.of(context).colorScheme.primary, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.7), fontFamily: 'Roboto Mono'));
+      return Text(element.textContent.toString(), textScaler: const TextScaler.linear(1.2), style: TextStyle(backgroundColor: Theme.of(context).colorScheme.primary, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9), fontFamily: 'Roboto Mono'));
     }
 
     else{
@@ -44,11 +42,9 @@ class CodeElementBuilder extends MarkdownElementBuilder {
     
       children: [
         
-        const Gap(9),
-
         Padding(
 
-          padding: const EdgeInsets.fromLTRB(12, 6, 12, 6),
+          padding: const EdgeInsets.fromLTRB(8, 4, 4, 8),
 
           child: Row(
             
@@ -60,12 +56,11 @@ class CodeElementBuilder extends MarkdownElementBuilder {
           
           side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
 
-          padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text(lang, style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
+          padding: const MaterialStatePropertyAll(EdgeInsets.all(8)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text(lang, style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9), fontFamily: 'Inter'))),
               
             IconButton(onPressed: (){
               copyToClipboard(context, element.textContent);
-              SnackBarUtils.showSnackbar(context, FluentIcons.copy_24_regular, "Code copied");
-            }, icon: const Icon(FluentIcons.copy_24_regular), padding: EdgeInsets.zero),
+            }, icon: Icon(Iconsax.copy_copy, size: 21, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)), padding: EdgeInsets.zero),
             ],
           ),
         ),
@@ -86,9 +81,9 @@ class CodeElementBuilder extends MarkdownElementBuilder {
             ? arduinoLightTheme
             : nordTheme,
         
-        padding: const EdgeInsets.fromLTRB(24, 10, 10, 10),
+        padding: const EdgeInsets.fromLTRB(14, 0, 5, 0),
     
-        textStyle: const TextStyle(fontSize: 16, fontFamily: "Roboto Mono", height: 1.5),
+        textStyle: const TextStyle(fontSize: 15.5, fontFamily: "Roboto Mono", height: 1.7),
         ),
       ]
     );

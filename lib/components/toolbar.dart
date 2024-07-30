@@ -25,33 +25,33 @@ Widget toolbar(TextEditingController controller, context){
       
           children: [
             
-            IconButton(onPressed: () => applyFormatting(controller, '**'), icon: Icon(CupertinoIcons.bold, size: 26, color: Theme.of(context).colorScheme.tertiary), tooltip: "Bold"),
+            IconButton(onPressed: () => applyFormatting(controller, '**'), icon: Icon(CupertinoIcons.bold, size: 22, color: Theme.of(context).colorScheme.tertiary), tooltip: "Bold", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
             
-            IconButton(onPressed: () => applyFormatting(controller, '*'), icon: Icon(CupertinoIcons.italic, size: 26, color: Theme.of(context).colorScheme.tertiary,), tooltip: "Italic"),
+            IconButton(onPressed: () => applyFormatting(controller, '*'), icon: Icon(CupertinoIcons.italic, size: 22, color: Theme.of(context).colorScheme.tertiary,), tooltip: "Italic", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
       
             const Gap(6),
 
-            IconButton(onPressed: () => applyCodeFormatting(controller, context), icon: Icon(CupertinoIcons.chevron_left_slash_chevron_right, size: 26, color: Theme.of(context).colorScheme.tertiary), tooltip: "Code Block"),
+            IconButton(onPressed: () => applyCodeFormatting(controller, context), icon: Icon(CupertinoIcons.chevron_left_slash_chevron_right, size: 22, color: Theme.of(context).colorScheme.tertiary), tooltip: "Code Block", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary))),
       
             const Gap(6),
 
-            IconButton(onPressed: () => applyQuoteFormatting(controller), icon: Icon(FluentIcons.text_quote_24_regular, size: 28, color: Theme.of(context).colorScheme.tertiary), tooltip: "Quote"),
+            IconButton(onPressed: () => applyQuoteFormatting(controller), icon: Icon(FluentIcons.text_quote_24_regular, size: 26, color: Theme.of(context).colorScheme.tertiary), tooltip: "Quote", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
       
             const Gap(6),
 
-            IconButton(onPressed: ()=> tableDialog(context, controller), icon: Icon(FluentIcons.table_edit_24_regular, size: 26, color: Theme.of(context).colorScheme.tertiary), tooltip: "Table"),
+            IconButton(onPressed: ()=> tableDialog(context, controller), icon: Icon(FluentIcons.table_edit_24_regular, size: 22, color: Theme.of(context).colorScheme.tertiary), tooltip: "Table", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
       
             const Gap(6),
 
-            IconButton(onPressed: () => applyListFormatting(controller, '-'), icon: Icon(FluentIcons.text_bullet_list_24_regular, size: 26, color: Theme.of(context).colorScheme.tertiary), tooltip: "Bullet List"),
+            IconButton(onPressed: () => applyListFormatting(controller, '-'), icon: Icon(FluentIcons.text_bullet_list_24_regular, size: 22, color: Theme.of(context).colorScheme.tertiary), tooltip: "Bullet List", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
       
             const Gap(6),
 
-            IconButton(onPressed: () => applyListFormatting(controller, '1. '), icon: Icon(FluentIcons.text_number_list_ltr_24_regular, size: 24, color: Theme.of(context).colorScheme.tertiary), tooltip: "Numbered List"),
+            IconButton(onPressed: () => applyListFormatting(controller, '1. '), icon: Icon(FluentIcons.text_number_list_ltr_24_regular, size: 22, color: Theme.of(context).colorScheme.tertiary), tooltip: "Numbered List", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
 
             const Gap(6),
 
-            IconButton(onPressed: () => linkDialog(context, controller), icon: Icon(FluentIcons.link_24_regular, size: 26, color: Theme.of(context).colorScheme.tertiary), tooltip: "Link"),
+            IconButton(onPressed: () => linkDialog(context, controller), icon: Icon(FluentIcons.link_24_regular, size: 22, color: Theme.of(context).colorScheme.tertiary), tooltip: "Link", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
 
             const Gap(6),
           
@@ -98,7 +98,7 @@ Widget toolbar(TextEditingController controller, context){
             
               width: 90,
             
-              textStyle: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'),
+              textStyle: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'),
             
               dropdownMenuEntries: heading,
             )
@@ -111,11 +111,11 @@ Widget toolbar(TextEditingController controller, context){
 
 List<DropdownMenuEntry> heading = [
 
-    const DropdownMenuEntry(value: 0, label: "H1", labelWidget: Icon(FluentIcons.text_header_1_24_regular, size: 28)),
+    const DropdownMenuEntry(value: 0, label: "H1", labelWidget: Icon(FluentIcons.text_header_1_24_regular, size: 26)),
 
-    const DropdownMenuEntry(value: 1, label: "H2", labelWidget: Icon(FluentIcons.text_header_2_24_regular, size: 26)),
+    const DropdownMenuEntry(value: 1, label: "H2", labelWidget: Icon(FluentIcons.text_header_2_24_regular, size: 24)),
 
-    const DropdownMenuEntry(value: 2, label: "H3", labelWidget: Icon(FluentIcons.text_header_3_24_regular, size: 24)),
+    const DropdownMenuEntry(value: 2, label: "H3", labelWidget: Icon(FluentIcons.text_header_3_24_regular, size: 22)),
 
   ];
 
@@ -476,7 +476,7 @@ void linkDialog(context, TextEditingController controller){
                       
                       padding: const EdgeInsets.fromLTRB(12.0, 0, 10, 0),
                       
-                      child: IconButton(onPressed: (){}, icon: Icon(FluentIcons.link_24_regular, color: Theme.of(context).colorScheme.tertiary, size: 26), tooltip: "Link", style: ButtonStyle(side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
+                      child: IconButton(onPressed: (){}, icon: Icon(FluentIcons.link_24_regular, color: Theme.of(context).colorScheme.tertiary, size: 24), tooltip: "Link", style: ButtonStyle(side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
 
                       overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), padding: const EdgeInsets.all(12),),
                       ),

@@ -1,8 +1,8 @@
 // import 'package:dictionaryx/dictionary_msa.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:markdown/markdown.dart' as md;
 import 'package:gap/gap.dart';
 import 'package:ozan/components/snackbar.dart';
 
@@ -18,11 +18,11 @@ FilledButton button(void Function()? function, IconData icon, context, {required
 
               children: [
 
-                Icon(icon, size: 21, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)),
+                Icon(icon, size: 21, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)),
 
                 const Gap(8),
 
-                Text(tooltip, textScaler: const TextScaler.linear(1.3), style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8))),
+                Text(tooltip, textScaler: const TextScaler.linear(1.3), style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
               ],
       ));
 }
@@ -43,11 +43,11 @@ TextField textField(context, {int? lines = 1, required void Function(String)? on
 
     focusNode: focusNode,
 
-    style: TextStyle(color: textColor ?? Theme.of(context).colorScheme.tertiary, fontSize: 18, height: 2, fontFamily: 'Inter'),
+    style: TextStyle(color: textColor ?? Theme.of(context).colorScheme.tertiary, fontSize: 16, height: 2, fontFamily: 'Inter'),
 
     decoration: InputDecoration(
 
-      filled: true,
+      filled: true, 
 
       fillColor: color,
 
@@ -91,26 +91,26 @@ SingleChildScrollView textEncode(context, {required int words, required int char
       children: [
     
         FilledButton(onPressed: (){}, style: ButtonStyle(
-          
-          side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
-
-          padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("$words words", style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
+                                                  
+        side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
+                                                                                  
+        padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary)), child: Text('$words words', style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
     
         const Gap(9),
     
         FilledButton(onPressed: (){}, style: ButtonStyle(
-          
-          side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.secondary)),
-
-          padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("$char characters", style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
+                                                  
+        side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
+                                                                                  
+        padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary)), child: Text('$char characters', style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
     
         const Gap(9),
     
         FilledButton(onPressed: (){}, style: ButtonStyle(
-
-          side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.secondary)),
-
-          padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text("$lines lines", style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontFamily: 'Inter'))),
+                                                  
+        side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
+                                                                                  
+        padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary)), child: Text('$lines lines', style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
       ],
     ),
   );
@@ -122,21 +122,21 @@ IconButton suffix(context){
       }, icon: const Icon(FluentIcons.mic_24_regular), padding: const EdgeInsets.all(1));
 }
 
-Widget titleBox(context, {required TextEditingController controller}){
+Widget titleBox(context, {required TextEditingController controller, required bool enabled}){
 
   return TextField(
 
     controller: controller,
 
+    enabled: enabled,
+
     decoration: InputDecoration(
 
       hintText: "Untitled",
 
-      hintStyle: TextStyle(fontWeight: FontWeight.w400, color: Theme.of(context).colorScheme.tertiary),
+      hintStyle: TextStyle(color: Theme.of(context).colorScheme.tertiary),
 
-      constraints: const BoxConstraints(maxWidth: 520),
-
-      contentPadding: const EdgeInsets.all(18),
+      constraints: const BoxConstraints(maxWidth: 400),
 
       focusColor: Colors.transparent,
 
@@ -146,7 +146,7 @@ Widget titleBox(context, {required TextEditingController controller}){
 
     ),
 
-    style: const TextStyle(fontSize: 24),
+    style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.tertiary),
   );
 }
 
@@ -155,16 +155,42 @@ String greet(String name){
   String text;
 
   if(DateTime.now().hour > 0 && DateTime.now().hour <= 11){
-    text = 'Good Morning $name!';
+    text = 'Good Morning ${name.split(' ')[0]}!';
   }
 
   else if(DateTime.now().hour > 11 && DateTime.now().hour <= 16){
-    text = 'Good Afternoon $name!';
+    text = 'Good Afternoon ${name.split(' ')[0]}!';
   }
 
   else{
-    text = 'Good Evening $name!';
+    text = 'Good Evening ${name.split(' ')[0]}!';
   }
 
   return text;
 }
+
+// Function to generate table of contents from Markdown notes
+String generateTableOfContents(String markdown) {
+  final document = md.Document();
+  final List<String> headings = [];
+
+  // Parse the Markdown and collect headings
+  document.parseLines(markdown.split('\n')).forEach((element) {
+    if (element is md.Element && element.tag.startsWith('h') && element.tag.length == 2) {
+      // Add the whole heading text without cutting off any part
+      headings.add(element.textContent);
+    }
+  });
+
+  // Generate the TOC Markdown string
+  final buffer = StringBuffer();
+  int count = 1;
+  for (final heading in headings) {
+    buffer.writeln('$count. $heading\n');
+    count++;
+  }
+
+  return buffer.toString();
+}
+
+

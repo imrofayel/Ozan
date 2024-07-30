@@ -5,6 +5,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:ozan/components/snackbar.dart';
+import 'package:page_transition/page_transition.dart';
 import '../home_window.dart';
 
 class FileService {
@@ -96,13 +97,15 @@ Future<void> saveContent(context) async {
 
   Future<void> loadFile(context) async {
     try {
-      FilePickerResult? result = await FilePicker.platform.pickFiles(type: FileType.any, allowedExtensions: ['md']);
+      FilePickerResult? result = await FilePicker.platform.pickFiles(type: FileType.any, allowedExtensions: ['md', 'txt', 'text']);
 
       if (result != null) {
         File file = File(result.files.single.path!);
         _selectedFile = file;
         _selectedDirectory = file.parent.path;
         markdown.text = await file.readAsString();
+
+        Navigator.push(context, PageTransition(type: PageTransitionType.fade, duration: const Duration(milliseconds: 300), child: const Markdown()));
 
         SnackBarUtils.showSnackbar(
             context, FluentIcons.checkmark_circle_24_regular, "File Uploaded!");
