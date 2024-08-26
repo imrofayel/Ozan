@@ -4,7 +4,7 @@
 
 Ozan is a personal knowledge base and journal application.
 
-![Uploading vlcsnap-2024-08-26-14h14m16s728.png…]()
+![vlcsnap-2024-08-26-14h14m16s728](https://github.com/user-attachments/assets/3f9028a9-3546-4fd2-ba52-574a58c96054)
 
 ### Features
 
