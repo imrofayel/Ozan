@@ -9,6 +9,7 @@ import 'package:ozan/components/filter_db.dart';
 import 'package:ozan/components/preferences.dart';
 import 'package:ozan/file_service/pdf_export.dart';
 import 'package:ozan/home_window.dart';
+import 'package:ozan/navigation_provider.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:popover/popover.dart';
 import 'package:gap/gap.dart';
@@ -119,7 +120,7 @@ class _NotesViewState extends State<NotesView> {
                     
                                           FilledButton(
                                             onPressed: () {
-                                              Navigator.push(context, PageTransition(type: PageTransitionType.fade, duration: const Duration(milliseconds: 300), child: const Markdown()));
+                                              Provider.of<Navigation>(context, listen: false).getPage(const Markdown());
                                             },
                                             style: ButtonStyle(
                                               side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
@@ -160,46 +161,7 @@ class _NotesViewState extends State<NotesView> {
                                           highlightColor: Colors.transparent,
                                           splashFactory: null,
                                           onTap: () {
-                                            Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                              return Scaffold(
-                                                body: Row(
-                                                  children: [
-                                                    Expanded(
-                                                      flex: MediaQuery.of(context).size.width > 850 ? 2 : 1,
-                                                      child: SizedBox(
-                                                        child: Padding(
-                                                          padding: const EdgeInsets.all(20.0),
-                                                          child: Column(
-                                                            mainAxisAlignment: MainAxisAlignment.start,
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                                            children: [
-                                                              IconButton(
-                                                                onPressed: () {
-                                                                  Navigator.pop(context);
-                                                                },
-                                                                icon: Icon(CupertinoIcons.arrow_left, size: 22, color: Theme.of(context).colorScheme.tertiary),
-                                                                style: const ButtonStyle(
-                                                                  backgroundColor: MaterialStatePropertyAll(Colors.transparent),
-                                                                  overlayColor: MaterialStatePropertyAll(Colors.transparent),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      flex: MediaQuery.of(context).size.width > 850 ? 10 : 9,
-                                                      child: Padding(
-                                                        padding: const EdgeInsets.all(26),
-                                                        child: Update(note: notes[index]),
-                                                      ),
-                                                    ),
-                                                    Expanded(flex: MediaQuery.of(context).size.width > 850 ? 2 : 0,child: const SizedBox()),
-                                                  ],
-                                                ),
-                                              );
-                                            }));
+                                            Provider.of<Navigation>(context, listen: false).getPage(Update(note: notes[index]));
                                           },
                                           child: Container(
                                             margin: const EdgeInsets.all(4),

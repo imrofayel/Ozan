@@ -8,7 +8,9 @@ import 'package:ozan/components/components.dart';
 import 'package:ozan/components/filter_db.dart';
 import 'package:ozan/components/preferences.dart';
 import 'package:ozan/components/snackbar.dart';
+import 'package:ozan/navigation_provider.dart';
 import 'package:ozan/views/graph.dart';
+import 'package:ozan/views/notes_view.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:provider/provider.dart';
@@ -49,58 +51,64 @@ class Sidebar extends StatefulWidget {
 class _SidebarState extends State<Sidebar> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height,
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                children: [
-                  _buildIconButton(LucideIcons.inbox, 21, () {
-                    Provider.of<FilterState>(context, listen: false).setShowFavouritesOnly(false);
-                  }, 'Notes'),
+    return Consumer<Navigation>(builder: (context, value, child) =>
+      SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height,
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    _buildIconButton(LucideIcons.inbox, 21, () {
 
-                  const Gap(35),
-
-                  _buildIconButton(LucideIcons.gitCompare, 21, () {
-                    _navigateTo(context, const GraphViewPage());
-                  }, 'Brain'),
-
-                  const Gap(35),
-
-                  _buildIconButton(LucideIcons.clapperboard, 21, () {
-                  }, 'Collections'),
-
-                  const Gap(35),
-
-                  _buildIconButton(LucideIcons.lasso, 21, () {
-                  }, 'Draw'),
-
-                  const Gap(35),
-                  _buildIconButton(!Provider.of<FilterState>(context).isBookmark() ? LucideIcons.pin : LucideIcons.pinOff, 21, (){
-                    Provider.of<FilterState>(context, listen: false).toggleShowFavouritesOnly();
-                  }, 'Bookmarks'),
-                ],
-              ),
-
-              Column(
-                children: [
-                  _buildIconButton(LucideIcons.trash, 21, (){
-                    }, 'Trash'),
-
-                  const Gap(35),
-
-                    _buildIconButton(LucideIcons.messageCircle, 21, (){
-                      _openAIChat(context);
-                    }, 'Ask AI'),
-                ]
-              )
-            ],
+                      Provider.of<Navigation>(context, listen: false).getPage(const NotesView());
+                      
+                    }, 'Notes'),
+      
+                    const Gap(35),
+      
+                    _buildIconButton(LucideIcons.gitCompare, 21, () {
+                      // _navigateTo(context, const GraphViewPage());
+                      Provider.of<Navigation>(context, listen: false).getPage(const GraphViewPage());
+      
+                    }, 'Brain'),
+      
+                    const Gap(35),
+      
+                    _buildIconButton(LucideIcons.clapperboard, 21, () {
+                    }, 'Collections'),
+      
+                    const Gap(35),
+      
+                    _buildIconButton(LucideIcons.lasso, 21, () {
+                    }, 'Draw'),
+      
+                    const Gap(35),
+                    _buildIconButton(!Provider.of<FilterState>(context).isBookmark() ? LucideIcons.pin : LucideIcons.pinOff, 21, (){
+                      Provider.of<FilterState>(context, listen: false).toggleShowFavouritesOnly();
+                    }, 'Bookmarks'),
+                  ],
+                ),
+      
+                Column(
+                  children: [
+                    _buildIconButton(LucideIcons.trash, 21, (){
+                      }, 'Trash'),
+      
+                    const Gap(35),
+      
+                      _buildIconButton(LucideIcons.messageCircle, 21, (){
+                        _openAIChat(context);
+                      }, 'Ask AI'),
+                  ]
+                )
+              ],
+            ),
           ),
         ),
       ),

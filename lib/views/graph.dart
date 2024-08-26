@@ -25,67 +25,68 @@ class _GraphViewPageState extends State<GraphViewPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Graph'),
-        centerTitle: true,
-        leading: InkWell(
-          onTap: () => {Navigator.pop(context)},
-          overlayColor: const MaterialStatePropertyAll(Colors.transparent),
-          child: Icon(
-            CupertinoIcons.arrow_left,
-            size: 20,
-            color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9),
+    return Padding(
+      padding: const EdgeInsets.all(6.0),
+      child: Container(
+      
+        decoration: BoxDecoration(border: Border.all(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)), borderRadius: BorderRadius.circular(12)),
+        
+        child: Scaffold(
+
+          backgroundColor: Colors.transparent,
+
+          appBar: AppBar(
+            title: const Text('Graph'),
+          ),
+          body: Consumer<DatabaseProvider>(
+            builder: (context, value, child) {
+              return FutureBuilder<List<NotesModel>>(
+                future: value.notesList,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    final notes = snapshot.data!;
+                    final Graph graph = _buildGraph(notes);
+        
+                    return Center(
+                      child: InteractiveViewer(
+                        constrained: false,
+                        boundaryMargin: const EdgeInsets.all(0.0),
+                        minScale: 1,
+                        maxScale: 1.6,
+                        child: GraphView(
+                          animated: true,
+                          graph: graph,
+                          algorithm: builder,
+                          paint: Paint()
+                            ..color = Theme.of(context).colorScheme.tertiary
+                            ..strokeWidth = 0.6
+                            ..style = PaintingStyle.stroke,
+                          builder: (Node node) {
+                            var nodeId = node.key!.value;
+        
+                            if (nodeId == 'NOTES') {
+                              return _buildNode(
+                                  nodeId, getColor(nodeId, context)[0], getColor(nodeId, context)[2], getColor(nodeId, context)[1], false
+                                  );
+                            } else if (notes.any((note) => note.tag == nodeId)) {
+                              return _buildNode(nodeId, getColor(nodeId, context)[0], getColor(nodeId, context)[2], getColor(nodeId, context)[1], false);
+                            } else {
+                              return _buildNode(nodeId, getColor(nodeId, context)[0], getColor(nodeId, context)[2], getColor(nodeId, context)[1], true);
+                            }
+                          },
+                        ),
+                      ),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  } else {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                },
+              );
+            },
           ),
         ),
-      ),
-      body: Consumer<DatabaseProvider>(
-        builder: (context, value, child) {
-          return FutureBuilder<List<NotesModel>>(
-            future: value.notesList,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                final notes = snapshot.data!;
-                final Graph graph = _buildGraph(notes);
-
-                return Center(
-                  child: InteractiveViewer(
-                    constrained: false,
-                    boundaryMargin: const EdgeInsets.all(0.0),
-                    minScale: 1,
-                    maxScale: 1.6,
-                    child: GraphView(
-                      animated: true,
-                      graph: graph,
-                      algorithm: builder,
-                      paint: Paint()
-                        ..color = Colors.grey.shade100
-                        ..strokeWidth = 0.6
-                        ..style = PaintingStyle.stroke,
-                      builder: (Node node) {
-                        var nodeId = node.key!.value;
-
-                        if (nodeId == 'NOTES') {
-                          return _buildNode(
-                              nodeId, getColor(nodeId, context)[0], getColor(nodeId, context)[2], getColor(nodeId, context)[1], false
-                              );
-                        } else if (notes.any((note) => note.tag == nodeId)) {
-                          return _buildNode(nodeId, getColor(nodeId, context)[0], getColor(nodeId, context)[2], getColor(nodeId, context)[1], false);
-                        } else {
-                          return _buildNode(nodeId, getColor(nodeId, context)[0], getColor(nodeId, context)[2], getColor(nodeId, context)[1], true);
-                        }
-                      },
-                    ),
-                  ),
-                );
-              } else if (snapshot.hasError) {
-                return Center(child: Text('Error: ${snapshot.error}'));
-              } else {
-                return const Center(child: CircularProgressIndicator());
-              }
-            },
-          );
-        },
       ),
     );
   }
@@ -115,7 +116,7 @@ class _GraphViewPageState extends State<GraphViewPage> {
 
     for (var edge in graph.edges) {
       edge.paint = Paint()
-        ..color = Colors.grey.shade300.withOpacity(0.6)
+        ..color = Theme.of(context).colorScheme.tertiary.withOpacity(0.9)
  // Change this to your desired color
         ..strokeWidth = 1.4 // Change this to your desired width
         ..style = PaintingStyle.stroke;
@@ -134,9 +135,7 @@ class _GraphViewPageState extends State<GraphViewPage> {
           color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.primary : color,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
-              color: Theme.of(context).brightness == Brightness.light
-                  ? border
-                  : Theme.of(context).colorScheme.secondary,
+              color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9),
               width: 2),
         ),
         child: Text(
@@ -215,27 +214,27 @@ class _GraphViewPageState extends State<GraphViewPage> {
   List<Color> getColor(String tag, BuildContext context) {
     if (tag == 'General') {
       return [
-        const Color.fromRGBO(247, 247, 246, 1),
-        const Color.fromARGB(255, 239, 239, 238),
-        const Color.fromRGBO(31, 28, 25, 1)
+        Theme.of(context).colorScheme.tertiary,
+        Colors.transparent,
+        Theme.of(context).colorScheme.background
       ];
     } else if (tag == 'Work') {
       return [
-        const Color.fromRGBO(255, 234, 236, 1),
-        const Color.fromARGB(255, 255, 223, 226),
-        const Color.fromRGBO(140, 40, 67, 1),
+        Theme.of(context).colorScheme.tertiary,
+        Colors.transparent,
+        Theme.of(context).colorScheme.background
       ];
     } else if (tag == 'Studies') {
       return [
-        const Color.fromRGBO(221, 251, 235, 1),
-        const Color.fromARGB(255, 207, 245, 209),
-        Colors.green.shade900.withOpacity(0.9)
+        Theme.of(context).colorScheme.tertiary,
+        Colors.transparent,
+        Theme.of(context).colorScheme.background
       ];
     } else if (tag == 'Personal') {
       return [
-        Colors.blue.shade50,
-        Colors.blue.shade100,
-        Colors.blue.shade900
+        Theme.of(context).colorScheme.tertiary,
+        Colors.transparent,
+        Theme.of(context).colorScheme.background
       ];
     }
 

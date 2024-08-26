@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
@@ -70,97 +71,126 @@ class _UpdateState extends State<Update>{
 
     return Consumer<DatabaseProvider>(builder:(context, value, child){
 
-      return Scaffold(
+      return Padding(
+
+        padding: const EdgeInsets.all(6),
+
+        child: Container(
         
-        body: Row(
+          decoration: BoxDecoration(border: Border.all(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)), borderRadius: BorderRadius.circular(12)),
         
-          children: [
-        
-            Expanded(
+          child: Scaffold(
             
-              flex: 6,
-            
-              child: SingleChildScrollView(
-               
-                scrollDirection: Axis.vertical,
+            backgroundColor: Colors.transparent,
         
-                child: Column(
-                
-                  mainAxisAlignment: MainAxisAlignment.center,
-                
-                  children: [
+            body: Row(
+              children: [
+
+                const Expanded(flex: 1, child: SizedBox()),
+
+                Expanded(
+
+                  flex: 8,
+
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 24),
+                    child: Row(
                     
-                    Row(
-                      
                       children: [
                     
-                        Expanded(child: titleBox(context, controller: pageTitle, enabled: true)),
-                                        
-                        Tooltip(
-                          
-                          message: 'Writer',
-
-                          child: FilledButton(onPressed: (){
+                        Expanded(
+                        
+                          flex: 6,
+                        
+                          child: SingleChildScrollView(
+                           
+                            scrollDirection: Axis.vertical,
+                    
+                            child: Column(
+                            
+                              mainAxisAlignment: MainAxisAlignment.center,
+                            
+                              children: [
+                                
+                                Row(
                                   
-                            showDialog(
-                              context: context, 
-                                  
-                              builder: (context){
-                                return Editor(note: widget.note);
-                              }
-                            );
-                          }, 
-                          
-                          style: ButtonStyle(
-                            
-                            shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15), side: BorderSide.none)),
-                            
-                            backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background.withOpacity(0.3)), padding: const MaterialStatePropertyAll(EdgeInsets.all(15)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: const MaterialStatePropertyAll(Colors.transparent)), 
-                            
-                            child: Icon(CupertinoIcons.pen, color: Colors.deepPurple.shade400, size: 26)),
-                        ),
-                            
-                        const Gap(15)
-                      ],
-                    ),
-
-                    const Gap(8),
-
-                    Theme(
-                      data: Theme.of(context).copyWith(
-                        splashColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        hoverColor: Colors.transparent
-                      ),
-                      child: ExpansionTile(leading: const Icon(CupertinoIcons.book), title: Text('Table Of Contents', style: TextStyle(color: Colors.deepPurple.shade400, fontWeight: FontWeight.bold, fontSize: 16, decoration: TextDecoration.underline, decorationStyle: TextDecorationStyle.wavy, decorationColor: Colors.deepPurple.shade100, decorationThickness: 2.3)), children: [Padding(
-                        padding: const EdgeInsets.only(bottom: 20, left: 15),
-                        child: MarkdownBody(data: generateTableOfContents(page.text), styleSheet: MarkdownStyle.style(context, 1.25), extensionSet: MarkdownStyle.extension()),
-                      )]),
-                    ),
-                          
-                    SizedBox(
+                                  children: [
+                                
+                                    Expanded(child: titleBox(context, controller: pageTitle, enabled: true)),
+                                                    
+                                    Tooltip(
+                                      
+                                      message: 'Writer',
                               
-                      height: 485,
-                      child: markdown(page.text, 1.14, context)
-                    ),
-                            
-                      const Gap(10),
-
-                      Row(
+                                      child: FilledButton(onPressed: (){
+                                              
+                                        showDialog(
+                                          context: context, 
+                                              
+                                          builder: (context){
+                                            return Editor(note: widget.note);
+                                          }
+                                        );
+                                      }, 
+                                      
+                                      style: ButtonStyle(
                                         
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      
-                      children: [
+                                        shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15), side: BorderSide.none)),
                                         
-                        textEncode(context, words: page.text.split(' ').length-1, char: page.text.length, lines: page.text.split('\n').length-1),
-                      
+                                        backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background.withOpacity(0.3)), padding: const MaterialStatePropertyAll(EdgeInsets.all(15)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: const MaterialStatePropertyAll(Colors.transparent)), 
+                                        
+                                        child: Icon(CupertinoIcons.pen, color: Theme.of(context).colorScheme.tertiary, size: 26)),
+                                    ),
+                                        
+                                    const Gap(15)
+                                  ],
+                                ),
+                              
+                                const Gap(8),
+                              
+                                Theme(
+                                  data: Theme.of(context).copyWith(
+                                    splashColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    hoverColor: Colors.transparent
+                                  ),
+                                  child: ExpansionTile(leading: const Icon(CupertinoIcons.book), title: Text('Table Of Contents', style: TextStyle(color: Colors.deepPurple.shade400, fontWeight: FontWeight.bold, fontSize: 16, decoration: TextDecoration.underline, decorationStyle: TextDecorationStyle.wavy, decorationColor: Colors.deepPurple.shade100, decorationThickness: 2.3)), children: [Padding(
+                                    padding: const EdgeInsets.only(bottom: 20, left: 15),
+                                    child: MarkdownBody(data: generateTableOfContents(page.text), styleSheet: MarkdownStyle.style(context, 1.25), extensionSet: MarkdownStyle.extension()),
+                                  )]),
+                                ),
+                                      
+                                SizedBox(
+                                          
+                                  height: 440,
+                                  child: markdown(page.text, 1.14, context)
+                                ),
+                                        
+                                  const Gap(10),
+                              
+                                  Row(
+                                                    
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  
+                                  children: [
+                                                    
+                                    textEncode(context, words: page.text.split(' ').length-1, char: page.text.length, lines: page.text.split('\n').length-1),
+                                  
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                    
+                        const Expanded(flex: 1, child: SizedBox()),
                       ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
       );
     }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ozan/components/filter_db.dart';
 import 'package:ozan/components/preferences.dart';
 import 'package:ozan/db/db_provider.dart';
+import 'package:ozan/navigation_provider.dart';
 import 'package:ozan/theme/theme.dart';
 import 'package:ozan/theme/theme_provider.dart';
 import 'package:ozan/views/home.dart';
@@ -31,6 +32,7 @@ void main() async {
     providers: [
       ChangeNotifierProvider(create: (context) => DatabaseProvider()),
       ChangeNotifierProvider(create: (_) => FilterState()),
+      ChangeNotifierProvider(create: (_) => Navigation()),
       ChangeNotifierProvider(create: (context) => AppState()),
          ChangeNotifierProxyProvider<AppState, ThemeSwitcher>(
         create: (context) => ThemeSwitcher(context),
