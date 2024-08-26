@@ -146,7 +146,7 @@ Widget titleBox(context, {required TextEditingController controller, required bo
 
     ),
 
-    style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.tertiary),
+    style: TextStyle(fontSize: 24, color: Theme.of(context).colorScheme.tertiary),
   );
 }
 
