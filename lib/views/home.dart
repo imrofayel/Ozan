@@ -31,7 +31,7 @@ class _HomeState extends State<Home> {
             
             Expanded(flex: 1, child: Sidebar()),
               
-            Expanded(flex: 23, child: NotesView()),
+            Expanded(flex: 25, child: NotesView()),
 
           ],
         ),
@@ -39,8 +39,4 @@ class _HomeState extends State<Home> {
     }
     );
   }
-}
-
-Widget _iconButton(IconData icon, void Function()? onPressed){
-  return IconButton(onPressed: onPressed, icon: Icon(icon, size: 21));
 }

@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 import 'package:ozan/components/components.dart';
 import 'package:ozan/components/filter_db.dart';
 import 'package:ozan/components/preferences.dart';
@@ -13,7 +14,6 @@ import 'package:popover/popover.dart';
 import 'package:gap/gap.dart';
 import 'package:ozan/db/db_provider.dart';
 import 'package:ozan/db/notes.dart';
-import 'package:ozan/markdown/markdown_style.dart';
 import 'package:ozan/views/update_view.dart';
 import 'package:provider/provider.dart';
 
@@ -139,6 +139,11 @@ class _NotesViewState extends State<NotesView> {
                                         ],
                                       ),
                                     ),
+
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 12.0),
+                                      child: IconButton(onPressed: (){}, icon: Icon(LucideIcons.search, size: 21, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)), style: const ButtonStyle(overlayColor: MaterialStatePropertyAll(Colors.transparent))),
+                                    )
                                   ],
                                 ),
                                 const Gap(14),
@@ -146,7 +151,7 @@ class _NotesViewState extends State<NotesView> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(8),
                                     child: GridView.builder(
-                                      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 340),
+                                      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 500),
                                       scrollDirection: Axis.vertical,
                                       itemCount: notes.length,
                                       itemBuilder: (context, index) {
@@ -197,11 +202,6 @@ class _NotesViewState extends State<NotesView> {
                                             }));
                                           },
                                           child: Container(
-                                            decoration: BoxDecoration(
-                                              color: Theme.of(context).colorScheme.primary,
-                                              border: Border.all(color: Theme.of(context).colorScheme.secondary),
-                                              borderRadius: BorderRadius.circular(14),
-                                            ),
                                             margin: const EdgeInsets.all(4),
                                             padding: const EdgeInsets.all(6),
                                             child: Column(
@@ -214,13 +214,13 @@ class _NotesViewState extends State<NotesView> {
                                                       onPressed: () {},
                                                       style: ButtonStyle(
                                                         shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
-                                                        side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
+                                                        side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
                                                         padding: const MaterialStatePropertyAll(EdgeInsets.all(8)),
                                                         overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                                                         shadowColor: const MaterialStatePropertyAll(Colors.transparent),
-                                                        backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.2) : Theme.of(context).colorScheme.background),
+                                                        backgroundColor: const MaterialStatePropertyAll(Colors.transparent),
                                                       ),
-                                                      child: Text(notes[index].date, style: TextStyle(fontSize: 15, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter')),
+                                                      child: Text(notes[index].date, style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary)),
                                                     ),
                                                     Row(
                                                       children: [
@@ -255,10 +255,10 @@ class _NotesViewState extends State<NotesView> {
                                                             backgroundColor: MaterialStatePropertyAll(Colors.transparent),
                                                           ),
                                                           child: Tooltip(
-                                                            message: 'Bookmark',
+                                                            message: 'Pin',
                                                             child: Icon(
-                                                              notes[index].favourite == 0 ? CupertinoIcons.bookmark : CupertinoIcons.bookmark_fill,
-                                                              color: notes[index].favourite == 0 ? Theme.of(context).colorScheme.tertiary : Theme.of(context).colorScheme.tertiary.withOpacity(0.9), size: 19),
+                                                              notes[index].favourite == 0 ? LucideIcons.pin : LucideIcons.pinOff,
+                                                              color: notes[index].favourite == 0 ? Theme.of(context).colorScheme.tertiary.withOpacity(0.9) : Theme.of(context).colorScheme.tertiary.withOpacity(0.9), size: 21),
                                                           )
                                                         ),
                                                         
@@ -270,19 +270,8 @@ class _NotesViewState extends State<NotesView> {
                                                 const Gap(7),
                     
                                                 Padding(
-                                                  padding: const EdgeInsets.only(left: 8),
-                                                  child: Text(notes[index].title, style: TextStyle(fontSize: 17.5, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.95))),
-                                                ),
-                                                const Gap(10),
-                                                Expanded(
-                                                  child: Container(
-                                                    decoration: BoxDecoration(
-                                                      color: Theme.of(context).colorScheme.background,
-                                                      border: Border.all(color: Theme.of(context).colorScheme.secondary),
-                                                      borderRadius: BorderRadius.circular(10),
-                                                    ),
-                                                    child: markdown(notes[index].description, 1, context),
-                                                  ),
+                                                  padding: const EdgeInsets.only(top: 6),
+                                                  child: Text(notes[index].title, style: TextStyle(fontSize: 24, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
                                                 ),
                                                 const Gap(10),
                                                 Row(
@@ -292,21 +281,21 @@ class _NotesViewState extends State<NotesView> {
                                                       onPressed: () {},
                                                       style: ButtonStyle(
                                                         shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
-                                                        side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).brightness == Brightness.light ? (getColor(notes[index].tag, context))[1] : Theme.of(context).colorScheme.secondary)),
+                                                        side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))), 
                                                         padding: const MaterialStatePropertyAll(EdgeInsets.all(8)),
                                                         overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                                                         shadowColor: const MaterialStatePropertyAll(Colors.transparent),
-                                                        backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? getColor(notes[index].tag, context)[0] : Theme.of(context).colorScheme.primary),
+                                                        backgroundColor: const MaterialStatePropertyAll(Colors.transparent),
                                                       ),
                                                       child: Text(
                                                         notes[index].tag,
-                                                        style: TextStyle(fontSize: 14.3, color: Theme.of(context).brightness == Brightness.light ? getColor(notes[index].tag, context)[2] : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'),
+                                                        style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary),
                                                       ),
                                                     ),
                   
                                                     Padding(
                                                       padding: const EdgeInsets.only(right: 6),
-                                                      child: IconButton(icon: Icon(CupertinoIcons.down_arrow, size: 20, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.95)), onPressed: () async{ await PdfExport.generateAndSavePDF(context, notes[index]);}, style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), tooltip: 'Export to PDF')
+                                                      child: IconButton(icon: Icon(LucideIcons.download, size: 20, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.95)), onPressed: () async{ await PdfExport.generateAndSavePDF(context, notes[index]);}, style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), tooltip: 'Export to PDF')
                                                     ),
                                                   ],
                                                 ),
@@ -454,15 +443,15 @@ class Delete extends StatelessWidget {
                 Navigator.pop(context);
               }, 
               
-              icon: Icon(CupertinoIcons.delete, size: 20, 
+              icon: Icon(LucideIcons.trash, size: 20, 
               
               color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)), 
               
-              style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), padding: const MaterialStatePropertyAll(EdgeInsets.all(10)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), surfaceTintColor: const MaterialStatePropertyAll(Colors.transparent)))                                                 
+              style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))), overlayColor: const MaterialStatePropertyAll(Colors.transparent), padding: const MaterialStatePropertyAll(EdgeInsets.all(10)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), surfaceTintColor: const MaterialStatePropertyAll(Colors.transparent)))                                                 
               );
             },
           );                                                       
-         }, icon: const Icon(CupertinoIcons.ellipsis, size: 20), padding: EdgeInsets.zero);
+         }, icon: const Icon(CupertinoIcons.ellipsis, size: 22), padding: EdgeInsets.zero, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9));
         }
       ),
     );
