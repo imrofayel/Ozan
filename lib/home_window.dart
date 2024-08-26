@@ -86,7 +86,6 @@ class _MarkdownState extends State<Markdown> {
                           value.initDatabase();
                           value.setLength();
                           Markdown.files.newFile(context);
-                          Navigator.of(context).pop();
                         } else {
                           SnackBarUtils.showSnackbar(context,
                               CupertinoIcons.pencil_slash, "Please enter title and description");

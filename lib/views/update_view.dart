@@ -93,7 +93,7 @@ class _UpdateState extends State<Update>{
                   flex: 8,
 
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 24),
+                    padding: const EdgeInsets.symmetric(vertical: 20),
                     child: Row(
                     
                       children: [
@@ -315,9 +315,7 @@ class _EditorState extends State<Editor> {
               
                   value.setLength();
                 }
-            
-                Navigator.of(context).pop();
-            
+                        
                 }
 
                 else{
