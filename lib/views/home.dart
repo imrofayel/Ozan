@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ozan/db/db_provider.dart';
 import 'package:ozan/components/sidebar.dart';
@@ -20,58 +19,19 @@ class _HomeState extends State<Home> {
 
     return Consumer<DatabaseProvider>(builder:(context, value, child){
 
-      return Scaffold(
+      return const Scaffold(
 
-        endDrawer: const SidebarDrawer(),
-      
-        appBar: AppBar(
-               
-              title: Builder(
-
-                builder: (BuildContext context) {
-                  return IconButton(
-                    icon: Icon(CupertinoIcons.ellipsis, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9), size: 22),
-                    onPressed: () { Scaffold.of(context).openEndDrawer(); },
-                    tooltip: 'Sidebar', hoverColor: Theme.of(context).colorScheme.primary, style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),
-                  );
-                },
-              ),
-                  
-              elevation: 0,
-
-              actionsIconTheme: IconThemeData(size: 24, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)),
-                  
-              actions:
-
-                [
-                                  
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
-                    child: InkWell(
-                      overlayColor: const MaterialStatePropertyAll(Colors.transparent),
-                      child: const Tooltip(
-                        message: 'Sync Coming Soon',
-                        child: Icon(
-                          CupertinoIcons.cloud
-                          ),
-                      ),
-
-                        onTap: (){}
-                    )
-                    ),
-                
-                ],
-              ),
+        endDrawer:  SidebarDrawer(),
         
-        body: const Row(
+        body: Row(
         
           crossAxisAlignment: CrossAxisAlignment.start,
           
           children: [
             
-            Expanded(flex: 2, child: Sidebar()),
+            Expanded(flex: 1, child: Sidebar()),
               
-            Expanded(flex: 18, child: NotesView()),
+            Expanded(flex: 23, child: NotesView()),
 
           ],
         ),
@@ -79,4 +39,8 @@ class _HomeState extends State<Home> {
     }
     );
   }
+}
+
+Widget _iconButton(IconData icon, void Function()? onPressed){
+  return IconButton(onPressed: onPressed, icon: Icon(icon, size: 21));
 }
