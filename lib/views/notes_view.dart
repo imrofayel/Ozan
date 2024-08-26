@@ -41,7 +41,7 @@ class _NotesViewState extends State<NotesView> {
             padding: const EdgeInsets.all(6.0),
             child: Container(
               
-              decoration: BoxDecoration(border: Border.all(width: 1, color: Theme.of(context).colorScheme.secondary), borderRadius: BorderRadius.circular(12)),
+              decoration: BoxDecoration(border: Border.all(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)), borderRadius: BorderRadius.circular(12)),
             
               child: Scaffold(
                 backgroundColor: Colors.transparent,
@@ -83,13 +83,13 @@ class _NotesViewState extends State<NotesView> {
                                           FilledButton(
                                             onPressed: () {},
                                             style: ButtonStyle(
-                                              side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
+                                              side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
                                               padding: const MaterialStatePropertyAll(EdgeInsets.all(14)),
                                               overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                                               shadowColor: const MaterialStatePropertyAll(Colors.transparent),
-                                              backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary),
+                                              backgroundColor: const MaterialStatePropertyAll(Colors.transparent),
                                             ),
-                                            child: Text('${notes.length} entries', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.9) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter')),
+                                            child: Text('${notes.length} entries', style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary)),
                                           ),
                                           const Gap(14),
                     
@@ -100,17 +100,17 @@ class _NotesViewState extends State<NotesView> {
                                             },
                     
                                             style: ButtonStyle(
-                                              side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
+                                              side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.tertiary)),
                                               padding: const MaterialStatePropertyAll(EdgeInsets.all(14)),
                                               overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                                               shadowColor: const MaterialStatePropertyAll(Colors.transparent),
-                                              backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.4) : Theme.of(context).colorScheme.primary),
+                                              backgroundColor: const MaterialStatePropertyAll(Colors.transparent),
                                             ),
                                             child: Row(
                                               children: [
-                                                Icon(CupertinoIcons.folder, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.9) : Theme.of(context).colorScheme.tertiary, size: 18),
+                                                Icon(CupertinoIcons.folder, color: Theme.of(context).colorScheme.tertiary, size: 18),
                                                 const Gap(8),
-                                                Text('Open', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.9) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter')),
+                                                Text('Open', style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary)),
                                               ],
                                             ),
                                           ),
@@ -122,17 +122,17 @@ class _NotesViewState extends State<NotesView> {
                                               Navigator.push(context, PageTransition(type: PageTransitionType.fade, duration: const Duration(milliseconds: 300), child: const Markdown()));
                                             },
                                             style: ButtonStyle(
-                                              side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
+                                              side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
                                               padding: const MaterialStatePropertyAll(EdgeInsets.all(14)),
                                               overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                                               shadowColor: const MaterialStatePropertyAll(Colors.transparent),
-                                              backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.4) : Theme.of(context).colorScheme.primary),
+                                              backgroundColor: const MaterialStatePropertyAll(Colors.transparent),
                                             ),
                                             child: Row(
                                               children: [
-                                                Icon(CupertinoIcons.pencil, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, size: 19),
+                                                Icon(CupertinoIcons.pencil, color: Theme.of(context).colorScheme.tertiary, size: 19),
                                                 const Gap(4),
-                                                Text('Write', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.9) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter')),
+                                                Text('Write', style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary)),
                                               ],
                                             ),
                                           ),
