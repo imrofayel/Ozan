@@ -92,25 +92,25 @@ SingleChildScrollView textEncode(context, {required int words, required int char
     
         FilledButton(onPressed: (){}, style: ButtonStyle(
                                                   
-        side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
+        side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
                                                                                   
-        padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary)), child: Text('$words words', style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
+        padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text('$words words', style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
     
         const Gap(9),
     
         FilledButton(onPressed: (){}, style: ButtonStyle(
                                                   
-        side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
+        side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
                                                                                   
-        padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary)), child: Text('$char characters', style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
+        padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text('$char characters', style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
     
         const Gap(9),
     
         FilledButton(onPressed: (){}, style: ButtonStyle(
                                                   
-        side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
+        side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
                                                                                   
-        padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary)), child: Text('$lines lines', style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
+        padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text('$lines lines', style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
       ],
     ),
   );

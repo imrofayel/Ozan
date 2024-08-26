@@ -28,11 +28,11 @@ class Themes {
 
       seedColor: Colors.white,
 
-      background: const Color.fromARGB(255, 250, 250, 250), 
+      background: const Color.fromARGB(255, 255, 255, 255), 
 
       secondary: const Color.fromRGBO(243, 243, 243, 1),
 
-      primary: const Color.fromRGBO(249, 249, 252, 1),
+      primary: Color.fromARGB(255, 246, 246, 251),
 
       tertiary: const Color.fromARGB(255, 9, 13, 16),
 

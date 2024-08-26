@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
-import 'package:ozan/components/sidebar.dart';
 import 'package:ozan/components/snackbar.dart';
 import 'package:ozan/file_service/file_service.dart';
 import 'package:ozan/components/components.dart';
@@ -55,139 +54,138 @@ class _MarkdownState extends State<Markdown> {
     String date = DateFormat('d MMM, yy').format(DateTime.now());
 
     return Consumer<DatabaseProvider>(builder: (context, value, child) {
-      return Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 60,
-          leading: InkWell(
-            onTap: () => Navigator.pop(context),
-            child: Icon(
-              CupertinoIcons.arrow_left,
-              size: 20,
-              color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9),
-            ),
-          ),
-          title: Expanded(
-              child: titleBox(context, controller: pageTitle, enabled: enableTitle)),
-          centerTitle: true,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 14, 0),
-              child: FilledButton(
-                  onPressed: () {
-                    if (_MarkdownState.page.text.isNotEmpty) {
-                      value.dbHelper.insert(NotesModel(
-                          title: _MarkdownState.pageTitle.text.isNotEmpty
-                              ? _MarkdownState.pageTitle.text
-                              : 'Untitled',
-                          description: _MarkdownState.page.text,
-                          date: date,
-                          favourite: 0,
-                          tag: _EditorState.selected.name,
-                          ));
-                      value.initDatabase();
-                      value.setLength();
-                      Markdown.files.newFile(context);
-                      Navigator.of(context).pop();
-                    } else {
-                      SnackBarUtils.showSnackbar(context,
-                          CupertinoIcons.pencil_slash, "Please enter title and description");
-                    }
-                  },
-                  style: ButtonStyle(
-                      side: MaterialStatePropertyAll(BorderSide(
-                          color: Theme.of(context).brightness == Brightness.light
-                              ? Colors.blue.shade100.withOpacity(0.2)
-                              : Theme.of(context).colorScheme.secondary)),
-                      padding: const MaterialStatePropertyAll(EdgeInsets.all(14)),
-                      overlayColor: const MaterialStatePropertyAll(Colors.transparent),
-                      shadowColor: const MaterialStatePropertyAll(Colors.transparent),
-                      backgroundColor: MaterialStatePropertyAll(
-                          Theme.of(context).brightness == Brightness.light
-                              ? Colors.blue.shade50.withOpacity(0.3)
-                              : Theme.of(context).colorScheme.primary)),
-                  child: Text('Save',
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: Theme.of(context).colorScheme.tertiary,
-                          fontFamily: 'Inter'))),
-            ),
-          ],
-        ),
-        body: Row(
+      return Padding(
+        padding: const EdgeInsets.all(6.0),
+        child: Container(
+        
+          decoration: BoxDecoration(border: Border.all(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)), borderRadius: BorderRadius.circular(12)),
+        
+          child: Scaffold(
 
-          children: [
-
-            const Expanded(flex: 1, child: Sidebar()),
-
-            Expanded(
-
-              flex: 8,
-
-              child: Center(
-                
-                child: Column(
-                          
-                  children: [
-                    ToggleButtons(
-              
-                      constraints: const BoxConstraints(minWidth: 50, minHeight: 35), 
-              
-                      isSelected: [isCodeView, !isCodeView],
-                      onPressed: (int index) {
-                        setState(() {
-                          isCodeView = index == 0;
-
-                          enableTitle = isCodeView;
-
-                        });
+            backgroundColor: Colors.transparent,
+            appBar: AppBar(
+              toolbarHeight: 60,
+              title: Expanded(
+                  child: titleBox(context, controller: pageTitle, enabled: enableTitle)),
+              centerTitle: true,
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 14, 0),
+                  child: FilledButton(
+                      onPressed: () {
+                        if (_MarkdownState.page.text.isNotEmpty) {
+                          value.dbHelper.insert(NotesModel(
+                              title: _MarkdownState.pageTitle.text.isNotEmpty
+                                  ? _MarkdownState.pageTitle.text
+                                  : 'Untitled',
+                              description: _MarkdownState.page.text,
+                              date: date,
+                              favourite: 0,
+                              tag: _EditorState.selected.name,
+                              ));
+                          value.initDatabase();
+                          value.setLength();
+                          Markdown.files.newFile(context);
+                        } else {
+                          SnackBarUtils.showSnackbar(context,
+                              CupertinoIcons.pencil_slash, "Please enter title and description");
+                        }
                       },
-              
-                      splashColor: Colors.transparent,
-              
-                      hoverColor: Colors.transparent,
-                      
-                      selectedBorderColor: Theme.of(context).brightness == Brightness.light
-                                    ? Colors.blue.shade100.withOpacity(0.2)
-                                    : Theme.of(context).colorScheme.secondary,
-              
-                      borderColor: Theme.of(context).brightness == Brightness.light
-                                    ? Colors.blue.shade100.withOpacity(0.2)
-                                    : Theme.of(context).colorScheme.secondary,
-                
-                      borderRadius: BorderRadius.circular(50),
-                
-                      fillColor: Theme.of(context).brightness == Brightness.light
+                      style: ButtonStyle(
+                          side: MaterialStatePropertyAll(BorderSide(
+                              color: Theme.of(context).brightness == Brightness.light
+                                  ? Colors.blue.shade100.withOpacity(0.2)
+                                  : Theme.of(context).colorScheme.secondary)),
+                          padding: const MaterialStatePropertyAll(EdgeInsets.all(14)),
+                          overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+                          shadowColor: const MaterialStatePropertyAll(Colors.transparent),
+                          backgroundColor: MaterialStatePropertyAll(
+                              Theme.of(context).brightness == Brightness.light
                                   ? Colors.blue.shade50.withOpacity(0.3)
-                                  : Theme.of(context).colorScheme.primary,
-                
+                                  : Theme.of(context).colorScheme.primary)),
+                      child: Text('Save',
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: Theme.of(context).colorScheme.tertiary,
+                              fontFamily: 'Inter'))),
+                ),
+              ],
+            ),
+            body: Row(
+          
+              children: [
+          
+                Expanded(
+          
+                  flex: 8,
+          
+                  child: Center(
+                    
+                    child: Column(
+                              
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                          child: Text('Code', style: TextStyle(
-                              fontSize: 15,
-                              color: Theme.of(context).colorScheme.tertiary,
-                              fontFamily: 'Inter')),
+                        ToggleButtons(
+                  
+                          constraints: const BoxConstraints(minWidth: 50, minHeight: 35), 
+                  
+                          isSelected: [isCodeView, !isCodeView],
+                          onPressed: (int index) {
+                            setState(() {
+                              isCodeView = index == 0;
+          
+                              enableTitle = isCodeView;
+          
+                            });
+                          },
+                  
+                          splashColor: Colors.transparent,
+                  
+                          hoverColor: Colors.transparent,
+                          
+                          selectedBorderColor: Theme.of(context).brightness == Brightness.light
+                                        ? Colors.blue.shade100.withOpacity(0.2)
+                                        : Theme.of(context).colorScheme.secondary,
+                  
+                          borderColor: Theme.of(context).brightness == Brightness.light
+                                        ? Colors.blue.shade100.withOpacity(0.2)
+                                        : Theme.of(context).colorScheme.secondary,
+                    
+                          borderRadius: BorderRadius.circular(50),
+                    
+                          fillColor: Theme.of(context).brightness == Brightness.light
+                                      ? Colors.blue.shade50.withOpacity(0.3)
+                                      : Theme.of(context).colorScheme.primary,
+                    
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                              child: Text('Code', style: TextStyle(
+                                  fontSize: 15,
+                                  color: Theme.of(context).colorScheme.tertiary,
+                                  fontFamily: 'Inter')),
+                            ),
+                    
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                              child: Text('Preview', style: TextStyle(
+                                  fontSize: 15,
+                                  color: Theme.of(context).colorScheme.tertiary,
+                                  fontFamily: 'Inter')),
+                            ),
+                          ],
                         ),
-                
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                          child: Text('Preview', style: TextStyle(
-                              fontSize: 15,
-                              color: Theme.of(context).colorScheme.tertiary,
-                              fontFamily: 'Inter')),
+                        Expanded(
+                          child: isCodeView ? const Editor() : preview(context),
                         ),
                       ],
                     ),
-                    Expanded(
-                      child: isCodeView ? const Editor() : preview(context),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+          
+                const Expanded(flex: 1, child: SizedBox()),
+              ],
             ),
-
-            const Expanded(flex: 1, child: SizedBox()),
-          ],
+          ),
         ),
       );
     });

@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ozan/db/db_provider.dart';
 import 'package:ozan/components/sidebar.dart';
-import 'package:ozan/views/notes_view.dart';
+import 'package:ozan/navigation_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../components/drawer.dart';
@@ -18,65 +17,29 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
 
-    return Consumer<DatabaseProvider>(builder:(context, value, child){
-
-      return Scaffold(
-
-        endDrawer: const SidebarDrawer(),
+    return Consumer<Navigation>(builder: (context, value, child) =>
       
-        appBar: AppBar(
-               
-              title: Builder(
-
-                builder: (BuildContext context) {
-                  return IconButton(
-                    icon: Icon(CupertinoIcons.ellipsis, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9), size: 22),
-                    onPressed: () { Scaffold.of(context).openEndDrawer(); },
-                    tooltip: 'Sidebar', hoverColor: Theme.of(context).colorScheme.primary, style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),
-                  );
-                },
-              ),
-                  
-              elevation: 0,
-
-              actionsIconTheme: IconThemeData(size: 24, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)),
-                  
-              actions:
-
-                [
-                                  
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
-                    child: InkWell(
-                      overlayColor: const MaterialStatePropertyAll(Colors.transparent),
-                      child: const Tooltip(
-                        message: 'Sync Coming Soon',
-                        child: Icon(
-                          CupertinoIcons.cloud
-                          ),
-                      ),
-
-                        onTap: (){}
-                    )
-                    ),
-                
-                ],
-              ),
-        
-        body: const Row(
-        
-          crossAxisAlignment: CrossAxisAlignment.start,
+      Consumer<DatabaseProvider>(builder:(context, value, child){
+      
+        return Scaffold(
+      
+          endDrawer:  const SidebarDrawer(),
           
-          children: [
+          body: Row(
+          
+            crossAxisAlignment: CrossAxisAlignment.start,
             
-            Expanded(flex: 2, child: Sidebar()),
+            children: [
               
-            Expanded(flex: 18, child: NotesView()),
-
-          ],
-        ),
-      );
-    }
+              const Expanded(flex: 1, child: Sidebar()),
+                
+              Expanded(flex: 24, child: Provider.of<Navigation>(context).current),
+      
+            ],
+          ),
+        );
+      }
+      ),
     );
   }
 }
