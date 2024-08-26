@@ -82,7 +82,7 @@ class _SidebarState extends State<Sidebar> {
                   }, 'Draw'),
 
                   const Gap(35),
-                  _buildIconButton(!Provider.of<FilterState>(context).isBookmark() ? LucideIcons.pin : LucideIcons.pin, 21, (){
+                  _buildIconButton(!Provider.of<FilterState>(context).isBookmark() ? LucideIcons.pin : LucideIcons.pinOff, 21, (){
                     Provider.of<FilterState>(context, listen: false).toggleShowFavouritesOnly();
                   }, 'Bookmarks'),
                 ],
