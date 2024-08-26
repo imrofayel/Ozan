@@ -4,6 +4,8 @@
 
 Ozan is a personal knowledge base and journal application.
 
+![Uploading vlcsnap-2024-08-26-14h14m16s728.png…]()
+
 ### Features
 
 - Write notes using simple markdown syntax.
