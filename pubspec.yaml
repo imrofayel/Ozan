@@ -56,6 +56,7 @@ dependencies:
   shared_preferences: ^2.2.3
   markdown: ^7.2.2
   lucide_icons: ^0.257.0
+  languagetool_textfield: ^0.0.6
   
 dev_dependencies:
   flutter_test:

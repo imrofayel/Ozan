@@ -65,7 +65,7 @@ Markdown markdown(String data, double scale, context){
 
           a: const TextStyle(color: Color.fromRGBO(19, 69, 137, 1), height: 1.6, decoration: TextDecoration.underline, decorationColor: Color.fromRGBO(223, 151, 173, 1), decorationThickness: 2),
 
-          codeblockDecoration: BoxDecoration(color: Theme.of(context).colorScheme.primary.withOpacity(0.9), borderRadius: BorderRadius.circular(10), border: Border.all(color: Theme.of(context).colorScheme.secondary)),
+          codeblockDecoration: BoxDecoration(color: Colors.transparent, borderRadius: BorderRadius.circular(10), border: Border.all(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
 
           p: TextStyle(color: Theme.of(context).colorScheme.tertiary, height: 1.6),
 

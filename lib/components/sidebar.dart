@@ -172,13 +172,13 @@ class _SidebarState extends State<Sidebar> {
 
             alignment: Alignment.centerLeft,
             
-            backgroundColor: Theme.of(context).brightness == Brightness.light ? const Color.fromARGB(255, 249, 253, 255) : Theme.of(context).colorScheme.primary,
+            backgroundColor: Theme.of(context).colorScheme.background,
           
             shape: RoundedRectangleBorder(
               
               borderRadius: BorderRadius.circular(10),
 
-              side: BorderSide(color:Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)
+              side: BorderSide(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))
             ),
             child: const AIChatInterface(),
           ),
@@ -231,9 +231,9 @@ class _AIChatInterfaceState extends State<AIChatInterface> {
                     FilledButton(onPressed: (){
                     }, style: ButtonStyle(
                                                         
-                    side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
+                    side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
                                                                                       
-                    padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary)), child: Text('Caira', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.9) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
+                    padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: const MaterialStatePropertyAll(Colors.transparent)), child: Text('Raya', style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
 
                     const Gap(10),
 
@@ -241,7 +241,7 @@ class _AIChatInterfaceState extends State<AIChatInterface> {
                       SnackBarUtils.showSnackbar(context, CupertinoIcons.ellipsis, 'Open the sidebar and add the API key');
                     }, style: ButtonStyle(
                                                           
-                      side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).brightness == Brightness.light ? Colors.red.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
+                      side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
                                                                                   
                       padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.red.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary)), child: Text('APIs', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.red.shade900.withOpacity(0.9) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
                   ],

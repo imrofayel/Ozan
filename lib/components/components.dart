@@ -31,7 +31,9 @@ TextField textField(context, {int? lines = 1, required void Function(String)? on
 
   return TextField(
 
- contextMenuBuilder: (context, editableTextState) {
+  spellCheckConfiguration: const SpellCheckConfiguration(),
+
+  contextMenuBuilder: (context, editableTextState) {
       final TextEditingValue value = editableTextState.textEditingValue;
       final List<ContextMenuButtonItem> buttonItems =
           List.from(editableTextState.contextMenuButtonItems);
