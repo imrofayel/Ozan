@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 import 'package:ozan/components/snackbar.dart';
 import 'package:ozan/file_service/file_service.dart';
 import 'package:ozan/components/components.dart';
@@ -64,10 +65,10 @@ class _MarkdownState extends State<Markdown> {
 
             backgroundColor: Colors.transparent,
             appBar: AppBar(
-              toolbarHeight: 60,
+              toolbarHeight: 70,
               title: Expanded(
                   child: titleBox(context, controller: pageTitle, enabled: enableTitle)),
-              centerTitle: true,
+              centerTitle: false,
               actions: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 0, 14, 0),
@@ -93,16 +94,12 @@ class _MarkdownState extends State<Markdown> {
                       },
                       style: ButtonStyle(
                           side: MaterialStatePropertyAll(BorderSide(
-                              color: Theme.of(context).brightness == Brightness.light
-                                  ? Colors.blue.shade100.withOpacity(0.2)
-                                  : Theme.of(context).colorScheme.secondary)),
+                              color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
                           padding: const MaterialStatePropertyAll(EdgeInsets.all(14)),
                           overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                           shadowColor: const MaterialStatePropertyAll(Colors.transparent),
-                          backgroundColor: MaterialStatePropertyAll(
-                              Theme.of(context).brightness == Brightness.light
-                                  ? Colors.blue.shade50.withOpacity(0.3)
-                                  : Theme.of(context).colorScheme.primary)),
+                          backgroundColor: const MaterialStatePropertyAll(
+                              Colors.transparent)),
                       child: Text('Save',
                           style: TextStyle(
                               fontSize: 16,
@@ -142,35 +139,60 @@ class _MarkdownState extends State<Markdown> {
                   
                           hoverColor: Colors.transparent,
                           
-                          selectedBorderColor: Theme.of(context).brightness == Brightness.light
-                                        ? Colors.blue.shade100.withOpacity(0.2)
-                                        : Theme.of(context).colorScheme.secondary,
+                          selectedBorderColor: Theme.of(context).colorScheme.tertiary.withOpacity(0.9),
                   
-                          borderColor: Theme.of(context).brightness == Brightness.light
-                                        ? Colors.blue.shade100.withOpacity(0.2)
-                                        : Theme.of(context).colorScheme.secondary,
+                          borderColor: Theme.of(context).colorScheme.tertiary.withOpacity(0.9),
                     
                           borderRadius: BorderRadius.circular(50),
-                    
-                          fillColor: Theme.of(context).brightness == Brightness.light
-                                      ? Colors.blue.shade50.withOpacity(0.3)
-                                      : Theme.of(context).colorScheme.primary,
                     
                           children: [
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                              child: Text('Code', style: TextStyle(
-                                  fontSize: 15,
-                                  color: Theme.of(context).colorScheme.tertiary,
-                                  fontFamily: 'Inter')),
+                              child: 
+                              
+                              isCodeView ?
+                              
+                              Row(
+                                children: [
+                                                                    
+                                 Icon(LucideIcons.check, size: 18, color: Theme.of(context).colorScheme.tertiary),
+
+                                  const Gap(6),
+
+                                  Text('Code', style: TextStyle(
+                                      fontSize: 15,
+                                      color: Theme.of(context).colorScheme.tertiary,
+                                      fontFamily: 'Inter')),
+                                ],
+                              ) : 
+                                Text('Code', style: TextStyle(
+                                      fontSize: 15,
+                                      color: Theme.of(context).colorScheme.tertiary,
+                                      fontFamily: 'Inter')),
                             ),
                     
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                              child: Text('Preview', style: TextStyle(
-                                  fontSize: 15,
-                                  color: Theme.of(context).colorScheme.tertiary,
-                                  fontFamily: 'Inter')),
+
+                              child: !isCodeView ?
+                              
+                              Row(
+                                children: [
+                                                                    
+                                 Icon(LucideIcons.check, size: 18, color: Theme.of(context).colorScheme.tertiary),
+
+                                  const Gap(6),
+
+                                  Text('Preview', style: TextStyle(
+                                      fontSize: 15,
+                                      color: Theme.of(context).colorScheme.tertiary,
+                                      fontFamily: 'Inter')),
+                                ],
+                              ) : 
+                                Text('Preview', style: TextStyle(
+                                      fontSize: 15,
+                                      color: Theme.of(context).colorScheme.tertiary,
+                                      fontFamily: 'Inter')),
                             ),
                           ],
                         ),
@@ -270,34 +292,23 @@ class _EditorState extends State<Editor> {
             
             style: ButtonStyle(
                 side: MaterialStatePropertyAll(BorderSide(
-                  color: Theme.of(context).brightness == Brightness.light
-                              ? Colors.blue.shade100.withOpacity(0.2)
-                              : Theme.of(context).colorScheme.secondary)),
+                  color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
                   padding: const MaterialStatePropertyAll(EdgeInsets.all(14)),
                   overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                   shadowColor: const MaterialStatePropertyAll(Colors.transparent),
-                  backgroundColor: MaterialStatePropertyAll(
-                          Theme.of(context).brightness == Brightness.light
-                              ? Colors.blue.shade50.withOpacity(0.3)
-                              : Theme.of(context).colorScheme.primary)),
-
-
+                  backgroundColor: const MaterialStatePropertyAll(Colors.transparent)),
             ),
 
             toolbar(_MarkdownState.page, context),
 
             Container(
-             height: 380,
+             height: 395,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(12)),
                 border: Border.all(
-                    color: Theme.of(context).brightness == Brightness.light
-                        ? Colors.blue.shade100.withOpacity(0.2)
-                        : Theme.of(context).colorScheme.secondary),
+                    color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)),
                 // TextBox
-                color: Theme.of(context).brightness == Brightness.light
-                    ? Colors.blue.shade50.withOpacity(0.3)
-                    : Theme.of(context).colorScheme.primary,
+                color: Colors.transparent,
               ),
               child: Padding(
                 padding: const EdgeInsets.all(0),

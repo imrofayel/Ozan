@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:gap/gap.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
@@ -67,6 +66,8 @@ class _SidebarState extends State<Sidebar> {
                     _buildIconButton(LucideIcons.inbox, 21, () {
 
                       Provider.of<Navigation>(context, listen: false).getPage(const NotesView());
+
+                      Provider.of<FilterState>(context, listen: false).isBookmark() ? Provider.of<FilterState>(context, listen: false).toggleShowFavouritesOnly() : (){};
                       
                     }, 'Notes'),
       
@@ -90,6 +91,9 @@ class _SidebarState extends State<Sidebar> {
       
                     const Gap(35),
                     _buildIconButton(!Provider.of<FilterState>(context).isBookmark() ? LucideIcons.pin : LucideIcons.pinOff, 21, (){
+
+                      Provider.of<Navigation>(context, listen: false).getPage(const NotesView());
+
                       Provider.of<FilterState>(context, listen: false).toggleShowFavouritesOnly();
                     }, 'Bookmarks'),
                   ],
@@ -135,6 +139,7 @@ class _SidebarState extends State<Sidebar> {
     );
   }
 
+  // ignore: unused_element
   void _navigateTo(BuildContext context, Widget view) {
     Navigator.push(
       context,

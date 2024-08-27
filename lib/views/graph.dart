@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graphview/GraphView.dart';
+import 'package:ozan/navigation_provider.dart';
 import 'package:ozan/views/update_view.dart';
 import 'package:provider/provider.dart';
 import 'package:ozan/db/db_provider.dart';
@@ -161,52 +162,7 @@ class _GraphViewPageState extends State<GraphViewPage> {
 
       // If a matching note is found, open the Update view
       if (clickedNote.title.isNotEmpty) {
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return Scaffold(
-            body: Row(
-              children: [
-                Expanded(
-                    flex: 2,
-                    child: SizedBox(
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            IconButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                icon: Icon(CupertinoIcons.arrow_left,
-                                    size: 22,
-                                    color: Theme.of(context).colorScheme.tertiary
-                                        .withOpacity(0.6)),
-                                style: ButtonStyle(
-                                    backgroundColor: MaterialStatePropertyAll(
-                                        Theme.of(context).colorScheme.primary),
-                                    side: MaterialStatePropertyAll(BorderSide(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .secondary)),
-                                    overlayColor:
-                                        const MaterialStatePropertyAll(
-                                            Colors.transparent))),
-                          ],
-                        ),
-                      ),
-                    )),
-                Expanded(
-                    flex: 10,
-                    child: Padding(
-                      padding: const EdgeInsets.all(26),
-                      child: Update(note: clickedNote),
-                    )),
-                const Expanded(flex: 2, child: SizedBox()),
-              ],
-            ),
-          );
-        }));
+        Provider.of<Navigation>(context, listen: false).getPage(Update(note: clickedNote));
       }
     });
   }
