@@ -32,7 +32,7 @@ class Themes {
 
       secondary: const Color.fromRGBO(243, 243, 243, 1),
 
-      primary: Color.fromARGB(255, 246, 246, 251),
+      primary: const Color.fromARGB(255, 246, 246, 251),
 
       tertiary: const Color.fromARGB(255, 9, 13, 16),
 
@@ -43,12 +43,11 @@ class Themes {
     drawerTheme: const DrawerThemeData(scrimColor: Colors.transparent),
 
     expansionTileTheme: ExpansionTileThemeData(
-      backgroundColor: Colors.deepPurple.shade50.withOpacity(0.4),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14), side: BorderSide(color: Colors.deepPurple.shade50)),
-      collapsedShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14), side: BorderSide(color: Colors.deepPurple.shade50)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14), side: const BorderSide()),
+      collapsedShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14), side: const BorderSide()),
       expandedAlignment: Alignment.centerLeft,
-      collapsedIconColor: Colors.deepPurple.shade100,
-      iconColor: Colors.deepPurple.shade100,
+      collapsedIconColor: const Color.fromARGB(255, 9, 13, 16),
+      iconColor: const Color.fromARGB(255, 9, 13, 16),
     ),
 
     tooltipTheme: TooltipThemeData(
@@ -160,7 +159,14 @@ class Themes {
       textStyle: const TextStyle(fontSize: 14, color: Color.fromRGBO(192, 212, 190, 1), fontFamily: 'Inter'),
     ),
 
-    
+
+    expansionTileTheme: ExpansionTileThemeData(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14), side: const BorderSide()),
+      collapsedShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14), side: const BorderSide()),
+      expandedAlignment: Alignment.centerLeft,
+      collapsedIconColor: const Color.fromRGBO(192, 212, 190, 1),
+      iconColor: const Color.fromRGBO(192, 212, 190, 1),
+    ),    
 
     dropdownMenuTheme: DropdownMenuThemeData(
 

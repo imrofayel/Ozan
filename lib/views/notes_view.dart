@@ -95,9 +95,22 @@ class _NotesViewState extends State<NotesView> {
                                           const Gap(14),
                     
                                           FilledButton(
-                                            onPressed: () {
+                                            onPressed: () async{
                                               
-                                              Markdown.files.loadFile(context);
+                                              String text = await Markdown.files.loadFile(context);
+
+                                              String date = DateFormat('d MMM, yy').format(DateTime.now());
+
+                                                if (text.isNotEmpty) {
+                                                  value.dbHelper.insert(NotesModel(title: date, description: text, date: date, 
+
+                                                  favourite: 0, tag: 'general'));
+                                            
+                                                  value.initDatabase();
+                                            
+                                                  value.setLength();
+
+                                                }
                                             },
                     
                                             style: ButtonStyle(
@@ -152,7 +165,7 @@ class _NotesViewState extends State<NotesView> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(8),
                                     child: GridView.builder(
-                                      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 500),
+                                      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 500, mainAxisExtent: 180),
                                       scrollDirection: Axis.vertical,
                                       itemCount: notes.length,
                                       itemBuilder: (context, index) {
@@ -302,9 +315,21 @@ class _NotesViewState extends State<NotesView> {
                                           const Gap(14),
               
                                           FilledButton(
-                                            onPressed: () {
+
+                                            onPressed: () async{
+
+                                              String text = await Markdown.files.loadFile(context);
+
+                                              String date = DateFormat('d MMM, yy').format(DateTime.now());
+
+                                                value.dbHelper.insert(NotesModel(title: date, description: text, date: date, 
+
+                                                favourite: 0, tag: 'general'));
+                                            
+                                                value.initDatabase();
+                                            
+                                                value.setLength();
                                               
-                                              Markdown.files.loadFile(context);
                                             },
                     
                                             style: ButtonStyle(

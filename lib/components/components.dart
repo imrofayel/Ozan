@@ -31,6 +31,44 @@ TextField textField(context, {int? lines = 1, required void Function(String)? on
 
   return TextField(
 
+  spellCheckConfiguration: const SpellCheckConfiguration(),
+
+  contextMenuBuilder: (context, editableTextState) {
+      final TextEditingValue value = editableTextState.textEditingValue;
+      final List<ContextMenuButtonItem> buttonItems =
+          List.from(editableTextState.contextMenuButtonItems);
+
+      // Check if text is selected
+      if (value.selection.isValid && !value.selection.isCollapsed) {
+        // Add custom menu items for bold and italic
+        buttonItems.insert(
+          0,
+          ContextMenuButtonItem(
+            label: 'Bold',
+            onPressed: () {
+              ContextMenuController.removeAny();
+              // Implement your Bold action logic here
+            },
+          ),
+        );
+        buttonItems.insert(
+          1,
+          ContextMenuButtonItem(
+            label: 'Italic',
+            onPressed: () {
+              ContextMenuController.removeAny();
+              // Implement your Italic action logic here
+            },
+          ),
+        );
+      }
+
+      return AdaptiveTextSelectionToolbar.buttonItems(
+        anchors: editableTextState.contextMenuAnchors,
+        buttonItems: buttonItems,
+      );
+    },
+
     cursorColor: Theme.of(context).colorScheme.tertiary,
     
     controller: controller,
@@ -146,7 +184,7 @@ Widget titleBox(context, {required TextEditingController controller, required bo
 
     ),
 
-    style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.tertiary),
+    style: TextStyle(fontSize: 24, color: Theme.of(context).colorScheme.tertiary),
   );
 }
 

@@ -154,7 +154,14 @@ class _UpdateState extends State<Update>{
                                     highlightColor: Colors.transparent,
                                     hoverColor: Colors.transparent
                                   ),
-                                  child: ExpansionTile(leading: const Icon(CupertinoIcons.book), title: Text('Table Of Contents', style: TextStyle(color: Colors.deepPurple.shade400, fontWeight: FontWeight.bold, fontSize: 16, decoration: TextDecoration.underline, decorationStyle: TextDecorationStyle.wavy, decorationColor: Colors.deepPurple.shade100, decorationThickness: 2.3)), children: [Padding(
+
+                                  // Legendary Purple
+
+                                  // child: ExpansionTile(leading: const Icon(CupertinoIcons.book), title: Text('Table Of Contents', style: TextStyle(color: Colors.deepPurple.shade400, fontWeight: FontWeight.bold, fontSize: 16, decoration: TextDecoration.underline, decorationStyle: TextDecorationStyle.wavy, decorationColor: Colors.deepPurple.shade100, decorationThickness: 2.3)), children: [Padding(
+                                  //   padding: const EdgeInsets.only(bottom: 20, left: 15),
+                                  //   child: MarkdownBody(data: generateTableOfContents(page.text), styleSheet: MarkdownStyle.style(context, 1.25), extensionSet: MarkdownStyle.extension()),
+
+                                  child: ExpansionTile(leading: const Icon(CupertinoIcons.book), title: Text('Table Of Contents', style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontSize: 18)), children: [Padding(
                                     padding: const EdgeInsets.only(bottom: 20, left: 15),
                                     child: MarkdownBody(data: generateTableOfContents(page.text), styleSheet: MarkdownStyle.style(context, 1.25), extensionSet: MarkdownStyle.extension()),
                                   )]),
@@ -283,9 +290,9 @@ class _EditorState extends State<Editor> {
 
               FilledButton(
 
-                    style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.blue.shade50.withOpacity(0.3)), padding: const MaterialStatePropertyAll(EdgeInsets.all(16)),
+                    style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.all(16)),
                     
-                    side: MaterialStatePropertyAll(BorderSide(width: 1, color: Colors.blue.shade100.withOpacity(0.2))),
+                    side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.tertiary)),
 
                     overlayColor: const MaterialStatePropertyAll(Colors.transparent),
 

@@ -2,6 +2,7 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 import 'package:ozan/components/snackbar.dart';
 
 Widget toolbar(TextEditingController controller, context){
@@ -25,99 +26,39 @@ Widget toolbar(TextEditingController controller, context){
       
           children: [
             
-            IconButton(onPressed: () => applyFormatting(controller, '**'), icon: Icon(CupertinoIcons.bold, size: 22, color: Theme.of(context).colorScheme.tertiary), tooltip: "Bold", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
+            IconButton(onPressed: () => applyFormatting(controller, '**'), icon: Icon(LucideIcons.bold, size: 21, color: Theme.of(context).colorScheme.tertiary), tooltip: "Bold", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
             
-            IconButton(onPressed: () => applyFormatting(controller, '*'), icon: Icon(CupertinoIcons.italic, size: 22, color: Theme.of(context).colorScheme.tertiary,), tooltip: "Italic", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
+            IconButton(onPressed: () => applyFormatting(controller, '*'), icon: Icon(LucideIcons.italic, size: 21, color: Theme.of(context).colorScheme.tertiary,), tooltip: "Italic", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
       
             const Gap(6),
 
-            IconButton(onPressed: () => applyCodeFormatting(controller, context), icon: Icon(CupertinoIcons.chevron_left_slash_chevron_right, size: 22, color: Theme.of(context).colorScheme.tertiary), tooltip: "Code Block", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary))),
+            IconButton(onPressed: () => applyCodeFormatting(controller, context), icon: Icon(LucideIcons.code2, size: 21, color: Theme.of(context).colorScheme.tertiary), tooltip: "Code Block", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary))),
       
             const Gap(6),
 
-            IconButton(onPressed: () => applyQuoteFormatting(controller), icon: Icon(FluentIcons.text_quote_24_regular, size: 26, color: Theme.of(context).colorScheme.tertiary), tooltip: "Quote", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
+            IconButton(onPressed: () => applyQuoteFormatting(controller), icon: Icon(LucideIcons.quote, size: 21, color: Theme.of(context).colorScheme.tertiary), tooltip: "Quote", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
       
             const Gap(6),
 
-            IconButton(onPressed: ()=> tableDialog(context, controller), icon: Icon(FluentIcons.table_edit_24_regular, size: 22, color: Theme.of(context).colorScheme.tertiary), tooltip: "Table", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
+            IconButton(onPressed: ()=> tableDialog(context, controller), icon: Icon(LucideIcons.table2, size: 21, color: Theme.of(context).colorScheme.tertiary), tooltip: "Table", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
       
             const Gap(6),
 
-            IconButton(onPressed: () => applyListFormatting(controller, '-'), icon: Icon(FluentIcons.text_bullet_list_24_regular, size: 22, color: Theme.of(context).colorScheme.tertiary), tooltip: "Bullet List", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
+            IconButton(onPressed: () => applyListFormatting(controller, '-'), icon: Icon(LucideIcons.list, size: 23, color: Theme.of(context).colorScheme.tertiary), tooltip: "Bullet List", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
       
             const Gap(6),
 
-            IconButton(onPressed: () => applyListFormatting(controller, '1. '), icon: Icon(FluentIcons.text_number_list_ltr_24_regular, size: 22, color: Theme.of(context).colorScheme.tertiary), tooltip: "Numbered List", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
+            IconButton(onPressed: () => applyListFormatting(controller, '1. '), icon: Icon(LucideIcons.listOrdered, size: 23, color: Theme.of(context).colorScheme.tertiary), tooltip: "Numbered List", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
 
             const Gap(6),
 
-            IconButton(onPressed: () => linkDialog(context, controller), icon: Icon(FluentIcons.link_24_regular, size: 22, color: Theme.of(context).colorScheme.tertiary), tooltip: "Link", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
-
-            const Gap(6),
+            IconButton(onPressed: () => linkDialog(context, controller), icon: Icon(LucideIcons.link2, size: 21, color: Theme.of(context).colorScheme.tertiary), tooltip: "Link", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
           
-            DropdownMenu(
-            
-              onSelected: (value){
-                
-                String temp = '';
-                
-                switch (value) {
-                  case 0:
-                    temp = '#';
-                    break;
-                  
-                  case 1:
-                    temp = '##';
-                    break;
-            
-                  case 2:
-                    temp = '###';
-                    break;
-            
-                  default: temp = '#';
-                }
-            
-                  TextSelection selection = controller.selection;
-            
-                  String text = controller.text;
-            
-                  try {
-                    String newText =
-                        '${text.substring(0, selection.start)}\n$temp ${text.substring(selection.start, selection.end)}\n${text.substring(selection.end)}';
-            
-                    controller.value = TextEditingValue(
-                      text: newText,
-                      selection: TextSelection.collapsed(offset: selection.end + 4),
-                    );
-                  } catch (e) {
-                    // Text field not selected
-                  }
-              },
-            
-              initialSelection: 2,
-            
-              width: 90,
-            
-              textStyle: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'),
-            
-              dropdownMenuEntries: heading,
-            )
           ],
       ),
     ),
   );
 }
-
-
-List<DropdownMenuEntry> heading = [
-
-    const DropdownMenuEntry(value: 0, label: "H1", labelWidget: Icon(FluentIcons.text_header_1_24_regular, size: 26)),
-
-    const DropdownMenuEntry(value: 1, label: "H2", labelWidget: Icon(FluentIcons.text_header_2_24_regular, size: 24)),
-
-    const DropdownMenuEntry(value: 2, label: "H3", labelWidget: Icon(FluentIcons.text_header_3_24_regular, size: 22)),
-
-  ];
 
 void applyCodeFormatting(TextEditingController controller, context) {
 

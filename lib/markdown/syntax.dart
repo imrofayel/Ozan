@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_highlighter/flutter_highlighter.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 // ignore: depend_on_referenced_packages
 import 'package:markdown/markdown.dart' as md;
 import 'package:ozan/components/components.dart';
@@ -54,13 +54,22 @@ class CodeElementBuilder extends MarkdownElementBuilder {
               
         FilledButton(onPressed: (){}, style: ButtonStyle(
           
-          side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary)),
+          side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
 
-          padding: const MaterialStatePropertyAll(EdgeInsets.all(8)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text(lang, style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9), fontFamily: 'Inter'))),
+          padding: const MaterialStatePropertyAll(EdgeInsets.all(8)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text(lang, style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9), fontFamily: 'Inter'))),
               
-            IconButton(onPressed: (){
-              copyToClipboard(context, element.textContent);
-            }, icon: Icon(Iconsax.copy_copy, size: 21, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)), padding: EdgeInsets.zero),
+            Row(
+              children: [
+
+                IconButton(onPressed: (){
+                  copyToClipboard(context, element.textContent);
+                }, icon: Icon(LucideIcons.download, size: 18, color: Theme.of(context).colorScheme.tertiary), padding: EdgeInsets.zero),
+
+                IconButton(onPressed: (){
+                  copyToClipboard(context, element.textContent);
+                }, icon: Icon(LucideIcons.copy, size: 18, color: Theme.of(context).colorScheme.tertiary), padding: EdgeInsets.zero),
+              ],
+            ),
             ],
           ),
         ),
