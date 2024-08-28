@@ -42,7 +42,7 @@ class _NotesViewState extends State<NotesView> {
             padding: const EdgeInsets.all(6.0),
             child: Container(
               
-              decoration: BoxDecoration(border: Border.all(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)), borderRadius: BorderRadius.circular(12)),
+              decoration: BoxDecoration(border: Border.all(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1)), borderRadius: BorderRadius.circular(12), color: Theme.of(context).colorScheme.primary),
             
               child: Scaffold(
                 backgroundColor: Colors.transparent,
@@ -84,11 +84,11 @@ class _NotesViewState extends State<NotesView> {
                                           FilledButton(
                                             onPressed: () {},
                                             style: ButtonStyle(
-                                              side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
+                                              side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
                                               padding: const MaterialStatePropertyAll(EdgeInsets.all(14)),
                                               overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                                               shadowColor: const MaterialStatePropertyAll(Colors.transparent),
-                                              backgroundColor: const MaterialStatePropertyAll(Colors.transparent),
+                                              backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background),
                                             ),
                                             child: Text('${notes.length} entries', style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary)),
                                           ),

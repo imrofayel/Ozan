@@ -133,7 +133,7 @@ class _SidebarState extends State<Sidebar> {
         child: Icon(
           icon,
           size: size,
-          color: color ?? Theme.of(context).colorScheme.tertiary.withOpacity(0.9),
+          color: color ?? Theme.of(context).colorScheme.tertiary.withOpacity(0.8),
         ),
       ),
     );
