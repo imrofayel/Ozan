@@ -50,11 +50,12 @@ class Green {
     drawerTheme: const DrawerThemeData(scrimColor: Colors.transparent),
 
     expansionTileTheme: ExpansionTileThemeData(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14), side: const BorderSide()),
-      collapsedShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14), side: const BorderSide()),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+      collapsedShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
       expandedAlignment: Alignment.centerLeft,
       collapsedIconColor: secondary,
       iconColor: secondary,
+      backgroundColor: primary
     ),
 
     tooltipTheme: TooltipThemeData(

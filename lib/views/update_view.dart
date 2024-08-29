@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
@@ -73,11 +72,11 @@ class _UpdateState extends State<Update>{
 
       return Padding(
 
-        padding: const EdgeInsets.all(6),
+        padding: const EdgeInsets.fromLTRB(6, 6, 6, 0),
 
         child: Container(
         
-          decoration: BoxDecoration(border: Border.all(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)), borderRadius: BorderRadius.circular(12)),
+          decoration: BoxDecoration(border: Border.all(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1)), borderRadius: BorderRadius.circular(12), color: Theme.of(context).colorScheme.primary),
         
           child: Scaffold(
             
@@ -137,7 +136,7 @@ class _UpdateState extends State<Update>{
                                         
                                         shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15), side: BorderSide.none)),
                                         
-                                        backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background.withOpacity(0.3)), padding: const MaterialStatePropertyAll(EdgeInsets.all(15)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: const MaterialStatePropertyAll(Colors.transparent)), 
+                                        backgroundColor: const MaterialStatePropertyAll(Colors.transparent), padding: const MaterialStatePropertyAll(EdgeInsets.all(15)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: const MaterialStatePropertyAll(Colors.transparent)), 
                                         
                                         child: Icon(CupertinoIcons.pen, color: Theme.of(context).colorScheme.tertiary, size: 26)),
                                     ),
@@ -169,7 +168,8 @@ class _UpdateState extends State<Update>{
                                       
                                 SizedBox(
                                           
-                                  height: 440,
+                                  height: 450,
+
                                   child: markdown(page.text, 1.14, context)
                                 ),
                                         

@@ -114,11 +114,11 @@ class _NotesViewState extends State<NotesView> {
                                             },
                     
                                             style: ButtonStyle(
-                                              side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.tertiary)),
+                                              side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
                                               padding: const MaterialStatePropertyAll(EdgeInsets.all(14)),
                                               overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                                               shadowColor: const MaterialStatePropertyAll(Colors.transparent),
-                                              backgroundColor: const MaterialStatePropertyAll(Colors.transparent),
+                                              backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background),
                                             ),
                                             child: Row(
                                               children: [
@@ -136,11 +136,11 @@ class _NotesViewState extends State<NotesView> {
                                               Provider.of<Navigation>(context, listen: false).getPage(const Markdown());
                                             },
                                             style: ButtonStyle(
-                                              side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
+                                              side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
                                               padding: const MaterialStatePropertyAll(EdgeInsets.all(14)),
                                               overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                                               shadowColor: const MaterialStatePropertyAll(Colors.transparent),
-                                              backgroundColor: const MaterialStatePropertyAll(Colors.transparent),
+                                              backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background),
                                             ),
                                             child: Row(
                                               children: [
@@ -189,11 +189,11 @@ class _NotesViewState extends State<NotesView> {
                                                       onPressed: () {},
                                                       style: ButtonStyle(
                                                         shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
-                                                        side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
+                                                        side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
                                                         padding: const MaterialStatePropertyAll(EdgeInsets.all(8)),
                                                         overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                                                         shadowColor: const MaterialStatePropertyAll(Colors.transparent),
-                                                        backgroundColor: const MaterialStatePropertyAll(Colors.transparent),
+                                                        backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background),
                                                       ),
                                                       child: Text(notes[index].date, style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary)),
                                                     ),
@@ -256,11 +256,11 @@ class _NotesViewState extends State<NotesView> {
                                                       onPressed: () {},
                                                       style: ButtonStyle(
                                                         shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
-                                                        side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))), 
+                                                        side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))), 
                                                         padding: const MaterialStatePropertyAll(EdgeInsets.all(8)),
                                                         overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                                                         shadowColor: const MaterialStatePropertyAll(Colors.transparent),
-                                                        backgroundColor: const MaterialStatePropertyAll(Colors.transparent),
+                                                        backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background),
                                                       ),
                                                       child: Text(
                                                         notes[index].tag,

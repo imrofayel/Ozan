@@ -17,7 +17,7 @@ class MarkdownStyle{
 
           codeblockDecoration: BoxDecoration(color: Theme.of(context).colorScheme.primary.withOpacity(0.9), borderRadius: BorderRadius.circular(10), border: Border.all(color: Theme.of(context).colorScheme.secondary)),
 
-          p: TextStyle(fontSize: 14.5, color: Theme.of(context).colorScheme.tertiary),
+          p: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.tertiary),
 
           h2: const TextStyle(fontSize: 17),
 
@@ -52,7 +52,7 @@ class MarkdownStyle{
 
           em: const TextStyle(fontStyle: FontStyle.italic),
 
-          listBullet: TextStyle(fontSize: 17, color: Theme.of(context).colorScheme.tertiary),
+          listBullet: TextStyle(fontSize: 17, color: Theme.of(context).colorScheme.secondary),
 
           listBulletPadding: const EdgeInsets.only(right: 14)
 
