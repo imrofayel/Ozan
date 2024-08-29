@@ -30,7 +30,7 @@ class _GraphViewPageState extends State<GraphViewPage> {
       padding: const EdgeInsets.all(6.0),
       child: Container(
       
-        decoration: BoxDecoration(border: Border.all(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)), borderRadius: BorderRadius.circular(12)),
+        decoration: BoxDecoration(border: Border.all(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1)), borderRadius: BorderRadius.circular(12), color: Theme.of(context).colorScheme.primary),
         
         child: Scaffold(
 
@@ -117,7 +117,7 @@ class _GraphViewPageState extends State<GraphViewPage> {
 
     for (var edge in graph.edges) {
       edge.paint = Paint()
-        ..color = Theme.of(context).colorScheme.tertiary.withOpacity(0.9)
+        ..color = Theme.of(context).colorScheme.secondary.withOpacity(0.8)
  // Change this to your desired color
         ..strokeWidth = 1.4 // Change this to your desired width
         ..style = PaintingStyle.stroke;
