@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:markdown/markdown.dart' as md;
+import 'package:flutter_markdown_latex/flutter_markdown_latex.dart';
 import 'package:gap/gap.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:ozan/components/components.dart';
 import 'package:ozan/components/filter_db.dart';
 import 'package:ozan/components/preferences.dart';
 import 'package:ozan/components/snackbar.dart';
+import 'package:ozan/markdown/colors/highlight.dart';
 import 'package:ozan/navigation_provider.dart';
 import 'package:ozan/views/graph.dart';
 import 'package:ozan/views/notes_view.dart';
@@ -172,13 +174,13 @@ class _SidebarState extends State<Sidebar> {
 
             alignment: Alignment.centerLeft,
             
-            backgroundColor: Theme.of(context).colorScheme.background,
+            backgroundColor: Theme.of(context).colorScheme.primary,
           
             shape: RoundedRectangleBorder(
               
               borderRadius: BorderRadius.circular(10),
 
-              side: BorderSide(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))
+              side: BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))
             ),
             child: const AIChatInterface(),
           ),
@@ -231,19 +233,19 @@ class _AIChatInterfaceState extends State<AIChatInterface> {
                     FilledButton(onPressed: (){
                     }, style: ButtonStyle(
                                                         
-                    side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
+                    side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
                                                                                       
-                    padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: const MaterialStatePropertyAll(Colors.transparent)), child: Text('Raya', style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
+                    padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor:  MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text('Raya', style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
 
                     const Gap(10),
 
                     FilledButton(onPressed: (){
-                      SnackBarUtils.showSnackbar(context, CupertinoIcons.ellipsis, 'Open the sidebar and add the API key');
+                      SnackBarUtils.showSnackbar(context, CupertinoIcons.ellipsis, 'Open the settings and add the Google API key');
                     }, style: ButtonStyle(
                                                           
-                      side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
+                      side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
                                                                                   
-                      padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: const MaterialStatePropertyAll(Colors.transparent)), child: Text('APIs', style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary))),
+                      padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text('APIs', style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary))),
                   ],
                 ),
 
@@ -257,9 +259,9 @@ class _AIChatInterfaceState extends State<AIChatInterface> {
                       });
                     }, style: ButtonStyle(
                                                         
-                    side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
+                    side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
                                                                                       
-                    padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: const MaterialStatePropertyAll(Colors.transparent)), child: Text('Clear', style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
+                    padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text('Clear', style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
 
                     const Gap(10),
 
@@ -347,9 +349,9 @@ class _AIChatInterfaceState extends State<AIChatInterface> {
       setState(() {
         _messages.add(ChatMessage(text: '''An error occurred. Please try again.
 - Check your internet connection.
-- Open sidebar and check APIs
+- Open settings and check APIs
 
-Get the API key from [ai.google.dev](ai.google.dev) and update in the sidebar.''', isUser: false));
+Get the API key from [ai.google.dev](ai.google.dev).''', isUser: false));
       });
     }
 
@@ -390,11 +392,11 @@ class ChatBubble extends StatelessWidget {
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             color: message.isUser
-                ? (Colors.transparent)
-                : Colors.transparent,
+                ? (Theme.of(context).colorScheme.background)
+                : Theme.of(context).colorScheme.background,
             borderRadius: BorderRadius.circular(10),
 
-            border: Border.all(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))
+            border: Border.all(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))
           ),
           child: !message.isUser ? Column(
 
@@ -448,18 +450,31 @@ class ChatBubble extends StatelessWidget {
               strong: const TextStyle(fontWeight: FontWeight.w500), 
               
               em: const TextStyle(fontStyle: FontStyle.italic),
-                    )),
+              ), extensionSet: md.ExtensionSet(
+                [
+                  LatexBlockSyntax(),
+                  const md.FencedCodeBlockSyntax(),
+                  const md.AlertBlockSyntax(),
+                ],
+                [
+                  LatexInlineSyntax(),
+                  md.InlineHtmlSyntax(),
+                  HighlightSyntax(),
+                  md.EmojiSyntax(),
+                  md.StrikethroughSyntax(),
+                ],
+              )),
 
               const Gap(10),
 
               IconButton(
-                icon:  const Icon(Iconsax.copy_copy, size: 21),
+                icon:  const Icon(LucideIcons.copy, size: 18),
               onPressed: () => {
                 copyToClipboard(context, message.text)
               },
                 color: Theme.of(context).colorScheme.tertiary,
 
-                style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.transparent)),
+                style: ButtonStyle(backgroundColor: const MaterialStatePropertyAll(Colors.transparent), overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),
               ),
             ],
           )
