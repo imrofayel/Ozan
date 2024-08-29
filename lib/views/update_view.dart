@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 import 'package:ozan/components/style_components.dart';
 import 'package:ozan/components/snackbar.dart';
 import 'package:ozan/file_service/file_service.dart';
@@ -267,6 +268,8 @@ class _EditorState extends State<Editor> {
         elevation: 0,
       
         shadowColor: Colors.transparent,
+
+        backgroundColor: Theme.of(context).colorScheme.primary,
       
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       
@@ -280,11 +283,11 @@ class _EditorState extends State<Editor> {
                   
               children: [
                   
-                Icon(CupertinoIcons.pencil_outline, size: 25, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)),
+                Icon(LucideIcons.book, size: 25, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)),
             
                 const Gap(10),
                   
-                Text("Writer", style: TextStyle(fontSize: 20, fontFamily: 'Inter', color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)),),
+                Text("Writer", style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)),),
               ],
             ),
 
@@ -292,7 +295,7 @@ class _EditorState extends State<Editor> {
 
                     style: ButtonStyle(padding: const MaterialStatePropertyAll(EdgeInsets.all(16)),
                     
-                    side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.tertiary)),
+                    side: MaterialStatePropertyAll(BorderSide(width: 1, color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
 
                     overlayColor: const MaterialStatePropertyAll(Colors.transparent),
 
@@ -306,7 +309,7 @@ class _EditorState extends State<Editor> {
             
                 if(widget.note != null){
             
-                value.dbHelper.update(NotesModel(title:  _UpdateState.pageTitle.text.isNotEmpty ? _UpdateState.pageTitle.text : 'Untitled', description: _UpdateState.page.text, date: date, id: widget.note!.id, favourite: widget.note!.favourite, tag: selected.name));
+                value.dbHelper.update(NotesModel(title:  _UpdateState.pageTitle.text.isNotEmpty ? _UpdateState.pageTitle.text : 'Untitled', description: _UpdateState.page.text, date: widget.note!.date, id: widget.note!.id, favourite: widget.note!.favourite, tag: selected.name));
               
                 value.initDatabase();
               
@@ -329,7 +332,7 @@ class _EditorState extends State<Editor> {
                   SnackBarUtils.showSnackbar(context, CupertinoIcons.pencil_slash, "Please enter title and description");
                 }
             
-                }, 
+                },
               
               
                 child: Text('Save', style: TextStyle(fontFamily: 'Inter', fontSize: 16, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)))
@@ -344,7 +347,7 @@ class _EditorState extends State<Editor> {
       
           SizedBox(
       
-            height: 480,
+            height: 490,
       
             width: 600,
       
@@ -354,13 +357,13 @@ class _EditorState extends State<Editor> {
 
                   SegmentedButton(segments: const[
 
-                    ButtonSegment(value: Tags.General, label: Text('General', style: TextStyle(fontSize: 15))),
+                    ButtonSegment(value: Tags.General, label: Text('General', style: TextStyle(fontSize: 16))),
 
-                    ButtonSegment(value: Tags.Studies, label: Text('Studies', style: TextStyle(fontSize: 15))),
+                    ButtonSegment(value: Tags.Studies, label: Text('Studies', style: TextStyle(fontSize: 16))),
 
-                    ButtonSegment(value: Tags.Work, label: Text('Work', style: TextStyle(fontSize: 15))),
+                    ButtonSegment(value: Tags.Work, label: Text('Work', style: TextStyle(fontSize: 16))),
 
-                    ButtonSegment(value: Tags.Personal, label: Text('Personal', style: TextStyle(fontSize: 15))),
+                    ButtonSegment(value: Tags.Personal, label: Text('Personal', style: TextStyle(fontSize: 16))),
 
                   ], selected: <Tags>{selected},
                   
@@ -372,18 +375,13 @@ class _EditorState extends State<Editor> {
                   
                   style: ButtonStyle(
                       side: MaterialStatePropertyAll(BorderSide(
-                        color: Theme.of(context).brightness == Brightness.light
-                                    ? Colors.blue.shade100.withOpacity(0.2)
-                                    : Theme.of(context).colorScheme.secondary)),
+                        color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
                         padding: const MaterialStatePropertyAll(EdgeInsets.all(14)),
                         overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                         shadowColor: const MaterialStatePropertyAll(Colors.transparent),
                         backgroundColor: MaterialStatePropertyAll(
-                                Theme.of(context).brightness == Brightness.light
-                                    ? Colors.blue.shade50.withOpacity(0.3)
-                                    : Theme.of(context).colorScheme.primary)),
+                                Theme.of(context).colorScheme.primary)),
                   ),
-
       
                   toolbar(_UpdateState.page, context),
                   
@@ -397,18 +395,18 @@ class _EditorState extends State<Editor> {
             
                         Padding(
       
-                          padding: const EdgeInsets.fromLTRB(18, 0, 18, 0),
+                          padding: const EdgeInsets.fromLTRB(18, 0, 6, 0),
       
                           child: Container(
                           
-                            height: 370,
+                            height: 390,
                           
                             decoration: BoxDecoration(
                               
                               borderRadius: const BorderRadius.all(Radius.circular(16)),
                               
                               // TextBox
-                              color: Theme.of(context).colorScheme.primary.withOpacity(0.9),
+                              color: Theme.of(context).colorScheme.primary,
                             ),
                           
                             child: Padding(
@@ -429,7 +427,7 @@ class _EditorState extends State<Editor> {
                           
                                       child: textField(context,
                                               
-                                      lines: 9,
+                                      lines: 10,
                                               
                                       onSubmitted: (text) {
                                         setState(() {

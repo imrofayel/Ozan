@@ -81,7 +81,7 @@ TextField textField(context, {int? lines = 1, required void Function(String)? on
 
     focusNode: focusNode,
 
-    style: TextStyle(color: textColor ?? Theme.of(context).colorScheme.tertiary, fontSize: 16, height: 2, fontFamily: 'Inter'),
+    style: TextStyle(color: textColor ?? Theme.of(context).colorScheme.tertiary, fontSize: 17, height: 2, fontFamily: 'Inter'),
 
     decoration: InputDecoration(
 

@@ -1,5 +1,4 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:lucide_icons/lucide_icons.dart';
@@ -14,7 +13,7 @@ Widget toolbar(TextEditingController controller, context){
       borderRadius: BorderRadius.circular(16),
     ),
 
-    height: 70,
+    height: 60,
                     
     child: Padding(
 
@@ -26,33 +25,33 @@ Widget toolbar(TextEditingController controller, context){
       
           children: [
             
-            IconButton(onPressed: () => applyFormatting(controller, '**'), icon: Icon(LucideIcons.bold, size: 21, color: Theme.of(context).colorScheme.tertiary), tooltip: "Bold", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
+            IconButton(onPressed: () => applyFormatting(controller, '**'), icon: Icon(LucideIcons.bold, size: 20, color: Theme.of(context).colorScheme.tertiary), tooltip: "Bold", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
             
-            IconButton(onPressed: () => applyFormatting(controller, '*'), icon: Icon(LucideIcons.italic, size: 21, color: Theme.of(context).colorScheme.tertiary,), tooltip: "Italic", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
+            IconButton(onPressed: () => applyFormatting(controller, '*'), icon: Icon(LucideIcons.italic, size: 20, color: Theme.of(context).colorScheme.tertiary,), tooltip: "Italic", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
       
             const Gap(6),
 
-            IconButton(onPressed: () => applyCodeFormatting(controller, context), icon: Icon(LucideIcons.code2, size: 21, color: Theme.of(context).colorScheme.tertiary), tooltip: "Code Block", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary))),
+            IconButton(onPressed: () => applyCodeFormatting(controller, context), icon: Icon(LucideIcons.code2, size: 20, color: Theme.of(context).colorScheme.tertiary), tooltip: "Code Block", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary))),
       
             const Gap(6),
 
-            IconButton(onPressed: () => applyQuoteFormatting(controller), icon: Icon(LucideIcons.quote, size: 21, color: Theme.of(context).colorScheme.tertiary), tooltip: "Quote", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
+            IconButton(onPressed: () => applyQuoteFormatting(controller), icon: Icon(LucideIcons.quote, size: 20, color: Theme.of(context).colorScheme.tertiary), tooltip: "Quote", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
       
             const Gap(6),
 
-            IconButton(onPressed: ()=> tableDialog(context, controller), icon: Icon(LucideIcons.table2, size: 21, color: Theme.of(context).colorScheme.tertiary), tooltip: "Table", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
+            IconButton(onPressed: ()=> tableDialog(context, controller), icon: Icon(LucideIcons.table2, size: 20, color: Theme.of(context).colorScheme.tertiary), tooltip: "Table", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
       
             const Gap(6),
 
-            IconButton(onPressed: () => applyListFormatting(controller, '-'), icon: Icon(LucideIcons.list, size: 23, color: Theme.of(context).colorScheme.tertiary), tooltip: "Bullet List", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
+            IconButton(onPressed: () => applyListFormatting(controller, '-'), icon: Icon(LucideIcons.list, size: 22, color: Theme.of(context).colorScheme.tertiary), tooltip: "Bullet List", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
       
             const Gap(6),
 
-            IconButton(onPressed: () => applyListFormatting(controller, '1. '), icon: Icon(LucideIcons.listOrdered, size: 23, color: Theme.of(context).colorScheme.tertiary), tooltip: "Numbered List", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
+            IconButton(onPressed: () => applyListFormatting(controller, '1. '), icon: Icon(LucideIcons.listOrdered, size: 22, color: Theme.of(context).colorScheme.tertiary), tooltip: "Numbered List", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
 
             const Gap(6),
 
-            IconButton(onPressed: () => linkDialog(context, controller), icon: Icon(LucideIcons.link2, size: 21, color: Theme.of(context).colorScheme.tertiary), tooltip: "Link", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
+            IconButton(onPressed: () => linkDialog(context, controller), icon: Icon(LucideIcons.link2, size: 20, color: Theme.of(context).colorScheme.tertiary), tooltip: "Link", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
           
           ],
       ),
