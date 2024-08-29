@@ -4,7 +4,6 @@ import 'package:ozan/components/filter_db.dart';
 import 'package:ozan/components/preferences.dart';
 import 'package:ozan/db/db_provider.dart';
 import 'package:ozan/navigation_provider.dart';
-import 'package:ozan/theme/brown.dart';
 import 'package:ozan/theme/green.dart';
 import 'package:ozan/theme/theme.dart';
 import 'package:ozan/theme/theme_provider.dart';
