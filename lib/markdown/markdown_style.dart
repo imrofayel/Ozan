@@ -91,7 +91,7 @@ Markdown markdown(String data, double scale, context){
 
           blockquoteDecoration: BoxDecoration(
             
-            color:  Theme.of(context).colorScheme.primary.withOpacity(0.9),
+            color:  Theme.of(context).colorScheme.background,
 
             borderRadius: const BorderRadius.all(Radius.circular(16)),
           ),

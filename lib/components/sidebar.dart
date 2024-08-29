@@ -83,12 +83,8 @@ class _SidebarState extends State<Sidebar> {
       
                     const Gap(35),
       
-                    _buildIconButton(LucideIcons.clapperboard, 21, () {
-                    }, 'Collections'),
-      
-                    const Gap(35),
-      
                     _buildIconButton(LucideIcons.lasso, 21, () {
+                      SnackBarUtils.showSnackbar(context, LucideIcons.badgeAlert, "This feature is under development.");
                     }, 'Draw'),
       
                     const Gap(35),
@@ -98,12 +94,19 @@ class _SidebarState extends State<Sidebar> {
 
                       Provider.of<FilterState>(context, listen: false).toggleShowFavouritesOnly();
                     }, 'Bookmarks'),
+
+                    const Gap(35),
+      
+                    _buildIconButton(LucideIcons.settings, 21, () {
+                      
+                    }, 'Settings'),
                   ],
                 ),
       
                 Column(
                   children: [
                     _buildIconButton(LucideIcons.trash, 21, (){
+                        SnackBarUtils.showSnackbar(context, LucideIcons.badgeAlert, "This feature is under development.");
                       }, 'Trash'),
       
                     const Gap(35),

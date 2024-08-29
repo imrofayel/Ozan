@@ -1,5 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -7,6 +9,7 @@ import 'package:lucide_icons/lucide_icons.dart';
 import 'package:ozan/components/components.dart';
 import 'package:ozan/components/filter_db.dart';
 import 'package:ozan/components/preferences.dart';
+import 'package:ozan/components/snackbar.dart';
 import 'package:ozan/file_service/pdf_export.dart';
 import 'package:ozan/home_window.dart';
 import 'package:ozan/navigation_provider.dart';
@@ -101,10 +104,12 @@ class _NotesViewState extends State<NotesView> {
 
                                               String date = DateFormat('d MMM, yy').format(DateTime.now());
 
-                                                if (text.isNotEmpty) {
-                                                  value.dbHelper.insert(NotesModel(title: date, description: text, date: date, 
+                                              String name = Random().nextInt(10000000).toString();
 
-                                                  favourite: 0, tag: 'general'));
+                                                if (text.isNotEmpty) {
+                                                  value.dbHelper.insert(NotesModel(title: name, description: text, date: date, 
+
+                                                  favourite: 0, tag: 'General'));
                                             
                                                   value.initDatabase();
                                             
@@ -156,7 +161,9 @@ class _NotesViewState extends State<NotesView> {
 
                                     Padding(
                                       padding: const EdgeInsets.only(right: 12.0),
-                                      child: IconButton(onPressed: (){}, icon: Icon(LucideIcons.search, size: 21, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)), style: const ButtonStyle(overlayColor: MaterialStatePropertyAll(Colors.transparent))),
+                                      child: IconButton(onPressed: (){
+                                        SnackBarUtils.showSnackbar(context, LucideIcons.badgeAlert, "This feature is under development.");
+                                      }, icon: Icon(LucideIcons.search, size: 21, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)), style: const ButtonStyle(overlayColor: MaterialStatePropertyAll(Colors.transparent))),
                                     )
                                   ],
                                 ),
@@ -434,7 +441,7 @@ class Delete extends StatelessWidget {
               
               color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)), 
               
-              style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))), overlayColor: const MaterialStatePropertyAll(Colors.transparent), padding: const MaterialStatePropertyAll(EdgeInsets.all(10)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), surfaceTintColor: const MaterialStatePropertyAll(Colors.transparent)))                                                 
+              style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))), overlayColor: const MaterialStatePropertyAll(Colors.transparent), padding: const MaterialStatePropertyAll(EdgeInsets.all(10)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), surfaceTintColor: const MaterialStatePropertyAll(Colors.transparent)))                                                 
               );
             },
           );                                                       
