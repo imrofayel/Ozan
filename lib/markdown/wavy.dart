@@ -22,12 +22,12 @@ class WavyBuilder extends MarkdownElementBuilder {
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(0),         
         color: Colors.transparent,
 ),
-        child: Text(
-          element.textContent,
-          style: TextStyle(decoration: TextDecoration.underline,
+        child: SelectableText(
+          element.textContent.trim(),
+          style: const TextStyle(decoration: TextDecoration.underline,
           decorationStyle: TextDecorationStyle.wavy,
           decorationThickness: 2,
-          decorationColor: Colors.deepPurple.shade400), textScaler: const TextScaler.linear(1.2)
+          ), textScaler: const TextScaler.linear(1.2)
         ),
       );
     }

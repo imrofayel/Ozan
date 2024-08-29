@@ -22,7 +22,7 @@ class StrikeBuilder extends MarkdownElementBuilder {
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(0),         
         color: Colors.transparent,
 ),
-        child: Text(
+        child: SelectableText(
           element.textContent,
           style: TextStyle(decoration: TextDecoration.lineThrough,
           decorationStyle: TextDecorationStyle.wavy,

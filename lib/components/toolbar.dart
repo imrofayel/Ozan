@@ -52,6 +52,18 @@ Widget toolbar(TextEditingController controller, context){
             const Gap(6),
 
             IconButton(onPressed: () => linkDialog(context, controller), icon: Icon(LucideIcons.link2, size: 20, color: Theme.of(context).colorScheme.tertiary), tooltip: "Link", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
+
+            const Gap(6),
+
+            IconButton(onPressed: () => applyFormatting(controller, '=='), icon: Icon(LucideIcons.highlighter, size: 20, color: Theme.of(context).colorScheme.tertiary), tooltip: "Link", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary))),
+
+            const Gap(6),
+
+            IconButton(onPressed: () => applyFormatting(controller, '~~'), icon: Icon(LucideIcons.strikethrough, size: 20, color: Theme.of(context).colorScheme.tertiary), tooltip: "Strikethrough", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary))),
+
+            const Gap(6),
+
+            IconButton(onPressed: () => applyFormatting(controller, '%%'), icon: Icon(LucideIcons.waves, size: 20, color: Theme.of(context).colorScheme.tertiary), tooltip: "Wavy Underline", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary))),
           
           ],
       ),
@@ -80,7 +92,7 @@ void applyCodeFormatting(TextEditingController controller, context) {
     }
 }
 
-void applyListFormatting(TextEditingController controller, String format) {
+void applyListFormatting(TextEditingController controller, String token) {
 
     TextSelection selection = controller.selection;
 
@@ -88,7 +100,7 @@ void applyListFormatting(TextEditingController controller, String format) {
 
     try {
       String newText =
-          '${text.substring(0, selection.start)}\n$format ${text.substring(selection.start, selection.end)}\n${text.substring(selection.end)}';
+          '${text.substring(0, selection.start)}\n$token ${text.substring(selection.start, selection.end)}\n${text.substring(selection.end)}';
 
       controller.value = TextEditingValue(
         text: newText,
