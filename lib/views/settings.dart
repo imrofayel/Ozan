@@ -21,8 +21,11 @@ class _SettingsState extends State<Settings> {
   @override
   void initState() {
     super.initState();
-    _usernameController = TextEditingController(text: Provider.of<AppState>(context, listen: false).userName);
-    _apiKeyController = TextEditingController(text: Provider.of<AppState>(context, listen: false).userName);
+
+    final appState = Provider.of<AppState>(context, listen: false);
+
+    _usernameController = TextEditingController(text: appState.userName);
+    _apiKeyController = TextEditingController(text: appState.apiKey);
   }
 
 
@@ -36,37 +39,45 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
 
-    return Column(
-      children: [
-        _buildUserNameChanger(context),
+    final appState = Provider.of<AppState>(context, listen: false);
 
-        _buildAPIChanger(context),
-
-        _buildThemeChanger(context),
-
-        _buildAboutContainer(context)
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: Column(
+        children: [
+      
+          const Text('Settings'),
+      
+          _buildUserNameChanger(context, appState),
+      
+          _buildAPIChanger(context, appState),
+      
+          _buildThemeChanger(context, appState),
+      
+          _buildAboutContainer(context)
+        ],
+      ),
     );
   }
 
-    Widget _buildThemeChanger(BuildContext context) {
+    Widget _buildThemeChanger(BuildContext context, AppState appState) {
     return Transform.scale(
       scale: 0.6,
       child: Tooltip(
-        message: Provider.of<AppState>(context, listen: false).isDarkMode == true ? 'Light Theme' : 'Dark Theme',
+        message: appState.isDarkMode == true ? 'Light Theme' : 'Dark Theme',
         child: Switch(
           activeColor: Theme.of(context).colorScheme.tertiary.withOpacity(0.6),
           activeTrackColor: Theme.of(context).colorScheme.secondary.withOpacity(0.6),
           inactiveThumbColor: Colors.blue.shade900.withOpacity(0.9),
           inactiveTrackColor: Colors.transparent,
-          value: Provider.of<AppState>(context, listen: false).isDarkMode,
-          onChanged: (value) => Provider.of<AppState>(context, listen: false).setDarkMode(value),
+          value: appState.isDarkMode,
+          onChanged: (value) => appState.setDarkMode(value),
         ),
       ),
     );
   }
 
-  Widget _buildUserNameChanger(BuildContext context) {
+  Widget _buildUserNameChanger(BuildContext context, AppState appState) {
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.secondary.withOpacity(0.4),
@@ -88,7 +99,7 @@ class _SettingsState extends State<Settings> {
 
               onEditingComplete: () {
                 if (_isEditingUsername) {
-                  Provider.of<AppState>(context, listen: false).setUserName(_usernameController.text);
+                  appState.setUserName(_usernameController.text);
                 }
                 _isEditingUsername = !_isEditingUsername;
               },
@@ -111,7 +122,7 @@ class _SettingsState extends State<Settings> {
             onPressed: () {
               setState(() {
                 if (_isEditingUsername) {
-                  Provider.of<AppState>(context, listen: false).setUserName(_usernameController.text);
+                  appState.setUserName(_usernameController.text);
                 }
                 _isEditingUsername = !_isEditingUsername;
               });
@@ -128,7 +139,7 @@ class _SettingsState extends State<Settings> {
     );
   }
 
-  Widget _buildAPIChanger(BuildContext context) {
+  Widget _buildAPIChanger(BuildContext context, AppState appState) {
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.secondary.withOpacity(0.4),
@@ -154,7 +165,7 @@ class _SettingsState extends State<Settings> {
 
               onEditingComplete: () {
                 if (_isEditingApiKey) {
-                  Provider.of<AppState>(context, listen: false).setUserName(_apiKeyController.text);
+                  appState.setUserName(_apiKeyController.text);
                 }
                 _isEditingApiKey = !_isEditingApiKey;
               },
@@ -178,7 +189,7 @@ class _SettingsState extends State<Settings> {
             onPressed: () {
                   setState(() {
                     if (_isEditingApiKey) {
-                      Provider.of<AppState>(context, listen: false).setApiKey(_apiKeyController.text);
+                      appState.setApiKey(_apiKeyController.text);
                     }
                     _isEditingApiKey = !_isEditingApiKey;
                   });

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ozan/db/db_provider.dart';
 import 'package:ozan/providers/filter_db.dart';
 import 'package:ozan/providers/navigation_provider.dart';
+import 'package:ozan/theme/colored/brown.dart';
 import 'package:ozan/theme/colored/green.dart';
 import 'package:ozan/theme/theme.dart';
 import 'package:ozan/theme/theme_provider.dart';
@@ -35,7 +36,7 @@ void main() async {
       ChangeNotifierProvider(create: (context) => DatabaseProvider()),
       ChangeNotifierProvider(create: (_) => FilterState()),
       ChangeNotifierProvider(create: (_) => Navigation()),
-      ChangeNotifierProvider(create: (context) => AppState()),
+      ChangeNotifierProvider(create: (_) => AppState()),
          ChangeNotifierProxyProvider<AppState, ThemeSwitcher>(
         create: (context) => ThemeSwitcher(context),
         update: (context, appState, themeSwitcher) {
@@ -72,7 +73,7 @@ class _OzanState extends State<Ozan> {
       title: "Ozan",
       debugShowCheckedModeBanner: false,
       // theme: Provider.of<ThemeSwitcher>(context).themeData,
-      theme: Green.lightTheme,
+      theme: Brown.lightTheme,
       home: const Scaffold(
         body: Home(),
       ),

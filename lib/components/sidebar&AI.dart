@@ -99,7 +99,7 @@ class _SidebarState extends State<Sidebar> {
                     const Gap(35),
       
                     _buildIconButton(LucideIcons.settings, 21, () {
-                      Provider.of<Navigation>(context).getPage(const Settings());
+                      Provider.of<Navigation>(context, listen: false).getPage(const Settings());
                     }, 'Settings'),
                   ],
                 ),
