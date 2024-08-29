@@ -155,14 +155,8 @@ class _UpdateState extends State<Update>{
                                     hoverColor: Colors.transparent
                                   ),
 
-                                  // Legendary Purple
-
-                                  // child: ExpansionTile(leading: const Icon(CupertinoIcons.book), title: Text('Table Of Contents', style: TextStyle(color: Colors.deepPurple.shade400, fontWeight: FontWeight.bold, fontSize: 16, decoration: TextDecoration.underline, decorationStyle: TextDecorationStyle.wavy, decorationColor: Colors.deepPurple.shade100, decorationThickness: 2.3)), children: [Padding(
-                                  //   padding: const EdgeInsets.only(bottom: 20, left: 15),
-                                  //   child: MarkdownBody(data: generateTableOfContents(page.text), styleSheet: MarkdownStyle.style(context, 1.25), extensionSet: MarkdownStyle.extension()),
-
-                                  child: ExpansionTile(leading: const Icon(CupertinoIcons.book), title: Text('Table Of Contents', style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8), fontSize: 18)), children: [Padding(
-                                    padding: const EdgeInsets.only(bottom: 20, left: 15),
+                                  child: ExpansionTile(leading: const Icon(CupertinoIcons.book), title: Text('Table Of Contents', style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9), fontSize: 18)), children: [Padding(
+                                    padding: const EdgeInsets.only(top: 10, bottom: 20, left: 15),
                                     child: MarkdownBody(data: generateTableOfContents(page.text), styleSheet: MarkdownStyle.style(context, 1.25), extensionSet: MarkdownStyle.extension()),
                                   )]),
                                 ),

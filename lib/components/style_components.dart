@@ -17,7 +17,7 @@ class MarkdownStyle{
 
           codeblockDecoration: BoxDecoration(color: Theme.of(context).colorScheme.primary.withOpacity(0.9), borderRadius: BorderRadius.circular(10), border: Border.all(color: Theme.of(context).colorScheme.secondary)),
 
-          p: TextStyle(fontSize: 13.5, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)),
+          p: TextStyle(fontSize: 13.5, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)),
 
           h2: const TextStyle(fontSize: 17),
 

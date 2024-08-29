@@ -407,8 +407,8 @@ class Delete extends StatelessWidget {
       Builder(
                                                                                   
       builder: (context) {
-      
-      return IconButton(onPressed: (){
+    
+      return IconButton(style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), onPressed: (){
                                                                 
         showPopover(context: context,
 
