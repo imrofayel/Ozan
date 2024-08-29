@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ozan/db/db_provider.dart';
 import 'package:ozan/components/sidebar.dart';
-import 'package:ozan/navigation_provider.dart';
+import 'package:ozan/providers/navigation_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../components/drawer.dart';

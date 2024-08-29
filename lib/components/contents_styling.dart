@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_markdown_latex/flutter_markdown_latex.dart';
 import 'package:markdown/markdown.dart' as md;
-import 'package:ozan/markdown/colors/colored.dart';
-import 'package:ozan/markdown/colors/highlight.dart';
-import 'package:ozan/markdown/strike.dart';
-import 'package:ozan/markdown/wavy.dart';
+import 'package:ozan/markdown/extensions/strikethrough.dart';
+import 'package:ozan/markdown/extensions/wavy_underline.dart';
+import 'package:ozan/markdown/highlighting/colored.dart';
+import 'package:ozan/markdown/highlighting/highlight.dart';
 
 class MarkdownStyle{
 

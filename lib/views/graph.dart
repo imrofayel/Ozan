@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graphview/GraphView.dart';
-import 'package:ozan/navigation_provider.dart';
+import 'package:ozan/providers/navigation_provider.dart';
 import 'package:ozan/views/update_view.dart';
 import 'package:provider/provider.dart';
 import 'package:ozan/db/db_provider.dart';

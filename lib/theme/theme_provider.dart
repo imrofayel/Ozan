@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ozan/components/preferences.dart';
+import 'package:ozan/providers/preferences.dart';
 import 'package:ozan/theme/theme.dart';
 import 'package:provider/provider.dart';
 class ThemeSwitcher with ChangeNotifier {

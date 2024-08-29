@@ -1,15 +1,16 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:ozan/components/filter_db.dart';
-import 'package:ozan/components/preferences.dart';
 import 'package:ozan/db/db_provider.dart';
-import 'package:ozan/navigation_provider.dart';
-import 'package:ozan/theme/green.dart';
+import 'package:ozan/providers/filter_db.dart';
+import 'package:ozan/providers/navigation_provider.dart';
+import 'package:ozan/theme/colored/green.dart';
 import 'package:ozan/theme/theme.dart';
 import 'package:ozan/theme/theme_provider.dart';
 import 'package:ozan/views/home.dart';
 import 'package:provider/provider.dart';
 import 'package:window_manager/window_manager.dart';
+
+import 'providers/preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

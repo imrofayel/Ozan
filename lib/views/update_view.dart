@@ -4,15 +4,15 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import 'package:ozan/components/style_components.dart';
+import 'package:ozan/components/contents_styling.dart';
 import 'package:ozan/components/snackbar.dart';
-import 'package:ozan/file_service/file_service.dart';
 import 'package:ozan/components/components.dart';
 import 'package:ozan/components/toolbar.dart';
 import 'package:ozan/db/db_provider.dart';
 import 'package:ozan/db/notes.dart';
+import 'package:ozan/files/file_service.dart';
+import 'package:ozan/markdown/markdown_styling.dart';
 import 'package:provider/provider.dart';
-import '../markdown/markdown_style.dart';
 
 // ignore: must_be_immutable
 class Update extends StatefulWidget {
