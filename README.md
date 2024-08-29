@@ -4,7 +4,7 @@
 
 Ozan — a personal knowledge base and journal application that combines simplicity with powerful features, offering a simple open-source alternative to Obsidian and Notion. Here are the key features and aspects of the app:
 
-![Screenshot 2024-08-29 115856](https://github.com/user-attachments/assets/5d32ceb6-6db8-4816-aba1-63fc61855466)
+![Screenshot 2024-08-29 192952](https://github.com/user-attachments/assets/7b43d57b-9b10-48de-83bc-b22d732ff811)
 
 ![Screenshot 2024-08-29 115931](https://github.com/user-attachments/assets/37d23f97-096d-4655-ab79-fea9bd1de021)
 
