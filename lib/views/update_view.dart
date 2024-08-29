@@ -351,13 +351,13 @@ class _EditorState extends State<Editor> {
 
                   SegmentedButton(segments: const[
 
-                    ButtonSegment(value: Tags.General, label: Text('General', style: TextStyle(fontSize: 16))),
+                    ButtonSegment(value: Tags.General, label: Text('General', style: TextStyle(fontSize: 17))),
 
-                    ButtonSegment(value: Tags.Studies, label: Text('Studies', style: TextStyle(fontSize: 16))),
+                    ButtonSegment(value: Tags.Studies, label: Text('Studies', style: TextStyle(fontSize: 17))),
 
-                    ButtonSegment(value: Tags.Work, label: Text('Work', style: TextStyle(fontSize: 16))),
+                    ButtonSegment(value: Tags.Work, label: Text('Work', style: TextStyle(fontSize: 17))),
 
-                    ButtonSegment(value: Tags.Personal, label: Text('Personal', style: TextStyle(fontSize: 16))),
+                    ButtonSegment(value: Tags.Personal, label: Text('Personal', style: TextStyle(fontSize: 17))),
 
                   ], selected: <Tags>{selected},
                   

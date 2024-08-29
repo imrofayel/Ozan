@@ -18,10 +18,11 @@ void main() async {
   await windowManager.ensureInitialized();
 
   WindowOptions windowOptions = const WindowOptions(
+    size: Size(950, 600),
     center: true,
     titleBarStyle: TitleBarStyle.normal,
     title: 'Ozan',
-    minimumSize: Size(700, 700),
+    minimumSize: Size(950, 600),
   );
   windowManager.waitUntilReadyToShow(windowOptions, () async {
     await windowManager.show();

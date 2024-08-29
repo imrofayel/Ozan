@@ -34,7 +34,7 @@ class CHighlightBuilder extends MarkdownElementBuilder {
         ),
         child: SelectableText(
           element.textContent,
-          style: TextStyle(color: textColor.withOpacity(0.6)),
+          style: TextStyle(color: textColor.withOpacity(0.8)),
           textScaler: const TextScaler.linear(1.25)
         ),
       );

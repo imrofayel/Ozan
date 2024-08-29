@@ -167,13 +167,13 @@ class _MarkdownState extends State<Markdown> {
                                   const Gap(6),
 
                                   Text('Code', style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 17,
                                       color: Theme.of(context).colorScheme.tertiary,
                                       fontFamily: 'Inter')),
                                 ],
                               ) : 
                                 Text('Code', style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 17,
                                       color: Theme.of(context).colorScheme.tertiary,
                                       fontFamily: 'Inter')),
                             ),
@@ -191,13 +191,13 @@ class _MarkdownState extends State<Markdown> {
                                   const Gap(6),
 
                                   Text('Preview', style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 17,
                                       color: Theme.of(context).colorScheme.tertiary,
                                       fontFamily: 'Inter')),
                                 ],
                               ) : 
                                 Text('Preview', style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 17,
                                       color: Theme.of(context).colorScheme.tertiary,
                                       fontFamily: 'Inter')),
                             ),
@@ -281,13 +281,13 @@ class _EditorState extends State<Editor> {
             
             SegmentedButton(segments: const[
 
-              ButtonSegment(value: Tags.General, label: Text('General', style: TextStyle(fontSize: 15))),
+              ButtonSegment(value: Tags.General, label: Text('General', style: TextStyle(fontSize: 17))),
 
-              ButtonSegment(value: Tags.Studies, label: Text('Studies', style: TextStyle(fontSize: 15))),
+              ButtonSegment(value: Tags.Studies, label: Text('Studies', style: TextStyle(fontSize: 17))),
 
-              ButtonSegment(value: Tags.Work, label: Text('Work', style: TextStyle(fontSize: 15))),
+              ButtonSegment(value: Tags.Work, label: Text('Work', style: TextStyle(fontSize: 17))),
 
-              ButtonSegment(value: Tags.Personal, label: Text('Personal', style: TextStyle(fontSize: 15))),
+              ButtonSegment(value: Tags.Personal, label: Text('Personal', style: TextStyle(fontSize: 17))),
 
             ], selected: <Tags>{selected},
             
