@@ -12,6 +12,7 @@ import 'package:ozan/components/snackbar.dart';
 import 'package:ozan/providers/navigation_provider.dart';
 import 'package:ozan/views/graph.dart';
 import 'package:ozan/views/notes_view.dart';
+import 'package:ozan/views/settings.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:provider/provider.dart';
@@ -98,7 +99,7 @@ class _SidebarState extends State<Sidebar> {
                     const Gap(35),
       
                     _buildIconButton(LucideIcons.settings, 21, () {
-                      
+                      Provider.of<Navigation>(context).getPage(const Settings());
                     }, 'Settings'),
                   ],
                 ),
