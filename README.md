@@ -2,6 +2,10 @@
 
 ## Ozan - Capture your thoughts!
 
+<a href="https://www.producthunt.com/posts/ozan"><img src="https://github.com/user-attachments/assets/1715a793-b8eb-4e1f-a8da-8ab9015e4725" height="30" weight="30"></a>
+
+<a href="https://github.com/imrofayel/Ozan/releases/tag/Windows"><img src="https://github.com/user-attachments/assets/9c531f25-86ad-4400-95a0-cba58c69529f" height="40" weight="40"></a>
+
 Ozan — a personal knowledge base and journal application that combines simplicity with powerful features, offering a simple open-source alternative to Obsidian and Notion. Here are the key features and aspects of the app:
 
 ![Screenshot 2024-08-29 192952](https://github.com/user-attachments/assets/7b43d57b-9b10-48de-83bc-b22d732ff811)
