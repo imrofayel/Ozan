@@ -4,6 +4,7 @@ import 'package:ozan/db/db_provider.dart';
 import 'package:ozan/providers/filter_db.dart';
 import 'package:ozan/providers/navigation_provider.dart';
 import 'package:ozan/theme/colored/brown.dart';
+import 'package:ozan/theme/colored/green.dart';
 import 'package:ozan/theme/theme.dart';
 import 'package:ozan/theme/theme_provider.dart';
 import 'package:ozan/home.dart';
@@ -36,18 +37,7 @@ void main() async {
       ChangeNotifierProvider(create: (_) => FilterState()),
       ChangeNotifierProvider(create: (_) => Navigation()),
       ChangeNotifierProvider(create: (_) => AppState()),
-         ChangeNotifierProxyProvider<AppState, ThemeSwitcher>(
-        create: (context) => ThemeSwitcher(context),
-        update: (context, appState, themeSwitcher) {
-          themeSwitcher ??= ThemeSwitcher(context);
-          if (appState.isDarkMode) {
-            themeSwitcher.themeData = Themes.darkTheme;
-          } else {
-            themeSwitcher.themeData = Themes.lightTheme;
-          }
-          return themeSwitcher;
-        },
-      ),
+            ChangeNotifierProvider(create: (context) => ThemeSwitcher()),
     ],
     child: ImageFiltered(imageFilter: ImageFilter.blur(sigmaX: 0.3, sigmaY: 0.3), child: const Ozan()),
   ));
@@ -71,8 +61,8 @@ class _OzanState extends State<Ozan> {
     return MaterialApp(
       title: "Ozan",
       debugShowCheckedModeBanner: false,
-      // theme: Provider.of<ThemeSwitcher>(context).themeData,
-      theme: Brown.lightTheme,
+      theme: Provider.of<ThemeSwitcher>(context).themeData,
+      // theme: Brown.lightTheme,
       home: const Scaffold(
         body: Home(),
       ),

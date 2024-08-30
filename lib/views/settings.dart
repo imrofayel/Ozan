@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:ozan/components/snackbar.dart';
 import 'package:ozan/providers/preferences.dart';
+import 'package:ozan/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class Settings extends StatefulWidget {
@@ -293,6 +294,9 @@ class _SettingsState extends State<Settings> {
             InkWell(
               
               onTap: () => {
+
+                Provider.of<ThemeSwitcher>(context, listen: false).toggleTheme(),
+
                 SnackBarUtils.showSnackbar(context, LucideIcons.paintBucket, 'Theme Selected')
               },
 
