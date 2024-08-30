@@ -2,7 +2,7 @@
 
 ## Ozan - Capture your thoughts!
 
-<a href="https://www.producthunt.com/posts/ozan"><img src="https://github.com/user-attachments/assets/1715a793-b8eb-4e1f-a8da-8ab9015e4725" height="30" weight="30"></a>
+<a href="https://www.producthunt.com/posts/ozan?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-ozan" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=485313&theme=light" alt="Ozan - Ozan&#0032;is&#0032;a&#0032;personal&#0032;knowledge&#0032;base&#0032;inspired&#0032;from&#0032;Obsidian&#0046; | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
 
 <a href="https://github.com/imrofayel/Ozan/releases/tag/Windows"><img src="https://github.com/user-attachments/assets/9c531f25-86ad-4400-95a0-cba58c69529f" height="40" weight="40"></a>
 
