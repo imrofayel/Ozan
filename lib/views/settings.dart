@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:lucide_icons/lucide_icons.dart';
+import 'package:ozan/components/snackbar.dart';
 import 'package:ozan/providers/preferences.dart';
 import 'package:provider/provider.dart';
 
@@ -42,36 +44,41 @@ class _SettingsState extends State<Settings> {
     final appState = Provider.of<AppState>(context, listen: false);
 
     return Padding(
-      padding: const EdgeInsets.all(12.0),
-      child: Column(
-        children: [
-      
-          const Text('Settings'),
-      
-          _buildUserNameChanger(context, appState),
-      
-          _buildAPIChanger(context, appState),
-      
-          _buildThemeChanger(context, appState),
-      
-          _buildAboutContainer(context)
-        ],
-      ),
-    );
-  }
+      padding: const EdgeInsets.all(6.0),
+      child: Container(
+        
+        decoration: BoxDecoration(border: Border.all(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1)), borderRadius: BorderRadius.circular(12), color: Theme.of(context).colorScheme.primary),
 
-    Widget _buildThemeChanger(BuildContext context, AppState appState) {
-    return Transform.scale(
-      scale: 0.6,
-      child: Tooltip(
-        message: appState.isDarkMode == true ? 'Light Theme' : 'Dark Theme',
-        child: Switch(
-          activeColor: Theme.of(context).colorScheme.tertiary.withOpacity(0.6),
-          activeTrackColor: Theme.of(context).colorScheme.secondary.withOpacity(0.6),
-          inactiveThumbColor: Colors.blue.shade900.withOpacity(0.9),
-          inactiveTrackColor: Colors.transparent,
-          value: appState.isDarkMode,
-          onChanged: (value) => appState.setDarkMode(value),
+        child: Padding(
+          padding: const EdgeInsets.all(30.0),
+          child: Column(
+          
+            mainAxisAlignment: MainAxisAlignment.start,
+          
+            crossAxisAlignment: CrossAxisAlignment.start,
+          
+            children: [
+          
+              const Text('Settings', style: TextStyle(fontSize: 22)),
+
+              const Gap(20),
+          
+              _buildUserNameChanger(context, appState),
+
+              const Gap(20),
+          
+              _buildAPIChanger(context, appState),
+
+              const Gap(20),
+                    
+              _buildAboutContainer(context),
+
+              const Gap(20),
+
+              _buildThemeChanger(context),
+
+            ],
+          ),
         ),
       ),
     );
@@ -80,11 +87,11 @@ class _SettingsState extends State<Settings> {
   Widget _buildUserNameChanger(BuildContext context, AppState appState) {
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.secondary.withOpacity(0.4),
+        color: Theme.of(context).colorScheme.background,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Theme.of(context).colorScheme.secondary.withOpacity(0.6)),
+        border: Border.all(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1)),
       ),
-      padding: const EdgeInsets.only(left: 14, bottom: 2, top: 2, right: 4),
+      padding: const EdgeInsets.only(left: 4, bottom: 2, top: 2, right: 4),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -95,7 +102,7 @@ class _SettingsState extends State<Settings> {
               controller: _usernameController,
               enabled: _isEditingUsername,
 
-              style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)),
+              style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9), fontSize: 18, fontFamily: 'Roboto Mono'),
 
               onEditingComplete: () {
                 if (_isEditingUsername) {
@@ -104,20 +111,24 @@ class _SettingsState extends State<Settings> {
                 _isEditingUsername = !_isEditingUsername;
               },
 
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 border: InputBorder.none,
                 fillColor: Colors.transparent,
-                hintText: 'User',
+                hintText: 'Username',
                 hoverColor: Colors.transparent,
-              ),
+
+                hintStyle: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9), fontSize: 18, fontFamily: 'Roboto Mono'),
+
+                prefixIcon: Icon(LucideIcons.user, size: 21, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))
+              )
             ),
           ),
 
           const Gap(8),
 
           IconButton(
-            icon: Icon(_isEditingUsername ? CupertinoIcons.arrow_right : CupertinoIcons.pencil,
-              color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.9) : Theme.of(context).colorScheme.tertiary.withOpacity(0.9),
+            icon: Icon(_isEditingUsername ? LucideIcons.arrowRight : CupertinoIcons.pencil,
+              color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9),
                 size: 21),
             onPressed: () {
               setState(() {
@@ -128,10 +139,11 @@ class _SettingsState extends State<Settings> {
               });
             },
             tooltip: _isEditingUsername ? 'Save' : 'Edit',
-            hoverColor: Theme.of(context).colorScheme.primary.withOpacity(0.9),
+            hoverColor: Theme.of(context).colorScheme.primary,
             style: ButtonStyle(
+                side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
                 backgroundColor: MaterialStatePropertyAll(
-                    Theme.of(context).colorScheme.primary.withOpacity(0.5)),
+                    Theme.of(context).colorScheme.primary),
                 padding: const MaterialStatePropertyAll(EdgeInsets.zero)),
           )
         ],
@@ -142,11 +154,11 @@ class _SettingsState extends State<Settings> {
   Widget _buildAPIChanger(BuildContext context, AppState appState) {
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.secondary.withOpacity(0.4),
+        color: Theme.of(context).colorScheme.background,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Theme.of(context).colorScheme.secondary.withOpacity(0.6)),
+        border: Border.all(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1)),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+      padding: const EdgeInsets.only(left: 4, bottom: 2, top: 2, right: 4),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -161,7 +173,7 @@ class _SettingsState extends State<Settings> {
 
               obscuringCharacter: '*',
               
-              style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9), fontFamily: 'Roboto Mono'),
+              style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9), fontFamily: 'Roboto Mono', fontSize: 18),
 
               onEditingComplete: () {
                 if (_isEditingApiKey) {
@@ -171,11 +183,15 @@ class _SettingsState extends State<Settings> {
               },
 
               decoration: InputDecoration(
-                prefixIcon: Tooltip(message: 'API Setting', child: Icon(CupertinoIcons.sparkles, size: 23, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.9) : Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
+              
                 border: InputBorder.none,
                 fillColor: Colors.transparent,
-                hintText: 'Google AI API',
+                hintText: 'Google API Key',
                 hoverColor: Colors.transparent,
+
+                hintStyle: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9), fontSize: 18, fontFamily: 'Roboto Mono'),
+
+                prefixIcon: Tooltip(message: 'API', child: Icon(LucideIcons.sparkle, size: 21, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)))
               ),
             ),
           ),
@@ -183,8 +199,8 @@ class _SettingsState extends State<Settings> {
           const Gap(8),
 
           IconButton(
-            icon: Icon(_isEditingApiKey ? CupertinoIcons.arrow_right : CupertinoIcons.pencil,
-                color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.9) : Theme.of(context).colorScheme.tertiary.withOpacity(0.9),
+            icon: Icon(_isEditingApiKey ? LucideIcons.arrowRight : CupertinoIcons.pencil,
+              color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9),
                 size: 21),
             onPressed: () {
                   setState(() {
@@ -196,47 +212,115 @@ class _SettingsState extends State<Settings> {
             },
             tooltip: _isEditingApiKey ? 'Save' : 'Edit API',
             hoverColor: Theme.of(context).colorScheme.primary.withOpacity(0.9),
+
             style: ButtonStyle(
+                side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
                 backgroundColor: MaterialStatePropertyAll(
-                    Theme.of(context).colorScheme.primary.withOpacity(0.5)),
+                    Theme.of(context).colorScheme.primary),
                 padding: const MaterialStatePropertyAll(EdgeInsets.zero)),
           )
         ],
       ),
     );
   }
-
   Widget _buildAboutContainer(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.secondary.withOpacity(0.4),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Theme.of(context).colorScheme.secondary.withOpacity(0.6)),
-      ),
-      padding: const EdgeInsets.all(10),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
       child: Opacity(
-        opacity: 0.85,
+
+        opacity: 0.9,
+
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
-                Icon(CupertinoIcons.scribble, color: Theme.of(context).colorScheme.tertiary, size: 26),
-                const Text('Ozan', textScaler: TextScaler.linear(1.3)),
+                Icon(CupertinoIcons.scribble, color: Theme.of(context).colorScheme.tertiary, size: 30),
+                const Text('Ozan', textScaler: TextScaler.linear(1.4)),
               ],
             ),
-            const Gap(4),
-            const Text('1.4.2 Pre-alpha', textScaler: TextScaler.linear(1.08)),
-            const Gap(3),
+            const Gap(10),
+            const Text('1.0.6 Pre-alpha', textScaler: TextScaler.linear(1.2)),
+            const Gap(8),
             Text(
               '© ${DateTime.now().year} Rofayel Labs',
-              textScaler: const TextScaler.linear(1.04),
+              textScaler: const TextScaler.linear(1.2),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildThemeChanger(BuildContext context){
+    return Column(
+      children: [
+
+        const Row(
+          children: [
+
+            Icon(LucideIcons.paintBucket),
+
+            Gap(10),
+
+            Text('look and feel', style: TextStyle(fontSize: 18)),
+          ],
+        ),
+
+        const Gap(25),
+
+        Row(
+          children: [
+
+            InkWell(
+              
+              onTap: () => {
+                SnackBarUtils.showSnackbar(context, LucideIcons.paintBucket, 'Theme Selected'),
+
+
+              },
+
+              child: Container(
+                decoration: BoxDecoration(color: Colors.blue.shade100, borderRadius: BorderRadius.circular(100)),
+              
+                height: 50, width: 50,
+              ),
+            ),
+
+            const Gap(15),
+
+            InkWell(
+              
+              onTap: () => {
+                SnackBarUtils.showSnackbar(context, LucideIcons.paintBucket, 'Theme Selected')
+              },
+
+              child: Container(
+                decoration: BoxDecoration(color: Colors.greenAccent.shade100, borderRadius: BorderRadius.circular(100)),
+              
+                height: 50, width: 50,
+              ),
+            ),
+
+            const Gap(15),
+
+            InkWell(
+              
+              onTap: () => {
+                SnackBarUtils.showSnackbar(context, LucideIcons.paintBucket, 'Theme Selected')
+              },
+
+              child: Container(
+                decoration: BoxDecoration(color: const Color.fromARGB(255, 255, 247, 203), borderRadius: BorderRadius.circular(100)),
+              
+                height: 50, width: 50,
+              ),
+            ),
+          ],
+        )
+
+      ], 
     );
   }
 }
