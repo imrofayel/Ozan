@@ -6,14 +6,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import 'package:ozan/components/components.dart';
 import 'package:ozan/providers/filter_db.dart';
 import 'package:ozan/providers/preferences.dart';
 import 'package:ozan/components/snackbar.dart';
 import 'package:ozan/files/pdf_export.dart';
 import 'package:ozan/views/create_view.dart';
 import 'package:ozan/providers/navigation_provider.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:popover/popover.dart';
 import 'package:gap/gap.dart';
 import 'package:ozan/db/db_provider.dart';
@@ -76,6 +74,7 @@ class _NotesViewState extends State<NotesView> {
                           return Expanded(
                             child: Column(
                               children: [
+                                
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
@@ -297,84 +296,97 @@ class _NotesViewState extends State<NotesView> {
               
                             visible: snapshot.connectionState == ConnectionState.done,
               
-                            child: Row(
-                    
+                            child: 
+                            
+                            Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    
                                   children: [
-                    
-                                    Opacity(opacity: 0.9, child: Text(greet(Provider.of<AppState>(context, listen: false).userName), textScaler: const TextScaler.linear(1.5), style: TextStyle(color: Colors.blue.shade900.withOpacity(0.9), decoration: TextDecoration.underline, decorationStyle: TextDecorationStyle.wavy, decorationThickness: 2, decorationColor: Colors.blue.shade200.withOpacity(0.4)))),
-                                    
+              
                                     Padding(
-                    
-                                      padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
-                    
+                                      padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
                                       child: Row(
-                                      
                                         children: [
-                                      
-                                          FilledButton(onPressed: (){}, style: ButtonStyle(
-                                                        
-                                          side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
-              
-                                          padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.3) : Theme.of(context).colorScheme.primary)), child: Text('0 entries', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.9) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
-                    
-                                          const Gap(14),
-              
                                           FilledButton(
-
+                                            onPressed: () {},
+                                            style: ButtonStyle(
+                                              side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
+                                              padding: const MaterialStatePropertyAll(EdgeInsets.all(14)),
+                                              overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+                                              shadowColor: const MaterialStatePropertyAll(Colors.transparent),
+                                              backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background),
+                                            ),
+                                            child: Text('0 entries', style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary)),
+                                          ),
+                                          const Gap(14),
+                    
+                                          FilledButton(
                                             onPressed: () async{
-
+                                              
                                               String text = await Markdown.files.loadFile(context);
 
                                               String date = DateFormat('d MMM, yy').format(DateTime.now());
 
-                                                value.dbHelper.insert(NotesModel(title: date, description: text, date: date, 
+                                              String name = Random().nextInt(10000000).toString();
 
-                                                favourite: 0, tag: 'general'));
+                                                if (text.isNotEmpty) {
+                                                  value.dbHelper.insert(NotesModel(title: name, description: text, date: date, 
+
+                                                  favourite: 0, tag: 'General'));
                                             
-                                                value.initDatabase();
+                                                  value.initDatabase();
                                             
-                                                value.setLength();
-                                              
+                                                  value.setLength();
+
+                                                }
                                             },
                     
                                             style: ButtonStyle(
-                                              side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
+                                              side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
                                               padding: const MaterialStatePropertyAll(EdgeInsets.all(14)),
                                               overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                                               shadowColor: const MaterialStatePropertyAll(Colors.transparent),
-                                              backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.4) : Theme.of(context).colorScheme.primary),
+                                              backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background),
                                             ),
                                             child: Row(
                                               children: [
-                                                Icon(CupertinoIcons.folder, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.9) : Theme.of(context).colorScheme.tertiary, size: 18),
+                                                Icon(CupertinoIcons.folder, color: Theme.of(context).colorScheme.tertiary, size: 18),
                                                 const Gap(8),
-                                                Text('Open', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.9) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter')),
+                                                Text('Open', style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary)),
                                               ],
                                             ),
                                           ),
-              
-                                          const Gap(14),
                     
-                                          FilledButton(onPressed: (){
-                                            Navigator.push(context, PageTransition(type: PageTransitionType.fade, duration: const Duration(milliseconds: 300), child: const Markdown()));
-                                          }, style: ButtonStyle(
-                                                        
-                                          side: MaterialStatePropertyAll(BorderSide(color:Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100.withOpacity(0.2) : Theme.of(context).colorScheme.secondary)),
-                                                                                        
-                                          padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).brightness == Brightness.light ? Colors.blue.shade50.withOpacity(0.4) : Theme.of(context).colorScheme.primary)), child: Row(
-                                            children: [
-                                              Icon(CupertinoIcons.pencil, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Theme.of(context).colorScheme.tertiary, size: 19),
+                                          const Gap(10),
                     
-                                              const Gap(4),
-                    
-                                              Text('Write', style: TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900.withOpacity(0.9) : Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter')),
-                                            ],
-                                          )),                                    
+                                          FilledButton(
+                                            onPressed: () {
+                                              Provider.of<Navigation>(context, listen: false).getPage(const Markdown());
+                                            },
+                                            style: ButtonStyle(
+                                              side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
+                                              padding: const MaterialStatePropertyAll(EdgeInsets.all(14)),
+                                              overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+                                              shadowColor: const MaterialStatePropertyAll(Colors.transparent),
+                                              backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background),
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                Icon(CupertinoIcons.pencil, color: Theme.of(context).colorScheme.tertiary, size: 19),
+                                                const Gap(4),
+                                                Text('Write', style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary)),
+                                              ],
+                                            ),
+                                          ),
                                         ],
                                       ),
                                     ),
+
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 12.0),
+                                      child: IconButton(onPressed: (){
+                                        SnackBarUtils.showSnackbar(context, LucideIcons.badgeAlert, "This feature is under development.");
+                                      }, icon: Icon(LucideIcons.search, size: 21, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)), style: const ButtonStyle(overlayColor: MaterialStatePropertyAll(Colors.transparent))),
+                                    )
                                   ],
                                 ),
                           );
