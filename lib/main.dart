@@ -16,16 +16,24 @@ void main() async {
   // Must add this line.
   await windowManager.ensureInitialized();
 
+
   WindowOptions windowOptions = const WindowOptions(
-    size: Size(950, 600),
     center: true,
     titleBarStyle: TitleBarStyle.normal,
     title: 'Ozan',
-    minimumSize: Size(950, 600),
+    backgroundColor: Colors.transparent,
+    skipTaskbar: false,
+    fullScreen: false,
+    minimumSize: Size(400, 400)
   );
+
   windowManager.waitUntilReadyToShow(windowOptions, () async {
     await windowManager.show();
     await windowManager.focus();
+    await windowManager.setMaximizable(true);  // Prevent manual maximizing
+    await windowManager.setMinimizable(true);
+    await windowManager.maximize();  // Prevent minimizing
+    await windowManager.setResizable(true);    // Prevent resizing
   });
 
   runApp(MultiProvider(
