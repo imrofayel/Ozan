@@ -19,11 +19,11 @@ class HighlightBuilder extends MarkdownElementBuilder {
     if (element.tag == 'highlight') {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),         color: Colors.yellow.shade100,
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),         color: Colors.yellow.shade100.withOpacity(0.6),
 ),
-        child: Text(
+        child: SelectableText(
           element.textContent,
-          style: TextStyle(color: Colors.yellow.shade900), textScaler: const TextScaler.linear(1.2)
+          style: TextStyle(color: Colors.yellow.shade900.withOpacity(0.6)), textScaler: const TextScaler.linear(1.2)
         ),
       );
     }

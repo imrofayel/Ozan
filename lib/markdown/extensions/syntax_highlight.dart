@@ -18,7 +18,7 @@ class CodeElementBuilder extends MarkdownElementBuilder {
     var language = '';
 
     if(element.attributes['class'] == null){
-      return Text(element.textContent.toString(), textScaler: const TextScaler.linear(1.2), style: TextStyle(backgroundColor: Theme.of(context).colorScheme.primary, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9), fontFamily: 'Roboto Mono'));
+      return Text(element.textContent.toString(), textScaler: const TextScaler.linear(1.2), style: TextStyle(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9), fontFamily: 'Roboto Mono'));
     }
 
     else{
@@ -54,20 +54,20 @@ class CodeElementBuilder extends MarkdownElementBuilder {
               
         FilledButton(onPressed: (){}, style: ButtonStyle(
           
-          side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
+          side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
 
-          padding: const MaterialStatePropertyAll(EdgeInsets.all(8)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text(lang, style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9), fontFamily: 'Inter'))),
+          padding: const MaterialStatePropertyAll(EdgeInsets.all(8)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)), child: Text(lang, style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9), fontFamily: 'Inter'))),
               
             Row(
               children: [
 
                 IconButton(onPressed: (){
                   copyToClipboard(context, element.textContent);
-                }, icon: Icon(LucideIcons.download, size: 18, color: Theme.of(context).colorScheme.tertiary), padding: EdgeInsets.zero),
+                }, hoverColor: Theme.of(context).colorScheme.primary, icon: Icon(LucideIcons.download, size: 18, color: Theme.of(context).colorScheme.secondary), padding: EdgeInsets.zero),
 
                 IconButton(onPressed: (){
                   copyToClipboard(context, element.textContent);
-                }, icon: Icon(LucideIcons.copy, size: 18, color: Theme.of(context).colorScheme.tertiary), padding: EdgeInsets.zero),
+                }, hoverColor: Theme.of(context).colorScheme.primary, icon: Icon(LucideIcons.copy, size: 18, color: Theme.of(context).colorScheme.secondary), padding: EdgeInsets.zero),
               ],
             ),
             ],

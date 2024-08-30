@@ -81,7 +81,7 @@ TextField textField(context, {int? lines = 1, required void Function(String)? on
 
     focusNode: focusNode,
 
-    style: TextStyle(color: textColor ?? Theme.of(context).colorScheme.tertiary, fontSize: 16, height: 2, fontFamily: 'Inter'),
+    style: TextStyle(color: textColor ?? Theme.of(context).colorScheme.tertiary, fontSize: 17, height: 2, fontFamily: 'Inter'),
 
     decoration: InputDecoration(
 
@@ -130,7 +130,7 @@ SingleChildScrollView textEncode(context, {required int words, required int char
     
         FilledButton(onPressed: (){}, style: ButtonStyle(
                                                   
-        side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
+        side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
                                                                                   
         padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text('$words words', style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
     
@@ -138,7 +138,7 @@ SingleChildScrollView textEncode(context, {required int words, required int char
     
         FilledButton(onPressed: (){}, style: ButtonStyle(
                                                   
-        side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
+        side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
                                                                                   
         padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text('$char characters', style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
     
@@ -146,7 +146,7 @@ SingleChildScrollView textEncode(context, {required int words, required int char
     
         FilledButton(onPressed: (){}, style: ButtonStyle(
                                                   
-        side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
+        side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
                                                                                   
         padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text('$lines lines', style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
       ],

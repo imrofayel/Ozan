@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:ozan/components/preferences.dart';
+import 'package:ozan/providers/preferences.dart';
 import 'package:provider/provider.dart';
 
 class SidebarDrawer extends StatefulWidget {

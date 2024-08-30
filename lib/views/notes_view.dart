@@ -1,15 +1,18 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:ozan/components/components.dart';
-import 'package:ozan/components/filter_db.dart';
-import 'package:ozan/components/preferences.dart';
-import 'package:ozan/file_service/pdf_export.dart';
-import 'package:ozan/home_window.dart';
-import 'package:ozan/navigation_provider.dart';
+import 'package:ozan/providers/filter_db.dart';
+import 'package:ozan/providers/preferences.dart';
+import 'package:ozan/components/snackbar.dart';
+import 'package:ozan/files/pdf_export.dart';
+import 'package:ozan/views/create_view.dart';
+import 'package:ozan/providers/navigation_provider.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:popover/popover.dart';
 import 'package:gap/gap.dart';
@@ -42,7 +45,7 @@ class _NotesViewState extends State<NotesView> {
             padding: const EdgeInsets.all(6.0),
             child: Container(
               
-              decoration: BoxDecoration(border: Border.all(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)), borderRadius: BorderRadius.circular(12)),
+              decoration: BoxDecoration(border: Border.all(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1)), borderRadius: BorderRadius.circular(12), color: Theme.of(context).colorScheme.primary),
             
               child: Scaffold(
                 backgroundColor: Colors.transparent,
@@ -84,11 +87,11 @@ class _NotesViewState extends State<NotesView> {
                                           FilledButton(
                                             onPressed: () {},
                                             style: ButtonStyle(
-                                              side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
+                                              side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
                                               padding: const MaterialStatePropertyAll(EdgeInsets.all(14)),
                                               overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                                               shadowColor: const MaterialStatePropertyAll(Colors.transparent),
-                                              backgroundColor: const MaterialStatePropertyAll(Colors.transparent),
+                                              backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background),
                                             ),
                                             child: Text('${notes.length} entries', style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary)),
                                           ),
@@ -101,10 +104,12 @@ class _NotesViewState extends State<NotesView> {
 
                                               String date = DateFormat('d MMM, yy').format(DateTime.now());
 
-                                                if (text.isNotEmpty) {
-                                                  value.dbHelper.insert(NotesModel(title: date, description: text, date: date, 
+                                              String name = Random().nextInt(10000000).toString();
 
-                                                  favourite: 0, tag: 'general'));
+                                                if (text.isNotEmpty) {
+                                                  value.dbHelper.insert(NotesModel(title: name, description: text, date: date, 
+
+                                                  favourite: 0, tag: 'General'));
                                             
                                                   value.initDatabase();
                                             
@@ -114,11 +119,11 @@ class _NotesViewState extends State<NotesView> {
                                             },
                     
                                             style: ButtonStyle(
-                                              side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.tertiary)),
+                                              side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
                                               padding: const MaterialStatePropertyAll(EdgeInsets.all(14)),
                                               overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                                               shadowColor: const MaterialStatePropertyAll(Colors.transparent),
-                                              backgroundColor: const MaterialStatePropertyAll(Colors.transparent),
+                                              backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background),
                                             ),
                                             child: Row(
                                               children: [
@@ -136,11 +141,11 @@ class _NotesViewState extends State<NotesView> {
                                               Provider.of<Navigation>(context, listen: false).getPage(const Markdown());
                                             },
                                             style: ButtonStyle(
-                                              side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
+                                              side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
                                               padding: const MaterialStatePropertyAll(EdgeInsets.all(14)),
                                               overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                                               shadowColor: const MaterialStatePropertyAll(Colors.transparent),
-                                              backgroundColor: const MaterialStatePropertyAll(Colors.transparent),
+                                              backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background),
                                             ),
                                             child: Row(
                                               children: [
@@ -156,7 +161,9 @@ class _NotesViewState extends State<NotesView> {
 
                                     Padding(
                                       padding: const EdgeInsets.only(right: 12.0),
-                                      child: IconButton(onPressed: (){}, icon: Icon(LucideIcons.search, size: 21, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)), style: const ButtonStyle(overlayColor: MaterialStatePropertyAll(Colors.transparent))),
+                                      child: IconButton(onPressed: (){
+                                        SnackBarUtils.showSnackbar(context, LucideIcons.badgeAlert, "This feature is under development.");
+                                      }, icon: Icon(LucideIcons.search, size: 21, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)), style: const ButtonStyle(overlayColor: MaterialStatePropertyAll(Colors.transparent))),
                                     )
                                   ],
                                 ),
@@ -189,11 +196,11 @@ class _NotesViewState extends State<NotesView> {
                                                       onPressed: () {},
                                                       style: ButtonStyle(
                                                         shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
-                                                        side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
+                                                        side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
                                                         padding: const MaterialStatePropertyAll(EdgeInsets.all(8)),
                                                         overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                                                         shadowColor: const MaterialStatePropertyAll(Colors.transparent),
-                                                        backgroundColor: const MaterialStatePropertyAll(Colors.transparent),
+                                                        backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background),
                                                       ),
                                                       child: Text(notes[index].date, style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary)),
                                                     ),
@@ -256,11 +263,11 @@ class _NotesViewState extends State<NotesView> {
                                                       onPressed: () {},
                                                       style: ButtonStyle(
                                                         shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
-                                                        side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))), 
+                                                        side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))), 
                                                         padding: const MaterialStatePropertyAll(EdgeInsets.all(8)),
                                                         overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                                                         shadowColor: const MaterialStatePropertyAll(Colors.transparent),
-                                                        backgroundColor: const MaterialStatePropertyAll(Colors.transparent),
+                                                        backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background),
                                                       ),
                                                       child: Text(
                                                         notes[index].tag,
@@ -400,8 +407,8 @@ class Delete extends StatelessWidget {
       Builder(
                                                                                   
       builder: (context) {
-      
-      return IconButton(onPressed: (){
+    
+      return IconButton(style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), onPressed: (){
                                                                 
         showPopover(context: context,
 
@@ -434,7 +441,7 @@ class Delete extends StatelessWidget {
               
               color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)), 
               
-              style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))), overlayColor: const MaterialStatePropertyAll(Colors.transparent), padding: const MaterialStatePropertyAll(EdgeInsets.all(10)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), surfaceTintColor: const MaterialStatePropertyAll(Colors.transparent)))                                                 
+              style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background), side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))), overlayColor: const MaterialStatePropertyAll(Colors.transparent), padding: const MaterialStatePropertyAll(EdgeInsets.all(10)), shadowColor: const MaterialStatePropertyAll(Colors.transparent), surfaceTintColor: const MaterialStatePropertyAll(Colors.transparent)))                                                 
               );
             },
           );                                                       

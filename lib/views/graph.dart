@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graphview/GraphView.dart';
-import 'package:ozan/navigation_provider.dart';
+import 'package:ozan/providers/navigation_provider.dart';
 import 'package:ozan/views/update_view.dart';
 import 'package:provider/provider.dart';
 import 'package:ozan/db/db_provider.dart';
@@ -30,7 +29,7 @@ class _GraphViewPageState extends State<GraphViewPage> {
       padding: const EdgeInsets.all(6.0),
       child: Container(
       
-        decoration: BoxDecoration(border: Border.all(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)), borderRadius: BorderRadius.circular(12)),
+        decoration: BoxDecoration(border: Border.all(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1)), borderRadius: BorderRadius.circular(12), color: Theme.of(context).colorScheme.primary),
         
         child: Scaffold(
 
@@ -59,7 +58,7 @@ class _GraphViewPageState extends State<GraphViewPage> {
                           graph: graph,
                           algorithm: builder,
                           paint: Paint()
-                            ..color = Theme.of(context).colorScheme.tertiary
+                            ..color = Theme.of(context).colorScheme.secondary.withOpacity(0.1)
                             ..strokeWidth = 0.6
                             ..style = PaintingStyle.stroke,
                           builder: (Node node) {
@@ -117,7 +116,7 @@ class _GraphViewPageState extends State<GraphViewPage> {
 
     for (var edge in graph.edges) {
       edge.paint = Paint()
-        ..color = Theme.of(context).colorScheme.tertiary.withOpacity(0.9)
+        ..color = Theme.of(context).colorScheme.secondary.withOpacity(0.3)
  // Change this to your desired color
         ..strokeWidth = 1.4 // Change this to your desired width
         ..style = PaintingStyle.stroke;
@@ -136,7 +135,7 @@ class _GraphViewPageState extends State<GraphViewPage> {
           color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.primary : color,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
-              color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9),
+              color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
               width: 2),
         ),
         child: Text(
@@ -170,33 +169,33 @@ class _GraphViewPageState extends State<GraphViewPage> {
   List<Color> getColor(String tag, BuildContext context) {
     if (tag == 'General') {
       return [
-        Theme.of(context).colorScheme.tertiary,
+        Theme.of(context).colorScheme.background,
         Colors.transparent,
-        Theme.of(context).colorScheme.background
+        Theme.of(context).colorScheme.tertiary
       ];
     } else if (tag == 'Work') {
       return [
-        Theme.of(context).colorScheme.tertiary,
+        Theme.of(context).colorScheme.background,
         Colors.transparent,
-        Theme.of(context).colorScheme.background
+        Theme.of(context).colorScheme.tertiary
       ];
     } else if (tag == 'Studies') {
       return [
-        Theme.of(context).colorScheme.tertiary,
+        Theme.of(context).colorScheme.background,
         Colors.transparent,
-        Theme.of(context).colorScheme.background
+        Theme.of(context).colorScheme.tertiary
       ];
     } else if (tag == 'Personal') {
       return [
-        Theme.of(context).colorScheme.tertiary,
+        Theme.of(context).colorScheme.background,
         Colors.transparent,
-        Theme.of(context).colorScheme.background
+        Theme.of(context).colorScheme.tertiary
       ];
     }
 
     return [
         Colors.white,
-        Colors.grey.shade200,
+        Theme.of(context).colorScheme.secondary.withOpacity(0.1),
         Theme.of(context).colorScheme.tertiary.withOpacity(0.9)
     ];
   }

@@ -1,14 +1,14 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:ozan/components/filter_db.dart';
-import 'package:ozan/components/preferences.dart';
 import 'package:ozan/db/db_provider.dart';
-import 'package:ozan/navigation_provider.dart';
-import 'package:ozan/theme/theme.dart';
+import 'package:ozan/providers/filter_db.dart';
+import 'package:ozan/providers/navigation_provider.dart';
 import 'package:ozan/theme/theme_provider.dart';
-import 'package:ozan/views/home.dart';
+import 'package:ozan/home.dart';
 import 'package:provider/provider.dart';
 import 'package:window_manager/window_manager.dart';
+
+import 'providers/preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,11 +17,11 @@ void main() async {
   await windowManager.ensureInitialized();
 
   WindowOptions windowOptions = const WindowOptions(
-    size: Size(650, 650),
+    size: Size(950, 600),
     center: true,
     titleBarStyle: TitleBarStyle.normal,
     title: 'Ozan',
-    minimumSize: Size(650, 650),
+    minimumSize: Size(950, 600),
   );
   windowManager.waitUntilReadyToShow(windowOptions, () async {
     await windowManager.show();
@@ -33,19 +33,8 @@ void main() async {
       ChangeNotifierProvider(create: (context) => DatabaseProvider()),
       ChangeNotifierProvider(create: (_) => FilterState()),
       ChangeNotifierProvider(create: (_) => Navigation()),
-      ChangeNotifierProvider(create: (context) => AppState()),
-         ChangeNotifierProxyProvider<AppState, ThemeSwitcher>(
-        create: (context) => ThemeSwitcher(context),
-        update: (context, appState, themeSwitcher) {
-          themeSwitcher ??= ThemeSwitcher(context);
-          if (appState.isDarkMode) {
-            themeSwitcher.themeData = Themes.darkTheme;
-          } else {
-            themeSwitcher.themeData = Themes.lightTheme;
-          }
-          return themeSwitcher;
-        },
-      ),
+      ChangeNotifierProvider(create: (_) => AppState()),
+            ChangeNotifierProvider(create: (context) => ThemeSwitcher()),
     ],
     child: ImageFiltered(imageFilter: ImageFilter.blur(sigmaX: 0.3, sigmaY: 0.3), child: const Ozan()),
   ));
@@ -70,6 +59,7 @@ class _OzanState extends State<Ozan> {
       title: "Ozan",
       debugShowCheckedModeBanner: false,
       theme: Provider.of<ThemeSwitcher>(context).themeData,
+      // theme: Brown.lightTheme,
       home: const Scaffold(
         body: Home(),
       ),

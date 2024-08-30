@@ -4,13 +4,15 @@ import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:ozan/components/snackbar.dart';
-import 'package:ozan/file_service/file_service.dart';
 import 'package:ozan/components/components.dart';
 import 'package:ozan/components/toolbar.dart';
 import 'package:ozan/db/db_provider.dart';
 import 'package:ozan/db/notes.dart';
+import 'package:ozan/files/file_service.dart';
+import 'package:ozan/markdown/markdown_styling.dart';
+import 'package:ozan/providers/navigation_provider.dart';
+import 'package:ozan/views/notes_view.dart';
 import 'package:provider/provider.dart';
-import 'markdown/markdown_style.dart';
 
 class Markdown extends StatefulWidget {
   const Markdown({super.key});
@@ -59,7 +61,7 @@ class _MarkdownState extends State<Markdown> {
         padding: const EdgeInsets.all(6.0),
         child: Container(
         
-          decoration: BoxDecoration(border: Border.all(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)), borderRadius: BorderRadius.circular(12)),
+          decoration: BoxDecoration(border: Border.all(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1)), borderRadius: BorderRadius.circular(12), color: Theme.of(context).colorScheme.primary),
         
           child: Scaffold(
 
@@ -86,6 +88,9 @@ class _MarkdownState extends State<Markdown> {
                               ));
                           value.initDatabase();
                           value.setLength();
+                          
+                          Provider.of<Navigation>(context, listen: false).getPage(const NotesView());
+
                           Markdown.files.newFile(context);
                         } else {
                           SnackBarUtils.showSnackbar(context,
@@ -94,12 +99,12 @@ class _MarkdownState extends State<Markdown> {
                       },
                       style: ButtonStyle(
                           side: MaterialStatePropertyAll(BorderSide(
-                              color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
+                              color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
                           padding: const MaterialStatePropertyAll(EdgeInsets.all(14)),
                           overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                           shadowColor: const MaterialStatePropertyAll(Colors.transparent),
-                          backgroundColor: const MaterialStatePropertyAll(
-                              Colors.transparent)),
+                          backgroundColor: MaterialStatePropertyAll(
+                              Theme.of(context).colorScheme.background)),
                       child: Text('Save',
                           style: TextStyle(
                               fontSize: 16,
@@ -134,14 +139,16 @@ class _MarkdownState extends State<Markdown> {
           
                             });
                           },
+
+                          fillColor: Theme.of(context).colorScheme.background,
                   
                           splashColor: Colors.transparent,
                   
                           hoverColor: Colors.transparent,
                           
-                          selectedBorderColor: Theme.of(context).colorScheme.tertiary.withOpacity(0.9),
+                          selectedBorderColor: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
                   
-                          borderColor: Theme.of(context).colorScheme.tertiary.withOpacity(0.9),
+                          borderColor: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
                     
                           borderRadius: BorderRadius.circular(50),
                     
@@ -160,13 +167,13 @@ class _MarkdownState extends State<Markdown> {
                                   const Gap(6),
 
                                   Text('Code', style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 17,
                                       color: Theme.of(context).colorScheme.tertiary,
                                       fontFamily: 'Inter')),
                                 ],
                               ) : 
                                 Text('Code', style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 17,
                                       color: Theme.of(context).colorScheme.tertiary,
                                       fontFamily: 'Inter')),
                             ),
@@ -184,13 +191,13 @@ class _MarkdownState extends State<Markdown> {
                                   const Gap(6),
 
                                   Text('Preview', style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 17,
                                       color: Theme.of(context).colorScheme.tertiary,
                                       fontFamily: 'Inter')),
                                 ],
                               ) : 
                                 Text('Preview', style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 17,
                                       color: Theme.of(context).colorScheme.tertiary,
                                       fontFamily: 'Inter')),
                             ),
@@ -217,15 +224,15 @@ class _MarkdownState extends State<Markdown> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
-            height: 430,
-            width: 550,
+            height: 470,
+            width: 700,
             // change md to page.text
-            child: markdown(page.text, 1.2, context)),
+            child: markdown(page.text, 1.25, context)),
         const Gap(14),
         Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+          padding: const EdgeInsets.fromLTRB(12, 0, 0, 6),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               textEncode(context,
                   words: page.text.split(' ').length - 1,
@@ -266,7 +273,7 @@ class _EditorState extends State<Editor> {
   Widget build(BuildContext context) {
     return Consumer<DatabaseProvider>(builder: (context, value, child) {
       return SizedBox(
-        width: 500,
+        width: 700,
         child: Column(
           children: [
 
@@ -274,13 +281,13 @@ class _EditorState extends State<Editor> {
             
             SegmentedButton(segments: const[
 
-              ButtonSegment(value: Tags.General, label: Text('General', style: TextStyle(fontSize: 15))),
+              ButtonSegment(value: Tags.General, label: Text('General', style: TextStyle(fontSize: 17))),
 
-              ButtonSegment(value: Tags.Studies, label: Text('Studies', style: TextStyle(fontSize: 15))),
+              ButtonSegment(value: Tags.Studies, label: Text('Studies', style: TextStyle(fontSize: 17))),
 
-              ButtonSegment(value: Tags.Work, label: Text('Work', style: TextStyle(fontSize: 15))),
+              ButtonSegment(value: Tags.Work, label: Text('Work', style: TextStyle(fontSize: 17))),
 
-              ButtonSegment(value: Tags.Personal, label: Text('Personal', style: TextStyle(fontSize: 15))),
+              ButtonSegment(value: Tags.Personal, label: Text('Personal', style: TextStyle(fontSize: 17))),
 
             ], selected: <Tags>{selected},
             
@@ -292,21 +299,21 @@ class _EditorState extends State<Editor> {
             
             style: ButtonStyle(
                 side: MaterialStatePropertyAll(BorderSide(
-                  color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
+                  color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
                   padding: const MaterialStatePropertyAll(EdgeInsets.all(14)),
                   overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                   shadowColor: const MaterialStatePropertyAll(Colors.transparent),
-                  backgroundColor: const MaterialStatePropertyAll(Colors.transparent)),
+                  backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)),
             ),
 
             toolbar(_MarkdownState.page, context),
 
             Container(
-             height: 395,
+             height: 410,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(12)),
                 border: Border.all(
-                    color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)),
+                    color: Theme.of(context).colorScheme.secondary.withOpacity(0.1)),
                 // TextBox
                 color: Colors.transparent,
               ),
@@ -320,7 +327,7 @@ class _EditorState extends State<Editor> {
                         scrollDirection: Axis.vertical,
                         child: textField(
                           context,
-                          lines: 10,
+                          lines: 11,
                           onSubmitted: (text) {
                             setState(() {
                               _MarkdownState.page.text += '\n';

@@ -5,7 +5,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:ozan/components/snackbar.dart';
-import '../home_window.dart';
+import 'package:ozan/views/create_view.dart';
 
 class FileService {
   
@@ -50,41 +50,6 @@ Future<void> saveContent(context) async {
     );
   }
 }
-
-  // Future<void> saveContent(context) async {
-
-  //   final content = markdown.text;
-
-  //   String? filePath;
-
-  //   try {
-
-  //     if (_selectedFile != null) {
-
-  //       await _selectedFile!.writeAsString(content);
-
-  //     } else {
-
-  //       String metadataDirPath = _selectedDirectory!;
-
-  //       if (metadataDirPath.isEmpty) {
-  //         final directory = await FilePicker.platform.getDirectoryPath();
-  //         _selectedDirectory = metadataDirPath = directory!;
-  //       }
-
-  //       filePath = '$metadataDirPath\\${$title.text.isNotEmpty ? $title.text : title()}.md';
-
-  //       final newFile = File(filePath);
-  //       await newFile.writeAsString(content);
-  //     }
-
-  //     SnackBarUtils.showSnackbar(
-  //         context, Icons.check, "File Saved at ${filePath ?? _selectedDirectory}");
-  //   } catch (e) {
-  //     SnackBarUtils.showSnackbar(context, FluentIcons.warning_24_regular, "Unexpected error occurred");
-  //   }
-  // }
-
   void newFile(context) {
     _selectedFile = null;
     _selectedDirectory = '';

@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ozan/db/db_provider.dart';
-import 'package:ozan/components/sidebar.dart';
-import 'package:ozan/navigation_provider.dart';
+import 'package:ozan/components/sidebar&AI.dart';
+import 'package:ozan/providers/navigation_provider.dart';
 import 'package:provider/provider.dart';
-
-import '../components/drawer.dart';
-
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -22,9 +19,7 @@ class _HomeState extends State<Home> {
       Consumer<DatabaseProvider>(builder:(context, value, child){
       
         return Scaffold(
-      
-          endDrawer:  const SidebarDrawer(),
-          
+                
           body: Row(
           
             crossAxisAlignment: CrossAxisAlignment.start,

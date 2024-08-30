@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_markdown_latex/flutter_markdown_latex.dart';
 import 'package:markdown/markdown.dart' as md;
-import 'package:ozan/markdown/colors/colored.dart';
-import 'package:ozan/markdown/colors/highlight.dart';
-import 'package:ozan/markdown/strike.dart';
-import 'package:ozan/markdown/wavy.dart';
+import 'package:ozan/markdown/extensions/strikethrough.dart';
+import 'package:ozan/markdown/extensions/wavy_underline.dart';
+import 'package:ozan/markdown/highlighting/colored.dart';
+import 'package:ozan/markdown/highlighting/highlight.dart';
 
 class MarkdownStyle{
 
@@ -17,7 +17,7 @@ class MarkdownStyle{
 
           codeblockDecoration: BoxDecoration(color: Theme.of(context).colorScheme.primary.withOpacity(0.9), borderRadius: BorderRadius.circular(10), border: Border.all(color: Theme.of(context).colorScheme.secondary)),
 
-          p: TextStyle(fontSize: 14.5, color: Theme.of(context).colorScheme.tertiary),
+          p: TextStyle(fontSize: 13.5, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9)),
 
           h2: const TextStyle(fontSize: 17),
 
@@ -52,7 +52,7 @@ class MarkdownStyle{
 
           em: const TextStyle(fontStyle: FontStyle.italic),
 
-          listBullet: TextStyle(fontSize: 17, color: Theme.of(context).colorScheme.tertiary),
+          listBullet: TextStyle(fontSize: 17, color: Theme.of(context).colorScheme.secondary),
 
           listBulletPadding: const EdgeInsets.only(right: 14)
 

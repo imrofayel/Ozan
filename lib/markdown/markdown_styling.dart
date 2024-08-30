@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_markdown_latex/flutter_markdown_latex.dart';
 import 'package:markdown/markdown.dart' as md;
-import 'package:ozan/markdown/colors/colored.dart';
-import 'package:ozan/markdown/colors/highlight.dart';
-import 'package:ozan/markdown/strike.dart';
-import 'package:ozan/markdown/syntax.dart';
-import 'package:ozan/markdown/wavy.dart';
+import 'package:ozan/markdown/extensions/strikethrough.dart';
+import 'package:ozan/markdown/extensions/syntax_highlight.dart';
+import 'package:ozan/markdown/extensions/wavy_underline.dart';
+import 'package:ozan/markdown/highlighting/highlight.dart';
+
+import 'highlighting/colored.dart';
 Markdown markdown(String data, double scale, context){
 
   return Markdown(
@@ -63,9 +64,9 @@ Markdown markdown(String data, double scale, context){
     
       styleSheet: MarkdownStyleSheet(
 
-          a: const TextStyle(color: Color.fromRGBO(19, 69, 137, 1), height: 1.6, decoration: TextDecoration.underline, decorationColor: Color.fromRGBO(223, 151, 173, 1), decorationThickness: 2),
+          a: TextStyle(color: const Color.fromRGBO(19, 69, 137, 1), height: 1.6, decoration: TextDecoration.underline, decorationColor: Theme.of(context).colorScheme.secondary, decorationThickness: 2),
 
-          codeblockDecoration: BoxDecoration(color: Colors.transparent, borderRadius: BorderRadius.circular(10), border: Border.all(color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9))),
+          codeblockDecoration: BoxDecoration(color: Theme.of(context).colorScheme.background, borderRadius: BorderRadius.circular(10), border: Border.all(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
 
           p: TextStyle(color: Theme.of(context).colorScheme.tertiary, height: 1.6),
 
@@ -91,7 +92,7 @@ Markdown markdown(String data, double scale, context){
 
           blockquoteDecoration: BoxDecoration(
             
-            color:  Theme.of(context).colorScheme.primary.withOpacity(0.9),
+            color:  Theme.of(context).colorScheme.background,
 
             borderRadius: const BorderRadius.all(Radius.circular(16)),
           ),
