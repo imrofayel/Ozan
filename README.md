@@ -8,6 +8,9 @@ Ozan — a personal knowledge base and journal application that combines simplic
 
 ![Screenshot 2024-08-29 115931](https://github.com/user-attachments/assets/37d23f97-096d-4655-ab79-fea9bd1de021)
 
+![Screenshot 2024-08-30 141259](https://github.com/user-attachments/assets/5247eac4-271f-4a88-83e2-65991f2a9975)
+
+
 1. **Markdown Support:** Write notes using simple markdown syntax, with support for LaTeX, syntax highlighting for code blocks, and many custom features.
 
 2. **Graph View:** Visualize your notes and ideas with a graph view to easily navigate your content.
