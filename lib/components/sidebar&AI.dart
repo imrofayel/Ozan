@@ -10,6 +10,7 @@ import 'package:ozan/providers/filter_db.dart';
 import 'package:ozan/providers/preferences.dart';
 import 'package:ozan/components/snackbar.dart';
 import 'package:ozan/providers/navigation_provider.dart';
+import 'package:ozan/theme/theme_provider.dart';
 import 'package:ozan/views/graph.dart';
 import 'package:ozan/views/notes_view.dart';
 import 'package:ozan/views/settings.dart';
@@ -106,6 +107,19 @@ class _SidebarState extends State<Sidebar> {
       
                 Column(
                   children: [
+
+                    InkWell(splashFactory: null, overlayColor: const MaterialStatePropertyAll(Colors.transparent), onTap: () => Provider.of<ThemeSwitcher>(context, listen: false).toggleGreen(), child: Container(width: 12, height: 12, decoration: BoxDecoration(color: Colors.greenAccent, borderRadius: BorderRadius.circular(100)))),
+
+                    const Gap(30),
+
+                    InkWell(splashFactory: null, overlayColor: const MaterialStatePropertyAll(Colors.transparent), onTap: () => Provider.of<ThemeSwitcher>(context, listen: false).toggleBrown(),  child: Container(width: 12, height: 12, decoration: BoxDecoration(color: Colors.brown, borderRadius: BorderRadius.circular(100)))),
+
+                    const Gap(30),
+
+                    InkWell(splashFactory: null, overlayColor: const MaterialStatePropertyAll(Colors.transparent), onTap: () => Provider.of<ThemeSwitcher>(context, listen: false).toggleBlue(), child: Container(width: 12, height: 12, decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(100)))),
+
+                    const Gap(40),
+
                     _buildIconButton(LucideIcons.trash, 21, (){
                         SnackBarUtils.showSnackbar(context, LucideIcons.badgeAlert, "This feature is under development.");
                       }, 'Trash'),
@@ -115,6 +129,7 @@ class _SidebarState extends State<Sidebar> {
                       _buildIconButton(LucideIcons.messageCircle, 21, (){
                         _openAIChat(context);
                       }, 'Ask AI'),
+                  
                   ]
                 )
               ],

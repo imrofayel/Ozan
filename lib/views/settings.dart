@@ -2,9 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import 'package:ozan/components/snackbar.dart';
 import 'package:ozan/providers/preferences.dart';
-import 'package:ozan/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class Settings extends StatefulWidget {
@@ -73,10 +71,6 @@ class _SettingsState extends State<Settings> {
               const Gap(20),
                     
               _buildAboutContainer(context),
-
-              const Gap(20),
-
-              _buildThemeChanger(context),
 
             ],
           ),
@@ -251,80 +245,6 @@ class _SettingsState extends State<Settings> {
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildThemeChanger(BuildContext context){
-    return Column(
-      children: [
-
-        const Row(
-          children: [
-
-            Icon(LucideIcons.paintBucket),
-
-            Gap(10),
-
-            Text('look and feel', style: TextStyle(fontSize: 18)),
-          ],
-        ),
-
-        const Gap(25),
-
-        Row(
-          children: [
-
-            InkWell(
-              
-              onTap: () => {
-                SnackBarUtils.showSnackbar(context, LucideIcons.paintBucket, 'Theme Selected'),
-
-
-              },
-
-              child: Container(
-                decoration: BoxDecoration(color: Colors.blue.shade100, borderRadius: BorderRadius.circular(100)),
-              
-                height: 50, width: 50,
-              ),
-            ),
-
-            const Gap(15),
-
-            InkWell(
-              
-              onTap: () => {
-
-                Provider.of<ThemeSwitcher>(context, listen: false).toggleTheme(),
-
-                SnackBarUtils.showSnackbar(context, LucideIcons.paintBucket, 'Theme Selected')
-              },
-
-              child: Container(
-                decoration: BoxDecoration(color: Colors.greenAccent.shade100, borderRadius: BorderRadius.circular(100)),
-              
-                height: 50, width: 50,
-              ),
-            ),
-
-            const Gap(15),
-
-            InkWell(
-              
-              onTap: () => {
-                SnackBarUtils.showSnackbar(context, LucideIcons.paintBucket, 'Theme Selected')
-              },
-
-              child: Container(
-                decoration: BoxDecoration(color: const Color.fromARGB(255, 255, 247, 203), borderRadius: BorderRadius.circular(100)),
-              
-                height: 50, width: 50,
-              ),
-            ),
-          ],
-        )
-
-      ], 
     );
   }
 }
