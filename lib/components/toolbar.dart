@@ -55,6 +55,9 @@ Widget toolbar(TextEditingController controller, context){
 
             const Gap(6),
 
+            IconButton(onPressed: () => applyFormatting(controller, '\$'), icon: Icon(LucideIcons.removeFormatting, size: 20, color: Theme.of(context).colorScheme.tertiary), tooltip: "Equation", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary))),
+            const Gap(6),
+
             IconButton(onPressed: () => applyFormatting(controller, '=='), icon: Icon(LucideIcons.highlighter, size: 20, color: Theme.of(context).colorScheme.tertiary), tooltip: "Highlighter", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary))),
 
             const Gap(6),

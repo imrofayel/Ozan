@@ -1,10 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:ozan/providers/filter_db.dart';
@@ -451,7 +449,7 @@ class _NotesViewState extends State<NotesView> {
                                                                     size: 21),
                                                               )),
                                                           SizedBox(
-                                                              child: Delete(
+                                                              child: Delete(index: index,
                                                                   id: notes[
                                                                           index]
                                                                       .id)),
@@ -824,14 +822,21 @@ class _NotesViewState extends State<NotesView> {
 
 // ignore: must_be_immutable
 class Delete extends StatelessWidget {
-  Delete({super.key, required this.id});
+  Delete({super.key, required this.id, required this.index});
 
   int? id;
+
+  int index;
 
   @override
   Widget build(BuildContext context) {
     return Consumer<DatabaseProvider>(
-      builder: (context, value, child) => Builder(builder: (context) {
+      builder: (context, value, child) => Builder(builder: (context){
+
+        var notes = [];
+
+        value.notesList.then((value) => notes = value);
+
         return IconButton(
             style: ButtonStyle(
                 overlayColor: MaterialStatePropertyAll(
@@ -846,39 +851,95 @@ class Delete extends StatelessWidget {
                 arrowWidth: 0,
                 arrowHeight: 0,
                 bodyBuilder: (context) {
-                  return SizedBox(
-                      child: IconButton(
-                          onPressed: () {
-                            value.dbHelper.delete(id);
-
-                            value.initDatabase();
-
-                            value.setLength();
-
-                            Navigator.pop(context);
-                          },
-                          icon: Icon(LucideIcons.trash,
-                              size: 20,
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .tertiary
-                                  .withOpacity(0.9)),
-                          style: ButtonStyle(
-                              backgroundColor: MaterialStatePropertyAll(
-                                  Theme.of(context).colorScheme.background),
-                              side: MaterialStatePropertyAll(BorderSide(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .secondary
-                                      .withOpacity(0.1))),
-                              overlayColor: const MaterialStatePropertyAll(
-                                  Colors.transparent),
-                              padding: const MaterialStatePropertyAll(
-                                  EdgeInsets.all(10)),
-                              shadowColor: const MaterialStatePropertyAll(
-                                  Colors.transparent),
-                              surfaceTintColor: const MaterialStatePropertyAll(
-                                  Colors.transparent))));
+                  return Row(
+                    children: [
+                      Tooltip(
+                  
+                        message: 'Delete',
+                  
+                        child: SizedBox(
+                            child: IconButton(
+                                onPressed: () {
+                                  value.dbHelper.delete(id);
+                        
+                                  value.initDatabase();
+                        
+                                  value.setLength();
+                        
+                                  Navigator.pop(context);
+                                },
+                                icon: Icon(LucideIcons.trash,
+                                    size: 20,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .tertiary
+                                        .withOpacity(0.9)),
+                                style: ButtonStyle(
+                                    backgroundColor: MaterialStatePropertyAll(
+                                        Theme.of(context).colorScheme.background),
+                                    side: MaterialStatePropertyAll(BorderSide(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary
+                                            .withOpacity(0.1))),
+                                    overlayColor: const MaterialStatePropertyAll(
+                                        Colors.transparent),
+                                    padding: const MaterialStatePropertyAll(
+                                        EdgeInsets.all(10)),
+                                    shadowColor: const MaterialStatePropertyAll(
+                                        Colors.transparent),
+                                    surfaceTintColor: const MaterialStatePropertyAll(
+                                        Colors.transparent)))),
+                      ),
+                  
+                        const Gap(10),
+                  
+                        Tooltip(
+                  
+                          message: 'Duplicate',
+                  
+                          child: SizedBox(
+                            child: IconButton(
+                                onPressed: () {
+                                  
+                                  value.dbHelper.insert(NotesModel(
+                                      title: notes[index].title,
+                                      description: notes[index].description,
+                                      date: DateFormat('d MMM, yy').format(DateTime.now()),
+                  
+                                      favourite: 0,
+                                      tag: notes[index].tag,
+                                      ));
+                                  value.initDatabase();
+                                  value.setLength();
+                                                
+                                  Navigator.pop(context);
+                                },
+                                icon: Icon(LucideIcons.files,
+                                    size: 20,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .tertiary
+                                        .withOpacity(0.9)),
+                                style: ButtonStyle(
+                                    backgroundColor: MaterialStatePropertyAll(
+                                        Theme.of(context).colorScheme.background),
+                                    side: MaterialStatePropertyAll(BorderSide(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary
+                                            .withOpacity(0.1))),
+                                    overlayColor: const MaterialStatePropertyAll(
+                                        Colors.transparent),
+                                    padding: const MaterialStatePropertyAll(
+                                        EdgeInsets.all(10)),
+                                    shadowColor: const MaterialStatePropertyAll(
+                                        Colors.transparent),
+                                    surfaceTintColor: const MaterialStatePropertyAll(
+                                        Colors.transparent)))),
+                        ),
+                    ],
+                  );
                 },
               );
             },
