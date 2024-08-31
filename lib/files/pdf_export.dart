@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:ozan/db/notes.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -8,13 +9,18 @@ import 'package:file_picker/file_picker.dart';
 import 'dart:io';
 
 class PdfExport {
-  static final fontData = File('assets/RobotoMono.ttf').readAsBytesSync();
-  static final customFont = pw.Font.ttf(fontData.buffer.asByteData());
-
-  static final textfontData = File('assets/Inter.ttf').readAsBytesSync();
-  static final textcustomFont = pw.Font.ttf(textfontData.buffer.asByteData());
 
   static Future generateAndSavePDF(context, NotesModel note) async {
+
+   // ignore: prefer_typing_uninitialized_variables
+    final fontData = await rootBundle.load('assets/RobotoMono.ttf');
+
+    final textfontData = await rootBundle.load('assets/Inter.ttf');
+
+    final customFont = pw.Font.ttf(fontData);
+
+    final textcustomFont = pw.Font.ttf(textfontData);  
+
     final pdf = pw.Document();
 
     final List<pw.Widget> contentWidgets = [
@@ -31,7 +37,7 @@ class PdfExport {
 
       pw.SizedBox(height: 20),
 
-      ...parseMarkdown(note.description),
+      ...parseMarkdown(note.description, customFont, textcustomFont),
     ];
 
     pdf.addPage(
@@ -80,7 +86,7 @@ class PdfExport {
     SnackBarUtils.showSnackbar(context, Iconsax.tick_circle, 'PDF exported successfully at $outputFile');
   }
 
-  static List<pw.Widget> parseMarkdown(String markdown) {
+  static List<pw.Widget> parseMarkdown(String markdown, customFont, textcustomFont) {
     List<pw.Widget> widgets = [];
     List<String> lines = markdown.split('\n');
     bool inCodeBlock = false;
@@ -94,7 +100,7 @@ class PdfExport {
     for (String line in lines) {
       if (line.trim().startsWith('```')) {
         if (inCodeBlock) {
-          widgets.add(renderCodeBlock(codeBlockContent, codeBlockLang, customFont));
+          widgets.add(renderCodeBlock(codeBlockContent, codeBlockLang, customFont, textcustomFont));
           codeBlockContent = '';
           codeBlockLang = '';
           inCodeBlock = false;
@@ -118,7 +124,7 @@ class PdfExport {
         tableData.add(line.split('|').map((cell) => cell.trim()).toList());
         continue;
       } else if (inTable) {
-        widgets.add(renderTable(tableData));
+        widgets.add(renderTable(tableData, textcustomFont));
         inTable = false;
         tableData = [];
       }
@@ -131,36 +137,36 @@ class PdfExport {
         quoteContent += '${line.substring(line.indexOf('>') + 1).trim()}\n';
         continue;
       } else if (inQuote) {
-        widgets.add(renderQuote(quoteContent.trim()));
+        widgets.add(renderQuote(quoteContent.trim(), textcustomFont));
         inQuote = false;
         quoteContent = '';
       }
 
       if (line.trim().startsWith('-') || line.trim().startsWith('*')) {
-        widgets.add(renderBulletPoint(line));
+        widgets.add(renderBulletPoint(line, textcustomFont));
       } else if (line.trim().startsWith('#')) {
-        widgets.add(renderHeader(line));
+        widgets.add(renderHeader(line, textcustomFont));
       } else {
-        widgets.add(renderParagraph(line));
+        widgets.add(renderParagraph(line, textcustomFont));
       }
     }
 
     if (inCodeBlock) {
-      widgets.add(renderCodeBlock(codeBlockContent, codeBlockLang, customFont));
+      widgets.add(renderCodeBlock(codeBlockContent, codeBlockLang, customFont, textcustomFont));
     }
 
     if (inTable) {
-      widgets.add(renderTable(tableData));
+      widgets.add(renderTable(tableData, textcustomFont));
     }
 
     if (inQuote) {
-      widgets.add(renderQuote(quoteContent.trim()));
+      widgets.add(renderQuote(quoteContent.trim(), textcustomFont));
     }
 
     return widgets;
   }
 
-  static pw.Widget renderHeader(String line) {
+  static pw.Widget renderHeader(String line, textcustomFont) {
     int level = line.indexOf(' ');
     String text = line.substring(level + 1);
     double fontSize = 20 - (level * 3);
@@ -174,13 +180,13 @@ class PdfExport {
     ]);
   }
 
-  static pw.Widget renderParagraph(String line) {
+  static pw.Widget renderParagraph(String line, textcustomFont) {
     return pw.Column(
       children: [
         pw.SizedBox(height: 4),
         pw.RichText(
           text: pw.TextSpan(
-            children: parseParagraph(line),
+            children: parseParagraph(line, textcustomFont),
             style: pw.TextStyle(lineSpacing: 5, fontSize: 12, font: textcustomFont, color: PdfColors.blueGrey900)
           )
         ),
@@ -189,7 +195,7 @@ class PdfExport {
     );
   }
 
-  static List<pw.TextSpan> parseParagraph(String text) {
+  static List<pw.TextSpan> parseParagraph(String text, textcustomFont) {
     List<pw.TextSpan> spans = [];
     RegExp exp = RegExp(r'\*\*(.+?)\*\*|\*(.+?)\*|\[(.+?)\]\((.+?)\)');
     int lastMatch = 0;
@@ -215,7 +221,7 @@ class PdfExport {
           style: pw.TextStyle(fontStyle: pw.FontStyle.italic, font: textcustomFont, fontSize: 12, color: PdfColors.blueGrey900),
         ));
       } else if (linkText != null && linkUrl != null) {
-        spans.add(renderLink(linkText, linkUrl));
+        spans.add(renderLink(linkText, linkUrl, textcustomFont));
       }
 
       lastMatch = match.end;
@@ -228,7 +234,7 @@ class PdfExport {
     return spans;
   }
 
-  static pw.TextSpan renderLink(String text, String url) {
+  static pw.TextSpan renderLink(String text, String url, textcustomFont) {
     return pw.TextSpan(
       text: text,
       style: pw.TextStyle(
@@ -241,7 +247,7 @@ class PdfExport {
     );
   }
 
-  static pw.Widget renderQuote(String text) {
+  static pw.Widget renderQuote(String text, textcustomFont) {
     return pw.Container(
       decoration: pw.BoxDecoration(
         borderRadius: pw.BorderRadius.circular(6),
@@ -280,7 +286,7 @@ class PdfExport {
     );
   }
 
-  static pw.Widget renderCodeBlock(String code, String lang, pw.Font customFont) {
+  static pw.Widget renderCodeBlock(String code, String lang, pw.Font customFont, textcustomFont) {
     String languageLabel = lang.isNotEmpty ? lang : 'txt';
 
     return pw.Container(
@@ -322,7 +328,7 @@ class PdfExport {
     );
   }
 
-  static pw.Widget renderBulletPoint(String line) {
+  static pw.Widget renderBulletPoint(String line, textcustomFont) {
     String text = line.trim().substring(1).trim();
     return pw.Padding(
       padding: const pw.EdgeInsets.only(left: 20, bottom: 5),
@@ -339,7 +345,7 @@ class PdfExport {
     );
   }
 
-static pw.Widget renderTable(List<List<String>> tableData) {
+static pw.Widget renderTable(List<List<String>> tableData, textcustomFont) {
   // Remove the markdown separator row (usually the second row)
   tableData.removeWhere((row) => row.every((cell) => cell.trim().startsWith('-')));
 

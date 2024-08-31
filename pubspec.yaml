@@ -83,12 +83,14 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   # assets:
-    # - assets/icons/memo.png
-    # # - assets/icons/download.png
+  #   - assets/icons/memo.png
+    # - assets/icons/download.png
     # # - assets/icons/heart.png
     # - assets/icons/pen.png
     # - assets/icons/folder.gif
-
+  assets:
+      - assets/RobotoMono.ttf
+      - assets/Inter.ttf
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
