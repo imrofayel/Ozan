@@ -69,7 +69,31 @@ class _MarkdownState extends State<Markdown> {
             appBar: AppBar(
               toolbarHeight: 70,
               title: Expanded(
-                  child: titleBox(context, controller: pageTitle, enabled: enableTitle)),
+                  child: TextField(
+
+                  controller: pageTitle,
+
+                  enabled: enableTitle,
+
+                  decoration: InputDecoration(
+
+                    hintText: "Untitled",
+
+                    hintStyle: TextStyle(color: Theme.of(context).colorScheme.tertiary),
+
+                    constraints: const BoxConstraints(maxWidth: 400),
+
+                    focusColor: Colors.transparent,
+
+                    hoverColor: Colors.transparent,
+
+                    border: InputBorder.none
+
+                  ),
+
+                  style: TextStyle(fontSize: 24, color: Theme.of(context).colorScheme.tertiary),
+                )
+              ),
               centerTitle: false,
               actions: [
                 Padding(

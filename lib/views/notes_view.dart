@@ -82,192 +82,190 @@ class _NotesViewState extends State<NotesView> {
 
                             return Expanded(
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              15, 15, 15, 0),
-                                          child: Row(
-                                            children: [
-                                              FilledButton(
-                                                onPressed: () {},
-                                                style: ButtonStyle(
-                                                  side: MaterialStatePropertyAll(
-                                                      BorderSide(
-                                                          color: Theme.of(context)
-                                                              .colorScheme
-                                                              .secondary
-                                                              .withOpacity(0.1))),
-                                                  padding:
-                                                      const MaterialStatePropertyAll(
-                                                          EdgeInsets.all(14)),
-                                                  overlayColor:
-                                                      const MaterialStatePropertyAll(
-                                                          Colors.transparent),
-                                                  shadowColor:
-                                                      const MaterialStatePropertyAll(
-                                                          Colors.transparent),
-                                                  backgroundColor:
-                                                      MaterialStatePropertyAll(
-                                                          Theme.of(context)
-                                                              .colorScheme
-                                                              .background),
-                                                ),
-                                                child: Text(
-                                                    '${notes.length} entries',
-                                                    style: TextStyle(
-                                                        fontSize: 16,
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            15, 15, 15, 0),
+                                        child: Row(
+                                          children: [
+                                            FilledButton(
+                                              onPressed: () {},
+                                              style: ButtonStyle(
+                                                side: MaterialStatePropertyAll(
+                                                    BorderSide(
                                                         color: Theme.of(context)
                                                             .colorScheme
-                                                            .tertiary)),
-                                              ),
-                                              const Gap(14),
-                                              FilledButton(
-                                                onPressed: () async {
-                                                  String text = await Markdown
-                                                      .files
-                                                      .loadFile(context);
-                                    
-                                                  String date =
-                                                      DateFormat('d MMM, yy')
-                                                          .format(DateTime.now());
-                                    
-                                                  String name = Random()
-                                                      .nextInt(10000000)
-                                                      .toString();
-                                    
-                                                  if (text.isNotEmpty) {
-                                                    value.dbHelper.insert(
-                                                        NotesModel(
-                                                            title: name,
-                                                            description: text,
-                                                            date: date,
-                                                            favourite: 0,
-                                                            tag: 'General'));
-                                    
-                                                    value.initDatabase();
-                                    
-                                                    value.setLength();
-                                                  }
-                                                },
-                                                style: ButtonStyle(
-                                                  side: MaterialStatePropertyAll(
-                                                      BorderSide(
-                                                          color: Theme.of(context)
-                                                              .colorScheme
-                                                              .secondary
-                                                              .withOpacity(0.1))),
-                                                  padding:
-                                                      const MaterialStatePropertyAll(
-                                                          EdgeInsets.all(14)),
-                                                  overlayColor:
-                                                      const MaterialStatePropertyAll(
-                                                          Colors.transparent),
-                                                  shadowColor:
-                                                      const MaterialStatePropertyAll(
-                                                          Colors.transparent),
-                                                  backgroundColor:
-                                                      MaterialStatePropertyAll(
-                                                          Theme.of(context)
-                                                              .colorScheme
-                                                              .background),
-                                                ),
-                                                child: Row(
-                                                  children: [
-                                                    Icon(CupertinoIcons.folder,
-                                                        color: Theme.of(context)
+                                                            .secondary
+                                                            .withOpacity(0.1))),
+                                                padding:
+                                                    const MaterialStatePropertyAll(
+                                                        EdgeInsets.all(14)),
+                                                overlayColor:
+                                                    const MaterialStatePropertyAll(
+                                                        Colors.transparent),
+                                                shadowColor:
+                                                    const MaterialStatePropertyAll(
+                                                        Colors.transparent),
+                                                backgroundColor:
+                                                    MaterialStatePropertyAll(
+                                                        Theme.of(context)
                                                             .colorScheme
-                                                            .tertiary,
-                                                        size: 18),
-                                                    const Gap(8),
-                                                    Text('Open',
-                                                        style: TextStyle(
-                                                            fontSize: 16,
-                                                            color:
-                                                                Theme.of(context)
-                                                                    .colorScheme
-                                                                    .tertiary)),
-                                                  ],
-                                                ),
+                                                            .background),
                                               ),
-                                              const Gap(10),
-                                              FilledButton(
-                                                onPressed: () {
-                                                  Provider.of<Navigation>(context,
-                                                          listen: false)
-                                                      .getPage(const Markdown());
-                                                },
-                                                style: ButtonStyle(
-                                                  side: MaterialStatePropertyAll(
-                                                      BorderSide(
-                                                          color: Theme.of(context)
-                                                              .colorScheme
-                                                              .secondary
-                                                              .withOpacity(0.1))),
-                                                  padding:
-                                                      const MaterialStatePropertyAll(
-                                                          EdgeInsets.all(14)),
-                                                  overlayColor:
-                                                      const MaterialStatePropertyAll(
-                                                          Colors.transparent),
-                                                  shadowColor:
-                                                      const MaterialStatePropertyAll(
-                                                          Colors.transparent),
-                                                  backgroundColor:
-                                                      MaterialStatePropertyAll(
-                                                          Theme.of(context)
-                                                              .colorScheme
-                                                              .background),
-                                                ),
-                                                child: Row(
-                                                  children: [
-                                                    Icon(CupertinoIcons.pencil,
-                                                        color: Theme.of(context)
-                                                            .colorScheme
-                                                            .tertiary,
-                                                        size: 19),
-                                                    const Gap(4),
-                                                    Text('Write',
-                                                        style: TextStyle(
-                                                            fontSize: 16,
-                                                            color:
-                                                                Theme.of(context)
-                                                                    .colorScheme
-                                                                    .tertiary)),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 12.0),
-                                          child: IconButton(
-                                              onPressed: () {
-                                                SnackBarUtils.showSnackbar(
-                                                    context,
-                                                    LucideIcons.badgeAlert,
-                                                    "This feature is under development.");
+                                              child: Text(
+                                                  '${notes.length} entries',
+                                                  style: TextStyle(
+                                                      fontSize: 16,
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .tertiary)),
+                                            ),
+                                            const Gap(14),
+                                            FilledButton(
+                                              onPressed: () async {
+                                                String text = await Markdown
+                                                    .files
+                                                    .loadFile(context);
+                                  
+                                                String date =
+                                                    DateFormat('d MMM, yy')
+                                                        .format(DateTime.now());
+                                  
+                                                String name = Random()
+                                                    .nextInt(10000000)
+                                                    .toString();
+                                  
+                                                if (text.isNotEmpty) {
+                                                  value.dbHelper.insert(
+                                                      NotesModel(
+                                                          title: name,
+                                                          description: text,
+                                                          date: date,
+                                                          favourite: 0,
+                                                          tag: 'General'));
+                                  
+                                                  value.initDatabase();
+                                  
+                                                  value.setLength();
+                                                }
                                               },
-                                              icon: Icon(LucideIcons.search,
-                                                  size: 21,
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .tertiary
-                                                      .withOpacity(0.9)),
-                                              style: const ButtonStyle(
-                                                  overlayColor:
-                                                      MaterialStatePropertyAll(
-                                                          Colors.transparent))),
-                                        )
-                                      ],
-                                    ),
+                                              style: ButtonStyle(
+                                                side: MaterialStatePropertyAll(
+                                                    BorderSide(
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .secondary
+                                                            .withOpacity(0.1))),
+                                                padding:
+                                                    const MaterialStatePropertyAll(
+                                                        EdgeInsets.all(14)),
+                                                overlayColor:
+                                                    const MaterialStatePropertyAll(
+                                                        Colors.transparent),
+                                                shadowColor:
+                                                    const MaterialStatePropertyAll(
+                                                        Colors.transparent),
+                                                backgroundColor:
+                                                    MaterialStatePropertyAll(
+                                                        Theme.of(context)
+                                                            .colorScheme
+                                                            .background),
+                                              ),
+                                              child: Row(
+                                                children: [
+                                                  Icon(CupertinoIcons.folder,
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .tertiary,
+                                                      size: 18),
+                                                  const Gap(8),
+                                                  Text('Open',
+                                                      style: TextStyle(
+                                                          fontSize: 16,
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .colorScheme
+                                                                  .tertiary)),
+                                                ],
+                                              ),
+                                            ),
+                                            const Gap(10),
+                                            FilledButton(
+                                              onPressed: () {
+                                                Provider.of<Navigation>(context,
+                                                        listen: false)
+                                                    .getPage(const Markdown());
+                                              },
+                                              style: ButtonStyle(
+                                                side: MaterialStatePropertyAll(
+                                                    BorderSide(
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .secondary
+                                                            .withOpacity(0.1))),
+                                                padding:
+                                                    const MaterialStatePropertyAll(
+                                                        EdgeInsets.all(14)),
+                                                overlayColor:
+                                                    const MaterialStatePropertyAll(
+                                                        Colors.transparent),
+                                                shadowColor:
+                                                    const MaterialStatePropertyAll(
+                                                        Colors.transparent),
+                                                backgroundColor:
+                                                    MaterialStatePropertyAll(
+                                                        Theme.of(context)
+                                                            .colorScheme
+                                                            .background),
+                                              ),
+                                              child: Row(
+                                                children: [
+                                                  Icon(CupertinoIcons.pencil,
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .tertiary,
+                                                      size: 19),
+                                                  const Gap(4),
+                                                  Text('Write',
+                                                      style: TextStyle(
+                                                          fontSize: 16,
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .colorScheme
+                                                                  .tertiary)),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 12.0),
+                                        child: IconButton(
+                                            onPressed: () {
+                                              SnackBarUtils.showSnackbar(
+                                                  context,
+                                                  LucideIcons.badgeAlert,
+                                                  "This feature is under development.");
+                                            },
+                                            icon: Icon(LucideIcons.search,
+                                                size: 21,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .tertiary
+                                                    .withOpacity(0.9)),
+                                            style: const ButtonStyle(
+                                                overlayColor:
+                                                    MaterialStatePropertyAll(
+                                                        Colors.transparent))),
+                                      )
+                                    ],
                                   ),
                                   const Gap(14),
                                   Expanded(
