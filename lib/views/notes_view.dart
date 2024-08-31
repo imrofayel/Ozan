@@ -7,10 +7,10 @@ import 'package:intl/intl.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:ozan/providers/filter_db.dart';
 import 'package:ozan/providers/preferences.dart';
-import 'package:ozan/components/snackbar.dart';
 import 'package:ozan/files/pdf_export.dart';
 import 'package:ozan/views/create_view.dart';
 import 'package:ozan/providers/navigation_provider.dart';
+import 'package:ozan/views/search_view.dart';
 import 'package:popover/popover.dart';
 import 'package:gap/gap.dart';
 import 'package:ozan/db/db_provider.dart';
@@ -247,10 +247,9 @@ class _NotesViewState extends State<NotesView> {
                                             const EdgeInsets.only(right: 12.0),
                                         child: IconButton(
                                             onPressed: () {
-                                              SnackBarUtils.showSnackbar(
-                                                  context,
-                                                  LucideIcons.badgeAlert,
-                                                  "This feature is under development.");
+                                              
+                                            Provider.of<Navigation>(context, listen: false).getPage(const SearchPage());
+
                                             },
                                             icon: Icon(LucideIcons.search,
                                                 size: 21,
@@ -740,10 +739,9 @@ class _NotesViewState extends State<NotesView> {
                                             const EdgeInsets.only(right: 12.0),
                                         child: IconButton(
                                             onPressed: () {
-                                              SnackBarUtils.showSnackbar(
-                                                  context,
-                                                  LucideIcons.badgeAlert,
-                                                  "This feature is under development.");
+                                              
+                                              Provider.of<Navigation>(context, listen: false).getPage(const SearchPage());
+
                                             },
                                             icon: Icon(LucideIcons.search,
                                                 size: 21,
