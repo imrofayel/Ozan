@@ -1,3 +1,7 @@
+import 'dart:io';
+import 'dart:math';
+import 'package:file_picker/file_picker.dart';
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_highlighter/flutter_highlighter.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -5,6 +9,7 @@ import 'package:lucide_icons/lucide_icons.dart';
 // ignore: depend_on_referenced_packages
 import 'package:markdown/markdown.dart' as md;
 import 'package:ozan/components/components.dart';
+import 'package:ozan/components/snackbar.dart';
 class CodeElementBuilder extends MarkdownElementBuilder {
 
     CodeElementBuilder({required this.context});
@@ -62,7 +67,7 @@ class CodeElementBuilder extends MarkdownElementBuilder {
               children: [
 
                 IconButton(onPressed: (){
-                  copyToClipboard(context, element.textContent);
+                  saveContent(context, element.textContent, lang);
                 }, hoverColor: Theme.of(context).colorScheme.primary, icon: Icon(LucideIcons.download, size: 18, color: Theme.of(context).colorScheme.secondary), padding: EdgeInsets.zero),
 
                 IconButton(onPressed: (){
@@ -100,6 +105,38 @@ class CodeElementBuilder extends MarkdownElementBuilder {
   }
 }
 
+Future<void> saveContent(context, String code, String lang) async {
+  final content = code;
+
+  try {
+    String? filePath;
+
+    final String? directoryPath = await FilePicker.platform.getDirectoryPath();
+
+    if (directoryPath != null) {
+      final fileName = 'code-${Random().nextInt(100000)}';
+      filePath = '$directoryPath\\$fileName.${lang.toLowerCase()}';
+    } else {
+      // User canceled the save operation
+      return;
+    }
+
+    final newFile = File(filePath);
+    await newFile.writeAsString(content);
+
+    SnackBarUtils.showSnackbar(
+      context,
+      Icons.check,
+      "File Saved at $filePath",
+    );
+  } catch (e) {
+    SnackBarUtils.showSnackbar(
+      context,
+      FluentIcons.warning_24_regular,
+      "Unexpected error occurred",
+    );
+  }
+}
 
 const nordTheme = {
   'root':
