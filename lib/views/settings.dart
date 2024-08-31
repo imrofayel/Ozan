@@ -56,10 +56,12 @@ class _SettingsState extends State<Settings> {
             children: [
               const Text('Settings', style: TextStyle(fontSize: 22)),
               const Gap(20),
+
               _buildUserNameChanger(context, appState),
               const Gap(20),
               _buildAPIChanger(context, appState),
               const Gap(20),
+              
               Opacity(opacity: 0.9, child: _buildAboutContainer(context)),
             ],
           ),
