@@ -86,6 +86,7 @@ class _SidebarState extends State<Sidebar> {
                     const Gap(35),
       
                     _buildIconButton(LucideIcons.lasso, 21, () {
+
                       SnackBarUtils.showSnackbar(context, LucideIcons.badgeAlert, "This feature is under development.");
                     }, 'Draw'),
       

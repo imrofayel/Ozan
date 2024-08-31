@@ -3,11 +3,11 @@
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:ozan/providers/filter_db.dart';
 import 'package:ozan/providers/preferences.dart';
-import 'package:ozan/components/snackbar.dart';
 import 'package:ozan/files/pdf_export.dart';
 import 'package:ozan/views/create_view.dart';
 import 'package:ozan/providers/navigation_provider.dart';
@@ -26,9 +26,25 @@ class NotesView extends StatefulWidget {
 }
 
 class _NotesViewState extends State<NotesView> {
+
+  final searchController = TextEditingController();
+  List<NotesModel> filteredNotes = []; // To hold filtered notes
+
   @override
   void initState() {
     super.initState();
+    // Initialize filteredNotes to the original notes list
+    context.read<DatabaseProvider>().notesList.then((notes) {
+      setState(() {
+        filteredNotes = notes;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
   }
 
   @override
@@ -78,9 +94,29 @@ class _NotesViewState extends State<NotesView> {
                                     .toList()
                                 : snapshot.data!;
 
+                            // // Filter based on search input
+                            // filteredNotes = notes.where((note) {
+                            //   final titleLower = note.title.toLowerCase();
+                            //   final descriptionLower =
+                            //       note.description.toLowerCase();
+                            //   final searchTermLower =
+                            //       searchController.text.toLowerCase();
+                            //   return titleLower.contains(searchTermLower) ||
+                            //       descriptionLower.contains(searchTermLower);
+                            // }).toList();
+
+                            filteredNotes = notes.where((note) {
+                              final titleLower = note.title.toLowerCase();
+                              final searchTermLower =
+                                  searchController.text.toLowerCase();
+                              return titleLower.contains(searchTermLower);
+                            }).toList();
+
                             return Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
+
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Row(
                                     mainAxisAlignment:
@@ -116,7 +152,7 @@ class _NotesViewState extends State<NotesView> {
                                                             .background),
                                               ),
                                               child: Text(
-                                                  '${notes.length} entries',
+                                                  '${filteredNotes.length} entries',
                                                   style: TextStyle(
                                                       fontSize: 16,
                                                       color: Theme.of(context)
@@ -242,30 +278,60 @@ class _NotesViewState extends State<NotesView> {
                                           ],
                                         ),
                                       ),
+                                      
                                       Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 12.0),
-                                        child: IconButton(
-                                            onPressed: () {
-                                              SnackBarUtils.showSnackbar(
-                                                  context,
-                                                  LucideIcons.badgeAlert,
-                                                  "This feature is under development.");
-                                            },
-                                            icon: Icon(LucideIcons.search,
-                                                size: 21,
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .tertiary
-                                                    .withOpacity(0.9)),
-                                            style: const ButtonStyle(
-                                                overlayColor:
-                                                    MaterialStatePropertyAll(
-                                                        Colors.transparent))),
-                                      )
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: TextField(
+                                        
+                                                            maxLines: 1,
+                                                            controller: searchController,
+                                        
+                                                            onChanged: (query) => {
+                                                                setState(() {
+                                                                  filteredNotes = notes.where((note) {
+                                                                    final titleLower = note.title.toLowerCase();
+                                                                    final descriptionLower =
+                                                                        note.description.toLowerCase();
+                                                                    final searchTermLower =
+                                                                        query.toLowerCase();
+                                                                    return titleLower.contains(searchTermLower) ||
+                                                                        descriptionLower.contains(searchTermLower);
+                                                                  }).toList();
+                                                                })
+                                                            },
+                                        
+                                                            decoration: InputDecoration(
+                                        
+                                                              constraints: BoxConstraints.tight(const Size(200, 40)),
+                                        
+                                                              contentPadding: const EdgeInsets.only(left: 20),
+                                        
+                                                              suffixIcon: Padding(
+                                                                padding: const EdgeInsets.fromLTRB(0, 0, 16, 3),
+                                                                child: Icon(LucideIcons.search, color: Theme.of(context).colorScheme.tertiary.withOpacity(0.9), size: 21),
+                                                              ),
+                                                              fillColor: Theme.of(context).colorScheme.background,
+                                                              filled: true,
+                                                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(100)),
+                                        
+                                                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1)), borderRadius: BorderRadius.circular(100)),
+                                        
+                                                              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.3)), borderRadius: BorderRadius.circular(100)),
+                                        
+                                                              hoverColor: Colors.transparent
+                                        
+                                        
+                                                            ),
+                                        
+                                                            style: const TextStyle(fontSize: 16),
+                                        
+                                                            cursorHeight: 25,
+                                        
+                                                            cursorColor: Theme.of(context).colorScheme.secondary,
+                                                          ),
+                                      ),
                                     ],
                                   ),
-                                  const Gap(14),
                                   Expanded(
                                     child: Padding(
                                       padding: const EdgeInsets.all(8),
@@ -275,7 +341,7 @@ class _NotesViewState extends State<NotesView> {
                                                 maxCrossAxisExtent: 500,
                                                 mainAxisExtent: 180),
                                         scrollDirection: Axis.vertical,
-                                        itemCount: notes.length,
+                                        itemCount: filteredNotes.length, // Use filteredNotes.length
                                         itemBuilder: (context, index) {
                                           return InkWell(
                                             overlayColor:
@@ -287,7 +353,7 @@ class _NotesViewState extends State<NotesView> {
                                               Provider.of<Navigation>(context,
                                                       listen: false)
                                                   .getPage(Update(
-                                                      note: notes[index]));
+                                                      note: filteredNotes[index]));
                                             },
                                             child: Container(
                                               margin: const EdgeInsets.all(4),
@@ -338,7 +404,8 @@ class _NotesViewState extends State<NotesView> {
                                                                       .background),
                                                         ),
                                                         child: Text(
-                                                            notes[index].date,
+                                                            filteredNotes[index]
+                                                                .date, // Use filteredNotes
                                                             style: TextStyle(
                                                                 fontSize: 15,
                                                                 color: Theme.of(
@@ -351,52 +418,53 @@ class _NotesViewState extends State<NotesView> {
                                                           FilledButton(
                                                               onPressed:
                                                                   () async {
-                                                                if (notes[index]
+                                                                if (filteredNotes[
+                                                                        index]
                                                                         .favourite ==
                                                                     0) {
                                                                   value.dbHelper
                                                                       .update(
                                                                           NotesModel(
-                                                                    title: notes[
+                                                                    title: filteredNotes[
                                                                             index]
                                                                         .title,
                                                                     description:
-                                                                        notes[index]
+                                                                        filteredNotes[index]
                                                                             .description,
-                                                                    date: notes[
+                                                                    date: filteredNotes[
                                                                             index]
                                                                         .date,
-                                                                    id: notes[
+                                                                    id: filteredNotes[
                                                                             index]
                                                                         .id,
                                                                     favourite:
                                                                         1,
-                                                                    tag: notes[
+                                                                    tag: filteredNotes[
                                                                             index]
                                                                         .tag,
                                                                   ));
-                                                                } else if (notes[
+                                                                } else if (filteredNotes[
                                                                             index]
                                                                         .favourite ==
                                                                     1) {
                                                                   value.dbHelper
                                                                       .update(
                                                                           NotesModel(
-                                                                    title: notes[
+                                                                    title: filteredNotes[
                                                                             index]
                                                                         .title,
                                                                     description:
-                                                                        notes[index]
+                                                                        filteredNotes[index]
                                                                             .description,
-                                                                    date: notes[
+                                                                    date: filteredNotes[
                                                                             index]
                                                                         .date,
-                                                                    id: notes[
+                                                                    id: filteredNotes[
                                                                             index]
                                                                         .id,
                                                                     favourite:
                                                                         0,
-                                                                    tag: notes[
+                                                                    tag: filteredNotes[
                                                                             index]
                                                                         .tag,
                                                                   ));
@@ -428,13 +496,13 @@ class _NotesViewState extends State<NotesView> {
                                                               child: Tooltip(
                                                                 message: 'Pin',
                                                                 child: Icon(
-                                                                    notes[index].favourite ==
+                                                                    filteredNotes[index].favourite ==
                                                                             0
                                                                         ? LucideIcons
                                                                             .pin
                                                                         : LucideIcons
                                                                             .pinOff,
-                                                                    color: notes[index]
+                                                                    color: filteredNotes[index]
                                                                                 .favourite ==
                                                                             0
                                                                         ? Theme.of(context)
@@ -450,7 +518,7 @@ class _NotesViewState extends State<NotesView> {
                                                               )),
                                                           SizedBox(
                                                               child: Delete(index: index,
-                                                                  id: notes[
+                                                                  id: filteredNotes[
                                                                           index]
                                                                       .id)),
                                                         ],
@@ -463,7 +531,8 @@ class _NotesViewState extends State<NotesView> {
                                                         const EdgeInsets.only(
                                                             top: 6),
                                                     child: Text(
-                                                        notes[index].title,
+                                                        filteredNotes[index]
+                                                            .title, // Use filteredNotes
                                                         style: TextStyle(
                                                             fontSize: 24,
                                                             color: Theme.of(
@@ -516,7 +585,8 @@ class _NotesViewState extends State<NotesView> {
                                                                       .background),
                                                         ),
                                                         child: Text(
-                                                          notes[index].tag,
+                                                          filteredNotes[index]
+                                                              .tag, // Use filteredNotes
                                                           style: TextStyle(
                                                               fontSize: 15,
                                                               color: Theme.of(
@@ -546,8 +616,8 @@ class _NotesViewState extends State<NotesView> {
                                                                 await PdfExport
                                                                     .generateAndSavePDF(
                                                                         context,
-                                                                        notes[
-                                                                            index]);
+                                                                        filteredNotes[
+                                                                            index]); // Use filteredNotes
                                                               },
                                                               style: ButtonStyle(
                                                                   overlayColor: MaterialStatePropertyAll(Theme.of(
@@ -740,10 +810,8 @@ class _NotesViewState extends State<NotesView> {
                                             const EdgeInsets.only(right: 12.0),
                                         child: IconButton(
                                             onPressed: () {
-                                              SnackBarUtils.showSnackbar(
-                                                  context,
-                                                  LucideIcons.badgeAlert,
-                                                  "This feature is under development.");
+                                              
+
                                             },
                                             icon: Icon(LucideIcons.search,
                                                 size: 21,
