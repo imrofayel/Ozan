@@ -90,44 +90,4 @@ initDatabase() async {
       whereArgs: [notesModel.id],
     );
   }
-
-  Future<Map<String, List<NotesModel>>> searchNotes(String query) async {
-    final Database? dbClient = await db;
-    final List<Map<String, dynamic>> titleMaps = await dbClient!.query(
-      'notes',
-      where: "title LIKE ?",
-      whereArgs: ['%$query%'],
-    );
-
-    final List<Map<String, dynamic>> descriptionMaps = await dbClient.query(
-      'notes',
-      where: "description LIKE ?",
-      whereArgs: ['%$query%'],
-    );
-
-    Map<String, List<NotesModel>> results = {
-      'title': List.generate(titleMaps.length, (i) {
-        return NotesModel(
-          id: titleMaps[i]['id'],
-          title: titleMaps[i]['title'],
-          description: titleMaps[i]['description'],
-          date: titleMaps[i]['date'],
-          favourite: titleMaps[i]['favourite'],
-          tag: titleMaps[i]['tag']
-        );
-      }),
-      'description': List.generate(descriptionMaps.length, (i) {
-        return NotesModel(
-          id: descriptionMaps[i]['id'],
-          title: descriptionMaps[i]['title'],
-          description: descriptionMaps[i]['description'],
-          date: descriptionMaps[i]['date'],
-          favourite: descriptionMaps[i]['favourite'],
-          tag: descriptionMaps[i]['tag']
-        );
-      }),
-    };
-
-    return results;
-  }  
 }
