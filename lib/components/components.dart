@@ -184,34 +184,6 @@ IconButton suffix(context){
       }, icon: const Icon(FluentIcons.mic_24_regular), padding: const EdgeInsets.all(1));
 }
 
-Widget titleBox(context, {required TextEditingController controller, required bool enabled}){
-
-  return TextField(
-
-    controller: controller,
-
-    enabled: enabled,
-
-    decoration: InputDecoration(
-
-      hintText: "Untitled",
-
-      hintStyle: TextStyle(color: Theme.of(context).colorScheme.tertiary),
-
-      constraints: const BoxConstraints(maxWidth: 400),
-
-      focusColor: Colors.transparent,
-
-      hoverColor: Colors.transparent,
-
-      border: InputBorder.none
-
-    ),
-
-    style: TextStyle(fontSize: 24, color: Theme.of(context).colorScheme.tertiary),
-  );
-}
-
 String greet(String name){
   
   String text;
