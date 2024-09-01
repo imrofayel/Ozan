@@ -27,40 +27,41 @@ class Markdown extends StatefulWidget {
 class _MarkdownState extends State<Markdown> {
   static TextEditingController page = TextEditingController();
   static TextEditingController pageTitle = TextEditingController();
-  static final FocusNode _focusNode = FocusNode(); // Declare the FocusNode
+  static final FocusNode _focusNode = FocusNode();
 
-  // ignore: unused_field
-  static String md = 'Open Editor & Capture your thoughts!'; // Markdown Body
-
-  bool isCodeView = true; // Variable to toggle between Code and Preview
-
+  bool isCodeView = true;
   bool enableTitle = true;
-
-  bool titleExists = false; // Flag to track if title already exists
+  bool titleExists = false;
 
   @override
   void initState() {
     super.initState();
-    page.addListener(() {
-      if (mounted) {
-        setState(() {});
-      }
-    });
-    pageTitle.addListener(() {
-      if (mounted) {
-        _checkTitleExists(); // Check for title existence on change
-      }
-    });
+    page.addListener(_pageListener);
+    pageTitle.addListener(_pageTitleListener);
   }
 
-  // Function to check if the title already exists in the database
+  void _pageListener() {
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  void _pageTitleListener() {
+    if (mounted) {
+      _checkTitleExists();
+    }
+  }
+
   Future<void> _checkTitleExists() async {
+    if (!mounted) return;
     final dbHelper =
         Provider.of<DatabaseProvider>(context, listen: false).dbHelper;
     final existingNotes = await dbHelper.getNotesList();
-    setState(() {
-      titleExists = existingNotes.any((note) => note.title == pageTitle.text);
-    });
+    if (mounted) {
+      setState(() {
+        titleExists = existingNotes.any((note) => note.title == pageTitle.text);
+      });
+    }
   }
 
   @override
@@ -101,20 +102,19 @@ class _MarkdownState extends State<Markdown> {
                   padding: const EdgeInsets.fromLTRB(0, 0, 14, 0),
                   child: FilledButton(
                       onPressed: () {
-                        if (_MarkdownState.page.text.isNotEmpty) {
+                        if (page.text.isNotEmpty) {
                           if (titleExists) {
-                            // Show snackbar error if title exists
                             SnackBarUtils.showSnackbar(
                                 context,
                                 CupertinoIcons.exclamationmark_circle,
                                 "A note with this title already exists.");
-                            return; // Do not save the note
+                            return;
                           }
                           value.dbHelper.insert(NotesModel(
-                            title: _MarkdownState.pageTitle.text.isNotEmpty
-                                ? _MarkdownState.pageTitle.text
+                            title: pageTitle.text.isNotEmpty
+                                ? pageTitle.text
                                 : 'Untitled',
-                            description: _MarkdownState.page.text,
+                            description: page.text,
                             date: date,
                             favourite: 0,
                             tag: _EditorState.selected.name,
@@ -169,7 +169,6 @@ class _MarkdownState extends State<Markdown> {
                           onPressed: (int index) {
                             setState(() {
                               isCodeView = index == 0;
-
                               enableTitle = isCodeView;
                             });
                           },
@@ -270,7 +269,6 @@ class _MarkdownState extends State<Markdown> {
         SizedBox(
             height: 470,
             width: 700,
-            // change md to page.text
             child: markdown(page.text, 1.25, context)),
         const Gap(14),
         Padding(
@@ -387,7 +385,6 @@ class _EditorState extends State<Editor> {
                           },
                           onChanged: (text) {
                             setState(() {
-                              _MarkdownState.md = text;
                             });
                           },
                           controller: _MarkdownState.page,
