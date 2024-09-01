@@ -54,18 +54,6 @@ class _UpdateState extends State<Update> {
   void initState() {
     page.addListener(() => setState(() {}));
 
-    page.addListener(() {
-      if (mounted) {
-        setState(() {});
-      }
-    });
-
-    pageTitle.addListener(() {
-      if (mounted) {
-        _checkTitleExists(); // Check for title existence on change
-      }
-    });
-
     _focusNode = FocusNode(); // Assign a FocusNode
 
     if (widget.note != null) {
@@ -124,6 +112,9 @@ class _UpdateState extends State<Update> {
                                         child: TextField(
                                       controller: pageTitle,
                                       enabled: true,
+
+                                      onChanged:(value) => _checkTitleExists(),
+
                                       decoration: InputDecoration(
                                           hintText: "Untitled",
                                           hintStyle: TextStyle(
