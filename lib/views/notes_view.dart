@@ -169,14 +169,14 @@ class _NotesViewState extends State<NotesView> {
                                                     DateFormat('d MMM, yy')
                                                         .format(DateTime.now());
                                   
-                                                String name = Random()
+                                                String name = Random.secure()
                                                     .nextInt(10000000)
                                                     .toString();
                                   
                                                 if (text.isNotEmpty) {
                                                   value.dbHelper.insert(
                                                       NotesModel(
-                                                          title: name,
+                                                          title: 'Opened$name}',
                                                           description: text,
                                                           date: date,
                                                           favourite: 0,
@@ -970,7 +970,7 @@ class Delete extends StatelessWidget {
                                 onPressed: () {
                                   
                                   value.dbHelper.insert(NotesModel(
-                                      title: notes[index].title,
+                                      title: 'Duplicated ${notes[index].title}${Random.secure().nextInt(1000)}',
                                       description: notes[index].description,
                                       date: DateFormat('d MMM, yy').format(DateTime.now()),
                   
