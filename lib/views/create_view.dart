@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -75,8 +73,10 @@ class _MarkdownState extends State<Markdown> {
         child: Container(
           decoration: BoxDecoration(
               border: Border.all(
-                  color:
-                      Theme.of(context).colorScheme.secondary.withOpacity(0.1)),
+                  color: Theme.of(context)
+                      .colorScheme
+                      .secondary
+                      .withOpacity(0.1)),
               borderRadius: BorderRadius.circular(12),
               color: Theme.of(context).colorScheme.primary),
           child: Scaffold(
@@ -87,22 +87,13 @@ class _MarkdownState extends State<Markdown> {
                 enabled: enableTitle,
                 decoration: InputDecoration(
                     hintText: "Untitled",
-                    hintStyle: TextStyle(
-                        color: Theme.of(context).colorScheme.tertiary),
+                    hintStyle:
+                        TextStyle(color: Theme.of(context).colorScheme.tertiary),
                     focusColor: Colors.transparent,
                     hoverColor: Colors.transparent,
                     border: InputBorder.none),
-                style: !titleExists
-                    ? TextStyle(
-                        fontSize: 24,
-                        color: Theme.of(context).colorScheme.tertiary)
-                    : TextStyle(
-                        fontSize: 24,
-                        color: Theme.of(context).colorScheme.tertiary,
-                        decoration: TextDecoration.underline,
-                        decorationStyle: TextDecorationStyle.wavy,
-                        decorationColor: Colors.red,
-                        decorationThickness: 1.3),
+                style: TextStyle(
+                    fontSize: 24, color: Theme.of(context).colorScheme.tertiary),
               ),
               centerTitle: false,
               actions: [
@@ -115,14 +106,14 @@ class _MarkdownState extends State<Markdown> {
                             // Show snackbar error if title exists
                             SnackBarUtils.showSnackbar(
                                 context,
-                                LucideIcons.fileWarning,
+                                CupertinoIcons.exclamationmark_circle,
                                 "A note with this title already exists.");
                             return; // Do not save the note
                           }
                           value.dbHelper.insert(NotesModel(
                             title: _MarkdownState.pageTitle.text.isNotEmpty
                                 ? _MarkdownState.pageTitle.text
-                                : 'Untitled${Random().nextInt(100000)}',
+                                : 'Untitled',
                             description: _MarkdownState.page.text,
                             date: date,
                             favourite: 0,
@@ -148,12 +139,12 @@ class _MarkdownState extends State<Markdown> {
                                   .colorScheme
                                   .secondary
                                   .withOpacity(0.1))),
-                          padding: const MaterialStatePropertyAll(
-                              EdgeInsets.all(14)),
-                          overlayColor: const MaterialStatePropertyAll(
-                              Colors.transparent),
-                          shadowColor: const MaterialStatePropertyAll(
-                              Colors.transparent),
+                          padding:
+                              const MaterialStatePropertyAll(EdgeInsets.all(14)),
+                          overlayColor:
+                              const MaterialStatePropertyAll(Colors.transparent),
+                          shadowColor:
+                              const MaterialStatePropertyAll(Colors.transparent),
                           backgroundColor: MaterialStatePropertyAll(
                               Theme.of(context).colorScheme.background)),
                       child: Text('Save',
@@ -256,7 +247,8 @@ class _MarkdownState extends State<Markdown> {
                           ],
                         ),
                         Expanded(
-                          child: isCodeView ? const Editor() : preview(context),
+                          child:
+                              isCodeView ? const Editor() : preview(context),
                         ),
                       ],
                     ),
