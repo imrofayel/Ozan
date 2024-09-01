@@ -41,14 +41,14 @@ class _UpdateState extends State<Update> {
 
   static bool titleExists = false; // Flag to track if title already exists
 
-  Future<void> _checkTitleExists() async {
-    final dbHelper =
-        Provider.of<DatabaseProvider>(context, listen: false).dbHelper;
-    final existingNotes = await dbHelper.getNotesList();
-    setState(() {
-      titleExists = existingNotes.any((note) => note.title == pageTitle.text);
-    });
-  }
+Future<void> _checkTitleExists() async {
+  final dbHelper = Provider.of<DatabaseProvider>(context, listen: false).dbHelper;
+  final existingNotes = await dbHelper.getNotesList();
+  setState(() {
+    titleExists = existingNotes.any((note) => 
+        note.title == pageTitle.text && note.id != widget.note!.id);
+  });
+}
 
   @override
   void initState() {
