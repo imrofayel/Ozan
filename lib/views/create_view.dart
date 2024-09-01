@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -29,40 +27,41 @@ class Markdown extends StatefulWidget {
 class _MarkdownState extends State<Markdown> {
   static TextEditingController page = TextEditingController();
   static TextEditingController pageTitle = TextEditingController();
-  static final FocusNode _focusNode = FocusNode(); // Declare the FocusNode
+  static final FocusNode _focusNode = FocusNode();
 
-  // ignore: unused_field
-  static String md = 'Open Editor & Capture your thoughts!'; // Markdown Body
-
-  bool isCodeView = true; // Variable to toggle between Code and Preview
-
+  bool isCodeView = true;
   bool enableTitle = true;
-
-  bool titleExists = false; // Flag to track if title already exists
+  bool titleExists = false;
 
   @override
   void initState() {
     super.initState();
-    page.addListener(() {
-      if (mounted) {
-        setState(() {});
-      }
-    });
-    pageTitle.addListener(() {
-      if (mounted) {
-        _checkTitleExists(); // Check for title existence on change
-      }
-    });
+    page.addListener(_pageListener);
+    pageTitle.addListener(_pageTitleListener);
   }
 
-  // Function to check if the title already exists in the database
+  void _pageListener() {
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  void _pageTitleListener() {
+    if (mounted) {
+      _checkTitleExists();
+    }
+  }
+
   Future<void> _checkTitleExists() async {
+    if (!mounted) return;
     final dbHelper =
         Provider.of<DatabaseProvider>(context, listen: false).dbHelper;
     final existingNotes = await dbHelper.getNotesList();
-    setState(() {
-      titleExists = existingNotes.any((note) => note.title == pageTitle.text);
-    });
+    if (mounted) {
+      setState(() {
+        titleExists = existingNotes.any((note) => note.title == pageTitle.text);
+      });
+    }
   }
 
   @override
@@ -75,8 +74,10 @@ class _MarkdownState extends State<Markdown> {
         child: Container(
           decoration: BoxDecoration(
               border: Border.all(
-                  color:
-                      Theme.of(context).colorScheme.secondary.withOpacity(0.1)),
+                  color: Theme.of(context)
+                      .colorScheme
+                      .secondary
+                      .withOpacity(0.1)),
               borderRadius: BorderRadius.circular(12),
               color: Theme.of(context).colorScheme.primary),
           child: Scaffold(
@@ -87,22 +88,13 @@ class _MarkdownState extends State<Markdown> {
                 enabled: enableTitle,
                 decoration: InputDecoration(
                     hintText: "Untitled",
-                    hintStyle: TextStyle(
-                        color: Theme.of(context).colorScheme.tertiary),
+                    hintStyle:
+                        TextStyle(color: Theme.of(context).colorScheme.tertiary),
                     focusColor: Colors.transparent,
                     hoverColor: Colors.transparent,
                     border: InputBorder.none),
-                style: !titleExists
-                    ? TextStyle(
-                        fontSize: 24,
-                        color: Theme.of(context).colorScheme.tertiary)
-                    : TextStyle(
-                        fontSize: 24,
-                        color: Theme.of(context).colorScheme.tertiary,
-                        decoration: TextDecoration.underline,
-                        decorationStyle: TextDecorationStyle.wavy,
-                        decorationColor: Colors.red,
-                        decorationThickness: 1.3),
+                style: TextStyle(
+                    fontSize: 24, color: Theme.of(context).colorScheme.tertiary),
               ),
               centerTitle: false,
               actions: [
@@ -110,20 +102,19 @@ class _MarkdownState extends State<Markdown> {
                   padding: const EdgeInsets.fromLTRB(0, 0, 14, 0),
                   child: FilledButton(
                       onPressed: () {
-                        if (_MarkdownState.page.text.isNotEmpty) {
+                        if (page.text.isNotEmpty) {
                           if (titleExists) {
-                            // Show snackbar error if title exists
                             SnackBarUtils.showSnackbar(
                                 context,
-                                LucideIcons.fileWarning,
+                                CupertinoIcons.exclamationmark_circle,
                                 "A note with this title already exists.");
-                            return; // Do not save the note
+                            return;
                           }
                           value.dbHelper.insert(NotesModel(
-                            title: _MarkdownState.pageTitle.text.isNotEmpty
-                                ? _MarkdownState.pageTitle.text
-                                : 'Untitled${Random().nextInt(100000)}',
-                            description: _MarkdownState.page.text,
+                            title: pageTitle.text.isNotEmpty
+                                ? pageTitle.text
+                                : 'Untitled',
+                            description: page.text,
                             date: date,
                             favourite: 0,
                             tag: _EditorState.selected.name,
@@ -148,12 +139,12 @@ class _MarkdownState extends State<Markdown> {
                                   .colorScheme
                                   .secondary
                                   .withOpacity(0.1))),
-                          padding: const MaterialStatePropertyAll(
-                              EdgeInsets.all(14)),
-                          overlayColor: const MaterialStatePropertyAll(
-                              Colors.transparent),
-                          shadowColor: const MaterialStatePropertyAll(
-                              Colors.transparent),
+                          padding:
+                              const MaterialStatePropertyAll(EdgeInsets.all(14)),
+                          overlayColor:
+                              const MaterialStatePropertyAll(Colors.transparent),
+                          shadowColor:
+                              const MaterialStatePropertyAll(Colors.transparent),
                           backgroundColor: MaterialStatePropertyAll(
                               Theme.of(context).colorScheme.background)),
                       child: Text('Save',
@@ -178,7 +169,6 @@ class _MarkdownState extends State<Markdown> {
                           onPressed: (int index) {
                             setState(() {
                               isCodeView = index == 0;
-
                               enableTitle = isCodeView;
                             });
                           },
@@ -256,7 +246,8 @@ class _MarkdownState extends State<Markdown> {
                           ],
                         ),
                         Expanded(
-                          child: isCodeView ? const Editor() : preview(context),
+                          child:
+                              isCodeView ? const Editor() : preview(context),
                         ),
                       ],
                     ),
@@ -278,7 +269,6 @@ class _MarkdownState extends State<Markdown> {
         SizedBox(
             height: 470,
             width: 700,
-            // change md to page.text
             child: markdown(page.text, 1.25, context)),
         const Gap(14),
         Padding(
@@ -395,7 +385,6 @@ class _EditorState extends State<Editor> {
                           },
                           onChanged: (text) {
                             setState(() {
-                              _MarkdownState.md = text;
                             });
                           },
                           controller: _MarkdownState.page,

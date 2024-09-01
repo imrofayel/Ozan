@@ -41,30 +41,18 @@ class _UpdateState extends State<Update> {
 
   static bool titleExists = false; // Flag to track if title already exists
 
-  Future<void> _checkTitleExists() async {
-    final dbHelper =
-        Provider.of<DatabaseProvider>(context, listen: false).dbHelper;
-    final existingNotes = await dbHelper.getNotesList();
-    setState(() {
-      titleExists = existingNotes.any((note) => note.title == pageTitle.text);
-    });
-  }
+Future<void> _checkTitleExists() async {
+  final dbHelper = Provider.of<DatabaseProvider>(context, listen: false).dbHelper;
+  final existingNotes = await dbHelper.getNotesList();
+  setState(() {
+    titleExists = existingNotes.any((note) => 
+        note.title == pageTitle.text && note.id != widget.note!.id);
+  });
+}
 
   @override
   void initState() {
     page.addListener(() => setState(() {}));
-
-    page.addListener(() {
-      if (mounted) {
-        setState(() {});
-      }
-    });
-
-    pageTitle.addListener(() {
-      if (mounted) {
-        _checkTitleExists(); // Check for title existence on change
-      }
-    });
 
     _focusNode = FocusNode(); // Assign a FocusNode
 
@@ -124,6 +112,9 @@ class _UpdateState extends State<Update> {
                                         child: TextField(
                                       controller: pageTitle,
                                       enabled: true,
+
+                                      onChanged:(value) => _checkTitleExists(),
+
                                       decoration: InputDecoration(
                                           hintText: "Untitled",
                                           hintStyle: TextStyle(
