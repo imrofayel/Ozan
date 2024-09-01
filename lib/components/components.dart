@@ -33,41 +33,65 @@ TextField textField(context, {int? lines = 1, required void Function(String)? on
 
   spellCheckConfiguration: const SpellCheckConfiguration(),
 
-  contextMenuBuilder: (context, editableTextState) {
+    contextMenuBuilder: (context, editableTextState) {
       final TextEditingValue value = editableTextState.textEditingValue;
       final List<ContextMenuButtonItem> buttonItems =
           List.from(editableTextState.contextMenuButtonItems);
 
       // Check if text is selected
-      if (value.selection.isValid && !value.selection.isCollapsed) {
-        // Add custom menu items for bold and italic
-        buttonItems.insert(
-          0,
-          ContextMenuButtonItem(
-            label: 'Bold',
-            onPressed: () {
-              ContextMenuController.removeAny();
-              // Implement your Bold action logic here
-            },
-          ),
-        );
-        buttonItems.insert(
-          1,
-          ContextMenuButtonItem(
-            label: 'Italic',
-            onPressed: () {
-              ContextMenuController.removeAny();
-              // Implement your Italic action logic here
-            },
-          ),
-        );
-      }
+  if (value.selection.isValid && !value.selection.isCollapsed) {
+    // Add custom menu items for bold and italic
+    buttonItems.insert(
+      0,
+      ContextMenuButtonItem(
+        label: 'Uppercase',
+        onPressed: () {
+          ContextMenuController.removeAny();
+          // Get the selected text
+          final selectedText = value.text.substring(
+              value.selection.start, value.selection.end);
+          // Convert to uppercase
+          final uppercasedText = selectedText.toUpperCase();
+          // Replace selected text with uppercase version
+          controller.text = value.text.replaceRange(
+              value.selection.start,
+              value.selection.end,
+              uppercasedText);
+          // Update the selection to the end of the uppercase text
+          controller.selection = TextSelection.collapsed(
+              offset: value.selection.start + uppercasedText.length);
+        },
+      ),
+    );
+    buttonItems.insert(
+      1,
+      ContextMenuButtonItem(
+        label: 'Lowercase',
+        onPressed: () {
+          ContextMenuController.removeAny();
+          // Get the selected text
+          final selectedText = value.text.substring(
+              value.selection.start, value.selection.end);
+          // Convert to lowercase
+          final lowercasedText = selectedText.toLowerCase();
+          // Replace selected text with lowercase version
+          controller.text = value.text.replaceRange(
+              value.selection.start,
+              value.selection.end,
+              lowercasedText);
+          // Update the selection to the end of the lowercase text
+          controller.selection = TextSelection.collapsed(
+              offset: value.selection.start + lowercasedText.length);
+        },
+      ),
+    );
+  }
 
+      // Customize the context menu appearance
       return AdaptiveTextSelectionToolbar.buttonItems(
         anchors: editableTextState.contextMenuAnchors,
         buttonItems: buttonItems,
-      );
-    },
+      );    },
 
     cursorColor: Theme.of(context).colorScheme.tertiary,
     
@@ -158,34 +182,6 @@ IconButton suffix(context){
   return IconButton(onPressed: (){
         SnackBarUtils.showSnackbar(context, Icons.window_sharp, "Press Windows + H");
       }, icon: const Icon(FluentIcons.mic_24_regular), padding: const EdgeInsets.all(1));
-}
-
-Widget titleBox(context, {required TextEditingController controller, required bool enabled}){
-
-  return TextField(
-
-    controller: controller,
-
-    enabled: enabled,
-
-    decoration: InputDecoration(
-
-      hintText: "Untitled",
-
-      hintStyle: TextStyle(color: Theme.of(context).colorScheme.tertiary),
-
-      constraints: const BoxConstraints(maxWidth: 400),
-
-      focusColor: Colors.transparent,
-
-      hoverColor: Colors.transparent,
-
-      border: InputBorder.none
-
-    ),
-
-    style: TextStyle(fontSize: 24, color: Theme.of(context).colorScheme.tertiary),
-  );
 }
 
 String greet(String name){

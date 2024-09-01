@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -17,7 +19,8 @@ import 'package:provider/provider.dart';
 class Markdown extends StatefulWidget {
   const Markdown({super.key});
 
-  static FileService files = FileService(_MarkdownState.page, _MarkdownState.pageTitle);
+  static FileService files =
+      FileService(_MarkdownState.page, _MarkdownState.pageTitle);
 
   @override
   State<Markdown> createState() => _MarkdownState();
@@ -35,6 +38,8 @@ class _MarkdownState extends State<Markdown> {
 
   bool enableTitle = true;
 
+  bool titleExists = false; // Flag to track if title already exists
+
   @override
   void initState() {
     super.initState();
@@ -43,14 +48,22 @@ class _MarkdownState extends State<Markdown> {
         setState(() {});
       }
     });
+    pageTitle.addListener(() {
+      if (mounted) {
+        _checkTitleExists(); // Check for title existence on change
+      }
+    });
   }
 
-  // @override
-  // void dispose() {
-  //   page.dispose(); // Dispose the TextEditingController
-  //   _focusNode.dispose(); // Dispose the FocusNode
-  //   super.dispose();
-  // }
+  // Function to check if the title already exists in the database
+  Future<void> _checkTitleExists() async {
+    final dbHelper =
+        Provider.of<DatabaseProvider>(context, listen: false).dbHelper;
+    final existingNotes = await dbHelper.getNotesList();
+    setState(() {
+      titleExists = existingNotes.any((note) => note.title == pageTitle.text);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,37 +73,37 @@ class _MarkdownState extends State<Markdown> {
       return Padding(
         padding: const EdgeInsets.all(6.0),
         child: Container(
-        
-          decoration: BoxDecoration(border: Border.all(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1)), borderRadius: BorderRadius.circular(12), color: Theme.of(context).colorScheme.primary),
-        
+          decoration: BoxDecoration(
+              border: Border.all(
+                  color:
+                      Theme.of(context).colorScheme.secondary.withOpacity(0.1)),
+              borderRadius: BorderRadius.circular(12),
+              color: Theme.of(context).colorScheme.primary),
           child: Scaffold(
-
             backgroundColor: Colors.transparent,
-
             appBar: AppBar(
-
               title: TextField(
-              
-              controller: pageTitle,
-              
-              enabled: enableTitle,
-              
-              decoration: InputDecoration(
-              
-                hintText: "Untitled",
-              
-                hintStyle: TextStyle(color: Theme.of(context).colorScheme.tertiary),
-                            
-                focusColor: Colors.transparent,
-              
-                hoverColor: Colors.transparent,
-              
-                border: InputBorder.none
-              
+                controller: pageTitle,
+                enabled: enableTitle,
+                decoration: InputDecoration(
+                    hintText: "Untitled",
+                    hintStyle: TextStyle(
+                        color: Theme.of(context).colorScheme.tertiary),
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    border: InputBorder.none),
+                style: !titleExists
+                    ? TextStyle(
+                        fontSize: 24,
+                        color: Theme.of(context).colorScheme.tertiary)
+                    : TextStyle(
+                        fontSize: 24,
+                        color: Theme.of(context).colorScheme.tertiary,
+                        decoration: TextDecoration.underline,
+                        decorationStyle: TextDecorationStyle.wavy,
+                        decorationColor: Colors.red,
+                        decorationThickness: 1.3),
               ),
-              
-              style: TextStyle(fontSize: 24, color: Theme.of(context).colorScheme.tertiary),
-                              ),
               centerTitle: false,
               actions: [
                 Padding(
@@ -98,32 +111,49 @@ class _MarkdownState extends State<Markdown> {
                   child: FilledButton(
                       onPressed: () {
                         if (_MarkdownState.page.text.isNotEmpty) {
+                          if (titleExists) {
+                            // Show snackbar error if title exists
+                            SnackBarUtils.showSnackbar(
+                                context,
+                                LucideIcons.fileWarning,
+                                "A note with this title already exists.");
+                            return; // Do not save the note
+                          }
                           value.dbHelper.insert(NotesModel(
-                              title: _MarkdownState.pageTitle.text.isNotEmpty
-                                  ? _MarkdownState.pageTitle.text
-                                  : 'Untitled',
-                              description: _MarkdownState.page.text,
-                              date: date,
-                              favourite: 0,
-                              tag: _EditorState.selected.name,
-                              ));
+                            title: _MarkdownState.pageTitle.text.isNotEmpty
+                                ? _MarkdownState.pageTitle.text
+                                : 'Untitled${Random().nextInt(100000)}',
+                            description: _MarkdownState.page.text,
+                            date: date,
+                            favourite: 0,
+                            tag: _EditorState.selected.name,
+                          ));
                           value.initDatabase();
                           value.setLength();
-                          
-                          Provider.of<Navigation>(context, listen: false).getPage(const NotesView());
+
+                          Provider.of<Navigation>(context, listen: false)
+                              .getPage(const NotesView());
 
                           Markdown.files.newFile(context);
                         } else {
-                          SnackBarUtils.showSnackbar(context,
-                              CupertinoIcons.pencil_slash, "Please enter title and description");
+                          SnackBarUtils.showSnackbar(
+                              context,
+                              CupertinoIcons.pencil_slash,
+                              "Please enter title and description");
                         }
                       },
                       style: ButtonStyle(
                           side: MaterialStatePropertyAll(BorderSide(
-                              color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
-                          padding: const MaterialStatePropertyAll(EdgeInsets.all(14)),
-                          overlayColor: const MaterialStatePropertyAll(Colors.transparent),
-                          shadowColor: const MaterialStatePropertyAll(Colors.transparent),
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .secondary
+                                  .withOpacity(0.1))),
+                          padding: const MaterialStatePropertyAll(
+                              EdgeInsets.all(14)),
+                          overlayColor: const MaterialStatePropertyAll(
+                              Colors.transparent),
+                          shadowColor: const MaterialStatePropertyAll(
+                              Colors.transparent),
                           backgroundColor: MaterialStatePropertyAll(
                               Theme.of(context).colorScheme.background)),
                       child: Text('Save',
@@ -135,92 +165,93 @@ class _MarkdownState extends State<Markdown> {
               ],
             ),
             body: Row(
-          
               children: [
-          
                 Expanded(
-          
                   flex: 8,
-          
                   child: Center(
-                    
                     child: Column(
-                              
                       children: [
                         ToggleButtons(
-                  
-                          constraints: const BoxConstraints(minWidth: 50, minHeight: 35), 
-                  
+                          constraints:
+                              const BoxConstraints(minWidth: 50, minHeight: 35),
                           isSelected: [isCodeView, !isCodeView],
                           onPressed: (int index) {
                             setState(() {
                               isCodeView = index == 0;
-          
+
                               enableTitle = isCodeView;
-          
                             });
                           },
-
                           fillColor: Theme.of(context).colorScheme.background,
-                  
                           splashColor: Colors.transparent,
-                  
                           hoverColor: Colors.transparent,
-                          
-                          selectedBorderColor: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
-                  
-                          borderColor: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
-                    
+                          selectedBorderColor: Theme.of(context)
+                              .colorScheme
+                              .secondary
+                              .withOpacity(0.1),
+                          borderColor: Theme.of(context)
+                              .colorScheme
+                              .secondary
+                              .withOpacity(0.1),
                           borderRadius: BorderRadius.circular(50),
-                    
                           children: [
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                              child: 
-                              
-                              isCodeView ?
-                              
-                              Row(
-                                children: [
-                                                                    
-                                 Icon(LucideIcons.check, size: 18, color: Theme.of(context).colorScheme.tertiary),
-
-                                  const Gap(6),
-
-                                  Text('Code', style: TextStyle(
-                                      fontSize: 17,
-                                      color: Theme.of(context).colorScheme.tertiary,
-                                      fontFamily: 'Inter')),
-                                ],
-                              ) : 
-                                Text('Code', style: TextStyle(
-                                      fontSize: 17,
-                                      color: Theme.of(context).colorScheme.tertiary,
-                                      fontFamily: 'Inter')),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 14.0),
+                              child: isCodeView
+                                  ? Row(
+                                      children: [
+                                        Icon(LucideIcons.check,
+                                            size: 18,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .tertiary),
+                                        const Gap(6),
+                                        Text('Code',
+                                            style: TextStyle(
+                                                fontSize: 17,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .tertiary,
+                                                fontFamily: 'Inter')),
+                                      ],
+                                    )
+                                  : Text('Code',
+                                      style: TextStyle(
+                                          fontSize: 17,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .tertiary,
+                                          fontFamily: 'Inter')),
                             ),
-                    
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 14.0),
-
-                              child: !isCodeView ?
-                              
-                              Row(
-                                children: [
-                                                                    
-                                 Icon(LucideIcons.check, size: 18, color: Theme.of(context).colorScheme.tertiary),
-
-                                  const Gap(6),
-
-                                  Text('Preview', style: TextStyle(
-                                      fontSize: 17,
-                                      color: Theme.of(context).colorScheme.tertiary,
-                                      fontFamily: 'Inter')),
-                                ],
-                              ) : 
-                                Text('Preview', style: TextStyle(
-                                      fontSize: 17,
-                                      color: Theme.of(context).colorScheme.tertiary,
-                                      fontFamily: 'Inter')),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 14.0),
+                              child: !isCodeView
+                                  ? Row(
+                                      children: [
+                                        Icon(LucideIcons.check,
+                                            size: 18,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .tertiary),
+                                        const Gap(6),
+                                        Text('Preview',
+                                            style: TextStyle(
+                                                fontSize: 17,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .tertiary,
+                                                fontFamily: 'Inter')),
+                                      ],
+                                    )
+                                  : Text('Preview',
+                                      style: TextStyle(
+                                          fontSize: 17,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .tertiary,
+                                          fontFamily: 'Inter')),
                             ),
                           ],
                         ),
@@ -231,7 +262,6 @@ class _MarkdownState extends State<Markdown> {
                     ),
                   ),
                 ),
-          
                 const Expanded(flex: 1, child: SizedBox()),
               ],
             ),
@@ -240,6 +270,7 @@ class _MarkdownState extends State<Markdown> {
       );
     });
   }
+
   Widget preview(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -266,6 +297,7 @@ class _MarkdownState extends State<Markdown> {
     );
   }
 }
+
 String title() {
   String getTitle = 'Untitled${DateTime.now().microsecond}';
   if (_MarkdownState.pageTitle.text.isNotEmpty) {
@@ -284,10 +316,9 @@ class Editor extends StatefulWidget {
 }
 
 // ignore: constant_identifier_names
-enum Tags {General, Studies, Work, Personal}
+enum Tags { General, Studies, Work, Personal }
 
 class _EditorState extends State<Editor> {
-
   static Tags selected = Tags.General;
 
   @override
@@ -297,44 +328,52 @@ class _EditorState extends State<Editor> {
         width: 700,
         child: Column(
           children: [
-
             const Gap(20),
-            
-            SegmentedButton(segments: const[
-
-              ButtonSegment(value: Tags.General, label: Text('General', style: TextStyle(fontSize: 17))),
-
-              ButtonSegment(value: Tags.Studies, label: Text('Studies', style: TextStyle(fontSize: 17))),
-
-              ButtonSegment(value: Tags.Work, label: Text('Work', style: TextStyle(fontSize: 17))),
-
-              ButtonSegment(value: Tags.Personal, label: Text('Personal', style: TextStyle(fontSize: 17))),
-
-            ], selected: <Tags>{selected},
-            
-            onSelectionChanged: (Set<Tags> newSelection) => {
-              setState(() {
-                selected = newSelection.first;
-              })
-            },
-            
-            style: ButtonStyle(
-                side: MaterialStatePropertyAll(BorderSide(
-                  color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
+            SegmentedButton(
+              segments: const [
+                ButtonSegment(
+                    value: Tags.General,
+                    label: Text('General', style: TextStyle(fontSize: 17))),
+                ButtonSegment(
+                    value: Tags.Studies,
+                    label: Text('Studies', style: TextStyle(fontSize: 17))),
+                ButtonSegment(
+                    value: Tags.Work,
+                    label: Text('Work', style: TextStyle(fontSize: 17))),
+                ButtonSegment(
+                    value: Tags.Personal,
+                    label: Text('Personal', style: TextStyle(fontSize: 17))),
+              ],
+              selected: <Tags>{selected},
+              onSelectionChanged: (Set<Tags> newSelection) => {
+                setState(() {
+                  selected = newSelection.first;
+                })
+              },
+              style: ButtonStyle(
+                  side: MaterialStatePropertyAll(BorderSide(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .secondary
+                          .withOpacity(0.1))),
                   padding: const MaterialStatePropertyAll(EdgeInsets.all(14)),
-                  overlayColor: const MaterialStatePropertyAll(Colors.transparent),
-                  shadowColor: const MaterialStatePropertyAll(Colors.transparent),
-                  backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)),
+                  overlayColor:
+                      const MaterialStatePropertyAll(Colors.transparent),
+                  shadowColor:
+                      const MaterialStatePropertyAll(Colors.transparent),
+                  backgroundColor: MaterialStatePropertyAll(
+                      Theme.of(context).colorScheme.background)),
             ),
-
             toolbar(_MarkdownState.page, context),
-
             Container(
-             height: 410,
+              height: 410,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(12)),
                 border: Border.all(
-                    color: Theme.of(context).colorScheme.secondary.withOpacity(0.1)),
+                    color: Theme.of(context)
+                        .colorScheme
+                        .secondary
+                        .withOpacity(0.1)),
                 // TextBox
                 color: Colors.transparent,
               ),
