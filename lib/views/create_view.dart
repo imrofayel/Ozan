@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -113,7 +115,7 @@ class _MarkdownState extends State<Markdown> {
                           value.dbHelper.insert(NotesModel(
                             title: pageTitle.text.isNotEmpty
                                 ? pageTitle.text
-                                : 'Untitled',
+                                : 'Untitled${Random.secure().nextInt(100000)}',
                             description: page.text,
                             date: date,
                             favourite: 0,
