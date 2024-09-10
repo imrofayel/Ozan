@@ -58,37 +58,22 @@ class ThemeAndFontProvider with ChangeNotifier {
 
   void setFontFamily(String font){
     fontFamily = font;
-    notifyListeners();
+    updateTheme();
   }
 
   void toggleBrown() {
     themeData = Brown.lightTheme(fontFamily);
-    notifyListeners();
   }
 
   void toggleBlue() {
     themeData = Blue.lightTheme(fontFamily);
-    notifyListeners();
   }
 
   void toggleGreen() {
     themeData = Green.lightTheme(fontFamily);
-    notifyListeners();
   }
 
-  void updateTheme(String themeName) {
-    switch (themeName) {
-      case 'brown':
-        toggleBrown();
-        break;
-      case 'blue':
-        toggleBlue();
-        break;
-      case 'green':
-        toggleGreen();
-        break;
-      default:
-        break;
-    }
+  void updateTheme() {
+    toggleGreen();
   }
 }

@@ -67,13 +67,15 @@ class _OzanState extends State<Ozan> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Ozan",
-      debugShowCheckedModeBanner: false,
-      theme: Provider.of<ThemeAndFontProvider>(context, listen: false).themeData,
-      // theme: Brown.lightTheme,
-      home: const Scaffold(
-        body: Home(),
+    return Consumer<ThemeAndFontProvider>(builder: (context, value, child) =>
+      MaterialApp(
+        title: "Ozan",
+        debugShowCheckedModeBanner: false,
+        theme: value.themeData,
+        // theme: Brown.lightTheme,
+        home: const Scaffold(
+          body: Home(),
+        ),
       ),
     );
   }

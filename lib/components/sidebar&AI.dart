@@ -87,7 +87,7 @@ class _SidebarState extends State<Sidebar> {
       
                     _buildIconButton(LucideIcons.lasso, 21, () {
 
-                      SnackBarUtils.showSnackbar(context, LucideIcons.badgeAlert, "This feature is under development.");
+                      Provider.of<ThemeAndFontProvider>(context, listen: false).setFontFamily('Roboto');
                     }, 'Draw'),
       
                     const Gap(35),
@@ -117,7 +117,7 @@ class _SidebarState extends State<Sidebar> {
 
                     const Gap(30),
 
-                    InkWell(splashFactory: null, overlayColor: const MaterialStatePropertyAll(Colors.transparent), onTap: () => Provider.of<ThemeAndFontProvider>(context, listen: false).setFontFamily('Inter'), child: Container(width: 12, height: 12, decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(100)))),
+                    InkWell(splashFactory: null, overlayColor: const MaterialStatePropertyAll(Colors.transparent), onTap: () => Provider.of<ThemeAndFontProvider>(context, listen: false).toggleBlue(), child: Container(width: 12, height: 12, decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(100)))),
 
                     const Gap(40),
 
