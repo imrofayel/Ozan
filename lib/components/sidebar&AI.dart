@@ -87,7 +87,8 @@ class _SidebarState extends State<Sidebar> {
       
                     _buildIconButton(LucideIcons.lasso, 21, () {
 
-                      Provider.of<ThemeAndFontProvider>(context, listen: false).setFontFamily('Roboto');
+                      Provider.of<ThemeAndFontProvider>(context, listen: false).setFontFamily('Nastaliq', context);
+                      
                     }, 'Draw'),
       
                     const Gap(35),
@@ -109,15 +110,15 @@ class _SidebarState extends State<Sidebar> {
                 Column(
                   children: [
 
-                    InkWell(splashFactory: null, overlayColor: const MaterialStatePropertyAll(Colors.transparent), onTap: () => Provider.of<ThemeAndFontProvider>(context, listen: false).toggleGreen(), child: Container(width: 12, height: 12, decoration: BoxDecoration(color: Colors.greenAccent, borderRadius: BorderRadius.circular(100)))),
+                    InkWell(splashFactory: null, overlayColor: const MaterialStatePropertyAll(Colors.transparent), onTap: () => Provider.of<ThemeAndFontProvider>(context, listen: false).toggleGreen(context), child: Container(width: 12, height: 12, decoration: BoxDecoration(color: Colors.greenAccent, borderRadius: BorderRadius.circular(100)))),
 
                     const Gap(30),
 
-                    InkWell(splashFactory: null, overlayColor: const MaterialStatePropertyAll(Colors.transparent), onTap: () => Provider.of<ThemeAndFontProvider>(context, listen: false).toggleBrown(),  child: Container(width: 12, height: 12, decoration: BoxDecoration(color: Colors.brown, borderRadius: BorderRadius.circular(100)))),
+                    InkWell(splashFactory: null, overlayColor: const MaterialStatePropertyAll(Colors.transparent), onTap: () => Provider.of<ThemeAndFontProvider>(context, listen: false).toggleBrown(context),  child: Container(width: 12, height: 12, decoration: BoxDecoration(color: Colors.brown, borderRadius: BorderRadius.circular(100)))),
 
                     const Gap(30),
 
-                    InkWell(splashFactory: null, overlayColor: const MaterialStatePropertyAll(Colors.transparent), onTap: () => Provider.of<ThemeAndFontProvider>(context, listen: false).toggleBlue(), child: Container(width: 12, height: 12, decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(100)))),
+                    InkWell(splashFactory: null, overlayColor: const MaterialStatePropertyAll(Colors.transparent), onTap: () => Provider.of<ThemeAndFontProvider>(context, listen: false).toggleBlue(context), child: Container(width: 12, height: 12, decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(100)))),
 
                     const Gap(40),
 
