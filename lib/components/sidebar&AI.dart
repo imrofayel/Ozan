@@ -230,6 +230,14 @@ class _AIChatInterfaceState extends State<AIChatInterface> {
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+void didChangeDependencies() {
+  super.didChangeDependencies();
+  // Access AppState userName after initState
+  final userName = Provider.of<AppState>(context).userName;
+
     // Initialize the model with the API key from AppState
     final apiKey = Provider.of<AppState>(context, listen: false).apiKey;
 
@@ -237,9 +245,13 @@ class _AIChatInterfaceState extends State<AIChatInterface> {
       model: 'gemini-1.5-flash-latest',
       apiKey: apiKey,
 
-      systemInstruction: Content.system('Your name is ozan, you are a note taking app with brain to help you being productive, the user name is ${Provider.of<AppState>(context).userName}'),
+      systemInstruction: Content.system('Your name is ozan, you are a note taking app with brain to help you being productive, the user name is hbro $userName'),
     );
-  }
+
+
+  // Update the model with the system instruction now that userName is accessible
+  
+}
 
   @override
   Widget build(BuildContext context) {
