@@ -47,12 +47,15 @@ class ThemeAndFontProvider with ChangeNotifier {
   }
 
   void updateTheme(context) {
-    if (_themeData == Brown.lightTheme(_fontFamily)) {
-      toggleBrown(context);
-    } else if (_themeData == Blue.lightTheme(_fontFamily)) {
+
+    String theme = Provider.of<AppState>(context, listen: false).theme;
+
+    if (theme == "green") {
+      toggleGreen(context);
+    } else if (theme == "blue") {
       toggleBlue(context);
     } else {
-      toggleGreen(context);
+      toggleBrown(context);
     }
   }
 

@@ -87,7 +87,7 @@ class _SidebarState extends State<Sidebar> {
       
                     _buildIconButton(LucideIcons.lasso, 21, () {
 
-                      Provider.of<ThemeAndFontProvider>(context, listen: false).setFontFamily('Nastaliq', context);
+                      Provider.of<ThemeAndFontProvider>(context, listen: false).setFontFamily('Roboto', context);
                       
                     }, 'Draw'),
       
@@ -221,7 +221,8 @@ class AIChatInterface extends StatefulWidget {
 
 class _AIChatInterfaceState extends State<AIChatInterface> {
   final TextEditingController _messageController = TextEditingController();
-  final List<ChatMessage> _messages = [];
+  final List<ChatMessage> _messages = [
+  ];
   final ScrollController _scrollController = ScrollController();
   late GenerativeModel model;
   final List<String> _conversationHistory = [];
@@ -235,6 +236,8 @@ class _AIChatInterfaceState extends State<AIChatInterface> {
       model: 'gemini-1.5-flash-latest',
       apiKey: apiKey,
     );
+
+    _messages.add(ChatMessage(text: 'User name is ${Provider.of<AppState>(context).userName}', isUser: true));
   }
 
   @override
@@ -256,17 +259,7 @@ class _AIChatInterfaceState extends State<AIChatInterface> {
                                                         
                     side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
                                                                                       
-                    padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor:  MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text('Raya', style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
-
-                    const Gap(10),
-
-                    FilledButton(onPressed: (){
-                      SnackBarUtils.showSnackbar(context, CupertinoIcons.ellipsis, 'Open the settings and add the Google API key');
-                    }, style: ButtonStyle(
-                                                          
-                      side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
-                                                                                  
-                      padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text('APIs', style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary))),
+                    padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor:  MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text('Ozan', style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
                   ],
                 ),
 
