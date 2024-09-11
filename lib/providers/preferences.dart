@@ -19,7 +19,7 @@ class AppState with ChangeNotifier {
 
   Future<void> _loadFromPrefs() async {
     _prefs = await SharedPreferences.getInstance();
-    _userName = _prefs.getString('userName') ?? 'Human';
+    _userName = _prefs.getString('userName') ?? 'human';
     _apiKey = _prefs.getString('apiKey') ?? '';
     _fontFamily = _prefs.getString('fontFamily') ?? 'Inter';
     _theme = _prefs.getString('theme') ?? 'brown';  // Load theme from prefs

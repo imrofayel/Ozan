@@ -237,9 +237,7 @@ class _AIChatInterfaceState extends State<AIChatInterface> {
       model: 'gemini-1.5-flash-latest',
       apiKey: apiKey,
 
-      systemInstruction: Content.system('you are Ozan, and user name is Adam'),
-
-      safetySettings: [SafetySetting(HarmCategory.sexuallyExplicit, HarmBlockThreshold.none), SafetySetting(HarmCategory.dangerousContent, HarmBlockThreshold.none), SafetySetting(HarmCategory.harassment, HarmBlockThreshold.none), SafetySetting(HarmCategory.unspecified, HarmBlockThreshold.none), SafetySetting(HarmCategory.hateSpeech, HarmBlockThreshold.none)]
+      systemInstruction: Content.system('Your name is ozan, you are a note taking app with brain to help you being productive, the user name is ${Provider.of<AppState>(context).userName}'),
     );
   }
 
@@ -425,7 +423,13 @@ class ChatBubble extends StatelessWidget {
               MarkdownBody(selectable: true,
                   
                     data: message.text,
-                    
+
+                    onSelectionChanged: (text, selection, cause) => {},
+
+                    onTapLink:(text, href, title) => {},
+
+                    onTapText: () => {},
+
                     softLineBreak: true,
                   
                     styleSheet: MarkdownStyleSheet(
