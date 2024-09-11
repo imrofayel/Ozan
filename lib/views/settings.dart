@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:ozan/providers/preferences.dart';
+import 'package:ozan/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class Settings extends StatefulWidget {
@@ -61,6 +62,8 @@ class _SettingsState extends State<Settings> {
               const Gap(20),
               _buildAPIChanger(context, appState),
               const Gap(20),
+
+              _buildFontChanger(context, appState),
               
               Opacity(opacity: 0.9, child: _buildAboutContainer(context)),
             ],
@@ -69,6 +72,38 @@ class _SettingsState extends State<Settings> {
       ),
     );
   }
+
+Widget _buildFontChanger(context, AppState appState) {
+
+  String selectedFont = Provider.of<AppState>(context, listen: false).fontFamily;
+
+  List<DropdownMenuEntry<dynamic>> dropdownMenuEntries = [
+    const DropdownMenuEntry(
+      value: 'Roboto', 
+      label: 'Roboto',
+      style: ButtonStyle(textStyle: MaterialStatePropertyAll(TextStyle(fontFamily: 'Roboto'))),
+    ),
+    const DropdownMenuEntry(
+      value: 'Inter', 
+      label: 'Inter',
+      style: ButtonStyle(textStyle: MaterialStatePropertyAll(TextStyle(fontFamily: 'Inter'))),
+    ),
+    const DropdownMenuEntry(
+      value: 'Lora', 
+      label: 'Lora',
+      style: ButtonStyle(textStyle: MaterialStatePropertyAll(TextStyle(fontFamily: 'Lora'))), // Apply Lora style
+    ),
+  ];
+
+  return DropdownMenu(
+    initialSelection: selectedFont,
+    dropdownMenuEntries: dropdownMenuEntries,
+    onSelected: (font) {
+        Provider.of<ThemeAndFontProvider>(context, listen: false).setFontFamily(font, context);
+    },
+    textStyle: const TextStyle(), // Default style for the menu itself
+  );
+}
 
   Widget _buildUserNameChanger(BuildContext context, AppState appState) {
     return Container(

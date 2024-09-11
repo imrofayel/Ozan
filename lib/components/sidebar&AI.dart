@@ -232,16 +232,20 @@ class _AIChatInterfaceState extends State<AIChatInterface> {
     super.initState();
     // Initialize the model with the API key from AppState
     final apiKey = Provider.of<AppState>(context, listen: false).apiKey;
+
     model = GenerativeModel(
       model: 'gemini-1.5-flash-latest',
       apiKey: apiKey,
-    );
 
-    _messages.add(ChatMessage(text: 'User name is ${Provider.of<AppState>(context).userName}', isUser: true));
+      systemInstruction: Content.system('you are Ozan, and user name is Adam'),
+
+      safetySettings: [SafetySetting(HarmCategory.sexuallyExplicit, HarmBlockThreshold.none), SafetySetting(HarmCategory.dangerousContent, HarmBlockThreshold.none), SafetySetting(HarmCategory.harassment, HarmBlockThreshold.none), SafetySetting(HarmCategory.unspecified, HarmBlockThreshold.none), SafetySetting(HarmCategory.hateSpeech, HarmBlockThreshold.none)]
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+
     return SizedBox(
       width: 500,
 
@@ -258,7 +262,7 @@ class _AIChatInterfaceState extends State<AIChatInterface> {
                     }, style: ButtonStyle(
                                                         
                     side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
-                                                                                      
+                                                                                    
                     padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor:  MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text('Ozan', style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
                   ],
                 ),
