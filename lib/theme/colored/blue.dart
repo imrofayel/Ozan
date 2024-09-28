@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Blue {
 
-  static const text = Color.fromARGB(255, 9, 30, 44);
+  static const text = Color.fromARGB(255, 0, 0, 0);
   static const secondary = Color.fromRGBO(145, 166, 196, 1);
   static const primary = Color.fromRGBO(225, 237, 255, 1);
 

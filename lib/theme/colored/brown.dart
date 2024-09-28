@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Brown {
 
-  static const text = Color.fromRGBO(31, 25, 0, 1);
+  static const text = Color.fromRGBO(0, 0, 0, 1);
   static const secondary = Color.fromARGB(248, 207, 195, 135);
   static const primary = Color.fromRGBO(255, 252, 241, 1);
 

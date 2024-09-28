@@ -1,8 +1,8 @@
-<img src="https://github.com/imrofayel/Ozan/assets/134688534/c246ede8-dee9-4bcb-a339-c4b57fca85f7" height="140" weight="140">
+<!-- <img src="https://github.com/imrofayel/Ozan/assets/134688534/c246ede8-dee9-4bcb-a339-c4b57fca85f7" height="140" weight="140">
 
 ## Ozan - Capture your thoughts!
 
-![Static Badge](https://img.shields.io/badge/Open%20Source-071e27) ![Static Badge](https://img.shields.io/badge/Windows-blue)
+![Static Badge](https://elds.io/badge/Open%20Source-071e27) ![Static Badge](https://elds.io/badge/Windows-blue)
 
 Ozan is a personal knowledge base and journal application.
 
@@ -41,4 +41,4 @@ Feel free to reach out if you have any questions or suggestions! 🚀
 
 
 
-
+ -->

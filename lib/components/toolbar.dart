@@ -1,8 +1,14 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:ozan/components/snackbar.dart';
+
+import 'package:path/path.dart' as path;
 
 Widget toolbar(TextEditingController controller, context){
 
@@ -27,7 +33,7 @@ Widget toolbar(TextEditingController controller, context){
             
             IconButton(onPressed: () => applyFormatting(controller, '**'), icon: Icon(LucideIcons.bold, size: 20, color: Theme.of(context).colorScheme.tertiary), tooltip: "Bold", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
             
-            IconButton(onPressed: () => applyFormatting(controller, '*'), icon: Icon(LucideIcons.italic, size: 20, color: Theme.of(context).colorScheme.tertiary,), tooltip: "Italic", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),),
+            IconButton(onPressed: () => applyFormatting(controller, '*'), icon: Icon(LucideIcons.italic, size: 20, color: Theme.of(context).colorScheme.tertiary,), tooltip: "Italic", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary))),
       
             const Gap(6),
 
@@ -70,12 +76,86 @@ Widget toolbar(TextEditingController controller, context){
 
             const Gap(6),
 
-            IconButton(onPressed: () => applyColor(controller), icon: Icon(LucideIcons.contrast, size: 20, color: Theme.of(context).colorScheme.tertiary), tooltip: "Colored Highlighter", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary))),
+            IconButton(onPressed: () => insertImage(controller, context), icon: Icon(LucideIcons.contrast, size: 20, color: Theme.of(context).colorScheme.tertiary), tooltip: "Colored Highlighter", style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary))),
           
           ],
       ),
     ),
   );
+}
+
+Future<void> insertImage(TextEditingController controller, BuildContext context) async {
+  FilePickerResult? result = await FilePicker.platform.pickFiles(
+    type: FileType.image,
+  );
+
+  if (result != null && result.files.single.path != null) {
+    File file = File(result.files.single.path!);
+    String fileName = path.basename(file.path);
+    String fileExtension = path.extension(fileName).toLowerCase();
+    
+    // Read file as bytes
+    List<int> imageBytes = await file.readAsBytes();
+    
+    // Convert to base64
+    String base64Image = base64Encode(imageBytes);
+    
+    // Determine MIME type
+    String mimeType;
+    switch (fileExtension) {
+      case '.png':
+        mimeType = 'image/png';
+        break;
+      case '.jpg':
+      case '.jpeg':
+        mimeType = 'image/jpeg';
+        break;
+      case '.gif':
+        mimeType = 'image/gif';
+        break;
+      default:
+        mimeType = 'image/png'; // Default to PNG
+    }
+
+    // Create data URL
+    String dataUrl = 'data:$mimeType;base64,$base64Image';
+
+    // Display the image
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Image.memory(base64Decode(base64Image)),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text('Close'),
+            ),
+          ],
+        );
+      },
+    );
+
+    // Insert the image markdown using the data URL
+    String imageMarkdown = '![]($dataUrl)';
+    
+    // Safely insert the markdown
+    int start = controller.selection.baseOffset;
+    int end = controller.selection.extentOffset;
+    if (start < 0) start = 0;
+    if (end < 0) end = 0;
+    if (start > controller.text.length) start = controller.text.length;
+    if (end > controller.text.length) end = controller.text.length;
+    
+    String newText = controller.text.replaceRange(start, end, imageMarkdown);
+
+    controller.value = TextEditingValue(
+      text: newText,
+      selection: TextSelection.collapsed(offset: start + imageMarkdown.length),
+    );
+
+    print("Image inserted as base64 data URL");
+  }
 }
 
 void applyCodeFormatting(TextEditingController controller, context) {
