@@ -64,6 +64,8 @@ class _SettingsState extends State<Settings> {
               const Gap(20),
 
               _buildFontChanger(context, appState),
+
+              const Gap(20),
               
               Opacity(opacity: 0.9, child: _buildAboutContainer(context)),
             ],
@@ -81,27 +83,54 @@ Widget _buildFontChanger(context, AppState appState) {
     const DropdownMenuEntry(
       value: 'Roboto', 
       label: 'Roboto',
-      style: ButtonStyle(textStyle: MaterialStatePropertyAll(TextStyle(fontFamily: 'Roboto'))),
+      style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Colors.transparent), textStyle: MaterialStatePropertyAll(TextStyle(fontFamily: 'Roboto', fontSize: 17))),
     ),
     const DropdownMenuEntry(
       value: 'Inter', 
       label: 'Inter',
-      style: ButtonStyle(textStyle: MaterialStatePropertyAll(TextStyle(fontFamily: 'Inter'))),
+      style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Colors.transparent), textStyle: MaterialStatePropertyAll(TextStyle(fontFamily: 'Inter', fontSize: 17))),
     ),
     const DropdownMenuEntry(
       value: 'Lora', 
       label: 'Lora',
-      style: ButtonStyle(textStyle: MaterialStatePropertyAll(TextStyle(fontFamily: 'Lora'))), // Apply Lora style
+      style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Colors.transparent), textStyle: MaterialStatePropertyAll(TextStyle(fontFamily: 'Lora', fontSize: 17))),
     ),
   ];
 
-  return DropdownMenu(
-    initialSelection: selectedFont,
-    dropdownMenuEntries: dropdownMenuEntries,
-    onSelected: (font) {
-        Provider.of<ThemeAndFontProvider>(context, listen: false).setFontFamily(font, context);
-    },
-    textStyle: const TextStyle(), // Default style for the menu itself
+  return Container(
+
+    decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.background,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+            color: Theme.of(context).colorScheme.secondary.withOpacity(0.1)),
+      ),
+
+    child: DropdownMenu(
+
+      menuStyle: MenuStyle(
+        side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.2))), 
+
+        shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+
+        backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background),
+
+        shadowColor: const MaterialStatePropertyAll(Colors.transparent),
+
+        surfaceTintColor: const MaterialStatePropertyAll(Colors.transparent),
+
+      ),
+
+      initialSelection: selectedFont,
+
+      enableSearch: true,
+
+      dropdownMenuEntries: dropdownMenuEntries,
+      onSelected: (font) {
+          Provider.of<ThemeAndFontProvider>(context, listen: false).setFontFamily(font, context);
+      },
+      textStyle: const TextStyle(fontSize: 17), // Default style for the menu itself
+    ),
   );
 }
 

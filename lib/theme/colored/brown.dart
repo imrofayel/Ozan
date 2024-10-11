@@ -45,14 +45,15 @@ class Brown {
       ),
       tooltipTheme: TooltipThemeData(
         height: 13,
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: primary,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: secondary.withOpacity(0.2))
         ),
         textStyle: TextStyle(
           fontSize: 14,
-          color: Colors.blueGrey.shade900.withOpacity(0.95),
+          color: text,
           fontFamily: fontFamily,
         ),
       ),
