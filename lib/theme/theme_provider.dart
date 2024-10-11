@@ -1,33 +1,65 @@
 import 'package:flutter/material.dart';
+import 'package:ozan/providers/preferences.dart';
 import 'package:ozan/theme/colored/blue.dart';
 import 'package:ozan/theme/colored/brown.dart';
 import 'package:ozan/theme/colored/green.dart';
-class ThemeSwitcher with ChangeNotifier{
+import 'package:provider/provider.dart';
 
-  ThemeData _themeData = Green.lightTheme;
+class ThemeAndFontProvider with ChangeNotifier {
+  ThemeData _themeData;
+  String _fontFamily;
+
+  ThemeAndFontProvider(this._themeData, this._fontFamily);
 
   ThemeData get themeData => _themeData;
 
-  set themeData(ThemeData theme){
+  String get fontFamily => _fontFamily;
+
+  set themeData(ThemeData theme) {
     _themeData = theme;
     notifyListeners();
   }
 
-  void toggleBrown(){
-
-    themeData = Brown.lightTheme;
-
+  set fontFamily(String font) {
+    _fontFamily = font;
+    notifyListeners();
   }
 
-  void toggleBlue(){
-
-    themeData = Blue.lightTheme;
-
+  void setFontFamily(String font, BuildContext context) {
+    fontFamily = font;
+    Provider.of<AppState>(context, listen: false).setFontFamily(font);
+    updateTheme(context);
   }
 
-  void toggleGreen(){
+  void toggleBrown(context) {
+    themeData = Brown.lightTheme(fontFamily);
+    _saveTheme('brown', context);
+  }
 
-    themeData = Green.lightTheme;
-    
+  void toggleBlue(context) {
+    themeData = Blue.lightTheme(fontFamily);
+    _saveTheme('blue', context);
+  }
+
+  void toggleGreen(context) {
+    themeData = Green.lightTheme(fontFamily);
+    _saveTheme('green', context);
+  }
+
+  void updateTheme(context) {
+
+    String theme = Provider.of<AppState>(context, listen: false).theme;
+
+    if (theme == "green") {
+      toggleGreen(context);
+    } else if (theme == "blue") {
+      toggleBlue(context);
+    } else {
+      toggleBrown(context);
+    }
+  }
+
+  void _saveTheme(String themeName, BuildContext context) {
+    Provider.of<AppState>(context, listen: false).setTheme(themeName);
   }
 }

@@ -87,7 +87,8 @@ class _SidebarState extends State<Sidebar> {
       
                     _buildIconButton(LucideIcons.lasso, 21, () {
 
-                      SnackBarUtils.showSnackbar(context, LucideIcons.badgeAlert, "This feature is under development.");
+                      Provider.of<ThemeAndFontProvider>(context, listen: false).setFontFamily('Roboto', context);
+                      
                     }, 'Draw'),
       
                     const Gap(35),
@@ -109,15 +110,15 @@ class _SidebarState extends State<Sidebar> {
                 Column(
                   children: [
 
-                    InkWell(splashFactory: null, overlayColor: const MaterialStatePropertyAll(Colors.transparent), onTap: () => Provider.of<ThemeSwitcher>(context, listen: false).toggleGreen(), child: Container(width: 12, height: 12, decoration: BoxDecoration(color: Colors.greenAccent, borderRadius: BorderRadius.circular(100)))),
+                    InkWell(splashFactory: null, overlayColor: const MaterialStatePropertyAll(Colors.transparent), onTap: () => Provider.of<ThemeAndFontProvider>(context, listen: false).toggleGreen(context), child: Container(width: 12, height: 12, decoration: BoxDecoration(color: Colors.greenAccent, borderRadius: BorderRadius.circular(100)))),
 
                     const Gap(30),
 
-                    InkWell(splashFactory: null, overlayColor: const MaterialStatePropertyAll(Colors.transparent), onTap: () => Provider.of<ThemeSwitcher>(context, listen: false).toggleBrown(),  child: Container(width: 12, height: 12, decoration: BoxDecoration(color: Colors.brown, borderRadius: BorderRadius.circular(100)))),
+                    InkWell(splashFactory: null, overlayColor: const MaterialStatePropertyAll(Colors.transparent), onTap: () => Provider.of<ThemeAndFontProvider>(context, listen: false).toggleBrown(context),  child: Container(width: 12, height: 12, decoration: BoxDecoration(color: Colors.brown, borderRadius: BorderRadius.circular(100)))),
 
                     const Gap(30),
 
-                    InkWell(splashFactory: null, overlayColor: const MaterialStatePropertyAll(Colors.transparent), onTap: () => Provider.of<ThemeSwitcher>(context, listen: false).toggleBlue(), child: Container(width: 12, height: 12, decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(100)))),
+                    InkWell(splashFactory: null, overlayColor: const MaterialStatePropertyAll(Colors.transparent), onTap: () => Provider.of<ThemeAndFontProvider>(context, listen: false).toggleBlue(context), child: Container(width: 12, height: 12, decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(100)))),
 
                     const Gap(40),
 
@@ -220,7 +221,8 @@ class AIChatInterface extends StatefulWidget {
 
 class _AIChatInterfaceState extends State<AIChatInterface> {
   final TextEditingController _messageController = TextEditingController();
-  final List<ChatMessage> _messages = [];
+  final List<ChatMessage> _messages = [
+  ];
   final ScrollController _scrollController = ScrollController();
   late GenerativeModel model;
   final List<String> _conversationHistory = [];
@@ -228,16 +230,32 @@ class _AIChatInterfaceState extends State<AIChatInterface> {
   @override
   void initState() {
     super.initState();
-    // Initialize the model with the API key from AppState
-    final apiKey = Provider.of<AppState>(context, listen: false).apiKey;
-    model = GenerativeModel(
-      model: 'gemini-1.5-flash-latest',
-      apiKey: apiKey,
-    );
   }
 
   @override
+void didChangeDependencies() {
+  super.didChangeDependencies();
+  // Access AppState userName after initState
+  final userName = Provider.of<AppState>(context).userName;
+
+    // Initialize the model with the API key from AppState
+    final apiKey = Provider.of<AppState>(context, listen: false).apiKey;
+
+    model = GenerativeModel(
+      model: 'gemini-1.5-flash-latest',
+      apiKey: apiKey,
+
+      systemInstruction: Content.system('Your name is ozan, you are a note taking app with brain to help you being productive, the user name is hbro $userName'),
+    );
+
+
+  // Update the model with the system instruction now that userName is accessible
+  
+}
+
+  @override
   Widget build(BuildContext context) {
+
     return SizedBox(
       width: 500,
 
@@ -254,18 +272,8 @@ class _AIChatInterfaceState extends State<AIChatInterface> {
                     }, style: ButtonStyle(
                                                         
                     side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
-                                                                                      
-                    padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor:  MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text('Raya', style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
-
-                    const Gap(10),
-
-                    FilledButton(onPressed: (){
-                      SnackBarUtils.showSnackbar(context, CupertinoIcons.ellipsis, 'Open the settings and add the Google API key');
-                    }, style: ButtonStyle(
-                                                          
-                      side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1))),
-                                                                                  
-                      padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text('APIs', style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary))),
+                                                                                    
+                    padding: const MaterialStatePropertyAll(EdgeInsets.all(14)), overlayColor: const MaterialStatePropertyAll(Colors.transparent), shadowColor: const MaterialStatePropertyAll(Colors.transparent), backgroundColor:  MaterialStatePropertyAll(Theme.of(context).colorScheme.background)), child: Text('Ozan', style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.tertiary, fontFamily: 'Inter'))),
                   ],
                 ),
 
@@ -427,7 +435,13 @@ class ChatBubble extends StatelessWidget {
               MarkdownBody(selectable: true,
                   
                     data: message.text,
-                    
+
+                    onSelectionChanged: (text, selection, cause) => {},
+
+                    onTapLink:(text, href, title) => {},
+
+                    onTapText: () => {},
+
                     softLineBreak: true,
                   
                     styleSheet: MarkdownStyleSheet(

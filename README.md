@@ -1,6 +1,8 @@
-<img src="https://github.com/imrofayel/Ozan/assets/134688534/c246ede8-dee9-4bcb-a339-c4b57fca85f7" height="140" weight="140">
+<!-- <img src="https://github.com/imrofayel/Ozan/assets/134688534/c246ede8-dee9-4bcb-a339-c4b57fca85f7" height="140" weight="140">
 
 ## Ozan - Capture your thoughts!
+
+![Static Badge](https://elds.io/badge/Open%20Source-071e27) ![Static Badge](https://elds.io/badge/Windows-blue)
 
 <a href="https://www.producthunt.com/posts/ozan?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-ozan" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=485313&theme=light" alt="Ozan - Ozan&#0032;is&#0032;a&#0032;personal&#0032;knowledge&#0032;base&#0032;inspired&#0032;from&#0032;Obsidian&#0046; | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
 
@@ -48,4 +50,4 @@ Feel free to reach out if you have any questions or suggestions!
 
 
 
-
+ -->

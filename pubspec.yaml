@@ -91,6 +91,9 @@ flutter:
   assets:
       - assets/RobotoMono.ttf
       - assets/Inter.ttf
+      - assets/Lora.ttf
+      - assets/Roboto.ttf
+      - assets/Gulzar.ttf
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
@@ -118,6 +121,18 @@ flutter:
     - family: 'Roboto Mono'
       fonts:
         - asset: assets/RobotoMono.ttf
+
+    - family: 'Lora'
+      fonts:
+        - asset: assets/Lora.ttf
+
+    - family: 'Nastaliq'
+      fonts:
+        - asset: assets/Gulzar.ttf
+
+    - family: 'Roboto'
+      fonts:
+        - asset: assets/Roboto.ttf        
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #

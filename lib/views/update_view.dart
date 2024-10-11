@@ -191,7 +191,7 @@ Future<void> _checkTitleExists() async {
                                               data: generateTableOfContents(
                                                   page.text),
                                               styleSheet: MarkdownStyle.style(
-                                                  context, 1.25),
+                                                  context, 1.22),
                                               extensionSet:
                                                   MarkdownStyle.extension()),
                                         )
@@ -199,7 +199,7 @@ Future<void> _checkTitleExists() async {
                                 ),
                                 SizedBox(
                                     height: 450,
-                                    child: markdown(page.text, 1.14, context)),
+                                    child: markdown(page.text, 1.25, context)),
                                 const Gap(10),
                                 Row(
                                   mainAxisAlignment:

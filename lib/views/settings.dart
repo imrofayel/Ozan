@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:ozan/providers/preferences.dart';
+import 'package:ozan/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class Settings extends StatefulWidget {
@@ -61,6 +62,10 @@ class _SettingsState extends State<Settings> {
               const Gap(20),
               _buildAPIChanger(context, appState),
               const Gap(20),
+
+              _buildFontChanger(context, appState),
+
+              const Gap(20),
               
               Opacity(opacity: 0.9, child: _buildAboutContainer(context)),
             ],
@@ -69,6 +74,65 @@ class _SettingsState extends State<Settings> {
       ),
     );
   }
+
+Widget _buildFontChanger(context, AppState appState) {
+
+  String selectedFont = Provider.of<AppState>(context, listen: false).fontFamily;
+
+  List<DropdownMenuEntry<dynamic>> dropdownMenuEntries = [
+    const DropdownMenuEntry(
+      value: 'Roboto', 
+      label: 'Roboto',
+      style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Colors.transparent), textStyle: MaterialStatePropertyAll(TextStyle(fontFamily: 'Roboto', fontSize: 17))),
+    ),
+    const DropdownMenuEntry(
+      value: 'Inter', 
+      label: 'Inter',
+      style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Colors.transparent), textStyle: MaterialStatePropertyAll(TextStyle(fontFamily: 'Inter', fontSize: 17))),
+    ),
+    const DropdownMenuEntry(
+      value: 'Lora', 
+      label: 'Lora',
+      style: ButtonStyle(overlayColor: MaterialStatePropertyAll(Colors.transparent), textStyle: MaterialStatePropertyAll(TextStyle(fontFamily: 'Lora', fontSize: 17))),
+    ),
+  ];
+
+  return Container(
+
+    decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.background,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+            color: Theme.of(context).colorScheme.secondary.withOpacity(0.1)),
+      ),
+
+    child: DropdownMenu(
+
+      menuStyle: MenuStyle(
+        side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.2))), 
+
+        shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+
+        backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.background),
+
+        shadowColor: const MaterialStatePropertyAll(Colors.transparent),
+
+        surfaceTintColor: const MaterialStatePropertyAll(Colors.transparent),
+
+      ),
+
+      initialSelection: selectedFont,
+
+      enableSearch: true,
+
+      dropdownMenuEntries: dropdownMenuEntries,
+      onSelected: (font) {
+          Provider.of<ThemeAndFontProvider>(context, listen: false).setFontFamily(font, context);
+      },
+      textStyle: const TextStyle(fontSize: 17), // Default style for the menu itself
+    ),
+  );
+}
 
   Widget _buildUserNameChanger(BuildContext context, AppState appState) {
     return Container(
