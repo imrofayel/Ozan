@@ -199,7 +199,7 @@ Future<void> _checkTitleExists() async {
                                 ),
                                 SizedBox(
                                     height: 450,
-                                    child: markdown(page.text, 1.22, context)),
+                                    child: markdown(page.text, 1.25, context)),
                                 const Gap(10),
                                 Row(
                                   mainAxisAlignment:
