@@ -1,3 +1,5 @@
+`we are planning & working on its next stable release with multiple new features, stay tuned.`
+
 <img src="https://github.com/imrofayel/Ozan/assets/134688534/c246ede8-dee9-4bcb-a339-c4b57fca85f7" height="140" weight="140">
 
 ## Ozan - Capture your thoughts!
