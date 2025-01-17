@@ -6,10 +6,14 @@
 
 ![Static Badge](https://shields.io/badge/Open%20Source-071e27) ![Static Badge](https://shields.io/badge/Windows-blue)
 
-![Launch_SVG_Dark](https://github.com/user-attachments/assets/42d62926-8a24-49a8-b01b-f971fdbdd371)
-
-
 <a href="https://github.com/imrofayel/Ozan/releases/tag/Windows"><img src="https://github.com/user-attachments/assets/9c531f25-86ad-4400-95a0-cba58c69529f" height="40" weight="40"></a>
+
+
+<picture>
+  <source srcset="https://github.com/user-attachments/assets/e17a443a-2a64-4a19-ae27-1af3d8468ee0" media="(prefers-color-scheme: dark)" />
+  <img src="https://github.com/user-attachments/assets/adbe2e34-72b9-4ecb-8d31-890911a53d82" alt="Badge" />
+</picture>
+
 
 Ozan — a personal knowledge base and journal application that combines simplicity with powerful features, offering a simple open-source alternative to Obsidian and Notion. Here are the key features and aspects of the app:
 
