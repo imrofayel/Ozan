@@ -6,7 +6,8 @@
 
 ![Static Badge](https://shields.io/badge/Open%20Source-071e27) ![Static Badge](https://shields.io/badge/Windows-blue)
 
-<a href="https://www.producthunt.com/posts/ozan?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-ozan" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=485313&theme=light" alt="Ozan - Ozan&#0032;is&#0032;a&#0032;personal&#0032;knowledge&#0032;base&#0032;inspired&#0032;from&#0032;Obsidian&#0046; | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+![Launch_SVG_Dark](https://github.com/user-attachments/assets/42d62926-8a24-49a8-b01b-f971fdbdd371)
+
 
 <a href="https://github.com/imrofayel/Ozan/releases/tag/Windows"><img src="https://github.com/user-attachments/assets/9c531f25-86ad-4400-95a0-cba58c69529f" height="40" weight="40"></a>
 
