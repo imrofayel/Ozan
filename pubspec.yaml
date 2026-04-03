@@ -59,6 +59,14 @@ dependencies:
   languagetool_textfield: ^0.0.6
   flutter_svg: ^2.0.10+1
   
+dependency_overrides:
+  # flutter_math_fork 0.7.2 is missing runLayoutCallback/scheduleLayoutCallback
+  # required by Flutter 3.22+. 0.7.4 adds support for Flutter 3.27 and 3.32.
+  flutter_math_fork: ^0.7.4
+  # win32 5.4.0 uses UnmodifiableUint8ListView which was removed in Dart 3.4+.
+  # 5.5.3+ removes that usage.
+  win32: ^5.5.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
